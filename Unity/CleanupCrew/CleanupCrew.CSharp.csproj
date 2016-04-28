@@ -63,11 +63,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Models\emptyfile.cs" />
-    <Compile Include="Assets\Prefabs\emptyfile2.cs" />
+    <Compile Include="Assets\Resources\Prefabs\emptyfile2.cs" />
     <Compile Include="Assets\Scripts\Explosion.cs" />
+    <Compile Include="Assets\Scripts\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\RandomColor.cs" />
     <Compile Include="Assets\Scripts\RandomMovement.cs" />
     <Compile Include="Assets\Scripts\emptyfile3.cs" />
+    <Compile Include="Assets\SpawnSpheres.cs" />
     <Compile Include="Assets\TestScenes\mptyfile5.cs" />
     <Compile Include="Assets\Textures\emptyfile4.cs" />
   </ItemGroup>
