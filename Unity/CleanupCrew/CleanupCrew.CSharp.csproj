@@ -62,9 +62,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\BallScript.cs" />
     <Compile Include="Assets\Models\emptyfile.cs" />
+    <Compile Include="Assets\PaddleScript.cs" />
     <Compile Include="Assets\Resources\Prefabs\emptyfile2.cs" />
     <Compile Include="Assets\Scripts\Explosion.cs" />
+    <Compile Include="Assets\Scripts\GameSettings.cs" />
     <Compile Include="Assets\Scripts\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\RandomColor.cs" />
     <Compile Include="Assets\Scripts\RandomMovement.cs" />

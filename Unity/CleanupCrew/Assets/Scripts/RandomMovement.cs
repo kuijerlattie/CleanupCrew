@@ -16,8 +16,6 @@ public class RandomMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (_rigid.velocity.magnitude < 3.1f)
-            Debug.Log(_rigid.velocity.magnitude);
         if(_rigid.velocity.magnitude < 3.1f)
         {
             ApplyForce();

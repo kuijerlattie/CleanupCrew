@@ -5,11 +5,12 @@ public class PlayerInput : MonoBehaviour {
 
     bool pressedOnce = false;
     public Rect spawnLocation;
-    public int AmountOfSpheres = 100;   //set in inspector probably
+    public int AmountOfSpheres = 20;   //set in inspector probably
 	// Use this for initialization
 	void Start () {
-        SpawnSpheres.SpawnMultipleSpheres(spawnLocation, AmountOfSpheres);
-	}
+        SpawnSpheres.SpawnMultipleSpheres(spawnLocation, AmountOfSpheres);  //TODO move this to other script
+        GameSettings.ApplySettings();   //TODO move this to other script
+    }
 
     void Reset()
     {
@@ -18,6 +19,7 @@ public class PlayerInput : MonoBehaviour {
 
     static public bool GetInput()
     {
+        //currently mouse, replace by touchInput later
         return Input.GetMouseButtonDown(0);
     }
     
@@ -28,7 +30,6 @@ public class PlayerInput : MonoBehaviour {
         {
             pressedOnce = true;
             Vector3 mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Debug.Log(mousepos);
             SpawnSpheres.SpawnSphere(mousepos, true);
         }
 	}

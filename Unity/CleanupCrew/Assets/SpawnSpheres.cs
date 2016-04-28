@@ -2,7 +2,9 @@
 using System.Collections;
 
 public class SpawnSpheres
-{ 
+{
+
+   
     static public void SpawnSphere(Vector3 position, bool ImmidiateExplode = false)
     {
         position.y = 0;
@@ -11,8 +13,14 @@ public class SpawnSpheres
         spawnedSphere.GetComponent<Explosion>().enabled = ImmidiateExplode;
     }
 
+    
+        
+
+    
+
     static public void SpawnMultipleSpheres(Rect spawnArea, int amount)
     {
+        //currently uses square root to get nicely divided positions but is not accurate to 'int amount' , real value is lower
         float Root = Mathf.Sqrt(amount);
         int roundedRoot = (int)Root;
         for (int ix = 0; ix < roundedRoot; ix++)
