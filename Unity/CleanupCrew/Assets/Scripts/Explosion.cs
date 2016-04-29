@@ -20,6 +20,8 @@ public class Explosion : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        //grow based on GROWTHRATE and MAXSIZE
         if (transform.localScale.x < MAXSIZE)
             transform.localScale = new Vector3(transform.localScale.x * 1+ ( GROWTHRATE * Time.deltaTime), transform.localScale.y, transform.localScale.z * 1 +( GROWTHRATE * Time.deltaTime));
 	}

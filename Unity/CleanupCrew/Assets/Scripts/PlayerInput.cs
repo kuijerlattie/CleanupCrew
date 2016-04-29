@@ -28,6 +28,7 @@ public class PlayerInput : MonoBehaviour {
 	void Update () {
 	    if(GetInput() && !pressedOnce)
         {
+            GameObject.FindObjectOfType<GameManager>().ResetTimer();
             pressedOnce = true;
             Vector3 mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             SpawnSpheres.SpawnSphere(mousepos, true);
