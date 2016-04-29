@@ -1,0 +1,23 @@
+Game Play changes
+
+- power ups
+
+- tilted camera and some sort of rotation4
+
+- rotational arena
+
+- magnetic padle
+
+- colect monsterrs and puke them somewhere ( sides, with 2-3 typs of enviroment ; earth, water, space)
+
+- ui barrel to indicate collecting and storing them
+
+- monsters coming back when bla bla bla (barrel full // after time )
+
+- easy editable engine thingie
+
+
+
+
+
+Programers divide work
