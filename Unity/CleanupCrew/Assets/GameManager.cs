@@ -55,6 +55,15 @@ public class GameManager : MonoBehaviour {
                 {
                     if (!allBalls[i].isActiveAndEnabled)
                         GameObject.Destroy(allBalls[i].gameObject);
+                    else {
+                        allBalls[i].GetComponent<SphereCollider>().isTrigger = false;   //mayble this is duplicate now
+                    }
+                }
+
+                for (int i = Explosion.explodedSpheres.Count-1; i > 0; i--)
+                {
+                    GameObject newObject = GameObject.Instantiate(Explosion.explodedSpheres[i].gameObject);
+                    newObject.transform.Translate(new Vector3(25, 0, 0));
                 }
 
                 breakoutObjects.SetActive(true);    //enable paddle etc to start 'breakout' stage
