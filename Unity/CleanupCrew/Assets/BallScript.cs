@@ -7,7 +7,7 @@ public class BallScript : MonoBehaviour {
     int points = 0;
     int power = 100;
 
-    public float startingSpeed = 5; //is this variable only for commercial or can we actually use it?
+    public float startingSpeed = 10; //is this variable only for commercial or can we actually use it?
 
     public Text tpoints; 
     public Text tpower;
@@ -18,7 +18,9 @@ public class BallScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        startingSpeed += 0.001f;
+        startingSpeed += 0.005f;
+        if (startingSpeed > 25) startingSpeed = 25;
+        Debug.Log(startingSpeed);
         GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity.normalized;
         Debug.Log(GetComponent<Rigidbody>().velocity);
         GetComponent<Rigidbody>().velocity *= startingSpeed;
