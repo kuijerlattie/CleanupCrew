@@ -9,6 +9,14 @@ public class GameManager : MonoBehaviour {
     float gameTimer = 15;
     bool timerPaused = false;
 
+    public int points;
+    public int power;
+
+    [SerializeField]
+    Text pointText;
+    [SerializeField]
+    Text powerText;
+
     public enum gamestate
     {
         Generating,
