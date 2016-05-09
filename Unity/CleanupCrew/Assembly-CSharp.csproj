@@ -45,19 +45,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\BallScript.cs" />
-     <Compile Include="Assets\CollectBallsScript.cs" />
-     <Compile Include="Assets\Models\emptyfile.cs" />
-     <Compile Include="Assets\PaddleScript.cs" />
      <Compile Include="Assets\Resources\Prefabs\emptyfile2.cs" />
+     <Compile Include="Assets\Scripts\BallCollisionScript.cs" />
+     <Compile Include="Assets\Scripts\BallScript.cs" />
+     <Compile Include="Assets\Scripts\BreakoutBlock.cs" />
+     <Compile Include="Assets\Scripts\CollectBallsScript.cs" />
      <Compile Include="Assets\Scripts\Explosion.cs" />
+     <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\GameSettings.cs" />
+     <Compile Include="Assets\Scripts\PaddleRotationScript.cs" />
+     <Compile Include="Assets\Scripts\PaddleScript.cs" />
      <Compile Include="Assets\Scripts\PlayerInput.cs" />
+     <Compile Include="Assets\Scripts\PointScript.cs" />
      <Compile Include="Assets\Scripts\RandomColor.cs" />
      <Compile Include="Assets\Scripts\RandomMovement.cs" />
-     <Compile Include="Assets\Scripts\emptyfile3.cs" />
-     <Compile Include="Assets\SpawnSpheres.cs" />
-     <Compile Include="Assets\TestScenes\mptyfile5.cs" />
+     <Compile Include="Assets\Scripts\SpawnSpheres.cs" />
+     <Compile Include="Assets\Scripts\rotationtest.cs" />
      <Compile Include="Assets\Textures\emptyfile4.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

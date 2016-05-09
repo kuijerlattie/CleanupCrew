@@ -12,11 +12,11 @@ public class PointScript : MonoBehaviour {
 
     public goalType type;
     int waterpoints = 1;
-    int undergroundpoints = 1;
-    int spacepoints = 1;
+    int undergroundpoints = 2;
+    int spacepoints = 5;
     int waterPower = 1;
-    int undergroundPower = 1;
-    int spacePower = 1;
+    int undergroundPower = 3;
+    int spacePower = 8;
 
     GameManager manager;
 
@@ -51,6 +51,8 @@ public class PointScript : MonoBehaviour {
                 default:
                     break;
             }
+
+            GameObject.Destroy(collision.collider.gameObject);
         }
     }
 }
