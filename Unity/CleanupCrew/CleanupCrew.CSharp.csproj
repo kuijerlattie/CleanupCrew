@@ -67,6 +67,7 @@
     <Compile Include="Assets\CollectBallsScript.cs" />
     <Compile Include="Assets\GameManager.cs" />
     <Compile Include="Assets\Models\emptyfile.cs" />
+    <Compile Include="Assets\PaddleRotationScript.cs" />
     <Compile Include="Assets\PaddleScript.cs" />
     <Compile Include="Assets\Resources\Prefabs\emptyfile2.cs" />
     <Compile Include="Assets\Scripts\Explosion.cs" />
