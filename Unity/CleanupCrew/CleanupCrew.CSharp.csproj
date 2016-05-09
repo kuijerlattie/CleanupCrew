@@ -63,6 +63,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\BallScript.cs" />
+    <Compile Include="Assets\BreakoutBlock.cs" />
+    <Compile Include="Assets\CollectBallsScript.cs" />
     <Compile Include="Assets\GameManager.cs" />
     <Compile Include="Assets\Models\emptyfile.cs" />
     <Compile Include="Assets\PaddleScript.cs" />
@@ -76,6 +78,7 @@
     <Compile Include="Assets\SpawnSpheres.cs" />
     <Compile Include="Assets\TestScenes\mptyfile5.cs" />
     <Compile Include="Assets\Textures\emptyfile4.cs" />
+    <Compile Include="Assets\rotationtest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
