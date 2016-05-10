@@ -8,7 +8,7 @@ public class PlayerInput : MonoBehaviour {
     public int AmountOfSpheres = 20;   //set in inspector probably
 	// Use this for initialization
 	void Start () {
-        SpawnSpheres.SpawnMultipleSpheres(spawnLocation, AmountOfSpheres);  //TODO move this to other script
+        //SpawnSpheres.SpawnMultipleSpheres(spawnLocation, AmountOfSpheres);  //TODO move this to other script
         GameSettings.ApplySettings();   //TODO move this to other script
     }
 
