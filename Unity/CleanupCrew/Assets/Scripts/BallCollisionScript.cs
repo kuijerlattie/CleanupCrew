@@ -23,7 +23,7 @@ public class BallCollisionScript : MonoBehaviour {
 
     void OnCollisionEnter(Collision other)
     {
-        Debug.Log(other.gameObject.tag);
+        //Debug.Log(other.gameObject.tag);
         if(other.gameObject.tag == "paddle")
         {
             touched = true;

@@ -4,7 +4,6 @@ using System.Collections;
 public class SpawnSpheres
 {
 
-   
     static public void SpawnSphere(Vector3 position, bool ImmidiateExplode = false)
     {
         position.y = 0;
@@ -12,11 +11,6 @@ public class SpawnSpheres
         spawnedSphere.transform.position = position;
         spawnedSphere.GetComponent<Explosion>().enabled = ImmidiateExplode;
     }
-
-    
-        
-
-    
 
     static public void SpawnMultipleSpheres(Rect spawnArea, int amount)
     {

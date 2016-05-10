@@ -8,8 +8,8 @@ public class PaddleRotationScript : MonoBehaviour {
     float paddleDistanceToCenter = 13.0f;
     GameObject paddle;
     float _angleToMove = 0.0f;
-    float RotationSpeed = 90;    //degrees per second
-    float InputMaxDistance = 2;  //used to specify how big the 'ring' is you can click/tap
+    float RotationSpeed = 360;    //degrees per second
+    float InputMaxDistance = 5;  //used to specify how big the 'ring' is you can click/tap
 	// Use this for initialization
 	void Start () {
         paddle = gameObject.transform.GetChild(0).gameObject;  //assumes paddle is the first child of this script.
