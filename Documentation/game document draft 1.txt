@@ -1,0 +1,39 @@
+Balancing player type:
+
+1. Killer - killer element is represented by cleaning the nuclear residual ( killing the nuclear blobs)
+
+2. Achiever - this element is represented by getting the highest score
+
+3. Socializer - players talking about how to beat the higher difficulty levels
+
+4. Explorer - the learning experience is the most representative for this player type
+
+
+
+
+3 Act structure
+
+Act 1:
+Hit a cooling rod and show you need energy. (Tutorial, shows breakout controles)
+
+Act 2:
+Set-up; create energy. (Initialize a chain reaction) 
+
+Act 3:
+Cleanup (hit blobs with the ball, direct the ball with a paddle on the side)
+
+Resolution:
+Highscore
+
+
+
+
+
+HUD
+
+Energy
+
+controls - first level only
+
+
+
