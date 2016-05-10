@@ -10,7 +10,7 @@ public class SpawnSpheres
         position.y = 0;
         GameObject spawnedSphere = GameObject.Instantiate(Resources.Load("Prefabs/Ball") as GameObject);
         spawnedSphere.transform.position = position;
-        spawnedSphere.GetComponent<Explosion>().enabled = ImmidiateExplode;
+        //spawnedSphere.GetComponent<Explosion>().enabled = ImmidiateExplode;
     }
 
     

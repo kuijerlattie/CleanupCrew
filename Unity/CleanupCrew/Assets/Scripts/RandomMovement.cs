@@ -1,25 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(Explosion), typeof(SphereCollider))]
+[RequireComponent(typeof(SphereCollider))]
 public class RandomMovement : MonoBehaviour {
 
     float force = 300f;
     Vector3 direction;
+    float Speed = 5;
     Rigidbody _rigid;
 	// Use this for initialization
 	void Start () {
-        direction = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
+        //direction = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
+        direction = -Vector3.forward;
         _rigid = GetComponent<Rigidbody>();
+        ApplyForce();
 
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if(_rigid.velocity.magnitude < 3.1f)
-        {
-            ApplyForce();
-        }
+        _rigid.velocity = _rigid.velocity.normalized * Speed;
     }
 
     void ApplyForce()
