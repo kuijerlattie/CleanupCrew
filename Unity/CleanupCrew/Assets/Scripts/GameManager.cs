@@ -27,6 +27,10 @@ public class GameManager : MonoBehaviour {
     float elapsedTime = 0;
     float idleTimer = 0;
 
+
+    //add all objects related to States as child to this, this is deleted after every state switch
+    GameObject currentStateObject = null;
+
     [SerializeField]
     Text pointText;
     [SerializeField]
@@ -52,6 +56,26 @@ public class GameManager : MonoBehaviour {
 
     void SetState(gamestate state)
     {
+        GameObject.Destroy(currentStateObject);
+
+        switch(currentState)
+        {
+            case gamestate.Tutorial:
+                EndTutorial();
+                break;
+            case gamestate.Cleanup:
+                EndCleanup();
+                break;
+            case gamestate.Battle:
+                EndBattle();
+                break;
+            case gamestate.Bossfight:
+                EndBossfight();
+                break;
+            default:
+                Debug.Log("WARNING, tried to switch to not existing state");
+                break;
+        }
         currentState = state;
         switch (state)
         {
@@ -78,8 +102,20 @@ public class GameManager : MonoBehaviour {
 
     }
 
+    //used to delete/cleanup
+    void EndTutorial()
+    {
+
+    }
+
     //used to initiate the cleanup actors / props / game rules
     void StartCleanup()
+    {
+
+    }
+
+    //used to delete/cleanup
+    void EndCleanup()
     {
 
     }
@@ -87,11 +123,25 @@ public class GameManager : MonoBehaviour {
     //used to initiate the battle actors / props / game rules
     void StartBattle()
     {
+        currentStateObject = new GameObject("battlePhaseObject");
+        BattlePhase battle = currentStateObject.AddComponent<BattlePhase>();
+        battle.StartBattle();
+    }
 
+    //used to delete/cleanup
+    void EndBattle()
+    {
+        currentStateObject.GetComponent<BattlePhase>().EndBattle();
     }
 
     //used to initiate the bossfight actors / props / game rules
     void StartBossfight()
+    {
+
+    }
+
+    //used to delete/cleanup
+    void EndBossfight()
     {
 
     }
