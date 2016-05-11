@@ -5,6 +5,7 @@ public class PaddleRotationScript : MonoBehaviour {
 
     Vector3 _desiredDirection;
     Vector3 _currentDirection;
+    float desiredAngle = 0;
     float paddleDistanceToCenter = 18.0f;
     GameObject paddle;
     float _angleToMove = 0.0f;
@@ -36,24 +37,26 @@ public class PaddleRotationScript : MonoBehaviour {
 	void Update () {
 
         _currentDirection = paddle.transform.forward;//(gameObject.transform.position - paddle.transform.localPosition).normalized;
-        if (Input.mousePosition.y < Screen.height / 100f * InputMaxDistance && Input.GetMouseButton(0) && oldMousePos != Input.mousePosition)
+        if (Input.mousePosition.y < Screen.height / 100f * InputMaxDistance && Input.GetMouseButton(0) && ((Input.mousePosition - oldMousePos).magnitude > 0.03f || (Input.mousePosition - oldMousePos).magnitude < -0.03f))
         {
-            //Screen.width/360f
             if (oldMousePos != Vector3.zero)
-                _desiredDirection = (Quaternion.AngleAxis(((float)Screen.width) * 2f * ((oldMousePos.x - Input.mousePosition.x) / (float)Screen.width), Vector3.up) * _currentDirection).normalized;
-            CalculateAngle();
-            Debug.Log((oldMousePos.x - Input.mousePosition.x) * ((float)Screen.width / 360f));
+            {
+                float onedegreeInScreenSize = (float)Screen.width/180f;
+                float degreesToRotate = (Input.mousePosition - oldMousePos).magnitude / onedegreeInScreenSize;
+                degreesToRotate *= Input.mousePosition.x < oldMousePos.x ? 1f : -1f;
+                degreesToRotate *= 25f;
+                
+               
+                _desiredDirection = Quaternion.Euler(0, degreesToRotate, 0) * _currentDirection;
+                CalculateAngle();
+            }
             oldMousePos = Input.mousePosition;
 
         }
         else oldMousePos = Vector3.zero;
-   
      
         MoveTo(_desiredDirection);
-        
-
     }
-
 
 
     void MoveTo(Vector3 direction)
