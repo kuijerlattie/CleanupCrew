@@ -1,26 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class BattlePhase : MonoBehaviour
+public class BattlePhase : AbstractPhase
 {
 
     private PointScript[] pointAreas;
     private List<GameObject> enemies = new List<GameObject>();
     // Use this for initialization
-    void Start()
-    {
-        
-    }
 
-    public void StartBattle()
+    public override void Start()
     {
+        isActive = true;
         FindPointAreas();
         PointScript.goalType mostUsedGoal = PointScript.goalType.space; //TODO, not tracking most used yet.
         SpawnEnemy(mostUsedGoal);
     }
 
-    public void EndBattle()
+    public override void Stop()
     {
+        isActive = false;
         for (int i = enemies.Count -1; i > 0; i--)
         {
             //destroy all enemies that are still alive
@@ -76,11 +74,15 @@ public class BattlePhase : MonoBehaviour
         currentEnemy.AddComponent<EnemyScript>();
 
         currentEnemy.transform.position = spawnPos;
+
+        enemies.Add(currentEnemy);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!isActive) return;
 
+        Debug.Log(enemies[0]);
     }
 }

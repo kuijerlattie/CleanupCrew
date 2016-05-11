@@ -63,10 +63,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Resources\Prefabs\emptyfile2.cs" />
+    <Compile Include="Assets\Scripts\AbstractPhase.cs" />
     <Compile Include="Assets\Scripts\BallCollisionScript.cs" />
     <Compile Include="Assets\Scripts\BallScript.cs" />
     <Compile Include="Assets\Scripts\BattlePhase.cs" />
     <Compile Include="Assets\Scripts\BreakoutBlock.cs" />
+    <Compile Include="Assets\Scripts\CleanupPhase.cs" />
     <Compile Include="Assets\Scripts\CollectBallsScript.cs" />
     <Compile Include="Assets\Scripts\EnemyScript.cs" />
     <Compile Include="Assets\Scripts\Explosion.cs" />

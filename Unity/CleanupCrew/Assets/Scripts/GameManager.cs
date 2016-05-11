@@ -12,12 +12,7 @@ public class GameManager : MonoBehaviour {
     gamestate currentState;
 
 
-    //ball specific shit
-    public float ballSpawnInterval = 10;
-    public float spawnIntervalIncrease = 0.9f;
-    public float spawnIntervalPowerIncrease = 0.1f;
-    float spawntimer = 0;
-    float spawncounter = 0;
+   
     public gamestate StartstateOverride = gamestate.Tutorial;
 
     public float expectedPlaytimeInSeconds = 300;
@@ -111,13 +106,16 @@ public class GameManager : MonoBehaviour {
     //used to initiate the cleanup actors / props / game rules
     void StartCleanup()
     {
-
+        currentStateObject = new GameObject("cleanupPhaseObject");
+        CleanupPhase cleanup = currentStateObject.AddComponent<CleanupPhase>();
+        cleanup.Start();
+        
     }
 
     //used to delete/cleanup
     void EndCleanup()
     {
-
+        currentStateObject.GetComponent<CleanupPhase>().Stop();
     }
 
     //used to initiate the battle actors / props / game rules
@@ -125,13 +123,13 @@ public class GameManager : MonoBehaviour {
     {
         currentStateObject = new GameObject("battlePhaseObject");
         BattlePhase battle = currentStateObject.AddComponent<BattlePhase>();
-        battle.StartBattle();
+        battle.Start();
     }
 
     //used to delete/cleanup
     void EndBattle()
     {
-        currentStateObject.GetComponent<BattlePhase>().EndBattle();
+        currentStateObject.GetComponent<BattlePhase>().Stop();
     }
 
     //used to initiate the bossfight actors / props / game rules
@@ -146,6 +144,12 @@ public class GameManager : MonoBehaviour {
 
     }
 
+    void UpdateHud()
+    {
+        pointText.text = "points: " + points;
+        powerText.text = "power: " + power;
+    }
+
 
     bool messageShown = false; //for debugging
 
@@ -157,15 +161,7 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        spawntimer -= Time.deltaTime;
-        if (spawntimer <= 0)
-        {
-            spawncounter += spawnIntervalPowerIncrease;
-            spawntimer = ballSpawnInterval * Mathf.Pow(0.9f, (float)spawncounter);
-            Debug.Log((float)Mathf.Pow(0.9f, (float)spawncounter));
-            Vector3 spawnloc = new Vector3(spawnLocation.x, 0, spawnLocation.y);
-            SpawnSpheres.SpawnSphere(spawnloc, false);
-        }
+        
 
         elapsedTime += Time.deltaTime;
         if (elapsedTime >= expectedPlaytimeInSeconds && !messageShown) //mostly for debug reasons
