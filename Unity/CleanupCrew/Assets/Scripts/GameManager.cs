@@ -162,7 +162,7 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        
+        UpdateHud();
 
         elapsedTime += Time.deltaTime;
         if (elapsedTime >= expectedPlaytimeInSeconds && !messageShown) //mostly for debug reasons
