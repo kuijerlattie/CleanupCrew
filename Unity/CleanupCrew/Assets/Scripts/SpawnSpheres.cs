@@ -12,6 +12,17 @@ public class SpawnSpheres
         return spawnedSphere;
     }
 
+    static public GameObject SpawnProjectile(Vector3 position, Vector3 direction, PointScript.goalType goaltype)
+    {
+        position.y = 0;
+        //TODO switch(goaltype)... different models
+        GameObject spawnedSphere = GameObject.Instantiate(Resources.Load("Prefabs/EnemyWaterProjectile") as GameObject);
+        spawnedSphere.transform.position = position;
+        spawnedSphere.GetComponent<Rigidbody>().velocity = direction;
+        
+        return spawnedSphere;
+    }
+
     static public GameObject[] SpawnMultipleSpheres(Rect spawnArea, int amount)
     {
         List<GameObject> spheres = new List<GameObject>();

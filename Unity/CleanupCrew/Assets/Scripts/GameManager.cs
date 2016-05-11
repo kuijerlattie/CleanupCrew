@@ -108,28 +108,29 @@ public class GameManager : MonoBehaviour {
     {
         currentStateObject = new GameObject("cleanupPhaseObject");
         CleanupPhase cleanup = currentStateObject.AddComponent<CleanupPhase>();
-        cleanup.Start();
+        cleanup.StartPhase();
         
     }
 
     //used to delete/cleanup
     void EndCleanup()
     {
-        currentStateObject.GetComponent<CleanupPhase>().Stop();
+        currentStateObject.GetComponent<CleanupPhase>().StopPhase();
     }
 
     //used to initiate the battle actors / props / game rules
     void StartBattle()
     {
+        Debug.Log("started");
         currentStateObject = new GameObject("battlePhaseObject");
         BattlePhase battle = currentStateObject.AddComponent<BattlePhase>();
-        battle.Start();
+        battle.StartPhase();
     }
 
     //used to delete/cleanup
     void EndBattle()
     {
-        currentStateObject.GetComponent<BattlePhase>().Stop();
+        currentStateObject.GetComponent<BattlePhase>().StopPhase();
     }
 
     //used to initiate the bossfight actors / props / game rules

@@ -76,6 +76,7 @@
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\GameSettings.cs" />
     <Compile Include="Assets\Scripts\PaddleBounce.cs" />
+    <Compile Include="Assets\Scripts\PaddlePowerUp.cs" />
     <Compile Include="Assets\Scripts\PaddleRotationScript.cs" />
     <Compile Include="Assets\Scripts\PaddleScript.cs" />
     <Compile Include="Assets\Scripts\PlayerInput.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Assets\Scripts\RandomColor.cs" />
     <Compile Include="Assets\Scripts\RandomMovement.cs" />
     <Compile Include="Assets\Scripts\SpawnSpheres.cs" />
+    <Compile Include="Assets\Scripts\WallScript.cs" />
     <Compile Include="Assets\Scripts\rotationtest.cs" />
     <Compile Include="Assets\Textures\emptyfile4.cs" />
   </ItemGroup>

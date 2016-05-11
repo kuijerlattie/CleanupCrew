@@ -12,12 +12,12 @@ public class CleanupPhase : AbstractPhase {
     List<GameObject> spheres = new List<GameObject>();
 
     // Use this for initialization
-    public override void Start()
+    public override void StartPhase()
     {
         isActive = true;
     }
 
-    public override void Stop()
+    public override void StopPhase()
     {
         isActive = false;
     }
