@@ -8,15 +8,16 @@ public class BattlePhase : AbstractPhase
     private List<GameObject> enemies = new List<GameObject>();
     // Use this for initialization
 
-    public override void Start()
+    public override void StartPhase()
     {
+        Debug.Log("START");
         isActive = true;
         FindPointAreas();
         PointScript.goalType mostUsedGoal = PointScript.goalType.space; //TODO, not tracking most used yet.
         SpawnEnemy(mostUsedGoal);
     }
 
-    public override void Stop()
+    public override void StopPhase()
     {
         isActive = false;
         for (int i = enemies.Count -1; i > 0; i--)
@@ -64,14 +65,17 @@ public class BattlePhase : AbstractPhase
             case PointScript.goalType.water:
                 break;
         }
-        currentEnemy = GameObject.CreatePrimitive(PrimitiveType.Cube);  //TODO replace with prefabs in above switch 
+        //currentEnemy = GameObject.CreatePrimitive(PrimitiveType.Cube);  //TODO replace with prefabs in above switch 
+        currentEnemy = GameObject.Instantiate(Resources.Load("Prefabs/Blob") as GameObject);
         currentEnemy.layer = LayerMask.NameToLayer("Enemies");
         Rigidbody body = currentEnemy.AddComponent<Rigidbody>();
         body.useGravity = false;
         body.constraints = RigidbodyConstraints.FreezeRotation;
         body.velocity = directionToMiddle.normalized;
         currentEnemy.AddComponent<FixedSpeed>();
-        currentEnemy.AddComponent<EnemyScript>();
+
+        EnemyScript enemyscript =  currentEnemy.AddComponent<EnemyScript>();
+        enemyscript.enemytype = goaltype;
 
         currentEnemy.transform.position = spawnPos;
 
@@ -83,6 +87,6 @@ public class BattlePhase : AbstractPhase
     {
         if (!isActive) return;
 
-        Debug.Log(enemies[0]);
+  
     }
 }

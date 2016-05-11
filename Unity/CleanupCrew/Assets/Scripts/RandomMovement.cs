@@ -8,8 +8,8 @@ public class RandomMovement : MonoBehaviour {
     Rigidbody _rigid;
 	// Use this for initialization
 	void Start () {
-        //direction = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
-        direction = -Vector3.forward;
+        direction = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
+        //direction = -Vector3.forward;
         _rigid = GetComponent<Rigidbody>();
         _rigid.velocity = direction;
 
