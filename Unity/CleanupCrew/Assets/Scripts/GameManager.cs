@@ -9,9 +9,23 @@ public class GameManager : MonoBehaviour {
     float gameTimer = 15;
     bool timerPaused = false;
 
+    gamestate currentState;
+
+
+    //ball specific shit
+    public float ballSpawnInterval = 10;
+    public float spawnIntervalIncrease = 0.9f;
+    public float spawnIntervalPowerIncrease = 0.1f;
+    float spawntimer = 0;
+    float spawncounter = 0;
+    public gamestate StartstateOverride = gamestate.Tutorial;
+
+    public float expectedPlaytimeInSeconds = 300;
 
     public int points;
     public int power;
+    float elapsedTime = 0;
+    float idleTimer = 0;
 
     [SerializeField]
     Text pointText;
@@ -22,11 +36,12 @@ public class GameManager : MonoBehaviour {
 
     public enum gamestate
     {
-        Generating,
-        Cleaning
+        Tutorial,
+        Cleanup,
+        Battle,
+        Bossfight
     }
 
-    gamestate state;
 
     GameObject g;
 
@@ -35,42 +50,60 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     GameObject breakoutObjects;
 
-
-    public void ResetTimer(bool generationStage = true)
+    void SetState(gamestate state)
     {
-        if (generationStage)
+        currentState = state;
+        switch (state)
         {
-            timerPaused = false;
-            gameTimer = GENERATIONTIME;
-        }
-        else
-        {
-            timerPaused = false;
-            state = gamestate.Cleaning;
-            gameTimer = CLEANINGTIME;
+            case gamestate.Tutorial:
+                StartTutorial();
+                break;
+            case gamestate.Cleanup:
+                StartCleanup();
+                break;
+            case gamestate.Battle:
+                StartBattle();
+                break;
+            case gamestate.Bossfight:
+                StartBossfight();
+                break;
+            default:
+                break;
         }
     }
 
-    public void PauseTimer()
+    //used to initiate the tutorial actors / props / game rules
+    void StartTutorial()
     {
-        timerPaused = true;
+
     }
-	// Use this for initialization
-	void Start () {
-        state = gamestate.Generating;
-        ResetTimer();
-        PauseTimer();
 
-        g = new GameObject("ShapeContainer");
-	}
+    //used to initiate the cleanup actors / props / game rules
+    void StartCleanup()
+    {
 
-    //ball specific shit
-    public float ballSpawnInterval = 10;
-    public float spawnIntervalIncrease = 0.9f;
-    public float spawnIntervalPowerIncrease = 0.1f;
-    float spawntimer = 0;
-    float spawncounter = 0;
-	
+    }
+
+    //used to initiate the battle actors / props / game rules
+    void StartBattle()
+    {
+
+    }
+
+    //used to initiate the bossfight actors / props / game rules
+    void StartBossfight()
+    {
+
+    }
+
+
+    bool messageShown = false; //for debugging
+
+    void Start()
+    {
+        SetState(StartstateOverride);
+    }
+
 	// Update is called once per frame
 	void Update () {
 
@@ -82,6 +115,13 @@ public class GameManager : MonoBehaviour {
             Debug.Log((float)Mathf.Pow(0.9f, (float)spawncounter));
             Vector3 spawnloc = new Vector3(spawnLocation.x, 0, spawnLocation.y);
             SpawnSpheres.SpawnSphere(spawnloc, false);
+        }
+
+        elapsedTime += Time.deltaTime;
+        if (elapsedTime >= expectedPlaytimeInSeconds && !messageShown) //mostly for debug reasons
+        {
+            messageShown = true;
+            Debug.Log("game has been running for longer than the expected playtime!");
         }
     }
 }
