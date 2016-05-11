@@ -9,7 +9,8 @@ public class PaddleRotationScript : MonoBehaviour {
     GameObject paddle;
     float _angleToMove = 0.0f;
     float RotationSpeed = 360;    //degrees per second
-    float InputMaxDistance = 500;  //used to specify how big the 'ring' is you can click/tap
+    float InputMaxDistance = 50;  //percent of the screen (y-axis) on the bottom that is clickable
+    Vector3 oldMousePos = Vector3.zero;
 	// Use this for initialization
 	void Start () {
         paddle = gameObject.transform.GetChild(0).gameObject;  //assumes paddle is the first child of this script.
@@ -35,19 +36,25 @@ public class PaddleRotationScript : MonoBehaviour {
 	void Update () {
 
         _currentDirection = paddle.transform.forward;//(gameObject.transform.position - paddle.transform.localPosition).normalized;
-        if (Input.GetMouseButton(0))
+        if (Input.mousePosition.y < Screen.height / 100f * InputMaxDistance && Input.GetMouseButton(0) && oldMousePos != Input.mousePosition)
         {
-            Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            worldMousePos.y = gameObject.transform.position.y;
-            Vector3 direction = gameObject.transform.position - worldMousePos;
-            if(direction.magnitude < paddleDistanceToCenter + InputMaxDistance && direction.magnitude > paddleDistanceToCenter - InputMaxDistance)
-            _desiredDirection = direction.normalized;
+            //Screen.width/360f
+            if (oldMousePos != Vector3.zero)
+                _desiredDirection = (Quaternion.AngleAxis(((float)Screen.width) * 2f * ((oldMousePos.x - Input.mousePosition.x) / (float)Screen.width), Vector3.up) * _currentDirection).normalized;
             CalculateAngle();
+            Debug.Log((oldMousePos.x - Input.mousePosition.x) * ((float)Screen.width / 360f));
+            oldMousePos = Input.mousePosition;
+
         }
+        else oldMousePos = Vector3.zero;
+   
+     
         MoveTo(_desiredDirection);
         
 
     }
+
+
 
     void MoveTo(Vector3 direction)
     {
