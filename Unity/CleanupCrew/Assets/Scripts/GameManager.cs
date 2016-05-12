@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour {
     bool timerPaused = false;
 
     gamestate currentState;
+
+    [HideInInspector]
+    public List<GameObject> paddles = new List<GameObject>();
 
 
    
