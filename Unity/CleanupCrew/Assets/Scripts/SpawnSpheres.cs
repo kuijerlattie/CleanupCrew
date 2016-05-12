@@ -12,6 +12,15 @@ public class SpawnSpheres
         return spawnedSphere;
     }
 
+    static public GameObject SpawnSphere(Vector3 position, Vector3 direction)
+    {
+        position.y = 0;
+        GameObject spawnedSphere = GameObject.Instantiate(Resources.Load("Prefabs/Ball") as GameObject);
+        spawnedSphere.GetComponent<RandomMovement>().OverrideDirection(direction);
+        spawnedSphere.transform.position = position;
+        return spawnedSphere;
+    }
+
     static public GameObject SpawnProjectile(Vector3 position, Vector3 direction, PointScript.goalType goaltype)
     {
         position.y = 0;

@@ -10,7 +10,7 @@ public class PaddleRotationScript : MonoBehaviour {
     GameObject paddle;
     float _angleToMove = 0.0f;
     float RotationSpeed = 360;    //degrees per second
-    float InputMaxDistance = 50;  //percent of the screen (y-axis) on the bottom that is clickable
+    public float InputMaxDistance = 10;  //percent of the screen (y-axis) on the bottom that is clickable
     Vector3 oldMousePos = Vector3.zero;
 	// Use this for initialization
 	void Start () {
@@ -41,13 +41,12 @@ public class PaddleRotationScript : MonoBehaviour {
         {
             if (oldMousePos != Vector3.zero)
             {
-                float onedegreeInScreenSize = (float)Screen.width/180f;
+                float onedegreeInScreenSize = (float)Screen.width/360f;
                 float degreesToRotate = (Input.mousePosition - oldMousePos).magnitude / onedegreeInScreenSize;
                 degreesToRotate *= Input.mousePosition.x < oldMousePos.x ? 1f : -1f;
-                degreesToRotate *= 25f;
-                
-               
-                _desiredDirection = Quaternion.Euler(0, degreesToRotate, 0) * _currentDirection;
+
+                gameObject.transform.Rotate(Vector3.up, degreesToRotate);
+                 _desiredDirection = Quaternion.Euler(0, degreesToRotate, 0) * _currentDirection;
                 CalculateAngle();
             }
             oldMousePos = Input.mousePosition;
@@ -55,7 +54,7 @@ public class PaddleRotationScript : MonoBehaviour {
         }
         else oldMousePos = Vector3.zero;
      
-        MoveTo(_desiredDirection);
+        //MoveTo(_desiredDirection);
     }
 
 

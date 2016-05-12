@@ -3,6 +3,8 @@ using System.Collections;
 
 public class WallScript : MonoBehaviour {
 
+    public bool isTutorial = false;
+    public float wallDamage = 10;
 	// Use this for initialization
 	void Start () {
 	
@@ -13,11 +15,18 @@ public class WallScript : MonoBehaviour {
 	
 	}
 
+
+
     void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.gameObject.tag == "Ball") // check if collision is with ball
         {
-            GameObject.Destroy(collision.collider.gameObject);
+            if (!isTutorial)
+            {
+                GameObject.FindObjectOfType<GameManager>().power -= wallDamage;
+                GameObject.Destroy(collision.collider.gameObject);
+            }
+            else GameObject.FindObjectOfType<TutorialPhase>().HitWall();
         }
     }
 }

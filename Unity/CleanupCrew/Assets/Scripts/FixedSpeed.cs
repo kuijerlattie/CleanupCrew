@@ -5,7 +5,7 @@ using System.Collections;
 public class FixedSpeed : MonoBehaviour {
 
     private Rigidbody _rigid;
-    float Speed = 5.0f;
+    float Speed = 7.0f;
 
 	// Use this for initialization
 	void Start () {
