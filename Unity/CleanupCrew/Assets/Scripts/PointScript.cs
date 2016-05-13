@@ -38,15 +38,18 @@ public class PointScript : MonoBehaviour {
             {
                 case goalType.water:
                     manager.points += waterpoints;
-                    manager.power -= waterPower;
+                    //manager.power -= waterPower;  //why would you lose power here? makes more sense to remove power ONLY when balls hit the wall
+                    manager.pointsWater++;
                     break;
                 case goalType.underground:
                     manager.points += undergroundpoints;
-                    manager.power -= undergroundPower;
+                    //manager.power -= undergroundPower;
+                    manager.pointsUnderground++;
                     break;
                 case goalType.space:
                     manager.points += spacepoints;
-                    manager.power -= spacePower;    
+                    //manager.power -= spacePower;
+                    manager.pointsSpace++;  
                     break;
                 default:
                     break;

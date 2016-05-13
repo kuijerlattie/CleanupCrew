@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public class CleanupPhase : AbstractPhase {
 
+    public int SpawnBossAfter = 10;
+
     //ball specific shit
     public float ballSpawnInterval = 10;
     public float spawnIntervalIncrease = 0.9f;
@@ -14,6 +16,7 @@ public class CleanupPhase : AbstractPhase {
     // Use this for initialization
     public override void StartPhase()
     {
+        FindPointZones();
         isActive = true;
     }
 
@@ -22,9 +25,19 @@ public class CleanupPhase : AbstractPhase {
         isActive = false;
     }
 
-	
-	// Update is called once per frame
-	void Update ()
+    public override bool HasEnded()
+    {
+        GameManager manager = GameObject.FindObjectOfType<GameManager>();
+        if(manager.pointsWater >= SpawnBossAfter || manager.pointsUnderground >= SpawnBossAfter || manager.pointsSpace >= SpawnBossAfter)
+        {
+            return true;
+        }
+        return false;
+      
+    }
+
+    // Update is called once per frame
+    void Update ()
     {
         if (!isActive) return;
 

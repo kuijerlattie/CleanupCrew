@@ -19,7 +19,8 @@ public class PowerupManager : MonoBehaviour {
         BiggerPaddle,
         SlowEnemies,
         MoreEnergy,
-        SmallerEnemies
+        SmallerEnemies,
+        Magnetic
     }
 
     // Use this for initialization
@@ -92,6 +93,10 @@ public class PowerupManager : MonoBehaviour {
                 manager.power += 10;
                 break;
 
+            case PowerupType.Magnetic:
+                MagneticPaddle.Magnetic();
+                StartCoroutine(PowerupTimer(type, sizeTimer));
+                break;
             default:
                 break;
         }
@@ -121,6 +126,10 @@ public class PowerupManager : MonoBehaviour {
             case PowerupType.SmallerEnemies:
                 SmallerEnemies.ReturnSize();
                 break;
+
+           /* case PowerupType.Magnetic():
+                MagneticPaddle.Magnetic();
+                break;*/
 
             default:
                 break;

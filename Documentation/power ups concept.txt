@@ -4,7 +4,7 @@ multiple peddals
 
 slowing blobs movement
 
-use blobs as projectiles
+Blobs stick to the paddle and can be shot off
 
 magnetic pedal
 
@@ -15,4 +15,6 @@ bigger pedal
 smaller pedal
 
 extra energy
+
+lose all powerups
 

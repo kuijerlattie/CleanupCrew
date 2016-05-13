@@ -1,25 +1,33 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class BattlePhase : AbstractPhase
 {
 
-    private PointScript[] pointAreas;
     private List<GameObject> enemies = new List<GameObject>();
     // Use this for initialization
 
     public override void StartPhase()
     {
-        Debug.Log("START");
         isActive = true;
-        FindPointAreas();
-        PointScript.goalType mostUsedGoal = PointScript.goalType.space; //TODO, not tracking most used yet.
+
+        FindPointZones();
+        SetPointZones(true);
+        GameManager manager = GameObject.FindObjectOfType<GameManager>();
+
+        PointScript.goalType mostUsedGoal =
+            (manager.pointsWater > manager.pointsUnderground && manager.pointsWater > manager.pointsSpace) ? PointScript.goalType.water :
+            ((manager.pointsUnderground > manager.pointsWater && manager.pointsUnderground > manager.pointsSpace) ? PointScript.goalType.underground :
+            PointScript.goalType.space
+            );
         SpawnEnemy(mostUsedGoal);
     }
 
     public override void StopPhase()
     {
         isActive = false;
+        SetPointZones(false);
         for (int i = enemies.Count -1; i > 0; i--)
         {
             //destroy all enemies that are still alive
@@ -27,17 +35,18 @@ public class BattlePhase : AbstractPhase
         }
     }
 
-    private void FindPointAreas()
+    public override bool HasEnded()
     {
-        pointAreas = GameObject.FindObjectsOfType<PointScript>();
-        if (pointAreas.GetLength(0) < 3) Debug.Log("WARNING, less then 3 'PointScripts'");
+        return false;
     }
+
 
     public void SpawnEnemy(PointScript.goalType goaltype)
     {
         PointScript currentPscript = null;
-        foreach (PointScript pscript in pointAreas)
+        foreach (GameObject pscriptObject in pointZones)
         {
+            PointScript pscript = pscriptObject.GetComponent<PointScript>();
             if (pscript.type == goaltype)
             {
                 currentPscript = pscript;
@@ -54,7 +63,6 @@ public class BattlePhase : AbstractPhase
         Vector3 directionToMiddle = -spawnPos;
 
 
-        //TODO actual spawning
         GameObject currentEnemy;
         switch(goaltype)
         {
@@ -65,7 +73,7 @@ public class BattlePhase : AbstractPhase
             case PointScript.goalType.water:
                 break;
         }
-        //currentEnemy = GameObject.CreatePrimitive(PrimitiveType.Cube);  //TODO replace with prefabs in above switch 
+        //TODO replace with prefabs in above switch  
         currentEnemy = GameObject.Instantiate(Resources.Load("Prefabs/Blob") as GameObject);
         currentEnemy.layer = LayerMask.NameToLayer("Enemies");
         Rigidbody body = currentEnemy.AddComponent<Rigidbody>();
