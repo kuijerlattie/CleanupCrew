@@ -6,7 +6,7 @@ public class FixedSpeed : MonoBehaviour {
 
     private Rigidbody _rigid;
     [HideInInspector]
-    public float Speed = 5.0f;
+    public float Speed = 7.0f;
 
 	// Use this for initialization
 	void Start () {

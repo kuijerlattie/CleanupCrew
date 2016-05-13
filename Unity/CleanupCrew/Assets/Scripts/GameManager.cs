@@ -21,14 +21,19 @@ public class GameManager : MonoBehaviour {
     public float expectedPlaytimeInSeconds = 300;
 
     public int points;
-    public int power;
+    public int pointsWater = 0;
+    public int pointsUnderground = 0;
+    public int pointsSpace = 0;
+    public float power;
     GameObject paddle;
     float elapsedTime = 0;
     float idleTimer = 0;
 
-
     //add all objects related to States as child to this, this is deleted after every state switch
     GameObject currentStateObject = null;
+    AbstractPhase currentPhase = null;
+
+
 
     [SerializeField]
     Text pointText;
@@ -57,23 +62,26 @@ public class GameManager : MonoBehaviour {
     {
         GameObject.Destroy(currentStateObject);
 
-        switch(currentState)
+        if (currentStateObject != null && currentPhase != null)
         {
-            case gamestate.Tutorial:
-                EndTutorial();
-                break;
-            case gamestate.Cleanup:
-                EndCleanup();
-                break;
-            case gamestate.Battle:
-                EndBattle();
-                break;
-            case gamestate.Bossfight:
-                EndBossfight();
-                break;
-            default:
-                Debug.Log("WARNING, tried to switch to not existing state");
-                break;
+            switch (currentState)
+            {
+                case gamestate.Tutorial:
+                    EndTutorial();
+                    break;
+                case gamestate.Cleanup:
+                    EndCleanup();
+                    break;
+                case gamestate.Battle:
+                    EndBattle();
+                    break;
+                case gamestate.Bossfight:
+                    EndBossfight();
+                    break;
+                default:
+                    Debug.Log("WARNING, tried to switch to not existing state");
+                    break;
+            }
         }
         currentState = state;
         switch (state)
@@ -98,13 +106,15 @@ public class GameManager : MonoBehaviour {
     //used to initiate the tutorial actors / props / game rules
     void StartTutorial()
     {
-
+        currentStateObject = new GameObject("tutorialPhaseObject");
+        currentPhase = currentStateObject.AddComponent<TutorialPhase>();
+        currentPhase.StartPhase();
     }
 
     //used to delete/cleanup
     void EndTutorial()
     {
-
+        currentPhase.StopPhase();
     }
 
     //used to initiate the cleanup actors / props / game rules
@@ -151,8 +161,8 @@ public class GameManager : MonoBehaviour {
 
     void UpdateHud()
     {
-        pointText.text = "points: " + points;
-        powerText.text = "power: " + power;
+        pointText.text = "points: " + Mathf.Round(points);
+        powerText.text = "power: " + Mathf.Round(power);
     }
 
 
@@ -165,8 +175,16 @@ public class GameManager : MonoBehaviour {
         paddles.Add(paddle);
     }
 
-	// Update is called once per frame
-	void Update () {
+    /// <summary>
+    /// Checks if the End-condition has been met for the current phase, and proceed to next phase.
+    /// </summary>
+    void AutomaticSwitchState()
+    {
+        if (currentPhase != null && currentPhase.HasEnded()) SetState(currentPhase.nextGamestate);
+    }
+
+    // Update is called once per frame
+    void Update () {
 
         UpdateHud();
 
@@ -176,5 +194,7 @@ public class GameManager : MonoBehaviour {
             messageShown = true;
             Debug.Log("game has been running for longer than the expected playtime!");
         }
+
+        AutomaticSwitchState();
     }
 }
