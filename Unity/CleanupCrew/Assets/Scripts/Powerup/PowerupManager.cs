@@ -10,6 +10,10 @@ public class PowerupManager : MonoBehaviour {
     public bool spawnFromCenter = true;
     public float sizeTimer = 5f;
     public float paddleTimer = 10f;
+
+    [HideInInspector]
+    public bool isSpawning = false;
+
     GameManager manager;
 
     public enum PowerupType
@@ -32,7 +36,7 @@ public class PowerupManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-
+        if (!isSpawning) return;
         if (timer <= 0)
         {
             SpawnRandomPowerup();
