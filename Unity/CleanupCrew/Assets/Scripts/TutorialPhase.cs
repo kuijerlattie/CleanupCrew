@@ -14,6 +14,7 @@ public class TutorialPhase : AbstractPhase {
     public override void StartPhase()
     {
         FindPointZones();
+        GameObject.FindObjectOfType<PowerupManager>().isSpawning = false;
         powerPerRod = 100f / (float)amountOfLayers;
         rods = new GameObject[amountOfLayers];
         manager = GameObject.FindObjectOfType<GameManager>();
@@ -79,6 +80,7 @@ public class TutorialPhase : AbstractPhase {
     public override void StopPhase()
     {
         GameObject.Destroy(playingBall);
+        GameObject.FindObjectOfType<PowerupManager>().isSpawning = true;
         SetWalls(false);
         SetPointZones(false);
         pointZones.Clear();
