@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour {
 
     public int points;
     public int power;
+    GameObject paddle;
     float elapsedTime = 0;
     float idleTimer = 0;
 
@@ -160,6 +161,8 @@ public class GameManager : MonoBehaviour {
     void Start()
     {
         SetState(StartstateOverride);
+        paddle = GameObject.FindGameObjectWithTag("paddle");
+        paddles.Add(paddle);
     }
 
 	// Update is called once per frame

@@ -8,10 +8,18 @@ public class PowerupManager : MonoBehaviour {
     public float spawntimerInSeconds = 25;
     public float spawntimerRandomDifference = 10;
     public bool spawnFromCenter = true;
+    public float sizeTimer = 5f;
+    public float paddleTimer = 10f;
+    GameManager manager;
 
     public enum PowerupType
     {
-        MultiPaddle
+        MultiPaddle,
+        SmallerPaddle,
+        BiggerPaddle,
+        SlowEnemies,
+        MoreEnergy,
+        SmallerEnemies
     }
 
     // Use this for initialization
@@ -55,8 +63,35 @@ public class PowerupManager : MonoBehaviour {
         {
             case PowerupType.MultiPaddle:
                 //activate powerup here.
-                
+                PaddlePowerUp.SpawnPaddles();
+                PaddlePowerUp.CalculatePosition();
+                StartCoroutine(PowerupTimer(type, paddleTimer));
                 break;
+
+            case PowerupType.SmallerPaddle:
+                ScalePowerUp.ScaleDown();
+                StartCoroutine(PowerupTimer(type, sizeTimer));
+                break;
+
+            case PowerupType.BiggerPaddle:
+                ScalePowerUp.ScaleUp();
+                StartCoroutine(PowerupTimer(type, sizeTimer));
+                break;
+
+            case PowerupType.SlowEnemies:
+                SlowEnemies.SlowBlobs();
+                StartCoroutine(PowerupTimer(type, sizeTimer));
+                break;
+
+           case PowerupType.SmallerEnemies:
+                SmallerEnemies.SrinkEnemies();
+                StartCoroutine(PowerupTimer(type, sizeTimer));
+                break;
+
+            case PowerupType.MoreEnergy:
+                manager.power += 10;
+                break;
+
             default:
                 break;
         }
@@ -68,7 +103,25 @@ public class PowerupManager : MonoBehaviour {
         {
             case PowerupType.MultiPaddle:
                 //deactivate powerup here.
+                PaddlePowerUp.RemovePaddle();
                 break;
+
+            case PowerupType.SmallerPaddle:
+                ScalePowerUp.ScaleUp();
+                break;
+
+            case PowerupType.BiggerPaddle:
+                ScalePowerUp.ScaleDown();
+                break;
+
+            case PowerupType.SlowEnemies:
+                SlowEnemies.NormalSpeed();
+                break;
+
+            case PowerupType.SmallerEnemies:
+                SmallerEnemies.ReturnSize();
+                break;
+
             default:
                 break;
         }

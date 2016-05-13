@@ -20,6 +20,8 @@ public class PowerupStartScript : MonoBehaviour {
         if (collision.collider.tag == "paddle")
         {
             pManager.ActivatePowerup(powerupType);
+            GameObject.Destroy(gameObject);
+
         }
         if (collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
