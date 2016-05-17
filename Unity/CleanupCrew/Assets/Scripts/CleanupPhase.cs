@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 public class CleanupPhase : AbstractPhase {
 
-    public int SpawnBossAfter = 10;
+    public int SpawnBossAfter = GameSettings.SpawnBossAfterS;
 
     //ball specific shit
-    public float ballSpawnInterval = 10;
-    public float spawnIntervalIncrease = 0.9f;
-    public float spawnIntervalPowerIncrease = 0.1f;
+    public float ballSpawnInterval = GameSettings.ballSpawnIntervalS;
+    public float spawnIntervalIncrease = GameSettings.spawnIntervalIncreaseS;
+    public float spawnIntervalPowerIncrease = GameSettings.spawnIntervalPowerIncreaseS;
     float spawntimer = 0;
     float spawncounter = 0;
     List<GameObject> spheres = new List<GameObject>();
@@ -46,8 +46,7 @@ public class CleanupPhase : AbstractPhase {
         if (spawntimer <= 0)
         {
             spawncounter += spawnIntervalPowerIncrease;
-            spawntimer = ballSpawnInterval * Mathf.Pow(0.9f, (float)spawncounter);
-            Debug.Log((float)Mathf.Pow(0.9f, (float)spawncounter));
+            spawntimer = ballSpawnInterval * Mathf.Pow(spawnIntervalIncrease, (float)spawncounter);
             Vector3 spawnloc = Vector3.zero;
             SpawnSpheres.SpawnSphere(spawnloc);
         }

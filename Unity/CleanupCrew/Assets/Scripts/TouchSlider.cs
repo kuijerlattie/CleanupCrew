@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// used to make the bar visual on the screen where you can click/tap
+/// </summary>
 public class TouchSlider : MonoBehaviour {
 
-	// Use this for initialization
 	void Start () {
         RectTransform rectTransform = GetComponent<RectTransform>();
         float percentOfScreen = GameObject.FindObjectOfType<PaddleRotationScript>().InputMaxDistance / 100f;

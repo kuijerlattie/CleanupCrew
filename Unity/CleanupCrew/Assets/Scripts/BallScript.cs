@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
+
 public class BallScript : MonoBehaviour {
 
     int points = 0;
@@ -17,6 +18,7 @@ public class BallScript : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
+    
 	void Update () {
         startingSpeed += 0.005f;
         if (startingSpeed > 25) startingSpeed = 25;

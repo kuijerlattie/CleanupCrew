@@ -5,11 +5,10 @@ public class PowerupManager : MonoBehaviour {
 
     public GameObject[] PowerupList;
     float timer = 0;
-    public float spawntimerInSeconds = 25;
-    public float spawntimerRandomDifference = 10;
-    public bool spawnFromCenter = true;
-    public float sizeTimer = 5f;
-    public float paddleTimer = 10f;
+    public float spawntimerInSeconds = GameSettings.PowSpawnRateS;
+    public float spawntimerRandomDifference = GameSettings.PowSpawnRateDiffS;
+    public bool spawnFromCenter = GameSettings.PowSpawnInCenterS;
+    public float durationTimer = GameSettings.PowDurationS;
 
     [HideInInspector]
     public bool isSpawning = false;
@@ -70,27 +69,27 @@ public class PowerupManager : MonoBehaviour {
                 //activate powerup here.
                 PaddlePowerUp.SpawnPaddles();
                 PaddlePowerUp.CalculatePosition();
-                StartCoroutine(PowerupTimer(type, paddleTimer));
+                StartCoroutine(PowerupTimer(type, durationTimer));
                 break;
 
             case PowerupType.SmallerPaddle:
                 ScalePowerUp.ScaleDown();
-                StartCoroutine(PowerupTimer(type, sizeTimer));
+                StartCoroutine(PowerupTimer(type, durationTimer));
                 break;
 
             case PowerupType.BiggerPaddle:
                 ScalePowerUp.ScaleUp();
-                StartCoroutine(PowerupTimer(type, sizeTimer));
+                StartCoroutine(PowerupTimer(type, durationTimer));
                 break;
 
             case PowerupType.SlowEnemies:
                 SlowEnemies.SlowBlobs();
-                StartCoroutine(PowerupTimer(type, sizeTimer));
+                StartCoroutine(PowerupTimer(type, durationTimer));
                 break;
 
            case PowerupType.SmallerEnemies:
                 SmallerEnemies.SrinkEnemies();
-                StartCoroutine(PowerupTimer(type, sizeTimer));
+                StartCoroutine(PowerupTimer(type, durationTimer));
                 break;
 
             case PowerupType.MoreEnergy:
@@ -99,7 +98,7 @@ public class PowerupManager : MonoBehaviour {
 
             case PowerupType.Magnetic:
                 MagneticPaddle.Magnetic();
-                StartCoroutine(PowerupTimer(type, sizeTimer));
+                StartCoroutine(PowerupTimer(type, durationTimer));
                 break;
             default:
                 break;

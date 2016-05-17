@@ -4,7 +4,7 @@ using System;
 
 public class TutorialPhase : AbstractPhase {
 
-    public const int amountOfLayers = 3;
+    private int amountOfLayers = GameSettings.AmountOfRingsS;
     private GameObject[] rods;
 
     private GameObject playingBall = null;
