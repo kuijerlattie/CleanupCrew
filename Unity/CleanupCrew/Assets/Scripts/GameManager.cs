@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour {
     float gameTimer = 15;
     bool timerPaused = false;
 
-    gamestate currentState;
+    public gamestate currentState;
 
     [HideInInspector]
     public List<GameObject> paddles = new List<GameObject>();
@@ -26,8 +26,8 @@ public class GameManager : MonoBehaviour {
     public int pointsSpace = 0;
     public float power;
     GameObject paddle;
-    float elapsedTime = 0;
-    float idleTimer = 0;
+    public float elapsedTime = 0;
+    public float idleTimer = 0;
 
     //add all objects related to States as child to this, this is deleted after every state switch
     GameObject currentStateObject = null;
@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     GameObject breakoutObjects;
 
-    void SetState(gamestate state)
+    public void SetState(gamestate state)
     {
         GameObject.Destroy(currentStateObject);
 
@@ -193,6 +193,12 @@ public class GameManager : MonoBehaviour {
         {
             messageShown = true;
             Debug.Log("game has been running for longer than the expected playtime!");
+        }
+
+        idleTimer += Time.deltaTime;
+        if (Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))
+        {
+            idleTimer = 0;
         }
 
         AutomaticSwitchState();

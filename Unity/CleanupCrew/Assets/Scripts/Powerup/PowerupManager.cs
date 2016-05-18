@@ -51,7 +51,7 @@ public class PowerupManager : MonoBehaviour {
         timer = spawntimerInSeconds + (Random.Range(0, spawntimerRandomDifference * 2) - spawntimerRandomDifference);
     }
 
-    void SpawnRandomPowerup()
+    public void SpawnRandomPowerup()
     {
         Vector3 spawnlocation = new Vector3(0, 0, 0);
         if (!spawnFromCenter)
@@ -137,6 +137,15 @@ public class PowerupManager : MonoBehaviour {
 
             default:
                 break;
+        }
+    }
+
+    public void EndAllPowerups()
+    {
+        StopAllCoroutines();
+        foreach (PowerupType p in System.Enum.GetValues(typeof(PowerupType)))
+        {
+            DeactivatePowerup(p);
         }
     }
 
