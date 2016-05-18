@@ -135,7 +135,6 @@ public class GameManager : MonoBehaviour {
     //used to initiate the battle actors / props / game rules
     void StartBattle()
     {
-        Debug.Log("started");
         currentStateObject = new GameObject("battlePhaseObject");
         BattlePhase battle = currentStateObject.AddComponent<BattlePhase>();
         battle.StartPhase();

@@ -14,9 +14,9 @@ public class PointScript : MonoBehaviour {
     int waterpoints = 1;
     int undergroundpoints = 2;
     int spacepoints = 5;
-    int waterPower = 1;
-    int undergroundPower = 3;
-    int spacePower = 8;
+    int waterPower = 1; //not used
+    int undergroundPower = 3;   //not used
+    int spacePower = 8; //not used
 
     GameManager manager;
 

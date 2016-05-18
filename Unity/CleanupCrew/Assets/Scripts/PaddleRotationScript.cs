@@ -3,19 +3,20 @@ using System.Collections;
 
 public class PaddleRotationScript : MonoBehaviour {
 
-    Vector3 _desiredDirection;
-    Vector3 _currentDirection;
-    float desiredAngle = 0;
-    float paddleDistanceToCenter = 18.0f;
+    private Vector3 _desiredDirection;
+    private Vector3 _currentDirection;
+    private float desiredAngle = 0;
+    float paddleDistanceToCenter = GameSettings.PaddleDistanceS;
     GameObject paddle;
-    float _angleToMove = 0.0f;
-    float RotationSpeed = 360;    //degrees per second
-    public float InputMaxDistance = 10;  //percent of the screen (y-axis) on the bottom that is clickable
-    Vector3 oldMousePos = Vector3.zero;
+    private float _angleToMove = 0.0f;
+    float RotationSpeed = GameSettings.PaddleRotationS;
+    public readonly float InputMaxDistance = GameSettings.TouchBarSizeS;  //percent of the screen (y-axis) on the bottom that is clickable, readonly because Bug where it otherwise always changes to 25
+    private Vector3 oldMousePos = Vector3.zero;
 	// Use this for initialization
 	void Start () {
         paddle = gameObject.transform.GetChild(0).gameObject;  //assumes paddle is the first child of this script.
         SetPaddleToDistance();
+        Debug.Log(InputMaxDistance);
 	}
 
     void SetPaddleToDistance()
@@ -54,10 +55,13 @@ public class PaddleRotationScript : MonoBehaviour {
         }
         else oldMousePos = Vector3.zero;
      
-        //MoveTo(_desiredDirection);
+        //MoveTo(_desiredDirection);   
     }
 
-
+    /// <summary>
+    /// used when the rotation should not be instant, but gradually moves to the target rotation(rotation of the direction vector)
+    /// </summary>
+    /// <param name="direction"></param>
     void MoveTo(Vector3 direction)
     {
         float stepRotation = RotationSpeed * Time.deltaTime;

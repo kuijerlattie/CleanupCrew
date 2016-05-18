@@ -6,7 +6,7 @@ public class FixedSpeed : MonoBehaviour {
 
     private Rigidbody _rigid;
     [HideInInspector]
-    public float Speed = 9.0f;
+    public float Speed = GameSettings.BlobSpeedS;
 
 	// Use this for initialization
 	void Start () {
