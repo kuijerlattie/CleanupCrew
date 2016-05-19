@@ -64,6 +64,7 @@
      <Compile Include="Assets\Scripts\PointScript.cs" />
      <Compile Include="Assets\Scripts\Powerup\MagneticPaddle.cs" />
      <Compile Include="Assets\Scripts\Powerup\PaddlePowerUp.cs" />
+     <Compile Include="Assets\Scripts\Powerup\PowerUpTesting.cs" />
      <Compile Include="Assets\Scripts\Powerup\PowerupManager.cs" />
      <Compile Include="Assets\Scripts\Powerup\PowerupStartScript.cs" />
      <Compile Include="Assets\Scripts\Powerup\ScalePowerUp.cs" />

@@ -4,20 +4,16 @@ using System.Collections.Generic;
 
 public class PaddlePowerUp : MonoBehaviour {
 
-    public GameObject LevelCenter;
-    GameObject paddle;
-    GameManager manager;
 
 	// Use this for initialization
 	void Start () {
-       /* manager = FindObjectOfType<GameManager>();
-        paddle = GameObject.FindGameObjectWithTag("paddle");
-        manager.paddles.Add(paddle);*/
+
     }
 	
 	// Update is called once per frame
 	void Update () {
-
+ 
+            
 	}
 
     static public void SpawnPaddles()
@@ -29,7 +25,6 @@ public class PaddlePowerUp : MonoBehaviour {
         LevelCenter = FindObjectOfType<PaddleRotationScript>().gameObject;
         manager = FindObjectOfType<GameManager>();
         paddle = GameObject.FindGameObjectWithTag("paddle");
-        //manager.paddles.Add(paddle);
 
         manager.paddles.Add(Instantiate(paddle));
         manager.paddles[manager.paddles.Count - 1].transform.SetParent(LevelCenter.transform);
