@@ -121,8 +121,8 @@ public class GameManager : MonoBehaviour {
     void StartCleanup()
     {
         currentStateObject = new GameObject("cleanupPhaseObject");
-        CleanupPhase cleanup = currentStateObject.AddComponent<CleanupPhase>();
-        cleanup.StartPhase();
+        currentPhase = currentStateObject.AddComponent<CleanupPhase>();
+        currentPhase.StartPhase();
         
     }
 
@@ -136,8 +136,8 @@ public class GameManager : MonoBehaviour {
     void StartBattle()
     {
         currentStateObject = new GameObject("battlePhaseObject");
-        BattlePhase battle = currentStateObject.AddComponent<BattlePhase>();
-        battle.StartPhase();
+        currentPhase = currentStateObject.AddComponent<BattlePhase>();
+        currentPhase.StartPhase();
     }
 
     //used to delete/cleanup

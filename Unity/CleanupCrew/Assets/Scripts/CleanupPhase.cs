@@ -29,6 +29,7 @@ public class CleanupPhase : AbstractPhase {
     public override bool HasEnded()
     {
         GameManager manager = GameObject.FindObjectOfType<GameManager>();
+        Debug.Log("Water: " + manager.pointsWater + " under: " + manager.pointsUnderground + " space: " + manager.pointsSpace);
         if(manager.pointsWater >= SpawnBossAfter || manager.pointsUnderground >= SpawnBossAfter || manager.pointsSpace >= SpawnBossAfter)
         {
             return true;
