@@ -22,6 +22,8 @@ public class BattlePhase : AbstractPhase
             PointScript.goalType.space
             );
         SpawnEnemy(mostUsedGoal);
+
+        //nextGamestate = //TODO back to menu??
     }
 
     public override void StopPhase()

@@ -91,6 +91,7 @@
     <Compile Include="Assets\Scripts\RandomMovement.cs" />
     <Compile Include="Assets\Scripts\RodTutorialScript.cs" />
     <Compile Include="Assets\Scripts\SpawnSpheres.cs" />
+    <Compile Include="Assets\Scripts\TESTONPCSCRIPT.cs" />
     <Compile Include="Assets\Scripts\TouchSlider.cs" />
     <Compile Include="Assets\Scripts\TutorialPhase.cs" />
     <Compile Include="Assets\Scripts\WallScript.cs" />

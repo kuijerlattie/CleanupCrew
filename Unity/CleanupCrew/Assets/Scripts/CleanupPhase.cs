@@ -18,6 +18,7 @@ public class CleanupPhase : AbstractPhase {
     {
         FindPointZones();
         isActive = true;
+        nextGamestate = GameManager.gamestate.Battle;
     }
 
     public override void StopPhase()
