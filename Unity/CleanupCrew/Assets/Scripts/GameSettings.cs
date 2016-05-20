@@ -76,12 +76,12 @@ public class GameSettings : MonoBehaviour
     static public float ballSpawnIntervalS = BALLSPAWNINTERVAL;
     private const float BALLSPAWNINTERVAL = 10.0f;
 
-    [SerializeField, Range(0.0f,1.0f)]
+    [SerializeField, Range(0.0f,1.0f), Tooltip("current spawninterval times x each time a new ball spawn, every time one spawns: next spawn time = current spawn time * this value")]
     private float spawnIntervalIncrease = spawnIntervalIncreaseS;
     static public float spawnIntervalIncreaseS = SPAWNINTERVALINCREASE;
     private const float SPAWNINTERVALINCREASE = 0.9f;
 
-    [SerializeField, Range(0.0f, 1.0f)]
+    //[SerializeField, Range(0.0f, 1.0f)]
     private float spawnIntervalPowerIncrease = spawnIntervalPowerIncreaseS;
     static public float spawnIntervalPowerIncreaseS = SPAWNINTERVALPOWERINCREASE;
     private const float SPAWNINTERVALPOWERINCREASE = 0.1f;

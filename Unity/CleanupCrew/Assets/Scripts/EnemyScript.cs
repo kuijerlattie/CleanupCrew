@@ -19,8 +19,9 @@ public class EnemyScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-        if(stoppedAtCenter) _currentSpawnTime -= Time.deltaTime;
+        _SPAWNTIME = GameSettings.ProjectileFireSpeedS; //only in the update for changing during runtime
+        SpeedMultiplier = GameSettings.ProjectileSpeedMultiplierS; //only in the update for changing during runtime
+        if (stoppedAtCenter) _currentSpawnTime -= Time.deltaTime;
 
 
         //spawn a projectile at a random position around this gameobject going in that same direction
