@@ -21,10 +21,20 @@ public class GameSettings : MonoBehaviour
     static public float BlobSpeedS = BLOBSPEED;
     private const float BLOBSPEED = 9.0f;
 
+    [SerializeField]
+    private float BlobScale = BlobScaleS;
+    static public float BlobScaleS = BLOBSCALE;
+    private const float BLOBSCALE = 1.0f;
+
+    [SerializeField]
+    private float CircleScale = CircleScaleS;
+    static public float CircleScaleS = CIRCLESCALE;
+    private const float CIRCLESCALE = 1.0f;
+
 
     [Header("Paddle")]      //-----------------------------------------------------------------------------------------
 
-    [SerializeField, Range(10.0f, 30.0f)]
+    [SerializeField, Range(10.0f, 30.0f), Tooltip("CURRENT BUG: does not work if multiple paddle powerups is also activated from start")]
     private float PaddleDistance = PaddleDistanceS;
     static public float PaddleDistanceS = PADDLEDISTANCE;
     private const float PADDLEDISTANCE = 18.0f;
@@ -180,6 +190,8 @@ public class GameSettings : MonoBehaviour
     {
         //general
         BlobSpeed = BLOBSPEED;
+        BlobScale = BLOBSCALE;
+        CircleScale = CIRCLESCALE;
 
         //paddle
         PaddleDistance = PADDLEDISTANCE;
@@ -229,6 +241,8 @@ public class GameSettings : MonoBehaviour
     {
         //general
         BlobSpeedS = BlobSpeed;
+        BlobScaleS = BlobScale;
+        CircleScaleS = CircleScale;
 
         //paddle
         PaddleDistanceS = PaddleDistance;
