@@ -188,6 +188,10 @@ public class GameSettings : MonoBehaviour
 
     void Reset() 
     {
+<<<<<<< HEAD:Unity/CleanupCrew/Assets/Scripts/toolset/GameSettings.cs
+        
+        //AmountOfRings = AmountOfRingsDEFAULT;   //TODO add default variables for each variable... lot of work....
+=======
         //general
         BlobSpeed = BLOBSPEED;
         BlobScale = BLOBSCALE;
@@ -231,6 +235,7 @@ public class GameSettings : MonoBehaviour
         SmallEnemies = SMALLENEMIES;
         BigPaddle = BIGPADDLE;
         SmallPaddle = SMALLPADDLE;
+>>>>>>> origin/master:Unity/CleanupCrew/Assets/Scripts/GameSettings.cs
     }
 
 
