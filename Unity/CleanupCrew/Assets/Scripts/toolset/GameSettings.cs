@@ -123,6 +123,7 @@ public class GameSettings : MonoBehaviour
 
     void Reset()    //TODO regular reset in inspector doesnt work because ¿¿¿¿¿statics??????
     {
+        
         //AmountOfRings = AmountOfRingsDEFAULT;   //TODO add default variables for each variable... lot of work....
     }
 
