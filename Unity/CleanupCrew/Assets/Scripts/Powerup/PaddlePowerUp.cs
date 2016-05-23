@@ -62,7 +62,7 @@ public class PaddlePowerUp : MonoBehaviour {
         paddle = GameObject.FindGameObjectWithTag("paddle");
         //manager.paddles.Add(paddle);
 
-        float radius = 18f;
+        float radius = GameSettings.PaddleDistanceS;
         
             float dot = Vector3.forward.x * paddle.transform.forward.x + Vector3.forward.z * paddle.transform.forward.z;      // dot product
             float det = Vector3.forward.x * paddle.transform.forward.z - Vector3.forward.z * paddle.transform.forward.x;      // determinant

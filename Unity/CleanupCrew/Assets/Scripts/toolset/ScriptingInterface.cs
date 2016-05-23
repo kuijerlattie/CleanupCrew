@@ -144,6 +144,86 @@ public class SI : MonoBehaviour {
     {
         powerupManager.ActivatePowerup(type);
     }
+    
+    public static Settings settings;
 
+    public static class Settings
+    {
+        /// <summary>
+        /// get/set the blob speed
+        /// </summary>
+        public static float blobSpeed
+        { 
+            get { return GameSettings.BlobSpeedS; }
+            set { GameSettings.BlobSpeedS = value; }
+        }
+        
+        public static float paddleDistance
+        {
+            get { return GameSettings.PaddleDistanceS; }
+            set { GameSettings.PaddleDistanceS = value; }
+        }
 
+        public static float paddleRotation
+        {
+            get { return GameSettings.PaddleRotationS; }
+            set { GameSettings.PaddleRotationS = value; }
+        }
+
+        public static float touchBarSize
+        {
+            get { return GameSettings.TouchBarSizeS; }
+            set { GameSettings.TouchBarSizeS = value; }
+        }
+
+        public static int tutorialAmountOfRings
+        {
+            get { return GameSettings.AmountOfRingsS; }
+            set { GameSettings.AmountOfRingsS = value; }
+        }
+
+        public static int cleanupSpawnBossAfter
+        {
+            get { return GameSettings.SpawnBossAfterS; }
+            set { GameSettings.SpawnBossAfterS = value; }
+        }
+
+        public static float cleanupBallSpawnInterval
+        {
+            get { return GameSettings.ballSpawnIntervalS; }
+            set { GameSettings.ballSpawnIntervalS = value; }
+        }
+
+        public static float cleanupSpawnIntervalIncrease
+        {
+            get { return GameSettings.spawnIntervalIncreaseS; }
+            set { GameSettings.spawnIntervalIncreaseS = value; }
+        }
+
+        public static float cleanupSpawnIntervalPowerIncrease
+        {
+            get { return GameSettings.spawnIntervalPowerIncreaseS; }
+            set { GameSettings.spawnIntervalPowerIncreaseS = value; }
+        }
+
+        public static float bossProjectileFireSpeed
+        {
+            get { return GameSettings.ProjectileFireSpeedS; }
+            set { GameSettings.ProjectileFireSpeedS = value; }
+        }
+
+        public static float bossProjectileSpeedMultiplier
+        {
+            get { return GameSettings.ProjectileSpeedMultiplierS; }
+            set { GameSettings.ProjectileSpeedMultiplierS = value; }
+        }
+
+        public static float bossDamagePerHitTaken
+        {
+            get { return GameSettings.DamagePerHitTakenS; }
+            set { GameSettings.DamagePerHitTakenS = value; }
+        }
+
+        public static float
+    }
 }

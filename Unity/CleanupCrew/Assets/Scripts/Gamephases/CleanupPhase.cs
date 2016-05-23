@@ -48,7 +48,8 @@ public class CleanupPhase : AbstractPhase {
         if (spawntimer <= 0)
         {
             spawncounter += spawnIntervalPowerIncrease;
-            spawntimer = ballSpawnInterval * Mathf.Pow(spawnIntervalIncrease, (float)spawncounter);
+            ballSpawnInterval *= spawnIntervalIncrease;
+            spawntimer = ballSpawnInterval; //ballSpawnInterval * Mathf.Pow(spawnIntervalIncrease, (float)spawncounter);
             Vector3 spawnloc = Vector3.zero;
             SpawnSpheres.SpawnSphere(spawnloc);
         }
