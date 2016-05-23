@@ -3,11 +3,9 @@ using System.Collections;
 
 public class StickyPaddle : MonoBehaviour {
 
-    GameObject levelcenter;
-
 	// Use this for initialization
 	void Start () {
-        levelcenter = FindObjectOfType<PaddleRotationScript>().gameObject;
+        
         
     }
 	
@@ -16,13 +14,8 @@ public class StickyPaddle : MonoBehaviour {
 	
 	}
 
-    void OnCollisionEnter(Collision other)
+    static public void Sticky()
     {
-        if(other.collider.tag == "paddle")
-        {
-           
-            
-        }
-        
+
     }
 }

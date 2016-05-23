@@ -22,6 +22,9 @@ public class BattlePhase : AbstractPhase
             PointScript.goalType.space
             );
         SpawnEnemy(mostUsedGoal);
+
+        nextGamestate = GameManager.gamestate.Tutorial;
+        //nextGamestate = //TODO back to menu??
     }
 
     public override void StopPhase()
@@ -74,7 +77,10 @@ public class BattlePhase : AbstractPhase
                 break;
         }
         //TODO replace with prefabs in above switch  
-        currentEnemy = GameObject.Instantiate(Resources.Load("Prefabs/Blob") as GameObject);
+        currentEnemy = GameObject.Instantiate(Resources.Load(
+            goaltype == PointScript.goalType.space? "Prefabs/BossSpace" : (goaltype == PointScript.goalType.underground? "Prefabs/BossUnderground" : "Prefabs/BossWater")
+            
+            ) as GameObject);
         currentEnemy.layer = LayerMask.NameToLayer("Enemies");
         Rigidbody body = currentEnemy.AddComponent<Rigidbody>();
         body.useGravity = false;

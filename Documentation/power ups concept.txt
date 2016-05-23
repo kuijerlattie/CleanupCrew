@@ -1,20 +1,20 @@
 power up concepts :
 
-multiple peddals
+multiple peddals				#
 
-slowing blobs movement
+?slowing blobs movement
 
-Blobs stick to the paddle and can be shot off	!
+Blobs stick to the paddle and can be shot off	!#
 
-magnetic pedal					!
+magnetic pedal					!#
 
 smaller blobs
 
-bigger pedal					!
+bigger pedal					!#
 
-smaller pedal					!
+smaller pedal					!#
 
-extra energy
+extra energy					
 
-lose all powerups
+lose all powerups				#
 

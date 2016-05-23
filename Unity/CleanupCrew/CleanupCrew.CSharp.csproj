@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\BallCollisionScript.cs" />
     <Compile Include="Assets\Scripts\BallScript.cs" />
     <Compile Include="Assets\Scripts\BattlePhase.cs" />
+    <Compile Include="Assets\Scripts\BlobScaleONStart.cs" />
     <Compile Include="Assets\Scripts\BreakoutBlock.cs" />
     <Compile Include="Assets\Scripts\CleanupPhase.cs" />
     <Compile Include="Assets\Scripts\CollectBallsScript.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Assets\Scripts\PointScript.cs" />
     <Compile Include="Assets\Scripts\Powerup\MagneticPaddle.cs" />
     <Compile Include="Assets\Scripts\Powerup\PaddlePowerUp.cs" />
+    <Compile Include="Assets\Scripts\Powerup\PowerUpTesting.cs" />
     <Compile Include="Assets\Scripts\Powerup\PowerupManager.cs" />
     <Compile Include="Assets\Scripts\Powerup\PowerupStartScript.cs" />
     <Compile Include="Assets\Scripts\Powerup\ScalePowerUp.cs" />
@@ -90,7 +92,10 @@
     <Compile Include="Assets\Scripts\RandomColor.cs" />
     <Compile Include="Assets\Scripts\RandomMovement.cs" />
     <Compile Include="Assets\Scripts\RodTutorialScript.cs" />
+    <Compile Include="Assets\Scripts\ScaleOnStart.cs" />
+    <Compile Include="Assets\Scripts\ScriptingInterface.cs" />
     <Compile Include="Assets\Scripts\SpawnSpheres.cs" />
+    <Compile Include="Assets\Scripts\TESTONPCSCRIPT.cs" />
     <Compile Include="Assets\Scripts\TouchSlider.cs" />
     <Compile Include="Assets\Scripts\TutorialPhase.cs" />
     <Compile Include="Assets\Scripts\WallScript.cs" />

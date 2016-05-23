@@ -4,20 +4,16 @@ using System.Collections.Generic;
 
 public class PaddlePowerUp : MonoBehaviour {
 
-    public GameObject LevelCenter;
-    GameObject paddle;
-    GameManager manager;
 
 	// Use this for initialization
 	void Start () {
-       /* manager = FindObjectOfType<GameManager>();
-        paddle = GameObject.FindGameObjectWithTag("paddle");
-        manager.paddles.Add(paddle);*/
+
     }
 	
 	// Update is called once per frame
 	void Update () {
-
+ 
+            
 	}
 
     static public void SpawnPaddles()
@@ -29,7 +25,6 @@ public class PaddlePowerUp : MonoBehaviour {
         LevelCenter = FindObjectOfType<PaddleRotationScript>().gameObject;
         manager = FindObjectOfType<GameManager>();
         paddle = GameObject.FindGameObjectWithTag("paddle");
-        //manager.paddles.Add(paddle);
 
         manager.paddles.Add(Instantiate(paddle));
         manager.paddles[manager.paddles.Count - 1].transform.SetParent(LevelCenter.transform);
@@ -67,7 +62,7 @@ public class PaddlePowerUp : MonoBehaviour {
         paddle = GameObject.FindGameObjectWithTag("paddle");
         //manager.paddles.Add(paddle);
 
-        float radius = 18f;
+        float radius = GameSettings.PaddleDistanceS;
         
             float dot = Vector3.forward.x * paddle.transform.forward.x + Vector3.forward.z * paddle.transform.forward.z;      // dot product
             float det = Vector3.forward.x * paddle.transform.forward.z - Vector3.forward.z * paddle.transform.forward.x;      // determinant

@@ -18,6 +18,7 @@ public class CleanupPhase : AbstractPhase {
     {
         FindPointZones();
         isActive = true;
+        nextGamestate = GameManager.gamestate.Battle;
     }
 
     public override void StopPhase()
@@ -28,6 +29,7 @@ public class CleanupPhase : AbstractPhase {
     public override bool HasEnded()
     {
         GameManager manager = GameObject.FindObjectOfType<GameManager>();
+        //Debug.Log("Water: " + manager.pointsWater + " under: " + manager.pointsUnderground + " space: " + manager.pointsSpace);
         if(manager.pointsWater >= SpawnBossAfter || manager.pointsUnderground >= SpawnBossAfter || manager.pointsSpace >= SpawnBossAfter)
         {
             return true;
@@ -46,7 +48,8 @@ public class CleanupPhase : AbstractPhase {
         if (spawntimer <= 0)
         {
             spawncounter += spawnIntervalPowerIncrease;
-            spawntimer = ballSpawnInterval * Mathf.Pow(spawnIntervalIncrease, (float)spawncounter);
+            ballSpawnInterval *= spawnIntervalIncrease;
+            spawntimer = ballSpawnInterval; //ballSpawnInterval * Mathf.Pow(spawnIntervalIncrease, (float)spawncounter);
             Vector3 spawnloc = Vector3.zero;
             SpawnSpheres.SpawnSphere(spawnloc);
         }

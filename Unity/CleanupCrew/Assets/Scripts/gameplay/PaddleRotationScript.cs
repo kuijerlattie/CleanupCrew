@@ -16,13 +16,12 @@ public class PaddleRotationScript : MonoBehaviour {
 	void Start () {
         paddle = gameObject.transform.GetChild(0).gameObject;  //assumes paddle is the first child of this script.
         SetPaddleToDistance();
-        Debug.Log(InputMaxDistance);
 	}
 
     void SetPaddleToDistance()
     {
         Vector3 newpos = Vector3.zero;
-        //Vector3 newpos = gameObject.transform.GetChild(0).position; using current pos
+        Debug.Log("dist: " + paddleDistanceToCenter);
         newpos.z = -paddleDistanceToCenter;
         paddle.transform.localPosition = newpos; 
     }
