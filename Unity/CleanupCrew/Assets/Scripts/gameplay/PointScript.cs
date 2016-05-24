@@ -32,7 +32,7 @@ public class PointScript : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.gameObject.tag == "Ball") // check if collision is with ball
+        if (collision.collider.gameObject.tag == "Blob") // check if collision is with ball
         {
             switch (type)
             {

@@ -4,18 +4,18 @@ using System.Collections.Generic;
 public class SpawnSpheres
 {
 
-    static public GameObject SpawnSphere(Vector3 position)
+    static public GameObject SpawnSphere(Vector3 position, bool isBlob = true)
     {
         position.y = 0;
-        GameObject spawnedSphere = GameObject.Instantiate(Resources.Load("Prefabs/Ball") as GameObject);
+        GameObject spawnedSphere = isBlob ? GameObject.Instantiate(Resources.Load("Prefabs/BlobPrefab") as GameObject) : GameObject.Instantiate(Resources.Load("Prefabs/Ball") as GameObject);
         spawnedSphere.transform.position = position;
         return spawnedSphere;
     }
 
-    static public GameObject SpawnSphere(Vector3 position, Vector3 direction)
+    static public GameObject SpawnSphere(Vector3 position, Vector3 direction, bool isBlob = true)
     {
         position.y = 0;
-        GameObject spawnedSphere = GameObject.Instantiate(Resources.Load("Prefabs/Ball") as GameObject);
+        GameObject spawnedSphere = isBlob? GameObject.Instantiate(Resources.Load("Prefabs/BlobPrefab") as GameObject) : GameObject.Instantiate(Resources.Load("Prefabs/Ball") as GameObject);
         spawnedSphere.GetComponent<RandomMovement>().OverrideDirection(direction);
         spawnedSphere.transform.position = position;
         return spawnedSphere;
@@ -32,6 +32,12 @@ public class SpawnSpheres
         return spawnedSphere;
     }
 
+    /// <summary>
+    /// dont use this
+    /// </summary>
+    /// <param name="spawnArea"></param>
+    /// <param name="amount"></param>
+    /// <returns></returns>
     static public GameObject[] SpawnMultipleSpheres(Rect spawnArea, int amount)
     {
         List<GameObject> spheres = new List<GameObject>();

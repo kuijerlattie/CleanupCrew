@@ -21,7 +21,6 @@ public class PaddleRotationScript : MonoBehaviour {
     void SetPaddleToDistance()
     {
         Vector3 newpos = Vector3.zero;
-        Debug.Log("dist: " + paddleDistanceToCenter);
         newpos.z = -paddleDistanceToCenter;
         paddle.transform.localPosition = newpos; 
     }

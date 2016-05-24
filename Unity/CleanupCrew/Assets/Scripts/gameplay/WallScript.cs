@@ -28,5 +28,12 @@ public class WallScript : MonoBehaviour {
             }
             else GameObject.FindObjectOfType<TutorialPhase>().HitWall();
         }
+
+        if (collision.collider.gameObject.tag == "Blob") // check if collision is with ball
+        {
+            if(!isTutorial)
+                GameObject.FindObjectOfType<GameManager>().power -= wallDamage;
+                GameObject.Destroy(collision.collider.gameObject);
+        }
     }
 }
