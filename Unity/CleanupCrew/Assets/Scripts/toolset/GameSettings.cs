@@ -63,6 +63,11 @@ public class GameSettings : MonoBehaviour
     static public int AmountOfRingsS = AMOUNTOFRINGS;
     private const int AMOUNTOFRINGS = 3;
 
+    [SerializeField, Range(0, 5)]
+    private int CenterSizeInRings = CenterSizeInRingsS;
+    static public int CenterSizeInRingsS = CENTERSIZEINRINGS;
+    private const int CENTERSIZEINRINGS = 0;
+
 
 
     [Header("Cleanup")]     //-----------------------------------------------------------------------------------------
@@ -252,6 +257,7 @@ public class GameSettings : MonoBehaviour
 
         //tutorial
         AmountOfRingsS = AmountOfRings;
+        CenterSizeInRingsS = CenterSizeInRings;
 
         //cleanup
         SpawnBossAfterS = SpawnBossAfter;
