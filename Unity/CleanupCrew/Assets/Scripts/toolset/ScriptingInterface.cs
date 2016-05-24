@@ -145,7 +145,7 @@ public class SI : MonoBehaviour {
         powerupManager.ActivatePowerup(type);
     }
     
-    public static Settings settings;
+    //public static Settings settings;
 
     public static class Settings
     {
@@ -222,6 +222,7 @@ public class SI : MonoBehaviour {
         {
             get { return GameSettings.DamagePerHitTakenS; }
             set { GameSettings.DamagePerHitTakenS = value; }
+        }
         
     }
 }
