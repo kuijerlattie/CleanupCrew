@@ -222,8 +222,6 @@ public class SI : MonoBehaviour {
         {
             get { return GameSettings.DamagePerHitTakenS; }
             set { GameSettings.DamagePerHitTakenS = value; }
-        }
-
-        public static float
+        
     }
 }
