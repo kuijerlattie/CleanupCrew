@@ -13,6 +13,7 @@ using System.Collections;
 //TODO make every variable into 'Getter' only because these values should ONLY be changes through the inspector
 //     , when doing this make a seperate variable otherwise it also cannot be changed from the inspector. EDIT: { get; private set; }
 
+    [System.Serializable]
 public class GameSettings : MonoBehaviour
 {
     [Header("General")]     //-----------------------------------------------------------------------------------------
@@ -27,10 +28,15 @@ public class GameSettings : MonoBehaviour
     static public float BlobScaleS = BLOBSCALE;
     private const float BLOBSCALE = 1.0f;
 
+    
     [SerializeField]
     private float CircleScale = CircleScaleS;
     static public float CircleScaleS = CIRCLESCALE;
     private const float CIRCLESCALE = 1.0f;
+    
+
+
+
 
 
     [Header("Paddle")]      //-----------------------------------------------------------------------------------------
@@ -188,9 +194,20 @@ public class GameSettings : MonoBehaviour
     static public bool SmallPaddleS = SMALLPADDLE;
     private const bool SMALLPADDLE = false;
 
-
-
-
+    /// <summary>
+    /// to make sure that when switching scenes the values change with it.. see 'ApplySettings' below
+    /// </summary>
+    void Awake()
+    {
+        ApplySettings();
+    }
+    /// <summary>
+    /// only need to be called when switching scenes through script, because it doesnt use the inspector values then, for some reason?
+    /// </summary>
+    public void ApplySettings()
+    {
+        OnValidate();
+    }
 
     void Reset()
     {

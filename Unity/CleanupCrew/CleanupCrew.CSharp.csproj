@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\Gamephases\BattlePhase.cs" />
     <Compile Include="Assets\Scripts\Gamephases\CleanupPhase.cs" />
     <Compile Include="Assets\Scripts\Gamephases\TutorialPhase.cs" />
+    <Compile Include="Assets\Scripts\GreyboxMenuScript.cs" />
     <Compile Include="Assets\Scripts\Powerup\MagneticPaddle.cs" />
     <Compile Include="Assets\Scripts\Powerup\PaddlePowerUp.cs" />
     <Compile Include="Assets\Scripts\Powerup\PowerUpTesting.cs" />

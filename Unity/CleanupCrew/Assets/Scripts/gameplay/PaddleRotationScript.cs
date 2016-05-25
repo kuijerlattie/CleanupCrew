@@ -6,17 +6,24 @@ public class PaddleRotationScript : MonoBehaviour {
     private Vector3 _desiredDirection;
     private Vector3 _currentDirection;
     private float desiredAngle = 0;
-    float paddleDistanceToCenter = GameSettings.PaddleDistanceS;
+    float paddleDistanceToCenter;
     GameObject paddle;
     private float _angleToMove = 0.0f;
-    float RotationSpeed = GameSettings.PaddleRotationS;
-    public readonly float InputMaxDistance = GameSettings.TouchBarSizeS;  //percent of the screen (y-axis) on the bottom that is clickable, readonly because Bug where it otherwise always changes to 25
+    float RotationSpeed;
+
+    //percent of the screen (y-axis) on the bottom that is clickable, readonly because Bug where it otherwise always changes to 25
+    public float InputMaxDistance {get; private set;} 
+    
     private Vector3 oldMousePos = Vector3.zero;
 	// Use this for initialization
 	void Start () {
+        paddleDistanceToCenter = GameSettings.PaddleDistanceS;
+        RotationSpeed = GameSettings.PaddleRotationS;
+        InputMaxDistance = GameSettings.TouchBarSizeS;
+
         paddle = gameObject.transform.GetChild(0).gameObject;  //assumes paddle is the first child of this script.
         SetPaddleToDistance();
-	}
+    }
 
     void SetPaddleToDistance()
     {

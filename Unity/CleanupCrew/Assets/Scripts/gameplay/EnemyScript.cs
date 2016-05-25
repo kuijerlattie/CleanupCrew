@@ -5,16 +5,20 @@ using System.Collections;
 public class EnemyScript : MonoBehaviour {
 
     float health = 100; //percent
-    float damagePerHit = GameSettings.DamagePerHitTakenS;
+    float damagePerHit;
 
     bool stoppedAtCenter = false;
     float _currentSpawnTime = 0;
-    float _SPAWNTIME = GameSettings.ProjectileFireSpeedS;
+    float _SPAWNTIME;
     public PointScript.goalType enemytype;
-    float SpeedMultiplier = GameSettings.ProjectileSpeedMultiplierS;
+    float SpeedMultiplier;
 	// Use this for initialization
 	void Start () {
-	
+        damagePerHit = GameSettings.DamagePerHitTakenS;
+        _SPAWNTIME = GameSettings.ProjectileFireSpeedS;
+        SpeedMultiplier = GameSettings.ProjectileSpeedMultiplierS;
+
+        GetComponent<Collider>().isTrigger = true;  //fixes where the boss can get bounced away by blobs....
 	}
 	
 	// Update is called once per frame
@@ -37,6 +41,7 @@ public class EnemyScript : MonoBehaviour {
         //stops the gameobject from moving after reaching the center and starts the shooting by setting 'stoppedAtCenter = true'
         if (gameObject.transform.position.magnitude < 0.5f && !stoppedAtCenter)
         {
+            GetComponent<Collider>().isTrigger = false;
             stoppedAtCenter = true;
             gameObject.GetComponent<FixedSpeed>().enabled = false;
             Rigidbody body = gameObject.GetComponent<Rigidbody>();

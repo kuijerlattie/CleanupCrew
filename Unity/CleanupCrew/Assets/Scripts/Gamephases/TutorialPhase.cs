@@ -4,19 +4,22 @@ using System;
 
 public class TutorialPhase : AbstractPhase {
 
-    private int amountOfLayers = GameSettings.AmountOfRingsS;
+    private int amountOfLayers;
     private GameObject[] rods;
 
     private GameObject playingBall = null;
     private GameManager manager;
     private float powerPerRod = 0;  //based on 'amountOfLayers'
-    private int CenterRingSize = GameSettings.CenterSizeInRingsS;
+    private int CenterRingSize;
     private float spawnAfterSeconds = 2;    //TODO gamesetting.---
     private float currentTimer = 0; //current spawn timer
     private Vector3 ballSpawn = -Vector3.forward * 15;
 
     public override void StartPhase()
     {
+        amountOfLayers = GameSettings.AmountOfRingsS;
+        CenterRingSize = GameSettings.CenterSizeInRingsS;
+
         FindPointZones();
         GameObject.FindObjectOfType<PowerupManager>().isSpawning = false;
         powerPerRod = 100f / (float)amountOfLayers;
