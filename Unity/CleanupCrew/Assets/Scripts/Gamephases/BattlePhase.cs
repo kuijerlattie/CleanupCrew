@@ -6,7 +6,10 @@ public class BattlePhase : AbstractPhase
 {
 
     private List<GameObject> enemies = new List<GameObject>();
-    // Use this for initialization
+    private bool hasSpawned = false;
+
+    PointScript.goalType DefaultGoal = PointScript.goalType.water;  //this is what happens if the waste is nicely distrebuted
+
 
     public override void StartPhase()
     {
@@ -15,14 +18,14 @@ public class BattlePhase : AbstractPhase
         FindPointZones();
         SetPointZones(true);
         GameManager manager = GameObject.FindObjectOfType<GameManager>();
-
+        
         PointScript.goalType mostUsedGoal =
             (manager.pointsWater > manager.pointsUnderground && manager.pointsWater > manager.pointsSpace) ? PointScript.goalType.water :
             ((manager.pointsUnderground > manager.pointsWater && manager.pointsUnderground > manager.pointsSpace) ? PointScript.goalType.underground :
-            PointScript.goalType.space
+            ((manager.pointsSpace > manager.pointsWater && manager.pointsSpace > manager.pointsUnderground) ? PointScript.goalType.space : DefaultGoal)
             );
         SpawnEnemy(mostUsedGoal);
-
+        hasSpawned = true;
         nextGamestate = GameManager.gamestate.Tutorial;
         //nextGamestate = //TODO back to menu??
     }
@@ -36,16 +39,20 @@ public class BattlePhase : AbstractPhase
             //destroy all enemies that are still alive
             if (enemies[i] != null) GameObject.Destroy(enemies[i]);
         }
+        enemies.Clear();
     }
 
     public override bool HasEnded()
     {
+        enemies.RemoveAll(a => a == null);
+        if (hasSpawned && enemies.Count <= 0) return true;
         return false;
     }
 
 
-    public void SpawnEnemy(PointScript.goalType goaltype)
+    public GameObject SpawnEnemy(PointScript.goalType goaltype)
     {
+        //goaltype = PointScript.goalType.underground;    //TODO remove this, ONLY FOR TESTING
         PointScript currentPscript = null;
         foreach (GameObject pscriptObject in pointZones)
         {
@@ -58,8 +65,7 @@ public class BattlePhase : AbstractPhase
         }
         if (currentPscript == null)
         {
-            Debug.Log("WARNING, could not find goal with type: " + goaltype.ToString());
-            return;
+            Debug.LogError("Dould not find goal with type: " + goaltype.ToString());
         }
         Vector3 spawnPos = currentPscript.gameObject.transform.position;
         spawnPos.y = 0;
@@ -75,12 +81,14 @@ public class BattlePhase : AbstractPhase
                 break;
             case PointScript.goalType.water:
                 break;
+            default:
+                break;
         }
-        //TODO replace with prefabs in above switch  
-        currentEnemy = GameObject.Instantiate(Resources.Load(
-            goaltype == PointScript.goalType.space? "Prefabs/BossSpace" : (goaltype == PointScript.goalType.underground? "Prefabs/BossUnderground" : "Prefabs/BossWater")
-            
-            ) as GameObject);
+        
+        //TODO proper switch instead of  'goaltype == PointScript.goalType.space ? ... : ... ;' because this is getting horrible to see :D
+        string prefabPath = "Prefabs/bosses/";
+        prefabPath += goaltype == PointScript.goalType.space ? "BossSpace" : (goaltype == PointScript.goalType.underground ? "BossUnderground" : "BossWater");
+        currentEnemy = GameObject.Instantiate(Resources.Load(prefabPath) as GameObject);
         currentEnemy.layer = LayerMask.NameToLayer("Enemies");
         Rigidbody body = currentEnemy.AddComponent<Rigidbody>();
         body.useGravity = false;
@@ -88,12 +96,36 @@ public class BattlePhase : AbstractPhase
         body.velocity = directionToMiddle.normalized;
         currentEnemy.AddComponent<FixedSpeed>();
 
-        EnemyScript enemyscript =  currentEnemy.AddComponent<EnemyScript>();
-        enemyscript.enemytype = goaltype;
+        switch (goaltype)
+        {
+            case PointScript.goalType.space:
+                currentEnemy.AddComponent<Meteo>().enemytype = goaltype;  //change to space
+                break;
+            case PointScript.goalType.underground:
+                currentEnemy.AddComponent<Mole>().enemytype = goaltype;
+                break;
+            case PointScript.goalType.water:
+                currentEnemy.AddComponent<Octo>().enemytype = goaltype;
+                break;
+            default:
+                break;
+        }
+        /*
+        EnemyScript enemyscript =
+            goaltype == PointScript.goalType.space ? 
+                currentEnemy.AddComponent<Mole>() : 
+            (goaltype == PointScript.goalType.underground? 
+                currentEnemy.AddComponent<Mole>() : 
+                currentEnemy.AddComponent<Mole>());
+                */
+
+        //enemyscript.enemytype = goaltype;
 
         currentEnemy.transform.position = spawnPos;
 
-        enemies.Add(currentEnemy);
+        enemies.Add(currentEnemy);  //to check current alive enemies
+
+        return currentEnemy;
     }
 
     // Update is called once per frame

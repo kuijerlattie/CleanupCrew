@@ -10,6 +10,9 @@ public class PaddleRotationScript : MonoBehaviour {
     GameObject paddle;
     private float _angleToMove = 0.0f;
     float RotationSpeed;
+    private bool useSlider = true;  //true: new controls, use the slider at the bottom to move the paddle,
+                                    //false: uses old controls, tap where u want the paddle to go, EDIT: currently doesnt work
+
 
     //percent of the screen (y-axis) on the bottom that is clickable, readonly because Bug where it otherwise always changes to 25
     public float InputMaxDistance {get; private set;} 
@@ -51,7 +54,7 @@ public class PaddleRotationScript : MonoBehaviour {
                 float degreesToRotate = (Input.mousePosition - oldMousePos).magnitude / onedegreeInScreenSize;
                 degreesToRotate *= Input.mousePosition.x < oldMousePos.x ? 1f : -1f;
 
-                gameObject.transform.Rotate(Vector3.up, degreesToRotate);
+                if(useSlider) gameObject.transform.Rotate(Vector3.up, degreesToRotate);
                  _desiredDirection = Quaternion.Euler(0, degreesToRotate, 0) * _currentDirection;
                 CalculateAngle();
             }
@@ -60,7 +63,7 @@ public class PaddleRotationScript : MonoBehaviour {
         }
         else oldMousePos = Vector3.zero;
      
-        //MoveTo(_desiredDirection);   
+        if(!useSlider) MoveTo(_desiredDirection);   
     }
 
     /// <summary>

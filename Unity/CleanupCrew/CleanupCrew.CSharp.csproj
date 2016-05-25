@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\Gamephases\CleanupPhase.cs" />
     <Compile Include="Assets\Scripts\Gamephases\TutorialPhase.cs" />
     <Compile Include="Assets\Scripts\GreyboxMenuScript.cs" />
+    <Compile Include="Assets\Scripts\KeepYzero.cs" />
     <Compile Include="Assets\Scripts\Powerup\MagneticPaddle.cs" />
     <Compile Include="Assets\Scripts\Powerup\PaddlePowerUp.cs" />
     <Compile Include="Assets\Scripts\Powerup\PowerUpTesting.cs" />
@@ -77,11 +78,16 @@
     <Compile Include="Assets\Scripts\Powerup\ScalePowerUp.cs" />
     <Compile Include="Assets\Scripts\Powerup\SlowEnemies.cs" />
     <Compile Include="Assets\Scripts\Powerup\SmallerEnemies.cs" />
+    <Compile Include="Assets\Scripts\Powerup\StickyBall.cs" />
     <Compile Include="Assets\Scripts\Powerup\StickyPaddle.cs" />
     <Compile Include="Assets\Scripts\RandomColor.cs" />
     <Compile Include="Assets\Scripts\ScaleOnStart.cs" />
     <Compile Include="Assets\Scripts\TESTONPCSCRIPT.cs" />
-    <Compile Include="Assets\Scripts\gameplay\EnemyScript.cs" />
+    <Compile Include="Assets\Scripts\gameplay\Bosses\CollidersMole.cs" />
+    <Compile Include="Assets\Scripts\gameplay\Bosses\EnemyScript.cs" />
+    <Compile Include="Assets\Scripts\gameplay\Bosses\Meteo.cs" />
+    <Compile Include="Assets\Scripts\gameplay\Bosses\Mole.cs" />
+    <Compile Include="Assets\Scripts\gameplay\Bosses\Octo.cs" />
     <Compile Include="Assets\Scripts\gameplay\FixedSpeed.cs" />
     <Compile Include="Assets\Scripts\gameplay\GameManager.cs" />
     <Compile Include="Assets\Scripts\gameplay\PaddleBounce.cs" />
