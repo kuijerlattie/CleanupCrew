@@ -1,0 +1,17 @@
+shit we need 
+-------------------------------
+
+1. Fix the bosses :
+   -water boss take no damage and when it initially fires the projectile should go trought the arms or above
+   -mole boss if we redirect once a projectile we cant redirect it again
+
+2. We need a slider to change the amount of energy you lose when blob hits wall
+
+3. Bouncing of the blobs 
+
+4. Limit of blobs/projectiles in each level, also make slider for this so we can change it if need it
+
+5. When boss fight starts all blobs need to disapear or when they hit wall  you dont loose energy
+
+6. When a fight with the boss ends somehow it starts tutorial and after that tutorial it goes to boss again, it should go to clean up 
+

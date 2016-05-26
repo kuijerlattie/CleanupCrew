@@ -10,6 +10,10 @@ public class BattlePhase : AbstractPhase
 
     PointScript.goalType DefaultGoal = PointScript.goalType.water;  //this is what happens if the waste is nicely distrebuted
 
+    public void AddEnemyToList(GameObject go)
+    {
+        enemies.Add(go);
+    }
 
     public override void StartPhase()
     {
