@@ -2,9 +2,11 @@
 using System.Collections;
 
 [RequireComponent(typeof(Rigidbody), typeof(Collider))]
-public class EnemyScript : MonoBehaviour {
+public class EnemyScript : MonoBehaviour {  //TODO make this abstract once all bosses have their own script
 
-    float health = 100; //percent
+    [HideInInspector]
+    public float health {get; private set; } //percent
+
     float damagePerHit;
 
     bool stoppedAtCenter = false;
@@ -12,17 +14,25 @@ public class EnemyScript : MonoBehaviour {
     float _SPAWNTIME;
     public PointScript.goalType enemytype;
     float SpeedMultiplier;
+    protected bool useBaseCollider = true;
+    protected bool isReady { get; private set; }
 	// Use this for initialization
-	void Start () {
+	protected void BaseStart () {
+        health = 100;
         damagePerHit = GameSettings.DamagePerHitTakenS;
         _SPAWNTIME = GameSettings.ProjectileFireSpeedS;
         SpeedMultiplier = GameSettings.ProjectileSpeedMultiplierS;
 
         GetComponent<Collider>().isTrigger = true;  //fixes where the boss can get bounced away by blobs....
 	}
+
+    public void DoDamage(float damage)
+    {
+        health -= damage;
+    }
 	
 	// Update is called once per frame
-	void Update () {
+	protected void BaseUpdate () {
         _SPAWNTIME = GameSettings.ProjectileFireSpeedS; //only in the update for changing during runtime
         SpeedMultiplier = GameSettings.ProjectileSpeedMultiplierS; //only in the update for changing during runtime
         if (stoppedAtCenter) _currentSpawnTime -= Time.deltaTime;
@@ -47,19 +57,36 @@ public class EnemyScript : MonoBehaviour {
             Rigidbody body = gameObject.GetComponent<Rigidbody>();
             body.velocity = Vector3.zero;
             body.isKinematic = true;
+            isReady = true;
+            SetupWhenReady();
         }
-	    if(health <= 0)
+	    if(HasDied())
         {
             GameObject.Destroy(gameObject);
         }
 	}
 
-    void OnCollisionEnter(Collision col)
+    /// <summary>
+    /// to do initialisation after the enemy    stopped in the middle/completed animation
+    /// </summary>
+    protected virtual void SetupWhenReady()
     {
         
+    }
+
+    protected virtual bool HasDied()
+    {
+        if (health <= 0) return true;
+        return false;
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+        if (!useBaseCollider) return;   //if the enemy has special colliders ignore this collider, projectiles will bounce off instead
+
         if(col.collider.gameObject.layer == LayerMask.NameToLayer("Balls"))
         {
-            health -= damagePerHit; //TODO change color
+            health -= damagePerHit; //TODO change color or something
             GameObject.Destroy(col.collider.gameObject);
         }
     }

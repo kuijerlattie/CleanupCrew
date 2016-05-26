@@ -203,8 +203,9 @@ public class GameSettings : MonoBehaviour
     }
     /// <summary>
     /// only need to be called when switching scenes through script, because it doesnt use the inspector values then, for some reason?
+    /// should not have to call this anywhere else, but if the settings are not saving for whatever reason there is this applysettings
     /// </summary>
-    public void ApplySettings()
+    private void ApplySettings()
     {
         OnValidate();
     }

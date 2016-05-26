@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour {
     float gameTimer = 15;
     bool timerPaused = false;
 
+    [HideInInspector]
     public gamestate currentState;
 
     [HideInInspector]
@@ -167,8 +168,16 @@ public class GameManager : MonoBehaviour {
 
     bool messageShown = false; //for debugging
 
+    private void CheckScriptExistence()
+    {
+        if (FindObjectOfType<GreyboxMenuScript>() == null) Debug.LogWarning("Missing 'GreyboxMenuScript' unable to switch scenes");
+        if (FindObjectOfType<GameSettings>() == null) Debug.LogWarning("Missing 'GameSettings' using default settings");
+        if (FindObjectOfType<PowerupManager>() == null) Debug.LogWarning("Missing 'PowerupManager' powerups won't spawn or won't work");
+    }
+
     void Start()
     {
+        CheckScriptExistence();
         SetState(StartstateOverride);
         paddle = GameObject.FindGameObjectWithTag("paddle");
         paddles.Add(paddle);
