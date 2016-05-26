@@ -7,7 +7,7 @@ public class WallScript : MonoBehaviour {
     public float wallDamage = 10;
 	// Use this for initialization
 	void Start () {
-	
+        wallDamage = GameSettings.WallPowerDamageS;
 	}
 	
 	// Update is called once per frame
@@ -24,9 +24,16 @@ public class WallScript : MonoBehaviour {
             if (!isTutorial)
             {
                 GameObject.FindObjectOfType<GameManager>().power -= wallDamage;
-                GameObject.Destroy(collision.collider.gameObject);
+                //GameObject.Destroy(collision.collider.gameObject);
             }
             else GameObject.FindObjectOfType<TutorialPhase>().HitWall();
+        }
+
+        if (collision.collider.gameObject.tag == "Blob") // check if collision is with ball
+        {
+            if(!isTutorial)
+                GameObject.FindObjectOfType<GameManager>().power -= wallDamage;
+                GameObject.Destroy(collision.collider.gameObject);
         }
     }
 }

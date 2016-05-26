@@ -6,22 +6,31 @@ public class PaddleRotationScript : MonoBehaviour {
     private Vector3 _desiredDirection;
     private Vector3 _currentDirection;
     private float desiredAngle = 0;
-    float paddleDistanceToCenter = GameSettings.PaddleDistanceS;
+    float paddleDistanceToCenter;
     GameObject paddle;
     private float _angleToMove = 0.0f;
-    float RotationSpeed = GameSettings.PaddleRotationS;
-    public readonly float InputMaxDistance = GameSettings.TouchBarSizeS;  //percent of the screen (y-axis) on the bottom that is clickable, readonly because Bug where it otherwise always changes to 25
+    float RotationSpeed;
+    private bool useSlider = true;  //true: new controls, use the slider at the bottom to move the paddle,
+                                    //false: uses old controls, tap where u want the paddle to go, EDIT: currently doesnt work
+
+
+    //percent of the screen (y-axis) on the bottom that is clickable, readonly because Bug where it otherwise always changes to 25
+    public float InputMaxDistance {get; private set;} 
+    
     private Vector3 oldMousePos = Vector3.zero;
 	// Use this for initialization
 	void Start () {
+        paddleDistanceToCenter = GameSettings.PaddleDistanceS;
+        RotationSpeed = GameSettings.PaddleRotationS;
+        InputMaxDistance = GameSettings.TouchBarSizeS;
+
         paddle = gameObject.transform.GetChild(0).gameObject;  //assumes paddle is the first child of this script.
         SetPaddleToDistance();
-	}
+    }
 
     void SetPaddleToDistance()
     {
         Vector3 newpos = Vector3.zero;
-        Debug.Log("dist: " + paddleDistanceToCenter);
         newpos.z = -paddleDistanceToCenter;
         paddle.transform.localPosition = newpos; 
     }
@@ -45,7 +54,7 @@ public class PaddleRotationScript : MonoBehaviour {
                 float degreesToRotate = (Input.mousePosition - oldMousePos).magnitude / onedegreeInScreenSize;
                 degreesToRotate *= Input.mousePosition.x < oldMousePos.x ? 1f : -1f;
 
-                gameObject.transform.Rotate(Vector3.up, degreesToRotate);
+                if(useSlider) gameObject.transform.Rotate(Vector3.up, degreesToRotate);
                  _desiredDirection = Quaternion.Euler(0, degreesToRotate, 0) * _currentDirection;
                 CalculateAngle();
             }
@@ -54,7 +63,7 @@ public class PaddleRotationScript : MonoBehaviour {
         }
         else oldMousePos = Vector3.zero;
      
-        //MoveTo(_desiredDirection);   
+        if(!useSlider) MoveTo(_desiredDirection);   
     }
 
     /// <summary>

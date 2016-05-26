@@ -1,0 +1,50 @@
+<html>
+    <body>
+        <h1>Event Tutorial</h1>
+        <div name="information" style="padding-left:10px">
+            To start using the eventsystem you need to follow a few simple steps. <br />
+            first you need to create a new script and place it on any gameobject in the scene. <br />
+            from this script, remove the update and start functions.
+            <br /><br />
+            to start recieving events you first need a function that will be activated when a event happens.<br />
+            this function will need to have 2 parameters, a <b>GameObject</b> and a <b>float</b>. <br /><br />
+            <div style="background-color:lightgrey;padding-left:10px">
+                void SomeFunction(GameObject g, float f)<br />
+	            {<br />
+	            	&nbsp;&nbsp;&nbsp;&nbsp;//code for linked event goes here<br />
+	            }<br />
+            </div>
+            <br /><br />
+
+            now that we have a function that we want to be called by the event, we have to make the EventManager know about this.<br />
+            for now we do this in the OnEnable of the script by calling EventManager.StartListening. this function also takes 2 parameters.<br />
+            these parameters are <b>the event name</b> and <b>the function to be called</b>.<br />
+
+            <br />
+            <div style="background-color:lightgrey;padding-left:10px">
+                void OnEnable() <br />
+	            {<br />
+	            	&nbsp;&nbsp;&nbsp;&nbsp;EventManager.StartListening("eventnamehere", SomeFunction);<br />
+	            	&nbsp;&nbsp;&nbsp;&nbsp;//add all events that you want to listen to when the game starts here.<br />
+	            }<br />
+            </div>
+            <br /><br />
+            
+            to make sure that we do not create memory leaks you have to do one more thing.<br /> 
+            for everytime you call EventManager.StartListening() you have to also call EventManager.StopListening in the OnDisable.<br />
+            this function again takes 2 parameters: <b>the event name</b> and <b>the function that should stop being called</b>.<br />
+            <br />
+            <div style="background-color:lightgrey;padding-left:10px">
+                void OnDisable() <br />
+	            {<br />
+	            	&nbsp;&nbsp;&nbsp;&nbsp;EventManager.StopListening("eventnamehere", SomeFunction);<br />
+	            	&nbsp;&nbsp;&nbsp;&nbsp;//add all events to stop listening to here<br />
+	            }<br />
+            </div>
+            <br /><br />    
+
+            now you are ready to script to your first event!<br />
+            <a href="../index.html">Click here to go back to the homepage</a>
+        </div>
+    </body>
+</html>

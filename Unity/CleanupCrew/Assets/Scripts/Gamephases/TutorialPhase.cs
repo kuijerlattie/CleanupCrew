@@ -4,15 +4,22 @@ using System;
 
 public class TutorialPhase : AbstractPhase {
 
-    private int amountOfLayers = GameSettings.AmountOfRingsS;
+    private int amountOfLayers;
     private GameObject[] rods;
 
     private GameObject playingBall = null;
     private GameManager manager;
     private float powerPerRod = 0;  //based on 'amountOfLayers'
+    private int CenterRingSize;
+    private float spawnAfterSeconds = 2;    //TODO gamesetting.---
+    private float currentTimer = 0; //current spawn timer
+    private Vector3 ballSpawn = -Vector3.forward * 15;
 
     public override void StartPhase()
     {
+        amountOfLayers = GameSettings.AmountOfRingsS;
+        CenterRingSize = GameSettings.CenterSizeInRingsS;
+
         FindPointZones();
         GameObject.FindObjectOfType<PowerupManager>().isSpawning = false;
         powerPerRod = 100f / (float)amountOfLayers;
@@ -22,17 +29,29 @@ public class TutorialPhase : AbstractPhase {
         SetWalls(true);
         SetPointZones(true);
         nextGamestate = GameManager.gamestate.Cleanup;
+        currentTimer = spawnAfterSeconds;
+        
 
-        for (int i = 0; i < amountOfLayers; i++)
+        for (int i = CenterRingSize; i < amountOfLayers + CenterRingSize; i++)
         {
             GameObject rod = GameObject.Instantiate(Resources.Load("Prefabs/UraniumRod") as GameObject);
             rod.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f) * i;
             rod.transform.position = Vector3.zero;
-            rods[i] = rod;
+            rods[i - CenterRingSize] = rod;
         }
 
-        playingBall = SpawnSpheres.SpawnSphere(-Vector3.forward * rods[2].GetComponent<MeshFilter>().mesh.bounds.size.x /4f, -Vector3.forward);
+        playingBall = SpawnSpheres.SpawnSphere(ballSpawn, -Vector3.forward, false);
         
+    }
+
+    private void UpdateSpawnTimer()
+    {
+        currentTimer -= Time.deltaTime;
+        if(currentTimer<= 0)
+        {
+            currentTimer = spawnAfterSeconds;
+            SpawnSpheres.SpawnSphere(Vector3.zero);
+        }
     }
 
     /// <summary>
@@ -99,6 +118,7 @@ public class TutorialPhase : AbstractPhase {
 
     // Update is called once per frame
     void Update () {
-	
+        UpdateSpawnTimer();
+
 	}
 }

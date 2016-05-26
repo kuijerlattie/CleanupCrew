@@ -13,6 +13,7 @@ using System.Collections;
 //TODO make every variable into 'Getter' only because these values should ONLY be changes through the inspector
 //     , when doing this make a seperate variable otherwise it also cannot be changed from the inspector. EDIT: { get; private set; }
 
+    [System.Serializable]
 public class GameSettings : MonoBehaviour
 {
     [Header("General")]     //-----------------------------------------------------------------------------------------
@@ -31,6 +32,22 @@ public class GameSettings : MonoBehaviour
     private float CircleScale = CircleScaleS;
     static public float CircleScaleS = CIRCLESCALE;
     private const float CIRCLESCALE = 1.0f;
+
+    [SerializeField]
+    private float WallPowerDamage = WallPowerDamageS;
+    static public float WallPowerDamageS = WALLPOWERDAMAGE;
+    private const float WALLPOWERDAMAGE = 5.0f;
+
+    [SerializeField]
+    private bool BounceWall = BounceWallS;
+    static public bool BounceWallS = BOUNCEWALL;
+    private const bool BOUNCEWALL = true;
+
+
+
+
+
+
 
 
     [Header("Paddle")]      //-----------------------------------------------------------------------------------------
@@ -188,9 +205,21 @@ public class GameSettings : MonoBehaviour
     static public bool SmallPaddleS = SMALLPADDLE;
     private const bool SMALLPADDLE = false;
 
-
-
-
+    /// <summary>
+    /// to make sure that when switching scenes the values change with it.. see 'ApplySettings' below
+    /// </summary>
+    void Awake()
+    {
+        ApplySettings();
+    }
+    /// <summary>
+    /// only need to be called when switching scenes through script, because it doesnt use the inspector values then, for some reason?
+    /// should not have to call this anywhere else, but if the settings are not saving for whatever reason there is this applysettings
+    /// </summary>
+    private void ApplySettings()
+    {
+        OnValidate();
+    }
 
     void Reset()
     {
@@ -198,6 +227,8 @@ public class GameSettings : MonoBehaviour
         BlobSpeed = BLOBSPEED;
         BlobScale = BLOBSCALE;
         CircleScale = CIRCLESCALE;
+        WallPowerDamage = WALLPOWERDAMAGE;
+        BounceWall = BOUNCEWALL;
 
         //paddle
         PaddleDistance = PADDLEDISTANCE;
@@ -249,6 +280,8 @@ public class GameSettings : MonoBehaviour
         BlobSpeedS = BlobSpeed;
         BlobScaleS = BlobScale;
         CircleScaleS = CircleScale;
+        WallPowerDamageS = WallPowerDamage;
+        BounceWallS = BounceWall;
 
         //paddle
         PaddleDistanceS = PaddleDistance;

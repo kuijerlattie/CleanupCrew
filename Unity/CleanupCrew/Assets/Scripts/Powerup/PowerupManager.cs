@@ -5,10 +5,10 @@ public class PowerupManager : MonoBehaviour {
 
     public GameObject[] PowerupList;
     float timer = 0;
-    public float spawntimerInSeconds = GameSettings.PowSpawnRateS;
-    public float spawntimerRandomDifference = GameSettings.PowSpawnRateDiffS;
-    public bool spawnFromCenter = GameSettings.PowSpawnInCenterS;
-    public float durationTimer = GameSettings.PowDurationS;
+    public float spawntimerInSeconds;
+    public float spawntimerRandomDifference;
+    public bool spawnFromCenter;
+    public float durationTimer;
 
     [HideInInspector]
     public bool isSpawning = false;
@@ -26,9 +26,17 @@ public class PowerupManager : MonoBehaviour {
         Magnetic
     }
 
+    private void Init()
+    {
+        spawntimerInSeconds = GameSettings.PowSpawnRateS;
+        spawntimerRandomDifference = GameSettings.PowSpawnRateDiffS;
+        spawnFromCenter = GameSettings.PowSpawnInCenterS;
+        durationTimer = GameSettings.PowDurationS;
+    }
     // Use this for initialization
     void Start()
     {
+        Init();
         ResetSpawnTimer();
     }
 

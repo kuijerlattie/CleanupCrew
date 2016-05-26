@@ -13,7 +13,7 @@ public class StickyPaddle : MonoBehaviour {
 	void Update () {
 	
 	}
-
+    
     static public void Sticky()
     {
 
