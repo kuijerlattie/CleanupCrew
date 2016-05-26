@@ -10,7 +10,7 @@ public class PaddleRotationScript : MonoBehaviour {
     GameObject paddle;
     private float _angleToMove = 0.0f;
     float RotationSpeed;
-    private bool useSlider = true;  //true: new controls, use the slider at the bottom to move the paddle,
+    private bool useSlider = false;  //true: new controls, use the slider at the bottom to move the paddle,
                                     //false: uses old controls, tap where u want the paddle to go, EDIT: currently doesnt work
 
 
@@ -23,6 +23,7 @@ public class PaddleRotationScript : MonoBehaviour {
         paddleDistanceToCenter = GameSettings.PaddleDistanceS;
         RotationSpeed = GameSettings.PaddleRotationS;
         InputMaxDistance = GameSettings.TouchBarSizeS;
+        useSlider = !GameSettings.OldControlsS;
 
         paddle = gameObject.transform.GetChild(0).gameObject;  //assumes paddle is the first child of this script.
         SetPaddleToDistance();
@@ -40,22 +41,41 @@ public class PaddleRotationScript : MonoBehaviour {
         float dot = _currentDirection.x * _desiredDirection.x + _currentDirection.z * _desiredDirection.z;      // dot product
         float det = _currentDirection.x * _desiredDirection.z - _currentDirection.z * _desiredDirection.x;      // determinant
         _angleToMove = Mathf.Atan2(det, dot) * (180f / Mathf.PI);
+        //_angleToMove /= (float) GameSettings.AmountOfPaddlesS;
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        _currentDirection = paddle.transform.forward;//(gameObject.transform.position - paddle.transform.localPosition).normalized;
-        if (Input.mousePosition.y < Screen.height / 100f * InputMaxDistance && Input.GetMouseButton(0) && ((Input.mousePosition - oldMousePos).magnitude > 0.03f || (Input.mousePosition - oldMousePos).magnitude < -0.03f))
+        _currentDirection = -paddle.transform.forward;//(gameObject.transform.position - paddle.transform.localPosition).normalized;
+        if (useSlider?( Input.mousePosition.y < Screen.height / 100f * InputMaxDistance && Input.GetMouseButton(0) && ((Input.mousePosition - oldMousePos).magnitude > 0.03f || (Input.mousePosition - oldMousePos).magnitude < -0.03f)) : Input.GetMouseButton(0))
         {
             if (oldMousePos != Vector3.zero)
             {
                 float onedegreeInScreenSize = (float)Screen.width/360f;
-                float degreesToRotate = (Input.mousePosition - oldMousePos).magnitude / onedegreeInScreenSize;
+                float degreesToRotate = useSlider ? (Input.mousePosition - oldMousePos).magnitude / onedegreeInScreenSize
+                    : 0;
+                
+                    
                 degreesToRotate *= Input.mousePosition.x < oldMousePos.x ? 1f : -1f;
 
-                if(useSlider) gameObject.transform.Rotate(Vector3.up, degreesToRotate);
-                 _desiredDirection = Quaternion.Euler(0, degreesToRotate, 0) * _currentDirection;
+                if (useSlider)
+                {
+                    gameObject.transform.Rotate(Vector3.up, degreesToRotate);
+                    _desiredDirection = Quaternion.Euler(0, degreesToRotate, 0) * _currentDirection;
+                }
+                if (!useSlider)
+                {
+                    // _desiredDirection = Input.mou
+                    RaycastHit hit;
+                    if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
+                    { 
+                        //transform.LookAt(hit.point);
+                        hit.point = new Vector3(hit.point.x, 0, hit.point.z);
+                    _desiredDirection = hit.point;
+                    }
+                }
+            
                 CalculateAngle();
             }
             oldMousePos = Input.mousePosition;
@@ -73,7 +93,7 @@ public class PaddleRotationScript : MonoBehaviour {
     void MoveTo(Vector3 direction)
     {
         float stepRotation = RotationSpeed * Time.deltaTime;
-        if (_angleToMove < stepRotation && _angleToMove > -stepRotation) return;   //TODO use epsilon or something probably
+        if (_angleToMove< stepRotation && _angleToMove > -stepRotation) return;   //TODO use epsilon or something probably
         CalculateAngle();
         gameObject.transform.Rotate(Vector3.up, _angleToMove < 0 ? stepRotation : -stepRotation);
     }

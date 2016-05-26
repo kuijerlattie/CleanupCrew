@@ -75,6 +75,11 @@ public class GameSettings : MonoBehaviour
     static public float PaddleBounceStrengthS = PADDLEBOUNCESTRENGTH;
     private const float PADDLEBOUNCESTRENGTH = 5.0f;
 
+    [SerializeField, Tooltip("old controls: tap where to go,    new controls: slider at bottom of screen")]
+    private bool OldControls = OldControlsS;
+    static public bool OldControlsS = OLDCONTROLS;
+    private const bool OLDCONTROLS = false;
+
     [Space(10)] //used to space out in inspector
 
     [SerializeField, Range(1.0f, 100.0f), Tooltip("percent of the screen (on the bottom) that the slider bar is")]
@@ -245,6 +250,7 @@ public class GameSettings : MonoBehaviour
         PaddleRotation = PADDLEROTATION;
         PaddleBounceStrength = PADDLEBOUNCESTRENGTH;
         TouchBarSize = TOUCHBARSIZE;
+        OldControls = OLDCONTROLS;
 
         //tutorial
         AmountOfRings = AMOUNTOFRINGS;
@@ -300,6 +306,7 @@ public class GameSettings : MonoBehaviour
         PaddleRotationS = PaddleRotation;
         PaddleBounceStrengthS = PaddleBounceStrength;
         TouchBarSizeS = TouchBarSize;
+        OldControlsS = OldControls;
 
         //tutorial
         AmountOfRingsS = AmountOfRings;

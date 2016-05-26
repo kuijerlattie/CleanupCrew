@@ -15,7 +15,7 @@ public class PaddleBounce : MonoBehaviour {
     {
         GameObject hitBall = col.gameObject;
 
-        if (hitBall.layer != LayerMask.NameToLayer("Balls")) return;
+        if (hitBall.layer != LayerMask.NameToLayer("Balls") && hitBall.layer != LayerMask.NameToLayer("Blobs")) return;
 
         Rigidbody hitBallRigid = hitBall.GetComponent<Rigidbody>();
         
