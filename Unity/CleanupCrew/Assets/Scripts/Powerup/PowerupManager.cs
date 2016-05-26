@@ -23,7 +23,8 @@ public class PowerupManager : MonoBehaviour {
         SlowEnemies,
         MoreEnergy,
         SmallerEnemies,
-        Magnetic
+        Magnetic,
+        Sticky
     }
 
     private void Init()
@@ -108,6 +109,11 @@ public class PowerupManager : MonoBehaviour {
                 MagneticPaddle.Magnetic();
                 StartCoroutine(PowerupTimer(type, durationTimer));
                 break;
+
+            case PowerupType.Sticky:
+                StickyPaddle.Sticky();
+                break;
+
             default:
                 break;
         }
