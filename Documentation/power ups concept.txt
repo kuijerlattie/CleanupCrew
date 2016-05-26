@@ -8,13 +8,13 @@ Blobs stick to the paddle and can be shot off	!#
 
 magnetic pedal					!#
 
-smaller blobs
+smaller blobs					
 
 bigger pedal					!#
 
 smaller pedal					!#
 
-extra energy					
+extra energy					#
 
 lose all powerups				#
 
