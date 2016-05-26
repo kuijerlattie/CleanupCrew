@@ -202,8 +202,9 @@ public class SI : MonoBehaviour {
 
         public static float cleanupSpawnIntervalPowerIncrease
         {
-            get { return GameSettings.spawnIntervalPowerIncreaseS; }
-            set { GameSettings.spawnIntervalPowerIncreaseS = value; }
+            get;
+            //{ return GameSettings.spawnIntervalPowerIncreaseS; }
+            set;// { GameSettings.spawnIntervalPowerIncreaseS = value; }
         }
 
         public static float bossProjectileFireSpeed

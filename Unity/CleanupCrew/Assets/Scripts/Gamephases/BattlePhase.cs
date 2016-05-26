@@ -6,6 +6,7 @@ public class BattlePhase : AbstractPhase
 {
 
     private List<GameObject> enemies = new List<GameObject>();
+    private List<GameObject> projectiles = new List<GameObject>();
     private bool hasSpawned = false;
 
     PointScript.goalType DefaultGoal = PointScript.goalType.water;  //this is what happens if the waste is nicely distrebuted
@@ -13,6 +14,10 @@ public class BattlePhase : AbstractPhase
     public void AddEnemyToList(GameObject go)
     {
         enemies.Add(go);
+    }
+    public void AddProjectileToList(GameObject go)
+    {
+        projectiles.Add(go);
     }
 
     public override void StartPhase()
@@ -30,7 +35,7 @@ public class BattlePhase : AbstractPhase
             );
         SpawnEnemy(mostUsedGoal);
         hasSpawned = true;
-        nextGamestate = GameManager.gamestate.Tutorial;
+        nextGamestate = GameManager.gamestate.Cleanup;
         //nextGamestate = //TODO back to menu??
     }
 
@@ -38,18 +43,31 @@ public class BattlePhase : AbstractPhase
     {
         isActive = false;
         SetPointZones(false);
-        for (int i = enemies.Count -1; i > 0; i--)
+        for (int i = enemies.Count -1; i >= 0; i--)
         {
             //destroy all enemies that are still alive
             if (enemies[i] != null) GameObject.Destroy(enemies[i]);
         }
+        for (int i = projectiles.Count-1; i >= 0; i--)
+        {
+            if (projectiles[i] != null) GameObject.Destroy(projectiles[i]);
+        }
         enemies.Clear();
+        projectiles.Clear();
     }
 
     public override bool HasEnded()
     {
         enemies.RemoveAll(a => a == null);
-        if (hasSpawned && enemies.Count <= 0) return true;
+        if (hasSpawned && enemies.Count <= 0)
+        {
+
+            //FindObjectOfType<GreyboxMenuScript>().StartMenu();
+            //return false; if not going to menu, use return true to start back at tutorial/cleanup depending on 'nextgamestate'
+            return true;
+            
+
+        }
         return false;
     }
 
