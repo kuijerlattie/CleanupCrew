@@ -28,12 +28,23 @@ public class GameSettings : MonoBehaviour
     static public float BlobScaleS = BLOBSCALE;
     private const float BLOBSCALE = 1.0f;
 
-    
     [SerializeField]
     private float CircleScale = CircleScaleS;
     static public float CircleScaleS = CIRCLESCALE;
     private const float CIRCLESCALE = 1.0f;
-    
+
+    [SerializeField]
+    private float WallPowerDamage = WallPowerDamageS;
+    static public float WallPowerDamageS = WALLPOWERDAMAGE;
+    private const float WALLPOWERDAMAGE = 5.0f;
+
+    [SerializeField]
+    private bool BounceWall = BounceWallS;
+    static public bool BounceWallS = BOUNCEWALL;
+    private const bool BOUNCEWALL = true;
+
+
+
 
 
 
@@ -216,6 +227,8 @@ public class GameSettings : MonoBehaviour
         BlobSpeed = BLOBSPEED;
         BlobScale = BLOBSCALE;
         CircleScale = CIRCLESCALE;
+        WallPowerDamage = WALLPOWERDAMAGE;
+        BounceWall = BOUNCEWALL;
 
         //paddle
         PaddleDistance = PADDLEDISTANCE;
@@ -267,6 +280,8 @@ public class GameSettings : MonoBehaviour
         BlobSpeedS = BlobSpeed;
         BlobScaleS = BlobScale;
         CircleScaleS = CircleScale;
+        WallPowerDamageS = WallPowerDamage;
+        BounceWallS = BounceWall;
 
         //paddle
         PaddleDistanceS = PaddleDistance;

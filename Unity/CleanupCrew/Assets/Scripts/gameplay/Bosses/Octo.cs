@@ -26,6 +26,9 @@ public class Octo : EnemyScript {
             float x = Mathf.Cos(calc * i);  //TODO expensive calcs, tentacles are included in model????
             float z = Mathf.Sin(calc * i);
             tentacles[i].transform.position = new Vector3(x, 0, z) * tentacleDistance;
+            tentacles[i].AddComponent<DestroyOnCollision>();
+            tentacles[i].GetComponent<Collider>().isTrigger = true;
+            //tentacles[i].layer = LayerMask.NameToLayer("Wall");
         }
     }
 

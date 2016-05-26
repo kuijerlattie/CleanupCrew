@@ -8,7 +8,7 @@ public class EnemyScript : MonoBehaviour {  //TODO make this abstract once all b
     public float health {get; private set; } //percent
 
     float damagePerHit;
-
+    public bool AbleToShoot = true;
     bool stoppedAtCenter = false;
     float _currentSpawnTime = 0;
     float _SPAWNTIME;
@@ -16,6 +16,7 @@ public class EnemyScript : MonoBehaviour {  //TODO make this abstract once all b
     float SpeedMultiplier;
     protected bool useBaseCollider = true;
     protected bool isReady { get; private set; }
+    public bool overrideStoppedAtCenter { set { stoppedAtCenter = value; } }
 	// Use this for initialization
 	protected void BaseStart () {
         health = 100;
@@ -39,11 +40,11 @@ public class EnemyScript : MonoBehaviour {  //TODO make this abstract once all b
 
 
         //spawn a projectile at a random position around this gameobject going in that same direction
-        if(_currentSpawnTime <= 0 && stoppedAtCenter)
+        if(_currentSpawnTime <= 0 && stoppedAtCenter && AbleToShoot)
         {
             _currentSpawnTime = _SPAWNTIME;
             Vector3 randomPos = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
-            GameObject projectile = SpawnSpheres.SpawnProjectile(transform.position + randomPos * gameObject.GetComponent<MeshFilter>().mesh.bounds.size.x/2f, randomPos, enemytype);
+            GameObject projectile = SpawnSpheres.SpawnProjectile(transform.position + randomPos * (gameObject.GetComponent<MeshFilter>().mesh.bounds.size.x/4f + 1), randomPos, enemytype);
             projectile.GetComponent<FixedSpeed>().Speed *= SpeedMultiplier;
         }
 
@@ -71,7 +72,7 @@ public class EnemyScript : MonoBehaviour {  //TODO make this abstract once all b
     /// </summary>
     protected virtual void SetupWhenReady()
     {
-        
+        //override this
     }
 
     protected virtual bool HasDied()
@@ -84,7 +85,7 @@ public class EnemyScript : MonoBehaviour {  //TODO make this abstract once all b
     {
         if (!useBaseCollider) return;   //if the enemy has special colliders ignore this collider, projectiles will bounce off instead
 
-        if(col.collider.gameObject.layer == LayerMask.NameToLayer("Balls"))
+        if(col.collider.gameObject.layer == LayerMask.NameToLayer("Balls")) //(projectiles are on the 'Balls' layer currently)
         {
             health -= damagePerHit; //TODO change color or something
             GameObject.Destroy(col.collider.gameObject);
