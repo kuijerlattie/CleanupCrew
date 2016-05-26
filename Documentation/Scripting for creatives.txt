@@ -1,0 +1,51 @@
+better documentation will come soon.
+-----------------------------------------
+
+all things happening in the game will be presented to you trough events. you can make a script and register it to as many events as you want.
+to register to a event you need the following things in your script:
+
+1.
+	void OnEnable()
+		
+	{
+		EventManager.StartListening("eventnamehere", SomeFunction);
+		//add all events to listen to here
+	}
+	replace the eventnamehere with the name of the event you want to listen to.
+	replace SomeFunction with the name of the function you want to be called when the event you just specified is activated.
+
+2.
+	void OnDisable()
+	{
+		EventManager.StopListening("eventnamehere", SomeFunction);
+		//add all events to stop listening to here
+	}
+	replace the eventnamehere with the name of the event you want to stop listening to.
+	replace SomeFunction with the name of the function that you want to stop being called when the event you just specified is activated.
+
+
+3.
+	void SomeFunction(GameObject g, float f)
+	{
+		//code for linked event goes here
+	}
+
+
+all functions required to change the gameplay/make stuff happen will be available trough the ScriptingInterface. you can call a function by doing this:
+	
+	void TriggersOnEnemyDeath(GameObject g, float f)
+	{
+		SI.SpawnPowerup();
+	}
+
+where the SI is the scripting interface. all functions will be static so you can just type SI (in capitals) anywhere to gain access to them.
+
+
+Notes:
+you can register multiple functions to the same event. this is also why you have to specify what function you want to stop in the stoplistening function.
+make sure you make a stoplistening in the OnDisable for every StartListening you make in your scripts. not stopping the listeners causes memory leaks! (bart will check for a fix for this later)
+every function that is called from a event NEEDS to have the GameObject and float parameters (the (GameObject g, float f) part) if you do not have this the function can not be called.
+^ not every event will return an actual gameobject / float. always check the documentation to see if you should use the returned values.
+not all functions are there yet. if you miss something tell a technical. if you miss multiple items, make a list out of what you want access to and give us the list when you ask us for the additions.
+
+

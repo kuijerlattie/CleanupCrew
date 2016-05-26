@@ -8,20 +8,19 @@ public class eventTest1 : MonoBehaviour
 
     void Awake()
     {
-        someListener = new UnityAction(SomeFunction);
     }
 
     void OnEnable()
     {
-        EventManager.StartListening("testevent1", someListener);
+        EventManager.StartListening("testevent1", SomeFunction);
     }
 
     void OnDisable()
     {
-        EventManager.StopListening("testevent1", someListener);
+        EventManager.StopListening("testevent1", SomeFunction);
     }
 
-    void SomeFunction()
+    void SomeFunction(GameObject g, float f)
     {
         Debug.Log("somefunction was called!");
     }
