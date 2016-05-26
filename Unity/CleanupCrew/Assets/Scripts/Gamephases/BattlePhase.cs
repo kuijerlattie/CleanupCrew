@@ -9,7 +9,7 @@ public class BattlePhase : AbstractPhase
     private List<GameObject> projectiles = new List<GameObject>();
     private bool hasSpawned = false;
 
-    PointScript.goalType DefaultGoal = PointScript.goalType.water;  //this is what happens if the waste is nicely distrebuted
+    PointScript.goalType DefaultGoal = PointScript.goalType.space;  //this is what happens if the waste is nicely distrebuted
 
     public void AddEnemyToList(GameObject go)
     {
@@ -23,6 +23,17 @@ public class BattlePhase : AbstractPhase
     public override void StartPhase()
     {
         isActive = true;
+
+        GameObject[] blobs = GameObject.FindGameObjectsWithTag("Blob");
+        for (int i = blobs.GetLength(0) -1; i >= 0; i--)
+        {
+            GameObject.Destroy(blobs[i]);
+        }
+        GameObject[] balls = GameObject.FindGameObjectsWithTag("Ball");
+        for (int i = balls.GetLength(0) - 1; i >= 0; i--)
+        {
+            GameObject.Destroy(balls[i]);
+        }
 
         FindPointZones();
         SetPointZones(true);

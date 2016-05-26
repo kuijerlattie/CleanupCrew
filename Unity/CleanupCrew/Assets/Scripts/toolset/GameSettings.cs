@@ -13,7 +13,7 @@ using System.Collections;
 //TODO make every variable into 'Getter' only because these values should ONLY be changes through the inspector
 //     , when doing this make a seperate variable otherwise it also cannot be changed from the inspector. EDIT: { get; private set; }
 
-    [System.Serializable]
+    [System.Serializable]   //cant remember why its a serializable but leave it i guess
 public class GameSettings : MonoBehaviour
 {
     [Header("General")]     //-----------------------------------------------------------------------------------------
@@ -69,6 +69,11 @@ public class GameSettings : MonoBehaviour
     private float PaddleRotation = PaddleRotationS;
     static public float PaddleRotationS = PADDLEROTATION;
     private const float PADDLEROTATION = 360.0f;
+
+    [SerializeField, Range(1.0f, 15.0f), Tooltip("how much the paddle bounces the blobs based on the distance to center of the paddle")]
+    private float PaddleBounceStrength = PaddleBounceStrengthS;
+    static public float PaddleBounceStrengthS = PADDLEBOUNCESTRENGTH;
+    private const float PADDLEBOUNCESTRENGTH = 5.0f;
 
     [Space(10)] //used to space out in inspector
 
@@ -238,6 +243,7 @@ public class GameSettings : MonoBehaviour
         //paddle
         PaddleDistance = PADDLEDISTANCE;
         PaddleRotation = PADDLEROTATION;
+        PaddleBounceStrength = PADDLEBOUNCESTRENGTH;
         TouchBarSize = TOUCHBARSIZE;
 
         //tutorial
@@ -292,6 +298,7 @@ public class GameSettings : MonoBehaviour
         //paddle
         PaddleDistanceS = PaddleDistance;
         PaddleRotationS = PaddleRotation;
+        PaddleBounceStrengthS = PaddleBounceStrength;
         TouchBarSizeS = TouchBarSize;
 
         //tutorial

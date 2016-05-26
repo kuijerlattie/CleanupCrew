@@ -4,6 +4,13 @@ using System.Collections;
 [RequireComponent(typeof(Collider))]
 public class PaddleBounce : MonoBehaviour {
 
+    private float paddleBounceAngleStrength;
+
+    void Start()
+    {
+        paddleBounceAngleStrength = GameSettings.PaddleBounceStrengthS;
+    }
+
 	void OnCollisionEnter(Collision col)
     {
         GameObject hitBall = col.gameObject;
@@ -20,7 +27,8 @@ public class PaddleBounce : MonoBehaviour {
         Vector3 hitPoint = col.contacts[0].point;
 
         float paddleLength = gameObject.transform.localScale.x;
-        outPutDirection += (hitPoint - gameObject.transform.position) / paddleLength * 2.0f;
+        outPutDirection += (hitPoint - gameObject.transform.position) / paddleLength * paddleBounceAngleStrength;
+        outPutDirection.y = 0;
 
         hitBallRigid.velocity = outPutDirection.normalized;
 

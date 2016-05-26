@@ -46,7 +46,7 @@ public class EnemyScript : MonoBehaviour {  //TODO make this abstract once all b
             Vector3 randomPos = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
             GameObject projectile = SpawnSpheres.SpawnProjectile(transform.position + randomPos * (gameObject.GetComponent<MeshFilter>().mesh.bounds.size.x/4f + 1), randomPos, enemytype);
             projectile.GetComponent<FixedSpeed>().Speed *= SpeedMultiplier;
-            projectile.transform.parent = gameObject.transform;
+            FindObjectOfType<BattlePhase>().AddProjectileToList(projectile);
         }
 
 

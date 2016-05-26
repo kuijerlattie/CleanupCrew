@@ -34,7 +34,13 @@ public class GameManager : MonoBehaviour {
     GameObject currentStateObject = null;
     AbstractPhase currentPhase = null;
 
-
+    public void ResetPoints()
+    {
+        pointsWater = 0;
+        pointsUnderground = 0;
+        pointsSpace = 0;
+        //power = 100;
+    }
 
     [SerializeField]
     Text pointText;
@@ -163,6 +169,7 @@ public class GameManager : MonoBehaviour {
     {
         pointText.text = "points: " + Mathf.Round(points);
         powerText.text = "power: " + Mathf.Round(power);
+        if (power <= 0) powerText.text = "power: GAME OVER, POWER REACHED 0";
     }
 
 

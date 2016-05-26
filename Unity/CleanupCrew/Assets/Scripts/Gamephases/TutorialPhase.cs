@@ -41,7 +41,7 @@ public class TutorialPhase : AbstractPhase {
         }
 
         playingBall = SpawnSpheres.SpawnSphere(ballSpawn, -Vector3.forward, false);
-        
+
     }
 
     private void UpdateSpawnTimer()
@@ -50,7 +50,7 @@ public class TutorialPhase : AbstractPhase {
         if(currentTimer<= 0)
         {
             currentTimer = spawnAfterSeconds;
-            SpawnSpheres.SpawnSphere(Vector3.zero);
+            //SpawnSpheres.SpawnSphere(Vector3.zero);
         }
     }
 

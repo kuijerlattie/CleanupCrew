@@ -18,6 +18,7 @@ public class SplitUpScript : MonoBehaviour {
         }
         if (col.collider.gameObject.layer == LayerMask.NameToLayer("Balls"))
         {
+            if (!col.collider.gameObject.GetComponent<HitPaddle>().HittedPaddle) return;
             GameObject clone = GameObject.Instantiate(gameObject) as GameObject;
             Vector3 randomVec = new Vector3(Random.Range(-1.0f, 1.0f), 0, Random.Range(-1.0f, 1.0f)).normalized;
             gameObject.transform.position += randomVec * splitupPushDistance;
@@ -27,8 +28,10 @@ public class SplitUpScript : MonoBehaviour {
             splits++;
             clone.GetComponent<SplitUpScript>().splits = splits;
             FindObjectOfType<BattlePhase>().AddEnemyToList(clone);
-            
-            clone.GetComponent<Meteo>().overrideStoppedAtCenter = true;
+
+            Meteo m = clone.GetComponent<Meteo>();
+            m.overrideStoppedAtCenter = true;
+            m.AbleToShoot = false;
             clone.AddComponent<ForceNotTrigger>();
         }
     }
