@@ -21,12 +21,12 @@ public class GameSettings : MonoBehaviour
     [SerializeField, Range(5.0f, 20.0f)]
     private float BlobSpeed = BlobSpeedS;
     static public float BlobSpeedS = BLOBSPEED;
-    private const float BLOBSPEED = 9.0f;
+    private const float BLOBSPEED = 10.0f;
 
     [SerializeField, Range(0.1f, 5.0f)]
     private float BlobScale = BlobScaleS;
     static public float BlobScaleS = BLOBSCALE;
-    private const float BLOBSCALE = 1.0f;
+    private const float BLOBSCALE = 2.0f;
 
     [SerializeField, Range(3, 50)]
     private int MaxBlobs = MaxBlobsS;
@@ -38,12 +38,12 @@ public class GameSettings : MonoBehaviour
     [SerializeField, Range(0.1f, 3.0f), Tooltip("size of the big circle/ the level")]
     private float CircleScale = CircleScaleS;
     static public float CircleScaleS = CIRCLESCALE;
-    private const float CIRCLESCALE = 1.0f;
+    private const float CIRCLESCALE = 1.5f;
 
     [SerializeField, Range(0.01f, 10.0f), Tooltip("the amount of energy you lose when blob hits wall")]
     private float WallPowerDamage = WallPowerDamageS;
     static public float WallPowerDamageS = WALLPOWERDAMAGE;
-    private const float WALLPOWERDAMAGE = 5.0f;
+    private const float WALLPOWERDAMAGE = 3.0f;
 
     [SerializeField,Tooltip("true: blobs bounce off walls.  false: blobs get destroyed by walls")]
     private bool BounceWall = BounceWallS;
@@ -59,10 +59,10 @@ public class GameSettings : MonoBehaviour
 
     [Header("Paddle")]      //-----------------------------------------------------------------------------------------
 
-    [SerializeField, Range(10.0f, 30.0f), Tooltip("CURRENT BUG: does not work if multiple paddle powerups is also activated from start")]
+    [SerializeField, Range(10.0f, 30.0f), Tooltip("distance from the middle")]
     private float PaddleDistance = PaddleDistanceS;
     static public float PaddleDistanceS = PADDLEDISTANCE;
-    private const float PADDLEDISTANCE = 18.0f;
+    private const float PADDLEDISTANCE = 25.0f;
 
     //if we switch to tapping on the actual circle again instead of the bar on the bottom this is NOT used
     [SerializeField, Range(180.0f, 540.0f), Tooltip("degrees the paddle rotates when swiping from most left to most right")]
@@ -106,15 +106,15 @@ public class GameSettings : MonoBehaviour
 
     [Header("Cleanup")]     //-----------------------------------------------------------------------------------------
 
-    [SerializeField, Range(1, 20)]
+    [SerializeField, Range(1, 20), Tooltip("after x amount of blobs in 1 area, the boss battle begins")]
     private int SpawnBossAfter = SpawnBossAfterS;
     static public int SpawnBossAfterS = SPAWNBOSSAFTER;   //goes to battle phase after x amount of blobs went into the same zone (space/water/underground)
-    private const int SPAWNBOSSAFTER = 2;
+    private const int SPAWNBOSSAFTER = 5;
 
     [SerializeField, Range(0.0f, 10.0f)]
     private float ballSpawnInterval = ballSpawnIntervalS;
     static public float ballSpawnIntervalS = BALLSPAWNINTERVAL;
-    private const float BALLSPAWNINTERVAL = 10.0f;
+    private const float BALLSPAWNINTERVAL = 7.0f;
 
     [SerializeField, Range(0.0f, 1.0f)]
     private float spawnIntervalIncrease = spawnIntervalIncreaseS;
@@ -135,7 +135,7 @@ public class GameSettings : MonoBehaviour
     [SerializeField, Range(0.1f, 3.0f), Tooltip("x times the speed of regular blobs")]
     private float ProjectileSpeedMultiplier = ProjectileSpeedMultiplierS;
     static public float ProjectileSpeedMultiplierS = PROJECTILESPEEDMULTIPLIER;   //x times the speed of regular blobs
-    private const float PROJECTILESPEEDMULTIPLIER = 1.0f;
+    private const float PROJECTILESPEEDMULTIPLIER = 1.25f;
 
     [SerializeField, Range(0.0f, 100.0f), Tooltip("percent of total health")]
     private float DamagePerHitTaken = DamagePerHitTakenS;
@@ -171,12 +171,12 @@ public class GameSettings : MonoBehaviour
     [SerializeField, Range(1.0f, 50.0f), Tooltip("Seconds")]
     private float PowSpawnRate = PowSpawnRateS;
     static public float PowSpawnRateS = POWSPAWNRATE;
-    private const float POWSPAWNRATE = 25.0f;
+    private const float POWSPAWNRATE = 10.0f;
 
     [SerializeField, Range(1.0f, 50.0f), Tooltip("random difference changing original spawnrate with x")]
     private float PowSpawnRateDiff = PowSpawnRateDiffS;
     static public float PowSpawnRateDiffS = POWSPAWNRATEDIFF;
-    private const float POWSPAWNRATEDIFF = 10.0f;
+    private const float POWSPAWNRATEDIFF = 5.0f;
 
     [Space(10)] //used to space out in inspector
 

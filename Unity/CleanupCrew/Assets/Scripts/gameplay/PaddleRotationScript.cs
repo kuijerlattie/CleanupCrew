@@ -10,7 +10,7 @@ public class PaddleRotationScript : MonoBehaviour {
     GameObject paddle;
     private float _angleToMove = 0.0f;
     float RotationSpeed;
-    private bool useSlider = false;  //true: new controls, use the slider at the bottom to move the paddle,
+    private bool useSlider = true;  //true: new controls, use the slider at the bottom to move the paddle,
                                     //false: uses old controls, tap where u want the paddle to go, EDIT: currently doesnt work
 
 

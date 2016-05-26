@@ -67,6 +67,19 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     GameObject breakoutObjects;
 
+    [SerializeField]
+    GameObject steamprefab;
+
+    public void PlaySteam()
+    {
+        if (steamprefab == null)
+        {
+            Debug.LogWarning("WARNING 'steamprefab' in gamemanager is not linked");
+            return;
+        }
+        steamprefab.GetComponent<ParticleSystem>().Play();
+    }
+
     public void SetState(gamestate state)
     {
         GameObject.Destroy(currentStateObject);
