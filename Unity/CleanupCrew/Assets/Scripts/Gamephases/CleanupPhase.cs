@@ -11,6 +11,7 @@ public class CleanupPhase : AbstractPhase {
     public float spawnIntervalPowerIncrease;
     float spawntimer = 0;
     float spawncounter = 0;
+    private int maxBlobs = 0;
     List<GameObject> spheres = new List<GameObject>();
 
     // Use this for initialization
@@ -19,8 +20,9 @@ public class CleanupPhase : AbstractPhase {
         SpawnBossAfter = GameSettings.SpawnBossAfterS;
         ballSpawnInterval = GameSettings.ballSpawnIntervalS;
         spawnIntervalIncrease = GameSettings.spawnIntervalIncreaseS;
-        spawnIntervalPowerIncrease = GameSettings.spawnIntervalPowerIncreaseS;
-
+       // spawnIntervalPowerIncrease = GameSettings.spawnIntervalPowerIncreaseS;
+        maxBlobs = GameSettings.MaxBlobsS;
+        spheres.AddRange(GameObject.FindGameObjectsWithTag("Blob"));
 
         FindPointZones();
         isActive = true;
@@ -30,6 +32,10 @@ public class CleanupPhase : AbstractPhase {
     public override void StopPhase()
     {
         isActive = false;
+        for (int i = spheres.Count -1; i >= 0; i--)
+        {
+            if (spheres[i] != null) GameObject.Destroy(spheres[i]);
+        }
     }
 
     public override bool HasEnded()
@@ -49,15 +55,18 @@ public class CleanupPhase : AbstractPhase {
     {
         if (!isActive) return;
 
+        spheres.RemoveAll(a => a == null || !a.activeSelf);
+
 
         spawntimer -= Time.deltaTime;
         if (spawntimer <= 0)
         {
+            if (spheres.Count >= maxBlobs) return;
             spawncounter += spawnIntervalPowerIncrease;
             ballSpawnInterval *= spawnIntervalIncrease;
             spawntimer = ballSpawnInterval; //ballSpawnInterval * Mathf.Pow(spawnIntervalIncrease, (float)spawncounter);
             Vector3 spawnloc = Vector3.zero;
-            SpawnSpheres.SpawnSphere(spawnloc);
+            spheres.Add(SpawnSpheres.SpawnSphere(spawnloc));
         }
     }
 }

@@ -23,22 +23,29 @@ public class GameSettings : MonoBehaviour
     static public float BlobSpeedS = BLOBSPEED;
     private const float BLOBSPEED = 9.0f;
 
-    [SerializeField]
+    [SerializeField, Range(0.1f, 5.0f)]
     private float BlobScale = BlobScaleS;
     static public float BlobScaleS = BLOBSCALE;
     private const float BLOBSCALE = 1.0f;
 
-    [SerializeField]
+    [SerializeField, Range(3, 50)]
+    private int MaxBlobs = MaxBlobsS;
+    static public int MaxBlobsS = MAXBLOBS;
+    private const int MAXBLOBS = 15;
+
+    [Space(10)] //used to space out in inspector
+
+    [SerializeField, Range(0.1f, 3.0f), Tooltip("size of the big circle/ the level")]
     private float CircleScale = CircleScaleS;
     static public float CircleScaleS = CIRCLESCALE;
     private const float CIRCLESCALE = 1.0f;
 
-    [SerializeField]
+    [SerializeField, Range(0.01f, 10.0f), Tooltip("the amount of energy you lose when blob hits wall")]
     private float WallPowerDamage = WallPowerDamageS;
     static public float WallPowerDamageS = WALLPOWERDAMAGE;
     private const float WALLPOWERDAMAGE = 5.0f;
 
-    [SerializeField]
+    [SerializeField,Tooltip("true: blobs bounce off walls.  false: blobs get destroyed by walls")]
     private bool BounceWall = BounceWallS;
     static public bool BounceWallS = BOUNCEWALL;
     private const bool BOUNCEWALL = true;
@@ -104,10 +111,7 @@ public class GameSettings : MonoBehaviour
     static public float spawnIntervalIncreaseS = SPAWNINTERVALINCREASE;
     private const float SPAWNINTERVALINCREASE = 0.9f;
 
-    [SerializeField, Range(0.0f, 1.0f)]
-    private float spawnIntervalPowerIncrease = spawnIntervalPowerIncreaseS;
-    static public float spawnIntervalPowerIncreaseS = SPAWNINTERVALPOWERINCREASE;
-    private const float SPAWNINTERVALPOWERINCREASE = 0.1f;
+
 
 
 
@@ -226,6 +230,7 @@ public class GameSettings : MonoBehaviour
         //general
         BlobSpeed = BLOBSPEED;
         BlobScale = BLOBSCALE;
+        MaxBlobs = MAXBLOBS;
         CircleScale = CIRCLESCALE;
         WallPowerDamage = WALLPOWERDAMAGE;
         BounceWall = BOUNCEWALL;
@@ -242,7 +247,7 @@ public class GameSettings : MonoBehaviour
         SpawnBossAfter = SPAWNBOSSAFTER;
         ballSpawnInterval = BALLSPAWNINTERVAL;
         spawnIntervalIncrease = SPAWNINTERVALINCREASE;
-        spawnIntervalPowerIncrease = SPAWNINTERVALPOWERINCREASE;
+ 
 
         //battle
         ProjectileFireSpeed = PROJECTILEFIRESPEED;
@@ -279,6 +284,7 @@ public class GameSettings : MonoBehaviour
         //general
         BlobSpeedS = BlobSpeed;
         BlobScaleS = BlobScale;
+        MaxBlobsS = MaxBlobs;
         CircleScaleS = CircleScale;
         WallPowerDamageS = WallPowerDamage;
         BounceWallS = BounceWall;
@@ -296,7 +302,7 @@ public class GameSettings : MonoBehaviour
         SpawnBossAfterS = SpawnBossAfter;
         ballSpawnIntervalS = ballSpawnInterval;
         spawnIntervalIncreaseS = spawnIntervalIncrease;
-        spawnIntervalPowerIncreaseS = spawnIntervalPowerIncrease;
+
 
         //battle
         ProjectileFireSpeedS = ProjectileFireSpeed;
