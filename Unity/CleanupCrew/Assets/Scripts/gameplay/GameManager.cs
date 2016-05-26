@@ -47,6 +47,8 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     Text powerText;
 
+
+
     public Rect spawnLocation;
 
     public enum gamestate
@@ -167,9 +169,11 @@ public class GameManager : MonoBehaviour {
 
     void UpdateHud()
     {
+        timertext.text = elapsedTime.ToString();
         pointText.text = "points: " + Mathf.Round(points);
         powerText.text = "power: " + Mathf.Round(power);
-        if (power <= 0) powerText.text = "power: GAME OVER, POWER REACHED 0";
+        if (power <= 0 && currentState != gamestate.Tutorial) powerText.text = "power: GAME OVER, POWER REACHED 0";
+        
     }
 
 
