@@ -3,9 +3,18 @@ using UnityEngine.Events;
 using System.Collections;
 using System.Collections.Generic;
 
+
+#region "special event types"
+[System.Serializable]
+public class GameEvent : UnityEvent<GameObject, float>
+{ }
+
+#endregion
+
+
 public class EventManager : MonoBehaviour {
 
-    private Dictionary<string, UnityEvent> eventDictionary;
+    private Dictionary<string, UnityEvent<GameObject, float>> eventDictionary;
 
     private static EventManager eventManager;
 
@@ -35,29 +44,29 @@ public class EventManager : MonoBehaviour {
     {
         if (eventDictionary == null)
         {
-            eventDictionary = new Dictionary<string, UnityEvent>();
+            eventDictionary = new Dictionary<string, UnityEvent<GameObject, float>>();
         }
     }
 
-	public static void StartListening(string eventname, UnityAction listener)
+	public static void StartListening(string eventname, UnityAction<GameObject, float> listener)
     {
-        UnityEvent thisEvent = null;
+        UnityEvent<GameObject, float> thisEvent = null;
         if (instance.eventDictionary.TryGetValue(eventname, out thisEvent))
         {
             thisEvent.AddListener(listener);
         }
         else
         {
-            thisEvent = new UnityEvent();
+            thisEvent = new GameEvent();
             thisEvent.AddListener(listener);
             instance.eventDictionary.Add(eventname, thisEvent);
         }
     }
 
-    public static void StopListening(string eventname, UnityAction listener)
+    public static void StopListening(string eventname, UnityAction<GameObject, float> listener)
     {
         if (eventManager == null) return; //anti error when eventmanager is gone
-        UnityEvent thisEvent = null;
+        UnityEvent<GameObject, float> thisEvent = null;
         if (instance.eventDictionary.TryGetValue(eventname, out thisEvent))
         {
             thisEvent.RemoveListener(listener);
@@ -66,16 +75,13 @@ public class EventManager : MonoBehaviour {
 
     }
 
-    public static void TriggerEvent(string eventname)
+    public static void TriggerEvent(string eventname, GameObject g = null, float f = 0)
     {
-        UnityEvent thisEvent = null;
+        UnityEvent<GameObject,float> thisEvent = null;
         if (instance.eventDictionary.TryGetValue(eventname, out thisEvent))
         {
-            thisEvent.Invoke(); 
-        }
-        else
-        {
-            Debug.LogWarning("triggered non-existing event!");
+            Debug.Log(thisEvent.GetType());
+            thisEvent.Invoke(g, f); 
         }
     }
 }
