@@ -10,6 +10,7 @@ public class Mole : EnemyScript {
 	void Start () {
         BaseStart();
         useBaseCollider = false;
+        spawndistance = 3;
     }
 
     protected override bool HasDied()

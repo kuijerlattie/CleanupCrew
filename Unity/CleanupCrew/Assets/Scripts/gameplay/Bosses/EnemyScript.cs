@@ -17,6 +17,7 @@ public class EnemyScript : MonoBehaviour {  //TODO make this abstract once all b
     protected bool useBaseCollider = true;
     protected bool isReady { get; private set; }
     public bool overrideStoppedAtCenter { set { stoppedAtCenter = value; } }
+    protected int spawndistance = 1;
 	// Use this for initialization
 	protected void BaseStart () {
         health = 100;
@@ -44,7 +45,7 @@ public class EnemyScript : MonoBehaviour {  //TODO make this abstract once all b
         {
             _currentSpawnTime = _SPAWNTIME;
             Vector3 randomPos = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
-            GameObject projectile = SpawnSpheres.SpawnProjectile(transform.position + randomPos * (gameObject.GetComponent<MeshFilter>().mesh.bounds.size.x/4f + 1), randomPos, enemytype);
+            GameObject projectile = SpawnSpheres.SpawnProjectile(transform.position + randomPos * (gameObject.GetComponent<MeshFilter>().mesh.bounds.size.z/4f + spawndistance), randomPos, enemytype);
             projectile.GetComponent<FixedSpeed>().Speed *= SpeedMultiplier;
             FindObjectOfType<BattlePhase>().AddProjectileToList(projectile);
         }
