@@ -13,9 +13,20 @@ public class StickyPaddle : MonoBehaviour {
 	void Update () {
 	
 	}
-    
+
     static public void Sticky()
     {
+        GameObject[] balls;
+
+        balls = GameObject.FindGameObjectsWithTag("Blob");
+
+        foreach (GameObject i in balls)
+        {
+            if (i.GetComponent<StickyBall>() == null)
+            {
+                i.gameObject.AddComponent<StickyBall>();
+            }
+        }
 
     }
 }

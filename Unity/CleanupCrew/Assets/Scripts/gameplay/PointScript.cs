@@ -34,6 +34,7 @@ public class PointScript : MonoBehaviour {
     {
         if (collision.collider.gameObject.tag == "Blob" || collision.collider.gameObject.tag == "Ball") // check if collision is with ball
         {
+            manager.points++;
             switch (type)
             {
                 case goalType.water:

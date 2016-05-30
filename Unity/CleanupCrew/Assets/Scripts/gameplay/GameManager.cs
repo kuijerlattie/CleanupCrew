@@ -47,6 +47,8 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     Text powerText;
 
+
+
     public Rect spawnLocation;
 
     public enum gamestate
@@ -64,6 +66,19 @@ public class GameManager : MonoBehaviour {
     Text timertext;
     [SerializeField]
     GameObject breakoutObjects;
+
+    [SerializeField]
+    GameObject steamprefab;
+
+    public void PlaySteam()
+    {
+        if (steamprefab == null)
+        {
+            Debug.LogWarning("WARNING 'steamprefab' in gamemanager is not linked");
+            return;
+        }
+        steamprefab.GetComponent<ParticleSystem>().Play();
+    }
 
     public void SetState(gamestate state)
     {
@@ -167,9 +182,11 @@ public class GameManager : MonoBehaviour {
 
     void UpdateHud()
     {
+        timertext.text = elapsedTime.ToString();
         pointText.text = "points: " + Mathf.Round(points);
         powerText.text = "power: " + Mathf.Round(power);
-        if (power <= 0) powerText.text = "power: GAME OVER, POWER REACHED 0";
+        if (power <= 0 && currentState != gamestate.Tutorial) powerText.text = "power: GAME OVER, POWER REACHED 0";
+        
     }
 
 

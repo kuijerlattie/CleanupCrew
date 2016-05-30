@@ -33,6 +33,7 @@ public class SplitUpScript : MonoBehaviour {
             m.overrideStoppedAtCenter = true;
             m.AbleToShoot = false;
             clone.AddComponent<ForceNotTrigger>();
+            GameObject.Destroy(col.collider.gameObject);    //destroys the ball
         }
     }
 }

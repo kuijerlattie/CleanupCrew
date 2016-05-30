@@ -10,7 +10,9 @@ public class DestroyOnCollision : MonoBehaviour
         if(col.gameObject.layer == LayerMask.NameToLayer("Balls"))
         {
             if (!col.gameObject.GetComponent<HitPaddle>().HittedPaddle) return;
+            GameObject.Destroy(col.gameObject);
             GameObject.Destroy(gameObject);
+            
         }
     }
 }

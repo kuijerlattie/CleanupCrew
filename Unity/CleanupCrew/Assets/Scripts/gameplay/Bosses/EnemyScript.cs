@@ -64,6 +64,7 @@ public class EnemyScript : MonoBehaviour {  //TODO make this abstract once all b
         }
 	    if(HasDied())
         {
+            FindObjectOfType<GameManager>().points += 10;
             GameObject.Destroy(gameObject);
         }
 	}
@@ -84,11 +85,11 @@ public class EnemyScript : MonoBehaviour {  //TODO make this abstract once all b
 
     void OnCollisionEnter(Collision col)
     {
-        if (!useBaseCollider) return;   //if the enemy has special colliders ignore this collider, projectiles will bounce off instead
+        //if (!useBaseCollider) return;   //if the enemy has special colliders ignore this collider, projectiles will bounce off instead
 
         if(col.collider.gameObject.layer == LayerMask.NameToLayer("Balls")) //(projectiles are on the 'Balls' layer currently)
         {
-            health -= damagePerHit; //TODO change color or something
+            if (useBaseCollider) health -= damagePerHit; //TODO change color or something
             GameObject.Destroy(col.collider.gameObject);
         }
     }

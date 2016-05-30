@@ -65,6 +65,7 @@ public class BattlePhase : AbstractPhase
         }
         enemies.Clear();
         projectiles.Clear();
+        FindObjectOfType<GameManager>().ResetPoints();
     }
 
     public override bool HasEnded()
