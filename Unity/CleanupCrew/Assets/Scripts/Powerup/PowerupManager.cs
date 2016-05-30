@@ -102,7 +102,7 @@ public class PowerupManager : MonoBehaviour {
                 break;
 
             case PowerupType.MoreEnergy:
-                manager.power += 10;
+                EnergyPowerUp.Energy();
                 break;
 
             case PowerupType.Magnetic:
