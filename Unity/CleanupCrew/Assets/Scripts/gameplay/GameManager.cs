@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEditor;
 
 public class GameManager : MonoBehaviour {
 
@@ -29,10 +30,18 @@ public class GameManager : MonoBehaviour {
     GameObject paddle;
     public float elapsedTime = 0;
     public float idleTimer = 0;
+    public float elapsedTimeThisPhase = 0;
+
+    public static bool IsQuitting = false;
 
     //add all objects related to States as child to this, this is deleted after every state switch
     GameObject currentStateObject = null;
     AbstractPhase currentPhase = null;
+
+    void OnApplicationQuit()
+    {
+        IsQuitting = true;  //used to make sure there are no particles etc spawned when objects get destroyed via exiting the game
+    }
 
     public void ResetPoints()
     {
@@ -70,6 +79,10 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     GameObject steamprefab;
 
+
+    /// <summary>
+    /// temporary method to show steam particles in the middle during the tutorial
+    /// </summary>
     public void PlaySteam()
     {
         if (steamprefab == null)
@@ -83,7 +96,7 @@ public class GameManager : MonoBehaviour {
     public void SetState(gamestate state)
     {
         GameObject.Destroy(currentStateObject);
-
+        elapsedTimeThisPhase = 0;
         if (currentStateObject != null && currentPhase != null)
         {
             switch (currentState)
@@ -232,6 +245,8 @@ public class GameManager : MonoBehaviour {
         {
             idleTimer = 0;
         }
+
+        elapsedTimeThisPhase += Time.deltaTime;
 
         AutomaticSwitchState();
     }

@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
+using System.Reflection;
 
 public class SI : MonoBehaviour {
 
@@ -17,6 +19,7 @@ public class SI : MonoBehaviour {
 
     /// <summary>
     /// initialize the Scripting interface
+    /// call ONLY during EventManager init
     /// </summary>
     public static void Init()
     {
@@ -62,10 +65,22 @@ public class SI : MonoBehaviour {
     { get { return gameManager.elapsedTime; } }
 
     /// <summary>
+    /// returns the time since the phase has switched
+    /// </summary>
+    public static float elapsedTimethisPhase
+    { get { return gameManager.elapsedTimeThisPhase; } }
+
+    /// <summary>
     /// returns the time since the last userinput was registered
     /// </summary>
     public static float idleTime
     { get { return gameManager.idleTimer; } }
+
+    /// <summary>
+    /// returns the time since the last userinput was registered
+    /// </summary>
+    public static int idleTimeInt
+    { get { return (int)gameManager.idleTimer; } }
 
     /// <summary>
     /// returns the amount of paddles in the game;
@@ -87,6 +102,12 @@ public class SI : MonoBehaviour {
     /// </summary>
     public static int ballcount
     { get { return GameObject.FindGameObjectsWithTag("Ball").GetLength(0); } }
+
+    // <summary>
+    /// returns the amount of blobs in the scene
+    /// </summary>
+    public static int blobcount
+    { get { return GameObject.FindGameObjectsWithTag("Blob").GetLength(0); } }
 
     /// <summary>
     /// spawn a ball
@@ -144,8 +165,68 @@ public class SI : MonoBehaviour {
     {
         powerupManager.ActivatePowerup(type);
     }
-    
-    //public static Settings settings;
+
+
+    /// <summary>
+    /// used to set all properties in an array at once
+    /// </summary>
+    /// <typeparam name="T1"></typeparam>
+    /// <typeparam name="T2"></typeparam>
+    /// <param name="array"></param>
+    /// <param name="paramname"></param>
+    /// <param name="value"></param>
+    public static void SetAll<T1, T2>(GameObject[] array, string paramname, T2 value)
+        where T1 : class
+        where T2 : struct
+    {
+        foreach(GameObject go in array)
+        {
+            T1 script = go.GetComponent<T1>();
+            PropertyInfo property = script.GetType().GetProperty(paramname);
+            property.SetValue(script, value, null);
+        }
+    }
+
+    public static void DisplayMessage(string path, float time)
+    {
+        MessageScript.SpawnMessage(path, time);
+    }
+
+    public static void DisplayMessage(string path, Func<bool> destroyMethod)
+    {
+        MessageScript.SpawnMessage(path, destroyMethod);
+    }
+
+
+    /// <summary>
+    /// assuming they are located in: Resources/Particles/ only specift name: Fire, Steam.. etc
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    public static GameObject SpawnParticle(string name, Vector3 position)
+    {
+        GameObject g = GameObject.Instantiate(Resources.Load("Particles/" + name)) as GameObject;
+        g.transform.position = position;
+        return g;
+    }
+
+    /// <summary>
+    /// assuming they are located in: Resources/Particles/ only specift name: Fire, Steam.. etc
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    public static GameObject SpawnParticle(string name, Transform ptransform)
+    {
+        GameObject g = GameObject.Instantiate(Resources.Load("Particles/" + name)) as GameObject;
+        g.transform.position = ptransform.position;
+        return g;
+    }
+
+
+
+
+
+    //public static Settings settings;  //------------------------------------------------
 
     public static class Settings
     {
@@ -200,6 +281,7 @@ public class SI : MonoBehaviour {
             set { GameSettings.spawnIntervalIncreaseS = value; }
         }
 
+        //this variable is currently not used during the spawning
         public static float cleanupSpawnIntervalPowerIncrease
         {
             get;
@@ -224,6 +306,10 @@ public class SI : MonoBehaviour {
             get { return GameSettings.DamagePerHitTakenS; }
             set { GameSettings.DamagePerHitTakenS = value; }
         }
-        
+
+       
+
+
+
     }
 }

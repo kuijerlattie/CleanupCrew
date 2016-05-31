@@ -9,7 +9,7 @@ public class RandomColor : MonoBehaviour {
     static public Color GetRandomColor()
     {
         return Color.red;
-        return Colors[Random.Range(0, Colors.GetLength(0))];
+        //return Colors[Random.Range(0, Colors.GetLength(0))];
     }
 
     // Use this for initialization
