@@ -34,7 +34,7 @@ public class TutorialPhase : AbstractPhase {
 
         for (int i = CenterRingSize; i < amountOfLayers + CenterRingSize; i++)
         {
-            GameObject rod = GameObject.Instantiate(Resources.Load("Prefabs/UraniumRod") as GameObject);
+            GameObject rod = GameObject.Instantiate(Resources.Load("Prefabs/Tutorial/UraniumRod") as GameObject);
             rod.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f) * i;
             rod.transform.position = Vector3.zero;
             rods[i - CenterRingSize] = rod;

@@ -64,7 +64,9 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\BallCollisionScript.cs" />
     <Compile Include="Assets\Scripts\BlobScaleONStart.cs" />
+    <Compile Include="Assets\Scripts\DestroyAfterXSeconds.cs" />
     <Compile Include="Assets\Scripts\DestroyOnCollision.cs" />
+    <Compile Include="Assets\Scripts\DoOnDestroy.cs" />
     <Compile Include="Assets\Scripts\ForceNotTrigger.cs" />
     <Compile Include="Assets\Scripts\Gamephases\AbstractPhase.cs" />
     <Compile Include="Assets\Scripts\Gamephases\BattlePhase.cs" />
@@ -72,7 +74,9 @@
     <Compile Include="Assets\Scripts\Gamephases\TutorialPhase.cs" />
     <Compile Include="Assets\Scripts\GreyboxMenuScript.cs" />
     <Compile Include="Assets\Scripts\KeepYzero.cs" />
+    <Compile Include="Assets\Scripts\MessageScript.cs" />
     <Compile Include="Assets\Scripts\ObstacleScript.cs" />
+    <Compile Include="Assets\Scripts\Powerup\EnergyPowerUp.cs" />
     <Compile Include="Assets\Scripts\Powerup\MagneticPaddle.cs" />
     <Compile Include="Assets\Scripts\Powerup\PaddlePowerUp.cs" />
     <Compile Include="Assets\Scripts\Powerup\PowerUpTesting.cs" />
@@ -94,6 +98,7 @@
     <Compile Include="Assets\Scripts\gameplay\Bosses\SplitUpScript.cs" />
     <Compile Include="Assets\Scripts\gameplay\FixedSpeed.cs" />
     <Compile Include="Assets\Scripts\gameplay\GameManager.cs" />
+    <Compile Include="Assets\Scripts\gameplay\HitPaddle.cs" />
     <Compile Include="Assets\Scripts\gameplay\PaddleBounce.cs" />
     <Compile Include="Assets\Scripts\gameplay\PaddleRotationScript.cs" />
     <Compile Include="Assets\Scripts\gameplay\PointScript.cs" />
@@ -103,8 +108,10 @@
     <Compile Include="Assets\Scripts\gameplay\TouchSlider.cs" />
     <Compile Include="Assets\Scripts\gameplay\WallScript.cs" />
     <Compile Include="Assets\Scripts\toolset\EventManager.cs" />
+    <Compile Include="Assets\Scripts\toolset\EventTypes.cs" />
     <Compile Include="Assets\Scripts\toolset\GameSettings.cs" />
-    <Compile Include="Assets\Scripts\toolset\ScriptingInterface.cs" />
+    <Compile Include="Assets\Scripts\toolset\Scripting\ScriptingInterface.cs" />
+    <Compile Include="Assets\Scripts\toolset\TestScripting.cs" />
     <Compile Include="Assets\Scripts\toolset\eventTest1.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />

@@ -50,6 +50,7 @@ public class BattlePhase : AbstractPhase
         //nextGamestate = //TODO back to menu??
     }
 
+
     public override void StopPhase()
     {
         isActive = false;
