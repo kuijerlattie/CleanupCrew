@@ -13,17 +13,17 @@ public class Arguments : MonoBehaviour {
 	void Awake() {
         DontDestroyOnLoad(gameObject);
 		string[] arguments = Environment.GetCommandLineArgs();
-		userID = Convert.ToInt32(arguments[2]);
-		gameID = Convert.ToInt32(arguments[3]);
-		username = arguments[4];
-		gametime = Convert.ToInt32(arguments[5]);
-		conURL = arguments[6];
+		//userID = Convert.ToInt32(arguments[2]);
+		//gameID = Convert.ToInt32(arguments[3]);
+		//username = arguments[4];
+		//gametime = Convert.ToInt32(arguments[5]);
+		//conURL = arguments[6];
 //
-//		userID = 2;
-//		gameID = 6;
-//		username = "YVONNE";
-//		gametime = 10;
-//		conURL = "http://www.serellyn.net/HEIM/php/";
+		userID = 2;
+		gameID = 6;
+		username = "YVONNE";
+		gametime = 10;
+		conURL = "http://www.serellyn.net/HEIM/php/";
 
 	}
 	

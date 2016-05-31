@@ -7,7 +7,13 @@ public class DBconnection : MonoBehaviour {
 	private string scoreURL = "insertScore.php?";
 
 	void Awake() {
-		argumentsScript = GameObject.Find("SceneManager").GetComponent<Arguments>();
+		try{
+        argumentsScript = GameObject.Find("SceneManager").GetComponent<Arguments>();
+        }
+        catch
+        {
+            argumentsScript = GameObject.FindObjectOfType<Arguments>();
+        }
 	}
 	void Start() {
 		connectionURL = argumentsScript.getConURL();
