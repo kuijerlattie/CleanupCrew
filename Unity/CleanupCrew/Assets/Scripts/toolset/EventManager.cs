@@ -16,6 +16,11 @@ public class EventManager : MonoBehaviour {
 
     private Dictionary<string, UnityEvent<GameObject, float>> eventDictionary;
 
+    void OnDestroy()
+    {
+       
+    }
+
     private static EventManager eventManager;
 
     public static EventManager instance

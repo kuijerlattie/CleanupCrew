@@ -187,11 +187,25 @@ public class SI : MonoBehaviour {
         }
     }
 
+
+    /// <summary>
+    /// used to spawn a prefab that gets destroyed after x seconds
+    /// not just messages, any prefab
+    /// </summary>
+    /// <param name="path"></param>
+    /// <param name="time"></param>
     public static void DisplayMessage(string path, float time)
     {
         MessageScript.SpawnMessage(path, time);
     }
 
+
+    /// <summary>
+    /// used to spawn a prefab that gets destroyed through 'destroyMethod'
+    /// not just messages, any prefab
+    /// </summary>
+    /// <param name="path"></param>
+    /// <param name="destroyMethod"></param>
     public static void DisplayMessage(string path, Func<bool> destroyMethod)
     {
         MessageScript.SpawnMessage(path, destroyMethod);

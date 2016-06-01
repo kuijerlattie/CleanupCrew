@@ -9,16 +9,26 @@ public class TestScripting : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (SI.idleTime >= 10) SI.DisplayMessage("Prefabs/Text/MessageAFK", StopIdleMessage);
-        Tutorial();
+        if (SI.idleTime >= 10) SI.DisplayMessage("Prefabs/Text/MessageAFK", StopIdleMessage);   //TESTING 
       
 	}
 
     void OnEnable()
     {
         EventManager.StartListening("BlobDestroyed", OnBlobDestroy);
-        EventManager.StartListening("BallDestroyed", OnBlobDestroy);
-        EventManager.StartListening("EnemyDestroyed", OnBlobDestroy);
+        EventManager.StartListening("BallDestroyed", OnBallDestroy);
+        EventManager.StartListening("EnemyWaterDestroyed", OnEnemyWaterDestroy);
+        EventManager.StartListening("EnemyGroundDestroyed", OnEnemyGroundDestroy);
+        EventManager.StartListening("EnemySpaceDestroyed", OnEnemySpaceDestroy);
+    }
+
+    void OnDisable()
+    {
+        EventManager.StopListening("BlobDestroyed", OnBlobDestroy);
+        EventManager.StopListening("BallDestroyed", OnBallDestroy);
+        EventManager.StopListening("EnemyWaterDestroyed", OnEnemyWaterDestroy);
+        EventManager.StopListening("EnemyGroundDestroyed", OnEnemyGroundDestroy);
+        EventManager.StopListening("EnemySpaceDestroyed", OnEnemySpaceDestroy);
     }
 
     void OnBlobDestroy(GameObject g, float f)
@@ -31,19 +41,21 @@ public class TestScripting : MonoBehaviour {
         SI.SpawnParticle("STEAM", g.transform);
     }
 
-    void OnEnemyDestroy(GameObject g, float f)
+    void OnEnemyWaterDestroy(GameObject g, float f)
     {
         SI.SpawnParticle("Smoke 2", g.transform);
     }
 
-    void Tutorial()
+    void OnEnemyGroundDestroy(GameObject g, float f)
     {
-        if (SI.gameState != GameManager.gamestate.Tutorial) return;
-        
-        if (SI.elapsedTimethisPhase >= 60) SI.DisplayMessage("Prefabs/Text/MessageBAD", StopYouAreBadMessage);
-
-
+        SI.SpawnParticle("Smoke 2", g.transform);
     }
+
+    void OnEnemySpaceDestroy(GameObject g, float f)
+    {
+        SI.SpawnParticle("Smoke 2", g.transform);
+    }
+
 
 
     bool StopIdleMessage()

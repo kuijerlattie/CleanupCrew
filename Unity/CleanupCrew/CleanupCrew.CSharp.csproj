@@ -101,6 +101,7 @@
     <Compile Include="Assets\Scripts\gameplay\HitPaddle.cs" />
     <Compile Include="Assets\Scripts\gameplay\PaddleBounce.cs" />
     <Compile Include="Assets\Scripts\gameplay\PaddleRotationScript.cs" />
+    <Compile Include="Assets\Scripts\gameplay\PaddleShoot.cs" />
     <Compile Include="Assets\Scripts\gameplay\PointScript.cs" />
     <Compile Include="Assets\Scripts\gameplay\RandomMovement.cs" />
     <Compile Include="Assets\Scripts\gameplay\RodTutorialScript.cs" />
