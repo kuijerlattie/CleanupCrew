@@ -10,8 +10,11 @@ public class TestScripting : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (SI.idleTime >= 10) SI.DisplayMessage("Prefabs/Text/MessageAFK", StopIdleMessage);   //TESTING 
-      
-	}
+        if (SI.idleTime >= 30) FindObjectOfType<GreyboxMenuScript>().StartMenu();
+            
+
+
+    }
 
     void OnEnable()
     {
@@ -64,11 +67,6 @@ public class TestScripting : MonoBehaviour {
         else return false;
     }
 
-    bool StopYouAreBadMessage()
-    {
-        if (SI.elapsedTimethisPhase <= 0) return true;
-        else return false;
-    }
 
 
 }
