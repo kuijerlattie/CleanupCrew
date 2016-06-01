@@ -3,7 +3,8 @@ using System.Collections;
 
 public class HitPaddle : MonoBehaviour {
 
-    public bool HittedPaddle { get; private set; }
+    [HideInInspector]
+    public bool HittedPaddle = false;
 	// Use this for initialization
 	
     void OnCollisionEnter(Collision col)

@@ -9,7 +9,7 @@ public class BattlePhase : AbstractPhase
     private List<GameObject> projectiles = new List<GameObject>();
     private bool hasSpawned = false;
 
-    PointScript.goalType DefaultGoal = PointScript.goalType.underground;  //this is what happens if the waste is nicely distrebuted
+    PointScript.goalType DefaultGoal = PointScript.goalType.space;  //this is what happens if the waste is nicely distrebuted
 
     public void AddEnemyToList(GameObject go)
     {

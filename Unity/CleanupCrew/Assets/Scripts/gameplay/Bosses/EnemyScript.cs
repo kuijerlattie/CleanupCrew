@@ -86,11 +86,11 @@ public class EnemyScript : MonoBehaviour {  //TODO make this abstract once all b
 
     void OnCollisionEnter(Collision col)
     {
-        //if (!useBaseCollider) return;   //if the enemy has special colliders ignore this collider, projectiles will bounce off instead
+        if (!useBaseCollider) return;   //if the enemy has special colliders ignore this collider, projectiles will bounce off instead
 
-        if(col.collider.gameObject.layer == LayerMask.NameToLayer("Balls")) //(projectiles are on the 'Balls' layer currently)
+        if (col.collider.gameObject.layer == LayerMask.NameToLayer("Balls")) //(projectiles are on the 'Balls' layer currently)
         {
-            if (useBaseCollider) health -= damagePerHit; //TODO change color or something
+            health -= damagePerHit; //TODO change color or something
             GameObject.Destroy(col.collider.gameObject);
         }
     }

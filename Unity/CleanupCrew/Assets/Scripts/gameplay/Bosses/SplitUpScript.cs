@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 [RequireComponent(typeof(Collider))]
 public class SplitUpScript : MonoBehaviour {
@@ -20,7 +21,7 @@ public class SplitUpScript : MonoBehaviour {
         {
             if (!col.collider.gameObject.GetComponent<HitPaddle>().HittedPaddle) return;
             GameObject clone = GameObject.Instantiate(gameObject) as GameObject;
-            Vector3 randomVec = new Vector3(Random.Range(-1.0f, 1.0f), 0, Random.Range(-1.0f, 1.0f)).normalized;
+            Vector3 randomVec = new Vector3(UnityEngine.Random.Range(-1.0f, 1.0f), 0, UnityEngine.Random.Range(-1.0f, 1.0f)).normalized;
             gameObject.transform.position += randomVec * splitupPushDistance;
             gameObject.transform.localScale *= splitUpScale;
             clone.transform.position -= randomVec * splitupPushDistance;
@@ -34,6 +35,8 @@ public class SplitUpScript : MonoBehaviour {
             m.AbleToShoot = false;
             clone.AddComponent<ForceNotTrigger>();
             GameObject.Destroy(col.collider.gameObject);    //destroys the ball
+            Meteo[] meteos = GameObject.FindObjectsOfType<Meteo>();
+            if (Array.Find(meteos, a => a.AbleToShoot) == null) m.AbleToShoot = true;
         }
     }
 }
