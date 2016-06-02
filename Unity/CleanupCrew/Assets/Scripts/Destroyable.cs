@@ -81,7 +81,7 @@ public class Destroyable : MonoBehaviour {
         }
     }
 
-    public void SetHitToDestroy(int hits)
+    public void SetHitpoints(int hits)
     {
         hitpoints = hits;
     }
