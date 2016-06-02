@@ -149,7 +149,8 @@ public class PaddleShoot : MonoBehaviour
         {
             GameObject.Destroy(spheres[i]);
         }
-        CleanupList();
+        spheres.Clear();
+        UpdateColor();
     }
 
     /// <summary>

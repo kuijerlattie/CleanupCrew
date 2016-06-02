@@ -92,9 +92,19 @@ public class PaddleRotationScript : MonoBehaviour {
     /// <param name="direction"></param>
     void MoveTo(Vector3 direction)
     {
-        float stepRotation = RotationSpeed * Time.deltaTime;
-        if (_angleToMove< stepRotation && _angleToMove > -stepRotation) return;   //TODO use epsilon or something probably
+        //TODO somehow the minimup step possible is Pi * (Rotationspeed /~180)
         CalculateAngle();
+        float stepRotation = RotationSpeed * Time.deltaTime;
+        float minStep = Mathf.PI * (RotationSpeed/ 225f);   //Mathf.epsilon
+        if (_angleToMove < minStep && _angleToMove > -minStep) return;
+        if (_angleToMove < stepRotation && _angleToMove > -stepRotation)
+        {
+            gameObject.transform.Rotate(Vector3.up, -_angleToMove);
+            CalculateAngle();
+            _desiredDirection = _currentDirection;
+            return;  
+        }
+        
         gameObject.transform.Rotate(Vector3.up, _angleToMove < 0 ? stepRotation : -stepRotation);
     }
     

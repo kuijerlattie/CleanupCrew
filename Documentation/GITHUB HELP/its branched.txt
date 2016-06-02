@@ -1,0 +1,7 @@
+git checkout master
+git pull
+git merge >Branch name here<  
+git pull  # if needed
+git push
+
+//do these in order in git shell
