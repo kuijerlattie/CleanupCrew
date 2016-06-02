@@ -14,31 +14,33 @@ public class Destroyable : MonoBehaviour {
     
     void OnCollisionEnter(Collision collision)
     {
-        bool ishit = true;
+        bool taghit = false;
+        bool layerhit = false;
         if (tagbased)
         {
-            ishit = false;
-            foreach (string tag in tags)
-            {
-                if (collision.gameObject.tag == tag)
-                {
-                    ishit = true;
-                }
-            }
+            if (tags.Contains(collision.gameObject.tag)) taghit = true;
         }
 
         if (layerbased)
         {
-            //check if other had a layer
+            if (layers.Contains(LayerMask.LayerToName(collision.gameObject.layer))) layerhit = true;
         }
 
-        if (ishit)
+        if ((!tagbased && !layerbased) ||((tagbased || layerbased) && (taghit || layerhit))) //if not tagbased or layerbased return true; if tagbased or layerbased and taghit or layerhit return true; else return false;
         {
             hitpoints--;
             if (hitpoints <= 0)
             {
                 GameObject.Destroy(this);
             }
+            else
+            {
+                EventManager.TriggerEvent("HitDestroyable", this.gameObject, hitpoints);
+            }
+        }
+        else
+        {
+            EventManager.TriggerEvent("FalseHitDestroyable", this.gameObject, 0);
         }
     }
 
