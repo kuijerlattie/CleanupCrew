@@ -70,7 +70,7 @@ public class GameSettings : MonoBehaviour
     static public float PaddleRotationS = PADDLEROTATION;
     private const float PADDLEROTATION = 360.0f;
 
-    [SerializeField, Range(1.0f, 15.0f), Tooltip("how much the paddle bounces the blobs based on the distance to center of the paddle")]
+    [SerializeField, Range(1.0f, 15.0f), Tooltip("requires: 'PaddleBounce'.  how much the paddle bounces the blobs based on the distance to center of the paddle")]
     private float PaddleBounceStrength = PaddleBounceStrengthS;
     static public float PaddleBounceStrengthS = PADDLEBOUNCESTRENGTH;
     private const float PADDLEBOUNCESTRENGTH = 5.0f;
@@ -78,11 +78,16 @@ public class GameSettings : MonoBehaviour
     [SerializeField, Tooltip("old controls: tap where to go,    new controls: slider at bottom of screen")]
     private bool OldControls = OldControlsS;
     static public bool OldControlsS = OLDCONTROLS;
-    private const bool OLDCONTROLS = false;
+    private const bool OLDCONTROLS = true;
+
+    [SerializeField, Range(0, 15),Tooltip("Max amount of Blobs/balls that can be held by the paddle")]
+    private int MaxPaddleObjects = MaxPaddleObjectsS;
+    static public int MaxPaddleObjectsS = MAXPADDLEOBJECTS;
+    private const int MAXPADDLEOBJECTS = 3;
 
     [Space(10)] //used to space out in inspector
 
-    [SerializeField, Range(1.0f, 100.0f), Tooltip("percent of the screen (on the bottom) that the slider bar is")]
+    [SerializeField, Range(1.0f, 100.0f), Tooltip("requires: 'oldcontrols = false'.     percent of the screen (on the bottom) that the slider bar is")]
     private float TouchBarSize = TouchBarSizeS;
     static public float TouchBarSizeS = TOUCHBARSIZE;
     private const float TOUCHBARSIZE = 25.0f;
@@ -249,6 +254,7 @@ public class GameSettings : MonoBehaviour
         PaddleDistance = PADDLEDISTANCE;
         PaddleRotation = PADDLEROTATION;
         PaddleBounceStrength = PADDLEBOUNCESTRENGTH;
+        MaxPaddleObjects = MAXPADDLEOBJECTS;
         TouchBarSize = TOUCHBARSIZE;
         OldControls = OLDCONTROLS;
 
@@ -305,6 +311,7 @@ public class GameSettings : MonoBehaviour
         PaddleDistanceS = PaddleDistance;
         PaddleRotationS = PaddleRotation;
         PaddleBounceStrengthS = PaddleBounceStrength;
+        MaxPaddleObjectsS = MaxPaddleObjects;
         TouchBarSizeS = TouchBarSize;
         OldControlsS = OldControls;
 

@@ -2,31 +2,226 @@
 <html>
     <head>
         <title>Documentation home</title>
+        <link rel="stylesheet" type="text/css" href="../style/style.css">
     </head>
     <body>
         <h1>Scripting documentation</h1>
         <div class="infobox"><br />
             <a href="ScriptingHome.html">Back</a><br />
-            <div style="padding-left:10px">
-                <table style="width:100%">
+            <div>
+                <table>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Parameters</th>
+                        <th>returns</th>
+                    </tr>
                     <tr>
                         <td>
-                            <div class="tableEntry">
-                                <h1>function: <b>name</b></h1>
-                                <h2>Description: </h2>
-                                <h3>
-                                    descriptiontext
-                                </h3>
-                                <h3>parameters: <br />
-                                    &nbsp;&nbsp;&nbsp;&nbsp; here
-                                </h3>
-                                <h3>returns: <br />
-                                    &nbsp;&nbsp;&nbsp;&nbsp; GameObject: null<br />
-                                    &nbsp;&nbsp;&nbsp;&nbsp; float: 0                     
-
-                                </h3>
-                                
-                            </div>
+                            <div id="returntype">GameObject</div> SpawnBall(Vector3 position)
+</td>
+                        <td>
+                            spawns a ball on this position
+                        </td>
+                        <td>
+                            position = location to spawn the ball
+                        </td>
+                        <td>
+                            the ball that has been spawned
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="returntype">GameObject</div> SpawnBall(Vector3 position, Vector3 direction)
+                        </td>
+                        <td>
+                            spawns a ball on this position while making it move in the direction specified
+                        </td>
+                        <td>
+                            position = location to spawn the ball <br />
+                            direction = direction that the ball will move at
+                        </td>
+                        <td>
+                            the ball that has been spawned
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="returntype">GameObject</div> SpawnBall(Vector3 position, int angle)
+                        </td>
+                        <td>
+                            spawns a ball on this position while making it move in the direction specified
+                        </td>
+                        <td>
+                            position = location to spawn the ball; <br />
+                            angle = direction that the ball will move at, 0 being up.
+                        </td>
+                        <td>
+                            the ball that has been spawned
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="returntype">Void</div> StopAllPowerups()
+                        </td>
+                        <td>
+                            stops all powerups that the player currently has;
+                        </td>
+                        <td>
+                            -
+                        </td>
+                        <td>
+                            -
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="returntype">Void</div> SpawnPowerup()
+                        </td>
+                        <td>
+                            spawns a random powerup
+                        </td>
+                        <td>
+                            -
+                        </td>
+                        <td>
+                            -
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="returntype">Void</div> SpawnPowerup(PowerupManager.PowerupType type)
+                        </td>
+                        <td>
+                            spawns the selected powerup
+                        </td>
+                        <td>
+                            Type = the powerup to spawn
+                        </td>
+                        <td>
+                            -
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="returntype">Void</div> SpawnPrefab(string path, float time)
+                        </td>
+                        <td>
+                            spawns a prefab that gets destroyed after (time) seconds
+                        </td>
+                        <td>
+                            Tpath = path to prefab <br />
+                            time = seconds untill it gets destroyed
+                        </td>
+                        <td>
+                            -
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="returntype">Void</div> SpawnPrefab(string path, Func&lt;bool&gt; destroyMethod)
+                        </td>
+                        <td>
+                            spawns a prefab that gets destroyed by the destroyMethod
+                        </td>
+                        <td>
+                            Tpath = path to prefab <br />
+                            destroyMethod = a method that will handle destroying this gameobject
+                        </td>
+                        <td>
+                            -
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="returntype">GameObject</div> SpawnParticle(string name, Vector3 position)
+                        </td>
+                        <td>
+                            spawns a particle from Resources/Particles
+                        </td>
+                        <td>
+                            name = name of the particle to spawn <br />
+                            position = location to spawn the particle
+                        </td>
+                        <td>
+                            the particle as a gameobject
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="returntype">GameObject</div> SpawnParticle(string name, Vector3 position)
+                        </td>
+                        <td>
+                            spawns a particle from Resources/Particles
+                        </td>
+                        <td>
+                            name = name of the particle to spawn <br />
+                            position = location to spawn the particle
+                        </td>
+                        <td>
+                            the particle as a gameobject
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="returntype">GameObject</div> SpawnParticle(string name, Vector3 position, Func&lt;bool&gt; destroyMethod)
+                        </td>
+                        <td>
+                            spawns a particle from Resources/Particles
+                        </td>
+                        <td>
+                            name = name of the particle to spawn <br />
+                            position = location to spawn the particle <br />
+                            destroyMethod = a method that will handle destroying this gameobject
+                        </td>
+                        <td>
+                            the particle as a gameobject
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="returntype">GameObject</div> SpawnParticle(string name, Transform ptransform)
+                        </td>
+                        <td>
+                            spawns a particle from Resources/Particles
+                        </td>
+                        <td>
+                            name = name of the particle to spawn <br />
+                            ptransform = location to spawn the particle
+                        </td>
+                        <td>
+                            the particle as a gameobject
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="returntype">GameObject</div> SpawnParticle(string name, Transform ptransform, Func&lt;bool&gt; destroyMethod)
+                        </td>
+                        <td>
+                            spawns a particle from Resources/Particles
+                        </td>
+                        <td>
+                            name = name of the particle to spawn <br />
+                            ptransform = location to spawn the particle <br />
+                            destroyMethod = a method that will handle destroying this gameobject
+                        </td>
+                        <td>
+                            the particle as a gameobject
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="returntype">Destroyable</div> MakeDestroyable(GameObject gameobject, int hitpoints)
+                        </td>
+                        <td>
+                            makes a gameobject destroyable
+                        </td>
+                        <td>
+                            gameobject = the gameobject to make destroyable <br />
+                            hitpoints = amount of hits before it is destroyed (defaults to 1)
+                        </td>
+                        <td>
+                            returns the destroyable script so you can tweak its settings more
                         </td>
                     </tr>
                 </table>

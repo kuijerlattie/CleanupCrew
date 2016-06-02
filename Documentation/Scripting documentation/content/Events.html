@@ -2,45 +2,136 @@
 <html>
     <head>
         <title>Documentation home</title>
+        <link rel="stylesheet" type="text/css" href="../style/style.css">
     </head>
     <body>
         <h1>Scripting documentation</h1>
         <div class="infobox"><br />
             <a href="ScriptingHome.html">Back</a><br />
             <div style="padding-left:10px">
-                <table style="width:100%">
+                <table>
+                    <tr>
+                        <th>
+                            Eventname
+                        </th>
+                        <th>
+                            Description
+                        </th>
+                        <th>
+                            Return gameobject
+                        </th>
+                        <th>Return float:</th>
+                    </tr>
                     <tr>
                         <td>
-                            <div class="tableEntry">
-                                <h1>eventname: <b>name</b></h1>
-                                <h2>Description: </h2>
-                                <h3>
-                                    descriptiontext
-                                </h3>
-                                <h3>returns: <br />
-                                    &nbsp;&nbsp;&nbsp;&nbsp; GameObject: null<br />
-                                    &nbsp;&nbsp;&nbsp;&nbsp; float: 0                     
-
-                                </h3>
-                                
-                            </div>
+                            BlobDestroyed
+                        </td>
+                        <td>
+                            triggers when a blob in the game is destroyed.
+                        </td>
+                        <td>
+                            the blob that has been destroyed
+                        </td>
+                        <td>
+                            -
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <div class="tableEntry">
-                                <h1>eventname: <b>name</b></h1>
-                                <h2>Description: </h2>
-                                <h3>
-                                    descriptiontext
-                                </h3>
-                                <h3>returns: <br />
-                                    &nbsp;&nbsp;&nbsp;&nbsp; GameObject: null<br />
-                                    &nbsp;&nbsp;&nbsp;&nbsp; float: 0                     
-
-                                </h3>
-                                
-                            </div>
+                            BallDestroyed
+                        </td>
+                        <td>
+                            triggers when a ball in the game is destroyed
+                        </td>
+                        <td>
+                            the ball that has been destroyed
+                        </td>
+                        <td>
+                            -
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            EnemyWaterDestroyed
+                        </td>
+                        <td>
+                            triggers when the water boss is defeated
+                        </td>
+                        <td>
+                            the boss object
+                        </td>
+                        <td>
+                            -
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            EnemyGroundDestroyed
+                        </td>
+                        <td>
+                            triggers when the ground boss is defeated
+                        </td>
+                        <td>
+                            the boss object
+                        </td>
+                        <td>
+                            -
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            EnemySpaceDestroyed
+                        </td>
+                        <td>
+                            triggers when the space boss is defeated
+                        </td>
+                        <td>
+                            the boss object
+                        </td>
+                        <td>
+                            -
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            HitDestroyable
+                        </td>
+                        <td>
+                            triggers when a Destroyable object is hit
+                        </td>
+                        <td>
+                            the destroyable object that is being hit
+                        </td>
+                        <td>
+                            hitpoints left
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            DestroyedDestroyable
+                        </td>
+                        <td>
+                            triggers when a Destroyable object is destroyed
+                        </td>
+                        <td>
+                            the destroyable object that is being destroyed
+                        </td>
+                        <td>
+                            -
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            FalseHitDestroyable
+                        </td>
+                        <td>
+                            triggers when a Destroyable object is hit by a object that doesnt damage it.
+                        </td>
+                        <td>
+                            the destroyable object that is being hit
+                        </td>
+                        <td>
+                            -
                         </td>
                     </tr>
                 </table>

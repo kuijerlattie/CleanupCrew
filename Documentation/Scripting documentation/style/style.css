@@ -1,0 +1,14 @@
+tr:nth-child(even) {
+    background-color: #c4c4c4;
+}
+tr:nth-child(odd) {
+    background-color: #e0e0e0;
+}
+table{
+    width:80%;
+    margin-left:10%;
+    border:ridge;
+}
+#returntype{
+    color:#054f40;
+}

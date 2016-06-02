@@ -28,6 +28,29 @@ public class SI : MonoBehaviour {
         initialized = true;
     }
 
+   
+
+    /// <summary>
+    /// used to get positions of all kinds of objects in the scene
+    /// </summary>
+    public class Positions
+    {
+        /// <summary>
+        /// returns the position of the paddle, NOTE!!: if multiple paddles you might not get the correct one
+        /// </summary>
+        public static Vector3 paddle
+        { get { return GameObject.FindGameObjectWithTag("paddle").transform.position; } }
+
+        public static Vector3 Water
+        { get { return GameObject.FindGameObjectWithTag("water").transform.position; } }
+
+        public static Vector3 Space
+        { get { return GameObject.FindGameObjectWithTag("space").transform.position; } }
+
+        public static Vector3 Underground
+        { get { return GameObject.FindGameObjectWithTag("sand").transform.position; } }
+    }
+
     /// <summary>
     /// returns the amount of points the player has earned
     /// </summary>
@@ -114,7 +137,7 @@ public class SI : MonoBehaviour {
     /// </summary>
     /// <param name="position">location to spawn the ball</param>
     /// <returns>the ball that was spawned</returns>
-    public static GameObject SpawnBall(Vector3 position)
+    public static GameObject SpawnBall(Vector3 position) //documented
     {
         return SpawnSpheres.SpawnSphere(position);
     }
@@ -125,7 +148,7 @@ public class SI : MonoBehaviour {
     /// <param name="position">location to spawn the ball</param>
     /// <param name="direction">direction to make the ball move towards</param>
     /// <returns>the ball that was spawned</returns>
-    public static GameObject SpawnBall(Vector3 position, Vector3 direction)
+    public static GameObject SpawnBall(Vector3 position, Vector3 direction) //documented
     {
         return SpawnSpheres.SpawnSphere(position, direction);
     }
@@ -136,7 +159,7 @@ public class SI : MonoBehaviour {
     /// <param name="position">location to spawn the ball</param>
     /// <param name="angle">the angle to make the ball move towards</param>
     /// <returns>the ball that was spawned</returns>
-    public static GameObject SpawnBall(Vector3 position, int angle)
+    public static GameObject SpawnBall(Vector3 position, int angle) //documented
     {
         return SpawnSpheres.SpawnSphere(position, Quaternion.AngleAxis(angle, Vector3.up) * new Vector3(0, 0, 1));
     }
@@ -161,7 +184,7 @@ public class SI : MonoBehaviour {
     /// spawns the selected powerup
     /// </summary>
     /// <param name="type">the powerup to spawn</param>
-    public static void SpawnPowerup(PowerupManager.PowerupType type)
+    public static void SpawnPowerup(PowerupManager.PowerupType type) //documented
     {
         powerupManager.ActivatePowerup(type);
     }
@@ -194,7 +217,7 @@ public class SI : MonoBehaviour {
     /// </summary>
     /// <param name="path"></param>
     /// <param name="time"></param>
-    public static void DisplayMessage(string path, float time)
+    public static void SpawnPrefab(string path, float time) //documented
     {
         MessageScript.SpawnMessage(path, time);
     }
@@ -206,7 +229,7 @@ public class SI : MonoBehaviour {
     /// </summary>
     /// <param name="path"></param>
     /// <param name="destroyMethod"></param>
-    public static void DisplayMessage(string path, Func<bool> destroyMethod)
+    public static void SpawnPrefab(string path, Func<bool> destroyMethod) //documented
     {
         MessageScript.SpawnMessage(path, destroyMethod);
     }
@@ -217,9 +240,18 @@ public class SI : MonoBehaviour {
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public static GameObject SpawnParticle(string name, Vector3 position)
+    public static GameObject SpawnParticle(string name, Vector3 position) //documented
     {
         GameObject g = GameObject.Instantiate(Resources.Load("Particles/" + name)) as GameObject;
+        g.transform.position = position;
+        return g;
+    }
+
+    public static GameObject SpawnParticle(string name, Vector3 position, Func<bool> destroyMethod) //documented
+    {
+        GameObject g = GameObject.Instantiate(Resources.Load("Particles/" + name)) as GameObject;
+        MessageScript m = g.AddComponent<MessageScript>();
+        m.DestroyMethod = destroyMethod;
         g.transform.position = position;
         return g;
     }
@@ -229,11 +261,35 @@ public class SI : MonoBehaviour {
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public static GameObject SpawnParticle(string name, Transform ptransform)
+    public static GameObject SpawnParticle(string name, Transform ptransform) //documented
     {
         GameObject g = GameObject.Instantiate(Resources.Load("Particles/" + name)) as GameObject;
         g.transform.position = ptransform.position;
         return g;
+    }
+
+    public static GameObject SpawnParticle(string name, Transform ptransform, Func<bool> destroyMethod) //documented
+    {
+        GameObject g = GameObject.Instantiate(Resources.Load("Particles/" + name)) as GameObject;
+        MessageScript m = g.AddComponent<MessageScript>();
+        m.DestroyMethod = destroyMethod;
+        g.transform.position = ptransform.position;
+        return g;
+    }
+
+    /// <summary>
+    /// makes a gameobject destroyable. if it has no collider it adds a meshcollider
+    /// </summary>
+    /// <param name="gameobject">the gameobject to make destroyable</param>
+    /// <param name="hitpoints">amount of hits it takes to destroy it</param>
+    /// <returns>the destroyable instance to modify it more if wanted</returns>
+    public static Destroyable MakeDestroyable(GameObject gameobject, int hitpoints = 1)
+    {
+        Destroyable d = gameobject.AddComponent<Destroyable>();
+        if (gameobject.GetComponent<Collider>() == null) gameobject.AddComponent<MeshCollider>();
+        gameobject.GetComponent<MeshCollider>().
+        d.SetHitpoints(hitpoints);
+        return d;
     }
 
 
