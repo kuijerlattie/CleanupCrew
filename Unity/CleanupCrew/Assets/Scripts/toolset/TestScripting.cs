@@ -2,6 +2,8 @@
 
 public class TestScripting : MonoBehaviour {
 
+	bool waypointIsShown = false;
+
 	// Use this for initialization
 	void Start () {
         
@@ -11,7 +13,9 @@ public class TestScripting : MonoBehaviour {
 	void Update () {
         if (SI.idleTime >= 10) SI.DisplayMessage("Prefabs/Text/MessageAFK", StopIdleMessage);   //TESTING 
         if (SI.idleTime >= 30) FindObjectOfType<GreyboxMenuScript>().StartMenu();
-            
+		if (SI.idleTime >= 5 && waypointIsShown == false) {SI.SpawnParticle ("waypoint blink particle 1", Vector3.zero);
+			waypointIsShown = true;}
+			// needs to be on peddle    
 
 
     }
