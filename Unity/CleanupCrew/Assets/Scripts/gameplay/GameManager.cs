@@ -96,6 +96,7 @@ public class GameManager : MonoBehaviour {
     public void SetState(gamestate state)
     {
         GameObject.Destroy(currentStateObject);
+        PaddleShoot.CleanPaddlesS();
         elapsedTimeThisPhase = 0;
         if (currentStateObject != null && currentPhase != null)
         {

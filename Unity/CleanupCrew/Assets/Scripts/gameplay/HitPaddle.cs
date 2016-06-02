@@ -12,7 +12,7 @@ public class HitPaddle : MonoBehaviour {
         if(col.collider.gameObject.tag == "paddle")
         {
             if (GetComponent<Renderer>() == null) return;
-            GetComponent<Renderer>().material.color = Color.green;
+            GetComponent<Renderer>().material.color = Color.green;  //TODO only for testing
             HittedPaddle = true;
         }
     }
