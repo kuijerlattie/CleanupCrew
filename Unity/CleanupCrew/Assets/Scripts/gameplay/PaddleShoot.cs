@@ -7,9 +7,11 @@ using System.Collections.Generic;
 /// </summary>
 public class PaddleShoot : MonoBehaviour
 {
-   
+
+    private int maxObjects = GameSettings.MaxPaddleObjectsS;
     private List<GameObject> spheres = new List<GameObject>();
-    public bool OverlapOnPaddle = true; //if balls etc dont collide with eachother this is always true
+    private bool OverlapOnPaddle = true; //if balls etc dont collide with eachother this is always true
+
 
     void OnCollisionEnter(Collision col)
     {
@@ -18,7 +20,9 @@ public class PaddleShoot : MonoBehaviour
         if (hitBall.layer != LayerMask.NameToLayer("Balls") && hitBall.layer != LayerMask.NameToLayer("Blobs")) return;
 
         Rigidbody hitBallRigid = hitBall.GetComponent<Rigidbody>();
-        if(Vector3.Dot(hitBallRigid.velocity, gameObject.transform.forward) < 0)
+
+        //TODO make sure blobs dont get stuck on the side of the paddle
+        if(Vector3.Dot(hitBallRigid.velocity.normalized, gameObject.transform.forward) < 0 || spheres.Count >= maxObjects)
         {
             return; //bounces back any blobs etc that are behind the paddle, so they dont get stuck
         }
@@ -28,7 +32,35 @@ public class PaddleShoot : MonoBehaviour
         hitBallRigid.velocity = Vector3.zero;
         hitBall.transform.parent = gameObject.transform.parent;
         if(OverlapOnPaddle) hitBall.GetComponent<Collider>().isTrigger = true;
+        MeshRenderer[] renderers = hitBall.GetComponentsInChildren<MeshRenderer>();
+        foreach(MeshRenderer r in renderers)
+        {
+            r.enabled = false;
+        }
+           
         spheres.Add(hitBall);
+        UpdateColor();
+
+    }
+
+    /// <summary>
+    /// only for prototype
+    /// </summary>
+    private void UpdateColor()
+    {
+        MeshFilter mf = GetComponent<MeshFilter>();
+        switch(spheres.Count)
+        {
+            case 0:
+                //mf.renderer.
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+        }
     }
 
     /// <summary>
@@ -36,20 +68,38 @@ public class PaddleShoot : MonoBehaviour
     /// </summary>
     public void Shoot()
     {
-        foreach(GameObject g in spheres)
+        if (spheres.Count <= 0) return; //nothing to shoot
+        GameObject g = spheres[0];
+        if (g == null) return;  //nothing to shoot
+        g.GetComponent<Rigidbody>().velocity = gameObject.transform.forward;
+        g.transform.position = gameObject.transform.position + gameObject.transform.forward * 3;
+        MeshRenderer[] renderers = g.GetComponentsInChildren<MeshRenderer>();
+        foreach (MeshRenderer r in renderers)
+        {
+            r.enabled = true;
+        }
+        g.transform.parent = null;
+        if (OverlapOnPaddle) g.GetComponent<Collider>().isTrigger = false;
+        spheres.Remove(g);
+        UpdateColor();
+        /*
+        foreach(GameObject g in spheres)    //all at once
         {
             if (g == null) continue;
             g.GetComponent<Rigidbody>().velocity = -g.transform.position;
             g.transform.parent = null;
+            g.transform.position += gameObject.transform.forward;
             if (OverlapOnPaddle) g.GetComponent<Collider>().isTrigger = false;
         }
         spheres.Clear();
+        */
 
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(1)) Shoot();   //TODO on screen button 
+        maxObjects = GameSettings.MaxPaddleObjectsS;
+        if (Input.GetMouseButtonDown(1)) Shoot();   
     }
 
 }

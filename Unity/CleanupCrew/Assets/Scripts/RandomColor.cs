@@ -14,6 +14,7 @@ public class RandomColor : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        if (GetComponent<Renderer>() == null) return;
         GetComponent<Renderer>().material.color = GetRandomColor();
 	}
 	
