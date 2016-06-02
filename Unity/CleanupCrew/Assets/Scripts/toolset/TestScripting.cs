@@ -11,7 +11,7 @@ public class TestScripting : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (SI.idleTime >= 10) SI.DisplayMessage("Prefabs/Text/MessageAFK", StopIdleMessage);   //TESTING 
+        if (SI.idleTime >= 10) SI.SpawnPrefab("Prefabs/Text/MessageAFK", StopIdleMessage);   //TESTING 
         if (SI.idleTime >= 30) FindObjectOfType<GreyboxMenuScript>().StartMenu();
 		if (SI.idleTime >= 5 && waypointIsShown == false) {SI.SpawnParticle ("waypoint blink particle 1", Vector3.zero);
 			waypointIsShown = true;}

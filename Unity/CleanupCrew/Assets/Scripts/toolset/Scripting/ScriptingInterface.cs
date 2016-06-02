@@ -287,7 +287,6 @@ public class SI : MonoBehaviour {
     {
         Destroyable d = gameobject.AddComponent<Destroyable>();
         if (gameobject.GetComponent<Collider>() == null) gameobject.AddComponent<MeshCollider>();
-        gameobject.GetComponent<MeshCollider>().
         d.SetHitpoints(hitpoints);
         return d;
     }
