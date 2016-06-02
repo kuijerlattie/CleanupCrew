@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 public class PaddleRotationScript : MonoBehaviour {
 
@@ -66,9 +67,11 @@ public class PaddleRotationScript : MonoBehaviour {
                 }
                 if (!useSlider)
                 {
+                    int LayerMaskk = 1<<13;
+                    if (EventSystem.current.IsPointerOverGameObject()) return; //UI is part of eventsystem so it wont move the paddle when clicking on UI
                     // _desiredDirection = Input.mou
                     RaycastHit hit;
-                    if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
+                    if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, LayerMaskk))
                     { 
                         //transform.LookAt(hit.point);
                         hit.point = new Vector3(hit.point.x, 0, hit.point.z);
