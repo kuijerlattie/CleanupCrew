@@ -108,6 +108,9 @@
     <Compile Include="Assets\Scripts\gameplay\SpawnSpheres.cs" />
     <Compile Include="Assets\Scripts\gameplay\TouchSlider.cs" />
     <Compile Include="Assets\Scripts\gameplay\WallScript.cs" />
+    <Compile Include="Assets\Scripts\heim server scripts\Arguments.cs" />
+    <Compile Include="Assets\Scripts\heim server scripts\DBconnection.cs" />
+    <Compile Include="Assets\Scripts\heim server scripts\argumentDebug.cs" />
     <Compile Include="Assets\Scripts\toolset\EventManager.cs" />
     <Compile Include="Assets\Scripts\toolset\EventTypes.cs" />
     <Compile Include="Assets\Scripts\toolset\GameSettings.cs" />

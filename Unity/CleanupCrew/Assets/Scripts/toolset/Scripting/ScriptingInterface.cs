@@ -28,6 +28,29 @@ public class SI : MonoBehaviour {
         initialized = true;
     }
 
+   
+
+    /// <summary>
+    /// used to get positions of all kinds of objects in the scene
+    /// </summary>
+    public class Positions
+    {
+        /// <summary>
+        /// returns the position of the paddle, NOTE!!: if multiple paddles you might not get the correct one
+        /// </summary>
+        public static Vector3 paddle
+        { get { return GameObject.FindGameObjectWithTag("paddle").transform.position; } }
+
+        public static Vector3 Water
+        { get { return GameObject.FindGameObjectWithTag("water").transform.position; } }
+
+        public static Vector3 Space
+        { get { return GameObject.FindGameObjectWithTag("space").transform.position; } }
+
+        public static Vector3 Underground
+        { get { return GameObject.FindGameObjectWithTag("sand").transform.position; } }
+    }
+
     /// <summary>
     /// returns the amount of points the player has earned
     /// </summary>
@@ -224,6 +247,15 @@ public class SI : MonoBehaviour {
         return g;
     }
 
+    public static GameObject SpawnParticle(string name, Vector3 position, Func<bool> destroyMethod)
+    {
+        GameObject g = GameObject.Instantiate(Resources.Load("Particles/" + name)) as GameObject;
+        MessageScript m = g.AddComponent<MessageScript>();
+        m.DestroyMethod = destroyMethod;
+        g.transform.position = position;
+        return g;
+    }
+
     /// <summary>
     /// assuming they are located in: Resources/Particles/ only specift name: Fire, Steam.. etc
     /// </summary>
@@ -232,6 +264,15 @@ public class SI : MonoBehaviour {
     public static GameObject SpawnParticle(string name, Transform ptransform)
     {
         GameObject g = GameObject.Instantiate(Resources.Load("Particles/" + name)) as GameObject;
+        g.transform.position = ptransform.position;
+        return g;
+    }
+
+    public static GameObject SpawnParticle(string name, Transform ptransform, Func<bool> destroyMethod)
+    {
+        GameObject g = GameObject.Instantiate(Resources.Load("Particles/" + name)) as GameObject;
+        MessageScript m = g.AddComponent<MessageScript>();
+        m.DestroyMethod = destroyMethod;
         g.transform.position = ptransform.position;
         return g;
     }
