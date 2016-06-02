@@ -48,17 +48,21 @@ public class PaddleShoot : MonoBehaviour
     /// </summary>
     private void UpdateColor()
     {
-        MeshFilter mf = GetComponent<MeshFilter>();
+        Renderer r = GetComponent<Renderer>();
+        if (r == null) return;
         switch(spheres.Count)
         {
             case 0:
-                //mf.renderer.
+                r.material.color = Color.white;
                 break;
             case 1:
+                r.material.color = Color.green;
                 break;
             case 2:
+                r.material.color = new Color(255, 145, 0);  //orange
                 break;
             case 3:
+                r.material.color = Color.red;
                 break;
         }
     }
