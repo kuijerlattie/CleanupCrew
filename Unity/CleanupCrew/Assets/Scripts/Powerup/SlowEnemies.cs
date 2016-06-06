@@ -3,20 +3,6 @@ using System.Collections;
 
 public class SlowEnemies : MonoBehaviour {
 
-    
-
-	// Use this for initialization
-	void Start () {
-        
-	}
-
-	
-	// Update is called once per frame
-	void Update () {
-
-        
-
-    }
 
     static public void SlowBlobs()
     {
@@ -25,7 +11,7 @@ public class SlowEnemies : MonoBehaviour {
 
         for(int i = 0; i < speed.Length; i++)
         {
-            speed[i].Speed *= 0.5f;
+            speed[i].Speed = GameSettings.BlobSpeedS * GameSettings.PowerupSlowEnemiesMultiplierS;
         }
     }
 
@@ -36,10 +22,7 @@ public class SlowEnemies : MonoBehaviour {
 
         for (int i = 0; i < speed.Length; i++)
         {
-            if(speed[i].Speed < 5)
-            {
-                speed[i].Speed *= 2.0f;
-            }
+            speed[i].Speed = GameSettings.BlobSpeedS;
         }
     }
 }

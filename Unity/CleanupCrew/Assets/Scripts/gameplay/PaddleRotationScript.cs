@@ -45,6 +45,32 @@ public class PaddleRotationScript : MonoBehaviour {
         //_angleToMove /= (float) GameSettings.AmountOfPaddlesS;
     }
 	
+
+
+    /*
+    void Update()
+    {
+        DoInput();
+    }
+
+    
+    void DoInput()
+    {
+        if (!Input.GetMouseButtonDown(0)) return;
+        int LayerMaskk = 1 << 13;
+        if (EventSystem.current.IsPointerOverGameObject()) return; //UI is part of eventsystem so it wont move the paddle when clicking on UI
+
+        RaycastHit hit;
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, LayerMaskk))
+        {
+            _desiredDirection = hit.point;
+            GameObject test = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            test.transform.position = hit.point;
+        }
+    }*/
+
+
+    
 	// Update is called once per frame
 	void Update () {
 
@@ -88,6 +114,7 @@ public class PaddleRotationScript : MonoBehaviour {
      
         if(!useSlider) MoveTo(_desiredDirection);   
     }
+    
 
     /// <summary>
     /// used when the rotation should not be instant, but gradually moves to the target rotation(rotation of the direction vector)
@@ -95,6 +122,11 @@ public class PaddleRotationScript : MonoBehaviour {
     /// <param name="direction"></param>
     void MoveTo(Vector3 direction)
     {
+       // transform.rotation *= Quaternion.FromToRotation(_currentDirection, direction);
+       Quaternion totalRotation = Quaternion.FromToRotation(_currentDirection, direction);
+        transform.rotation = Quaternion.Lerp(transform.rotation, totalRotation*transform.rotation, Time.deltaTime * RotationSpeed);
+        //transform.Rotate()
+        /*
         //TODO somehow the minimup step possible is Pi * (Rotationspeed /~180)
         CalculateAngle();
         float stepRotation = RotationSpeed * Time.deltaTime;
@@ -102,13 +134,14 @@ public class PaddleRotationScript : MonoBehaviour {
         if (_angleToMove < minStep && _angleToMove > -minStep) return;
         if (_angleToMove < stepRotation && _angleToMove > -stepRotation)
         {
-            gameObject.transform.Rotate(Vector3.up, -_angleToMove);
-            CalculateAngle();
-            _desiredDirection = _currentDirection;
+            //gameObject.transform.Rotate(Vector3.up, -_angleToMove);
+            //CalculateAngle();
+            //_desiredDirection = _currentDirection;
             return;  
         }
         
         gameObject.transform.Rotate(Vector3.up, _angleToMove < 0 ? stepRotation : -stepRotation);
+        */
     }
     
 }
