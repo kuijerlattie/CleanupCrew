@@ -29,11 +29,11 @@ public class BattlePhase : AbstractPhase
         {
             GameObject.Destroy(blobs[i]);
         }
-        GameObject[] balls = GameObject.FindGameObjectsWithTag("Ball");
-        for (int i = balls.GetLength(0) - 1; i >= 0; i--)
-        {
-            GameObject.Destroy(balls[i]);
-        }
+        //GameObject[] balls = GameObject.FindGameObjectsWithTag("Ball");
+        //for (int i = balls.GetLength(0) - 1; i >= 0; i--)
+        //{
+        //    GameObject.Destroy(balls[i]);
+        //}
 
         FindPointZones();
         SetPointZones(true);

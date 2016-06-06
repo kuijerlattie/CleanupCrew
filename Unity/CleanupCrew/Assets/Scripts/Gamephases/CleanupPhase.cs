@@ -61,6 +61,7 @@ public class CleanupPhase : AbstractPhase {
         spawntimer -= Time.deltaTime;
         if (spawntimer <= 0)
         {
+            return;
             if (spheres.Count >= maxBlobs) return;
             spawncounter += spawnIntervalPowerIncrease;
             ballSpawnInterval *= spawnIntervalIncrease;

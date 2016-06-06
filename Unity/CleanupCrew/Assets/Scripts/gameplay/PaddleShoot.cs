@@ -17,10 +17,13 @@ public class PaddleShoot : MonoBehaviour
     [HideInInspector]
     public bool CanShoot = true;
 
+    bool doubleTap;
+
     void Start()
     {
         if (GameObject.FindObjectsOfType<PaddleShoot>().GetLength(0) > 1) CanShoot = false;
         UpdateColor();
+        doubleTap = GameObject.FindObjectOfType<PaddleRotationScript>().doubleClickToShoot;
     }
 
     public void AddObject(GameObject g)
@@ -158,6 +161,7 @@ public class PaddleShoot : MonoBehaviour
     /// </summary>
     public static void CleanPaddlesS()
     {
+        return;
         FindMainPaddle().CleanPaddle();
     }
 
@@ -173,7 +177,7 @@ public class PaddleShoot : MonoBehaviour
         CleanupList();
         maxObjects = GameSettings.MaxPaddleObjectsS;    //in update in case it is changed during gameplay.   TODO if for sure this doesnt change move to 'Start()'
                                                         // if (Input.GetMouseButtonDown(1)) Shoot();   
-        DC.UpdateMouse();
+        if(doubleTap) DC.UpdateMouse();   //for double click to shoot
        
     }
 

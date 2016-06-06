@@ -23,6 +23,7 @@ public class WallScript : MonoBehaviour {
     {
         if (collision.collider.gameObject.tag == "Ball") // check if collision is with ball
         {
+            return;
             if (!isTutorial)
             {
                 GameObject.FindObjectOfType<GameManager>().power -= wallDamage;

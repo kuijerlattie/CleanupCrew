@@ -98,7 +98,7 @@ public class TutorialPhase : AbstractPhase {
 
     public override void StopPhase()
     {
-        GameObject.Destroy(playingBall);
+        //GameObject.Destroy(playingBall);
         GameObject.FindObjectOfType<PowerupManager>().isSpawning = true;
         SetWalls(false);
         SetPointZones(false);

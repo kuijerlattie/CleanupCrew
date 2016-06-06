@@ -14,6 +14,10 @@ public class PaddleRotationScript : MonoBehaviour {
     private bool useSlider = true;  //true: new controls, use the slider at the bottom to move the paddle,
                                     //false: uses old controls, tap where u want the paddle to go, EDIT: currently doesnt work
 
+    public bool doubleClickToShoot = false;
+    public bool clickPaddleToShoot = true;
+    bool buttonToShoot = false;
+
 
     //percent of the screen (y-axis) on the bottom that is clickable, readonly because Bug where it otherwise always changes to 25
     public float InputMaxDistance {get; private set;} 
@@ -74,8 +78,23 @@ public class PaddleRotationScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        bool mouseButton = Input.GetMouseButton(0);
+        bool mouseButtonDown = Input.GetMouseButtonDown(0);
+        if (Input.GetMouseButtonDown(0))
+        {
+            int layermask = 1 << 14;
+            RaycastHit hit;
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, float.PositiveInfinity, layermask))
+            {
+                Debug.Log(hit.collider.gameObject);
+                if (clickPaddleToShoot && hit.collider.gameObject.name == "paddle")
+                {
+                    GameObject.FindObjectOfType<PaddleShoot>().Shoot();
+                }
+            }
+        }
         _currentDirection = -paddle.transform.forward;//(gameObject.transform.position - paddle.transform.localPosition).normalized;
-        if (useSlider?( Input.mousePosition.y < Screen.height / 100f * InputMaxDistance && Input.GetMouseButton(0) && ((Input.mousePosition - oldMousePos).magnitude > 0.03f || (Input.mousePosition - oldMousePos).magnitude < -0.03f)) : Input.GetMouseButton(0))
+        if (useSlider?( Input.mousePosition.y < Screen.height / 100f * InputMaxDistance && mouseButton && ((Input.mousePosition - oldMousePos).magnitude > 0.03f || (Input.mousePosition - oldMousePos).magnitude < -0.03f)) : Input.GetMouseButton(0))
         {
             if (oldMousePos != Vector3.zero)
             {
@@ -94,12 +113,17 @@ public class PaddleRotationScript : MonoBehaviour {
                 if (!useSlider)
                 {
                     int LayerMaskk = 1<<13;
-                    if (EventSystem.current.IsPointerOverGameObject()) return; //UI is part of eventsystem so it wont move the paddle when clicking on UI
+                    //if (EventSystem.current.IsPointerOverGameObject()) return; //UI is part of eventsystem so it wont move the paddle when clicking on UI
                     // _desiredDirection = Input.mou
                     RaycastHit hit;
                     if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, LayerMaskk))
-                    { 
+                    {
                         //transform.LookAt(hit.point);
+                        
+                        if(clickPaddleToShoot && hit.collider.gameObject.name == "paddle" && mouseButtonDown )
+                        {
+                            //GameObject.FindObjectOfType<PaddleShoot>().Shoot();
+                        }
                         hit.point = new Vector3(hit.point.x, 0, hit.point.z);
                     _desiredDirection = hit.point;
                     }

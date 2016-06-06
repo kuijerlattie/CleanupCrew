@@ -62,6 +62,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\CopyRotation.cs" />
+    <Compile Include="Assets\Scripts\BallBlobCollision.cs" />
     <Compile Include="Assets\Scripts\BallCollisionScript.cs" />
     <Compile Include="Assets\Scripts\BlobScaleONStart.cs" />
     <Compile Include="Assets\Scripts\DestroyAfterXSeconds.cs" />
@@ -96,6 +98,7 @@
     <Compile Include="Assets\Scripts\gameplay\Bosses\Mole.cs" />
     <Compile Include="Assets\Scripts\gameplay\Bosses\Octo.cs" />
     <Compile Include="Assets\Scripts\gameplay\Bosses\SplitUpScript.cs" />
+    <Compile Include="Assets\Scripts\gameplay\Destroyable.cs" />
     <Compile Include="Assets\Scripts\gameplay\FixedSpeed.cs" />
     <Compile Include="Assets\Scripts\gameplay\GameManager.cs" />
     <Compile Include="Assets\Scripts\gameplay\HitPaddle.cs" />
@@ -117,6 +120,7 @@
     <Compile Include="Assets\Scripts\toolset\Scripting\ScriptingInterface.cs" />
     <Compile Include="Assets\Scripts\toolset\TestScripting.cs" />
     <Compile Include="Assets\Scripts\toolset\eventTest1.cs" />
+    <Compile Include="Assets\UpDownScript.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
