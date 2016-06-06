@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 public class PaddleRotationScript : MonoBehaviour {
 
@@ -66,9 +67,11 @@ public class PaddleRotationScript : MonoBehaviour {
                 }
                 if (!useSlider)
                 {
+                    int LayerMaskk = 1<<13;
+                    if (EventSystem.current.IsPointerOverGameObject()) return; //UI is part of eventsystem so it wont move the paddle when clicking on UI
                     // _desiredDirection = Input.mou
                     RaycastHit hit;
-                    if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
+                    if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, LayerMaskk))
                     { 
                         //transform.LookAt(hit.point);
                         hit.point = new Vector3(hit.point.x, 0, hit.point.z);
@@ -92,9 +95,19 @@ public class PaddleRotationScript : MonoBehaviour {
     /// <param name="direction"></param>
     void MoveTo(Vector3 direction)
     {
-        float stepRotation = RotationSpeed * Time.deltaTime;
-        if (_angleToMove< stepRotation && _angleToMove > -stepRotation) return;   //TODO use epsilon or something probably
+        //TODO somehow the minimup step possible is Pi * (Rotationspeed /~180)
         CalculateAngle();
+        float stepRotation = RotationSpeed * Time.deltaTime;
+        float minStep = Mathf.PI * (RotationSpeed/ 225f);   //Mathf.epsilon
+        if (_angleToMove < minStep && _angleToMove > -minStep) return;
+        if (_angleToMove < stepRotation && _angleToMove > -stepRotation)
+        {
+            gameObject.transform.Rotate(Vector3.up, -_angleToMove);
+            CalculateAngle();
+            _desiredDirection = _currentDirection;
+            return;  
+        }
+        
         gameObject.transform.Rotate(Vector3.up, _angleToMove < 0 ? stepRotation : -stepRotation);
     }
     
