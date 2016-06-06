@@ -129,11 +129,11 @@ public class PowerupManager : MonoBehaviour {
                 break;
 
             case PowerupType.SmallerPaddle:
-                ScalePowerUp.ScaleUp();
+                ScalePowerUp.ResetScale();
                 break;
 
             case PowerupType.BiggerPaddle:
-                ScalePowerUp.ScaleDown();
+                ScalePowerUp.ResetScale();
                 break;
 
             case PowerupType.SlowEnemies:
