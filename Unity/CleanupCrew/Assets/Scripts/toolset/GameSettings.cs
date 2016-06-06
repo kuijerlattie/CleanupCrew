@@ -85,6 +85,11 @@ public class GameSettings : MonoBehaviour
     static public int MaxPaddleObjectsS = MAXPADDLEOBJECTS;
     private const int MAXPADDLEOBJECTS = 3;
 
+    [SerializeField]
+    private float PaddleScaleX = PaddleScaleXS;
+    static public float PaddleScaleXS = PADDLESCALEX;
+    private const float PADDLESCALEX = 15f;
+
     [Space(10)] //used to space out in inspector
 
     [SerializeField, Range(1.0f, 100.0f), Tooltip("requires: 'oldcontrols = false'.     percent of the screen (on the bottom) that the slider bar is")]
@@ -274,6 +279,7 @@ public class GameSettings : MonoBehaviour
         MaxPaddleObjects = MAXPADDLEOBJECTS;
         TouchBarSize = TOUCHBARSIZE;
         OldControls = OLDCONTROLS;
+        PaddleScaleX = PADDLESCALEX;
 
         //tutorial
         AmountOfRings = AMOUNTOFRINGS;
@@ -336,6 +342,7 @@ public class GameSettings : MonoBehaviour
         MaxPaddleObjectsS = MaxPaddleObjects;
         TouchBarSizeS = TouchBarSize;
         OldControlsS = OldControls;
+        PaddleScaleXS = PaddleScaleX;
 
         //tutorial
         AmountOfRingsS = AmountOfRings;
@@ -356,6 +363,11 @@ public class GameSettings : MonoBehaviour
         PowerupsInTutorialS = PowerupsInTutorial;
         PowerupsInCleanupS = PowerupsInCleanup;
         PowerupsInBattleS = PowerupsInBattle;
+
+        PowerupPaddleUpscaleByS = PowerupPaddleUpscaleBy;
+        PowerupPaddleDownscaleByS = PowerupPaddleDownscaleBy;
+
+        PowerupSlowEnemiesMultiplierS = PowerupSlowEnemiesMultiplier;
 
         PowSpawnInCenterS = PowSpawnInCenter;
         PowSpawnRateS = PowSpawnRate;

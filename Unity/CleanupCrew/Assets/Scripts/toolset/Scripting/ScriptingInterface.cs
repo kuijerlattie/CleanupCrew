@@ -51,6 +51,9 @@ public class SI : MonoBehaviour {
         { get { return GameObject.FindGameObjectWithTag("sand").transform.position; } }
     }
 
+    public static GameManager Gamemanager
+    { get { return gameManager; } }
+
     /// <summary>
     /// returns the amount of points the player has earned
     /// </summary>
@@ -376,7 +379,10 @@ public class SI : MonoBehaviour {
             set { GameSettings.DamagePerHitTakenS = value; }
         }
 
-       
+        public static void SetOutline(GameObject obj)
+        {
+            
+        }
 
 
 
