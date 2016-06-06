@@ -65,10 +65,10 @@ public class GameSettings : MonoBehaviour
     private const float PADDLEDISTANCE = 25.0f;
 
     //if we switch to tapping on the actual circle again instead of the bar on the bottom this is NOT used
-    [SerializeField, Range(180.0f, 540.0f), Tooltip("degrees the paddle rotates when swiping from most left to most right")]
+    [SerializeField, Range(0.0f, 20.0f), Tooltip("degrees the paddle rotates when swiping from most left to most right")]
     private float PaddleRotation = PaddleRotationS;
     static public float PaddleRotationS = PADDLEROTATION;
-    private const float PADDLEROTATION = 360.0f;
+    private const float PADDLEROTATION = 8.0f;
 
     [SerializeField, Range(1.0f, 15.0f), Tooltip("requires: 'PaddleBounce'.  how much the paddle bounces the blobs based on the distance to center of the paddle")]
     private float PaddleBounceStrength = PaddleBounceStrengthS;
@@ -165,6 +165,23 @@ public class GameSettings : MonoBehaviour
     private bool PowerupsInBattle = PowerupsInBattleS;    //SHOULD be true
     static public bool PowerupsInBattleS = POWERUPSINBATTLE;
     private const bool POWERUPSINBATTLE = true;
+
+    [Space(5)]
+
+    [SerializeField, Range(0.0f, 0.99f)]
+    private float PowerupSlowEnemiesMultiplier = PowerupSlowEnemiesMultiplierS;
+    static public float PowerupSlowEnemiesMultiplierS = POWERUPSLOWENEMIESMULTIPLIER;
+    private const float POWERUPSLOWENEMIESMULTIPLIER = 0.5f;
+
+    [SerializeField, Range(0.0f, 5.0f)]
+    private float PowerupPaddleUpscaleBy = PowerupPaddleUpscaleByS;
+    static public float PowerupPaddleUpscaleByS = POWERUPPADDLEUPSCALEBY;
+    private const float POWERUPPADDLEUPSCALEBY = 3f;
+
+    [SerializeField, Range(0.0f, 5.0f)]
+    private float PowerupPaddleDownscaleBy = PowerupPaddleDownscaleByS;
+    static public float PowerupPaddleDownscaleByS = POWERUPPADDLEDOWNSCALEBY;
+    private const float POWERUPPADDLEDOWNSCALEBY = 3f;
 
     [Space(10)] //used to space out in inspector
 
@@ -276,6 +293,11 @@ public class GameSettings : MonoBehaviour
         PowerupsInTutorial = POWERUPSINTUTORIAL;
         PowerupsInCleanup = POWERUPSINCLEANUP;
         PowerupsInBattle = POWERUPSINBATTLE;
+
+        PowerupPaddleUpscaleBy = POWERUPPADDLEUPSCALEBY;
+        PowerupPaddleDownscaleBy = POWERUPPADDLEDOWNSCALEBY;
+
+        PowerupSlowEnemiesMultiplier = POWERUPSLOWENEMIESMULTIPLIER;
 
         PowSpawnInCenter = POWSPAWNINCENTER;
         PowSpawnRate = POWSPAWNRATE;
