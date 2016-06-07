@@ -33,7 +33,7 @@ public class EventManager : MonoBehaviour {
 
                 if (!eventManager)
                 {
-                    Debug.LogError("There needs to be a EventManager script on a gameobject in your scene.");
+                    Debug.LogWarning("There needs to be a EventManager script on a gameobject in your scene, making one now");
                 }
                 else
                 {
@@ -85,7 +85,6 @@ public class EventManager : MonoBehaviour {
         UnityEvent<GameObject,float> thisEvent = null;
         if (instance.eventDictionary.TryGetValue(eventname, out thisEvent))
         {
-            Debug.Log(thisEvent.GetType());
             thisEvent.Invoke(g, f); 
         }
     }
