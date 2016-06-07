@@ -8,9 +8,10 @@ public class Loader : MonoBehaviour {
 
 	void Awake()
     {
-        if (GameManager.instance == null)
-            Instantiate(gameManager);
+        //always do the eventmanager first!
         if (EventManager.instance == null)
             Instantiate(eventManager);
+        if (GameManager.instance == null)
+            Instantiate(gameManager);
     }
 }
