@@ -38,7 +38,6 @@ public class EventManager : MonoBehaviour {
                 else
                 {
                     eventManager.Init();
-                    //SI.Init();
                 }
 
             }
