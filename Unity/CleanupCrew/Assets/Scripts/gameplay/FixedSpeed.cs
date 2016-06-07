@@ -19,5 +19,6 @@ public class FixedSpeed : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         _rigid.velocity = _rigid.velocity.normalized * Speed;
+        transform.LookAt(_rigid.velocity + transform.position); //make the models look at the direction they are moving at
     }
 }
