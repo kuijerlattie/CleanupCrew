@@ -84,6 +84,11 @@ public class EventManager : MonoBehaviour {
     public static void TriggerEvent(string eventname, GameObject g = null, float f = 0)
     {
         UnityEvent<GameObject,float> thisEvent = null;
+        if (FindObjectOfType<EventManager>() == null)
+        {
+            Debug.LogWarning("NO EVENTMANAGER!!!!!!!!!!!");
+            return;
+        }
         if (instance.eventDictionary.TryGetValue(eventname, out thisEvent))
         {
             Debug.Log(thisEvent.GetType());

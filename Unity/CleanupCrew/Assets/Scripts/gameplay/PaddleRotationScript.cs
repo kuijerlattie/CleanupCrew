@@ -89,7 +89,7 @@ public class PaddleRotationScript : MonoBehaviour {
                 Debug.Log(hit.collider.gameObject);
                 if (clickPaddleToShoot && hit.collider.gameObject.name == "paddle")
                 {
-                    GameObject.FindObjectOfType<PaddleShoot>().Shoot();
+                    //GameObject.FindObjectOfType<PaddleShoot>().Shoot();
                 }
             }
         }
