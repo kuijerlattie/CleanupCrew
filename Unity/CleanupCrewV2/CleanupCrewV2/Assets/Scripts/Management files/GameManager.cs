@@ -20,6 +20,10 @@ public class GameManager : MonoBehaviour {
     private int energy = 0;
     private int points = 0;
 
+    private int waterpoints = 0;
+    private int earthpoints = 0;
+    private int spacepoints = 0;
+
 
 
     void Awake()
@@ -99,17 +103,40 @@ public class GameManager : MonoBehaviour {
 
     public gamestate CurrentGamestate
     { get { return gameState; } }
-
+    
     public int CurrentEnergy
     { get { return energy; } }
 
     public int CurrentPoints
     { get { return points; } }
 
+    public int CurrentWaterPoints
+    { get { return waterpoints; } }
+
+    public int CurrentEarthPoints
+    { get { return earthpoints; } }
+
+    public int CurrentSpacePoints
+    { get { return spacepoints; } }
+
     public void AddPoints(int p)
     {
         points += p;
         EventManager.TriggerEvent("GainedPoints", null, p);
     }
+
+    public void AddEnergy(int e)
+    {
+        energy += e;
+        EventManager.TriggerEvent("GainedEnergy", null, e);
+    }
+
+    public void LoseEnergy(int e)
+    {
+        energy -= e;
+        EventManager.TriggerEvent("LoseEnergy", null, e);
+    }
+
+
 
 }
