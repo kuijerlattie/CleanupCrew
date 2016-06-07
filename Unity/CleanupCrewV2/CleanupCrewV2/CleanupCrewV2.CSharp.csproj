@@ -68,9 +68,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\EventManager.cs" />
-    <Compile Include="Assets\Scripts\GameManager.cs" />
-    <Compile Include="Assets\Scripts\Loader.cs" />
+    <Compile Include="Assets\Scripts\Management files\EventManager.cs" />
+    <Compile Include="Assets\Scripts\Management files\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Management files\Loader.cs" />
     <Compile Include="Assets\Scripts\PaddleControls.cs" />
     <Compile Include="Assets\Scripts\deathscript.cs" />
     <Compile Include="Assets\Scripts\eventTriggers\InputScript.cs" />

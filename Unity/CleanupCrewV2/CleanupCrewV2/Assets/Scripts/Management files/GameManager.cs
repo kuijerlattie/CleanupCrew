@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour {
 
     void StartIntro()
     {
+        GameObject.Instantiate(Resources.Load("prefabs/paddle"));
         //game start animation and shit
     }
 
