@@ -8,14 +8,14 @@ public class pointevents : MonoBehaviour
     void OnEnable()
     {
         EventManager.StartListening("BallBottomDeath", OnBallBottomDeath);
-        EventManager.StartListening("blobBottomDeath", OnBlobBottomDeath);
+        EventManager.StartListening("BlobBottomDeath", OnBlobBottomDeath);
         //add all events that you want to listen to when the game starts here.
     }
 
     void OnDisable()
     {
         EventManager.StopListening("BallBottomDeath", OnBallBottomDeath);
-        EventManager.StopListening("blobBottomDeath", OnBlobBottomDeath);
+        EventManager.StopListening("BlobBottomDeath", OnBlobBottomDeath);
         //add all events to stop listening to here
     }
 

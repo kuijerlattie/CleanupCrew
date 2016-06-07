@@ -22,7 +22,7 @@ public class deathscript : MonoBehaviour {
 
         if (col.gameObject.tag == "blob")
         {
-            EventManager.TriggerEvent("blobBottomDeath", col.gameObject, 0f);
+            EventManager.TriggerEvent("BlobBottomDeath", col.gameObject, 0f);
         }
     }
 }

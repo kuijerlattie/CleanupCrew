@@ -16,6 +16,12 @@ public class GameManager : MonoBehaviour {
     public static GameManager instance = null;
     private gamestate gameState = gamestate.Start;
 
+
+    private int energy = 0;
+    private int points = 0;
+
+
+
     void Awake()
     {
         if (instance == null)
@@ -93,5 +99,17 @@ public class GameManager : MonoBehaviour {
 
     public gamestate CurrentGamestate
     { get { return gameState; } }
+
+    public int CurrentEnergy
+    { get { return energy; } }
+
+    public int CurrentPoints
+    { get { return points; } }
+
+    public void AddPoints(int p)
+    {
+        points += p;
+        EventManager.TriggerEvent("GainedPoints", null, p);
+    }
 
 }
