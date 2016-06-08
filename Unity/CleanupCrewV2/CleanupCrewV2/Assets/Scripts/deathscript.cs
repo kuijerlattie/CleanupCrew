@@ -15,12 +15,12 @@ public class deathscript : MonoBehaviour {
 
     void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.tag == "ball")
+        if (col.gameObject.tag == "Ball")
         {
             EventManager.TriggerEvent("BallBottomDeath", col.gameObject, 0f);
         }
 
-        if (col.gameObject.tag == "blob")
+        if (col.gameObject.tag == "Blob")
         {
             EventManager.TriggerEvent("BlobBottomDeath", col.gameObject, 0f);
         }
