@@ -55,6 +55,28 @@ public class RodScript : MonoBehaviour {
         }
 	}
 
+    public enum rodtype
+    {
+        water,
+        space,
+        underground
+    }
+
+    public rodtype rodType;
+
+    void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.tag == "Ball")
+        {
+            EventManager.TriggerEvent("BallHitRod", this.gameObject, (float)rodType);
+        }
+
+        if (col.gameObject.tag == "Blob")
+        {
+            EventManager.TriggerEvent("BlobHitRod", col.gameObject, (float)rodType);
+        }
+    }
+
     //custom 'enum' of which its values can be changed during runtime
     //the values of the states are used for the Y-value of the rod
     //EDIT: this might not work with static if the different rods have different heights(which they should NOT)
