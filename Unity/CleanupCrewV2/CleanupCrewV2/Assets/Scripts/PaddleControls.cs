@@ -4,12 +4,24 @@ using System;
 
 public class PaddleControls : MonoBehaviour {
 
-    float minX, maxX, targetX = 0; 
-    float PaddleWidthHalf;
-    float BallRadius;
-    float moveSpeed = 25;
-    public PaddleState currentState { private set; get; }
+    private float minX, maxX, targetX = 0; 
+    private float PaddleWidthHalf;
+    private float BallRadius;
+    float moveSpeed = 25;   //could be public
+
+    public PaddleState currentState
+    {
+        private set
+        {
+            _currentState = value;
+            EventManager.TriggerEvent(value == PaddleState.Launching ? "StartLaunch" : "StartPlay", gameObject);
+        }
+        get { return _currentState; }
+
+    }
+    private PaddleState _currentState;
     public GameObject ball { private set; get; }
+
     public enum PaddleState
     {
         Playing,
@@ -17,7 +29,7 @@ public class PaddleControls : MonoBehaviour {
     }
 
     /// <summary>
-    /// gets information from walls in the scene
+    /// gets width/height information from objects in the scene needed for this script to work properly
     /// </summary>
     private void SetBoundaries()
     {
@@ -41,7 +53,7 @@ public class PaddleControls : MonoBehaviour {
         if (!ball)
         {
             ball = GameObject.Instantiate(Resources.Load("prefabs/ball")) as GameObject;
-
+            EventManager.TriggerEvent("BallSpawn", ball);
         }
         else Debug.LogError("currently doesnt support 'multi-balls' yet");
     }
@@ -85,9 +97,11 @@ public class PaddleControls : MonoBehaviour {
 
     void ShootBall(GameObject g, float f)
     {
+        if(currentState != PaddleState.Launching) { Debug.LogWarning("Cannot shoot ball during play"); return; }
         ball.GetComponent<Rigidbody>().velocity = (ball.transform.position - gameObject.transform.position).normalized * 10f;
         currentState = PaddleState.Playing;
-        EventManager.StopListening("DoubleClick", ShootBall);   //so it only works once
+        //EventManager.StopListening("DoubleClick", ShootBall);   //so it only works once
+        EventManager.TriggerEvent("BallShoot", ball);
     }
 
 	
@@ -97,8 +111,16 @@ public class PaddleControls : MonoBehaviour {
 
         if(currentState == PaddleState.Launching)
         {
-            if (ball.transform.position.x - BallRadius < transform.position.x - PaddleWidthHalf) ball.transform.position = new Vector3(transform.position.x - PaddleWidthHalf + BallRadius, ball.transform.position.y, ball.transform.position.z);
-            if (ball.transform.position.x + BallRadius > transform.position.x + PaddleWidthHalf) ball.transform.position = new Vector3(transform.position.x + PaddleWidthHalf - BallRadius, ball.transform.position.y, ball.transform.position.z);
+            if (ball.transform.position.x - BallRadius < transform.position.x - PaddleWidthHalf)
+            {
+                ball.transform.position = new Vector3(transform.position.x - PaddleWidthHalf + BallRadius, ball.transform.position.y, ball.transform.position.z);
+                EventManager.TriggerEvent("BallMoveWithPaddle", ball, 1);
+            }
+            if (ball.transform.position.x + BallRadius > transform.position.x + PaddleWidthHalf)
+            {
+                ball.transform.position = new Vector3(transform.position.x + PaddleWidthHalf - BallRadius, ball.transform.position.y, ball.transform.position.z);
+                EventManager.TriggerEvent("BallMoveWithPaddle", ball, -1);
+            }
         }
 	}
 
