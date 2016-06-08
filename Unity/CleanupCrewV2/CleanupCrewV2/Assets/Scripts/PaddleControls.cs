@@ -48,6 +48,10 @@ public class PaddleControls : MonoBehaviour {
         maxX -= PaddleWidthHalf;
         
     }
+    void DestroyBall()
+    {
+
+    }
 
     public void SpawnBall()
     {
@@ -65,12 +69,14 @@ public class PaddleControls : MonoBehaviour {
         currentState = PaddleState.Launching;
         EventManager.StartListening("HoldClick", OnInput);
         EventManager.StartListening("DoubleClick", ShootBall);  //change 'DoubleClick' to any other event in case of change
+        EventManager.StartListening("BallBottomDeath", BallDied);
     }
 
     void OnDisable()
     {
         EventManager.StopListening("HoldClick", OnInput);
         EventManager.StopListening("DoubleClick", ShootBall);
+        EventManager.StopListening("BallBottomDeath", BallDied);
     }
 
 
@@ -128,6 +134,15 @@ public class PaddleControls : MonoBehaviour {
         LaunchUpdate();
        
 	}
+
+    void BallDied(GameObject ball, float f)
+    {
+        Debug.Log("ballhitgroud");
+        GameManager.instance.LoseEnergy(10);
+        Destroy(ball);
+        currentState = PaddleState.Launching;
+        SpawnBall();
+    }
 
 
 }
