@@ -8,11 +8,16 @@ public class IntroScript : BaseGamestate {
 
     public override void StartState()
     {
-        GameManager.instance.SetState(GameManager.gamestate.Tutorial);
+
     }
 
     public override void EndState()
     {
         
+    }
+    
+    void Update()
+    {
+        GameManager.instance.SetState(GameManager.gamestate.Tutorial);
     }
 }

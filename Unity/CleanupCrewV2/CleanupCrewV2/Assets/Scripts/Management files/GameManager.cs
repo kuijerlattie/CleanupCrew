@@ -45,7 +45,6 @@ public class GameManager : MonoBehaviour {
 
         DontDestroyOnLoad(gameObject);
         InitGame();
-        
     }
 
     void InitGame()
@@ -57,6 +56,8 @@ public class GameManager : MonoBehaviour {
     public void SetState(gamestate state)
     {
         EndState();
+        Debug.Log("state switched from " + gameState + " to " + state + ".");
+        gameState = state;
         switch (state)
         {
             case gamestate.Start:
@@ -88,6 +89,9 @@ public class GameManager : MonoBehaviour {
 
     public void SetGameplayState(gameplaystate state)
     {
+
+        Debug.Log("gameplay state switched from " + gameplayState + " to " + state + ".");
+        gameplayState = state;
         switch (state)
         {
             case gameplaystate.paused:
@@ -103,11 +107,14 @@ public class GameManager : MonoBehaviour {
 
     private void EndState()
     {
-       foreach (BaseGamestate m in stateBasedScripts)
+        int i = 0;
+        foreach (BaseGamestate m in stateBasedScripts)
         {
             m.EndState();
             Destroy(m);
+            i++;
         }
+        Debug.Log("removed " + i + " state based scripts from the " + gameState + " state");
         stateBasedScripts.Clear();
     }
 
@@ -122,7 +129,8 @@ public class GameManager : MonoBehaviour {
     void StartIntro()
     {
         stateBasedScripts.Add(gameObject.AddComponent<IntroScript>());
-        stateBasedScripts[stateBasedScripts.Count].StartState();
+        Debug.Log("thisshitshouldbeadded");
+        stateBasedScripts[stateBasedScripts.Count-1].StartState();
         SetGameplayState(gameplaystate.paused);
         EventManager.TriggerEvent("StartIntro");
         //game start animation and shit
@@ -131,7 +139,7 @@ public class GameManager : MonoBehaviour {
     void StartTutorial()
     {
         stateBasedScripts.Add(gameObject.AddComponent<TutorialScript>());
-        stateBasedScripts[stateBasedScripts.Count].StartState();
+        stateBasedScripts[stateBasedScripts.Count-1].StartState();
         SetGameplayState(gameplaystate.running);
         EventManager.TriggerEvent("StartTutorial");
         //play tutorial
@@ -140,7 +148,7 @@ public class GameManager : MonoBehaviour {
     void StartBreakoutIntermission()
     {
         stateBasedScripts.Add(gameObject.AddComponent<BreakoutIntermissionScript>());
-        stateBasedScripts[stateBasedScripts.Count].StartState();
+        stateBasedScripts[stateBasedScripts.Count-1].StartState();
         SetGameplayState(gameplaystate.paused);
         EventManager.TriggerEvent("BreakoutIntermission");
         //breakout start animation and shit
@@ -149,7 +157,7 @@ public class GameManager : MonoBehaviour {
     void StartBreakout()
     {
         stateBasedScripts.Add(gameObject.AddComponent<BreakoutScript>());
-        stateBasedScripts[stateBasedScripts.Count].StartState();
+        stateBasedScripts[stateBasedScripts.Count-1].StartState();
         SetGameplayState(gameplaystate.running);
         EventManager.TriggerEvent("StartBreakout");
         //start the main gameplay stuff
@@ -158,7 +166,7 @@ public class GameManager : MonoBehaviour {
     void StartBossIntermission()
     {
         stateBasedScripts.Add(gameObject.AddComponent<BossIntermissionScript>());
-        stateBasedScripts[stateBasedScripts.Count].StartState();
+        stateBasedScripts[stateBasedScripts.Count-1].StartState();
         SetGameplayState(gameplaystate.paused);
         EventManager.TriggerEvent("BossIntermission");
         //boss start animation and shit
@@ -167,7 +175,7 @@ public class GameManager : MonoBehaviour {
     void StartBoss()
     {
         stateBasedScripts.Add(gameObject.AddComponent<BossScript>());
-        stateBasedScripts[stateBasedScripts.Count].StartState();
+        stateBasedScripts[stateBasedScripts.Count-1].StartState();
         SetGameplayState(gameplaystate.running);
         EventManager.TriggerEvent("StartBoss");
         //actually start the bossfight logics
@@ -176,7 +184,7 @@ public class GameManager : MonoBehaviour {
     void GameOver()
     {
         stateBasedScripts.Add(gameObject.AddComponent<GameOverScript>());
-        stateBasedScripts[stateBasedScripts.Count].StartState();
+        stateBasedScripts[stateBasedScripts.Count-1].StartState();
         SetGameplayState(gameplaystate.running);
         EventManager.TriggerEvent("GameOver", null, points);
         //game is over. destroy (explode?) everything
@@ -185,6 +193,9 @@ public class GameManager : MonoBehaviour {
     public gamestate CurrentGamestate
     { get { return gameState; } }
     
+    public gameplaystate CurrentGameplaystate
+    { get { return gameplayState; } }
+
     public int CurrentEnergy
     { get { return energy; } }
 
