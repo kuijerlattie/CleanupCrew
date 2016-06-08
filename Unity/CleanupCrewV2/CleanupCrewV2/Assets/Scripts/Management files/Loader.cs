@@ -5,6 +5,7 @@ public class Loader : MonoBehaviour {
 
     public GameObject gameManager;
     public GameObject eventManager;
+    public GameObject gameLogicScript;
 
 	void Awake()
     {
@@ -13,5 +14,7 @@ public class Loader : MonoBehaviour {
             Instantiate(eventManager);
         if (GameManager.instance == null)
             Instantiate(gameManager);
+        if (GameLogicScripting.instance == null)
+            Instantiate(gameLogicScript);
     }
 }

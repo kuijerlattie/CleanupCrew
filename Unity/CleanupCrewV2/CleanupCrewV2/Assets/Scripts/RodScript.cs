@@ -78,13 +78,12 @@ public class RodScript : MonoBehaviour {
 
     void OnCollisionEnter(Collision col)
     {
-        //TODO lets not use tags or layers for this stuff :D
-        if (col.gameObject.tag == "Ball")
+        if (col.gameObject.GetComponent<BallScript>() != null)
         {
             EventManager.TriggerEvent("BallHitRod", this.gameObject, (float)rodType);
         }
 
-        if (col.gameObject.tag == "Blob")
+        if (col.gameObject.GetComponent<BlobScript>() != null)
         {
             EventManager.TriggerEvent("BlobHitRod", col.gameObject, (float)rodType);
         }
