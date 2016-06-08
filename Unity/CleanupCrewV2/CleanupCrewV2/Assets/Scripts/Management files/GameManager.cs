@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
+
+    public List<BaseGamestate> stateBasedScripts = new List<BaseGamestate>();
 
     public enum gamestate
     {
@@ -45,9 +47,11 @@ public class GameManager : MonoBehaviour {
 
     public void SetState(gamestate state)
     {
+        EndState();
         switch (state)
         {
             case gamestate.Start:
+                StartGame();
                 StartIntro();
                 break;
             case gamestate.Tutorial:
@@ -70,9 +74,24 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    private void EndState()
+    {
+       foreach (BaseGamestate m in stateBasedScripts)
+        {
+            m.EndState();
+            Destroy(m);
+        }
+        stateBasedScripts.Clear();
+    }
+
+    void StartGame()
+    {
+        //everything you make here wont be automaticly removed at the end of a gamestate
+        gameObject.AddComponent<InitializeGame>().StartState();
+    }
+
     void StartIntro()
     {
-        GameObject.Instantiate(Resources.Load("prefabs/paddle"));
         //game start animation and shit
     }
 
