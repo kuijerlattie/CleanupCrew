@@ -1,17 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 [RequireComponent(typeof(Collider))]    //needs collider to work out the maximum Y-value in 'Down-state' 
 public class RodScript : MonoBehaviour {
 
 
-    private float currentState = RodState.Up;
+    private float currentState = RodState.Down;
 
     private Vector3 targetPos = Vector3.up;
     public float RodSpeed = 2;  //how fast it moves up and down
 
     public float SwitchAfterSeconds = 5;
     private float switchTimer;
+    private float maxHeight = 2;
 
     public static bool AllowedToSwitch = true; //alternative to disable this script
 
@@ -32,7 +34,8 @@ public class RodScript : MonoBehaviour {
     {
         switchTimer = SwitchAfterSeconds;
         targetPos = transform.position;
-        RodState.Down = -(GetComponent<Collider>().bounds.size.y / 2.0f + float.Epsilon);   //higher value instead of Epsilon if it glitches through the floor
+        RodState.Up = (GetComponent<Collider>().bounds.size.y / 2.0f + float.Epsilon + maxHeight);   
+
     }
 	
 	// Update is called once per frame
@@ -55,6 +58,15 @@ public class RodScript : MonoBehaviour {
         }
 	}
 
+    public static rodtype RandomType
+    {
+        get
+        {
+            rodtype[] rodtypeValues = (rodtype[])Enum.GetValues(typeof(rodtype));
+            return rodtypeValues[UnityEngine.Random.Range(0, rodtypeValues.GetLength(0))];
+        }
+    }
+ 
     public enum rodtype
     {
         water,
@@ -66,6 +78,7 @@ public class RodScript : MonoBehaviour {
 
     void OnCollisionEnter(Collision col)
     {
+        //TODO lets not use tags or layers for this stuff :D
         if (col.gameObject.tag == "Ball")
         {
             EventManager.TriggerEvent("BallHitRod", this.gameObject, (float)rodType);
@@ -82,8 +95,8 @@ public class RodScript : MonoBehaviour {
     //EDIT: this might not work with static if the different rods have different heights(which they should NOT)
     private static class RodState
     {
-        static public float Up = 0;
-        static public float Down = -3;
+        static public float Up = 5; //is overwritten later
+        static public float Down = 0;
     }
 
 
