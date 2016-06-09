@@ -17,6 +17,10 @@ public class FixedSpeed : MonoBehaviour {
         _rigid = GetComponent<Rigidbody>();
 	}
 	
+    void Update()
+    {
+        ResetSpeed();
+    }
 
     public void ResetSpeed()
     {
@@ -25,7 +29,6 @@ public class FixedSpeed : MonoBehaviour {
             if (fixedDirection != Vector3.zero) _rigid.velocity = fixedDirection;
             _rigid.velocity = _rigid.velocity.normalized * targetSpeed;
         }
-            
     }
 
 
