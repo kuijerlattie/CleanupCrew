@@ -53,6 +53,7 @@ public class PaddleControls : MonoBehaviour {
     }
     void DestroyBall()
     {
+        EventManager.TriggerEvent("BallDestroyed", ball);
         GameObject.Destroy(ball);
         ball = null;
     }

@@ -10,6 +10,12 @@ public class BlobScript : MonoBehaviour {
     private float moveSpeed = 1;
 
 
+
+    void OnDestroy()
+    {
+        //TODO if(is quitting game, do nothing)
+        EventManager.TriggerEvent("BlobDestroyed", gameObject);
+    }
     public static Vector3 GetRandomSpawnPos
     {
         get
@@ -60,6 +66,8 @@ public class BlobScript : MonoBehaviour {
         GameObject newBlob = GameObject.Instantiate(Resources.Load("prefabs/" + prefabName)) as GameObject;
         newBlob.transform.position = position;
         if (position.y != 0.5f) Debug.LogWarning("Warning, spawning not on Y = 0.5");
+
+        EventManager.TriggerEvent("BlobSpawn", newBlob);
         return newBlob;
     }
     // Use this for initialization
@@ -78,7 +86,7 @@ public class BlobScript : MonoBehaviour {
     /// <param name="c"></param>
 	void OnCollisionEnter(Collision c)
     {
-        if(c.collider.gameObject.GetComponent<BallScript>() != null)
+        if(c.collider.gameObject.tag == "Ball")
         {
             EventManager.TriggerEvent("BallHitBlob", gameObject);
         }
@@ -87,7 +95,7 @@ public class BlobScript : MonoBehaviour {
 
     void OnTriggerEnter(Collider c)
     {
-        if (c.gameObject.GetComponent<BallScript>() != null)
+        if (c.gameObject.tag == "Ball")
         {
             EventManager.TriggerEvent("BallHitBlob", gameObject);
         }

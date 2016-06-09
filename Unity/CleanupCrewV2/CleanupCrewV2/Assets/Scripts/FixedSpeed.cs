@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+/// <summary>
+/// makes sure the speed of gameobject stays constant 
+/// optional: keeps constant direction
+/// </summary>
 [RequireComponent(typeof(Rigidbody), typeof(Collider))]
 public class FixedSpeed : MonoBehaviour {
 
