@@ -63,6 +63,7 @@ public class PaddleControls : MonoBehaviour {
         if (ball == null)
         {
             ball = GameObject.Instantiate(Resources.Load("prefabs/ball")) as GameObject;
+            ball.transform.position = this.transform.position + new Vector3(0, 0, ball.GetComponent<SphereCollider>().radius + 0.5f);
             EventManager.TriggerEvent("BallSpawn", ball);
         }
         else Debug.LogError("currently doesnt support 'multi-balls' yet");
