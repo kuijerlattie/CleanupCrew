@@ -16,12 +16,15 @@ public class PaddleControls : MonoBehaviour {
         {
             _currentState = value;
             EventManager.TriggerEvent(value == PaddleState.Launching ? "StartLaunch" : "StartPlay", gameObject);
+            if (ball.transform.position.z < gameObject.transform.position.z) Debug.LogWarning("ball not spawned in correct position");
         }
         get { return _currentState; }
 
     }
     private PaddleState _currentState;
-    public GameObject ball { private set; get; }
+
+    [HideInInspector]
+    public GameObject ball;
 
     public enum PaddleState
     {
@@ -50,12 +53,13 @@ public class PaddleControls : MonoBehaviour {
     }
     void DestroyBall()
     {
-
+        GameObject.Destroy(ball);
+        ball = null;
     }
 
     public void SpawnBall()
     {
-        if (!ball)
+        if (ball == null)
         {
             ball = GameObject.Instantiate(Resources.Load("prefabs/ball")) as GameObject;
             EventManager.TriggerEvent("BallSpawn", ball);
@@ -107,13 +111,15 @@ public class PaddleControls : MonoBehaviour {
     void ShootBall(GameObject g, float f)
     {
         if(currentState != PaddleState.Launching) { Debug.LogWarning("Cannot shoot ball during play"); return; }
-        ball.GetComponent<Rigidbody>().velocity = (ball.transform.position - gameObject.transform.position).normalized * 10f;
+        ball.GetComponent<Rigidbody>().velocity = (ball.transform.position - gameObject.transform.position).normalized;
         currentState = PaddleState.Playing;
+        ball.GetComponent<FixedSpeed>().ResetSpeed();
         EventManager.TriggerEvent("BallShoot", ball);
     }
 
     void LaunchUpdate()
     {
+        if (!ball) SpawnBall();
         if (currentState != PaddleState.Launching) return;
 
         if (ball.transform.position.x - BallRadius < transform.position.x - PaddleWidthHalf)
@@ -137,11 +143,11 @@ public class PaddleControls : MonoBehaviour {
 
     void BallDied(GameObject ball, float f)
     {
-        Debug.Log("ballhitgroud");
         GameManager.instance.LoseEnergy(10);
-        Destroy(ball);
-        currentState = PaddleState.Launching;
+        DestroyBall();
         SpawnBall();
+        currentState = PaddleState.Launching;
+        
     }
 
 
