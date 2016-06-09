@@ -63,6 +63,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\CopyRotation.cs" />
+    <Compile Include="Assets\Scripts v2\GameManager.cs" />
+    <Compile Include="Assets\Scripts v2\PaddleControls.cs" />
+    <Compile Include="Assets\Scripts v2\deathscript.cs" />
+    <Compile Include="Assets\Scripts v2\eventTriggers\InputScript.cs" />
+    <Compile Include="Assets\Scripts v2\eventlisteners\point events.cs" />
     <Compile Include="Assets\Scripts\BallBlobCollision.cs" />
     <Compile Include="Assets\Scripts\BallCollisionScript.cs" />
     <Compile Include="Assets\Scripts\BlobScaleONStart.cs" />
@@ -89,6 +94,7 @@
     <Compile Include="Assets\Scripts\Powerup\SmallerEnemies.cs" />
     <Compile Include="Assets\Scripts\Powerup\StickyBall.cs" />
     <Compile Include="Assets\Scripts\Powerup\StickyPaddle.cs" />
+    <Compile Include="Assets\Scripts\Powerup\lookAtDirectionOfMovement.cs" />
     <Compile Include="Assets\Scripts\RandomColor.cs" />
     <Compile Include="Assets\Scripts\ScaleOnStart.cs" />
     <Compile Include="Assets\Scripts\TESTONPCSCRIPT.cs" />
@@ -114,6 +120,7 @@
     <Compile Include="Assets\Scripts\heim server scripts\Arguments.cs" />
     <Compile Include="Assets\Scripts\heim server scripts\DBconnection.cs" />
     <Compile Include="Assets\Scripts\heim server scripts\argumentDebug.cs" />
+    <Compile Include="Assets\Scripts\testingPowerupsScript.cs" />
     <Compile Include="Assets\Scripts\toolset\EventManager.cs" />
     <Compile Include="Assets\Scripts\toolset\EventTypes.cs" />
     <Compile Include="Assets\Scripts\toolset\GameSettings.cs" />

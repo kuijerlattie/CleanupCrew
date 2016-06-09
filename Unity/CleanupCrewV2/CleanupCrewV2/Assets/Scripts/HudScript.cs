@@ -8,6 +8,8 @@ public class HudScript : MonoBehaviour {
     Text tWaterpoints;
     Text tEarthpoints;
     Text tSpacepoints;
+    Text tState;
+    Text tGameplayState;
 
     // Use this for initialization
     void Start () {
@@ -16,6 +18,8 @@ public class HudScript : MonoBehaviour {
         tWaterpoints = GameObject.Find("Waterpoints").GetComponent<Text>();
         tEarthpoints = GameObject.Find("Sandpoints").GetComponent<Text>();
         tSpacepoints = GameObject.Find("Spacepoints").GetComponent<Text>();
+        tState = GameObject.Find("GameState").GetComponent<Text>();
+        tGameplayState = GameObject.Find("GameplayState").GetComponent<Text>();
 
     }
 	
@@ -26,5 +30,7 @@ public class HudScript : MonoBehaviour {
         tWaterpoints.text = "Waste in water: " + GameManager.instance.CurrentWaterPoints;
         tEarthpoints.text = "Waste underground: " + GameManager.instance.CurrentEarthPoints;
         tSpacepoints.text = "waste in space: " + GameManager.instance.CurrentSpacePoints;
+        tState.text = "Current state: " + GameManager.instance.CurrentGamestate;
+        tGameplayState.text = "current gameplay state: " + GameManager.instance.CurrentGameplaystate;
 	}
 }
