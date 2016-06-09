@@ -1,7 +1,7 @@
 fileFormatVersion: 2
-guid: df3b381e33884974897f1fa24d9df52b
-timeCreated: 1465464389
-licenseType: Free
+guid: 7a4a144bc31f7b947b05488664255e4a
+timeCreated: 1465482173
+licenseType: Pro
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Tube002
+    4300000: Tube004
   materials:
     importMaterials: 1
     materialName: 0

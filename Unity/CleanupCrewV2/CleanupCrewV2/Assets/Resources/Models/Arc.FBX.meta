@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 8eed2770f4aff15418d80e74379d3fb6
-timeCreated: 1465482191
+guid: 5cfb07f33510c8d4ba15514bd1c46294
+timeCreated: 1465482190
 licenseType: Pro
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Box002
+    4300000: Tube003
   materials:
     importMaterials: 1
     materialName: 0
@@ -34,7 +34,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 90
+    globalScale: 100
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
