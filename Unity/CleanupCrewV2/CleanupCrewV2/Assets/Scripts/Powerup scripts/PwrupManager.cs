@@ -4,7 +4,8 @@ using System.Collections;
 public class PwrupManager : MonoBehaviour {
 
     public GameObject[] pwrUps;
-    public int blobsNeeded = 3; // how many blobs need to be destroyed before spawning pwrup
+    public int blobsNeeded = 1; // how many blobs need to be destroyed before spawning pwrup
+    public int blobsDestroyed = 0;
     public float durationTimer; // Time how long pwrups stay on
 
     public enum PowerupType
@@ -13,18 +14,31 @@ public class PwrupManager : MonoBehaviour {
         bigPaddle
     }
 
+    void BlobDestroyed(GameObject g, float f)
+    {
+        blobsDestroyed += 1;
+
+        if (blobsDestroyed == blobsNeeded)
+        {
+            SpawnPwrup();
+            blobsDestroyed = 0;
+        }
+    }
+
     void OnEnable()
     {
-       // EventManager.StartListening();
+        EventManager.StartListening("BlobDestroyed", BlobDestroyed);
     }
 
     void OnDisable()
     {
-
+        EventManager.StopListening("BlobDestroyed", BlobDestroyed);
     }
+    
 
     void SpawnPwrup()
     {
+        Debug.Log("SAATANA");
         Vector3 spawnLocation = new Vector3(0, 0, 0); // current solution, later need to make it spawn where last blob dies(?)
         GameObject pwrUp = (GameObject)Instantiate(pwrUps[Random.Range(0, pwrUps.Length)], spawnLocation, Quaternion.identity);
         
