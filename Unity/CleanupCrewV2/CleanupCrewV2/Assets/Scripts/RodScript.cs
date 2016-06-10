@@ -13,7 +13,7 @@ public class RodScript : MonoBehaviour {
 
     public float SwitchAfterSeconds = 5;
     private float switchTimer;
-    private float maxHeight = 2;
+    private float maxHeight = 10;
 
     public static bool AllowedToSwitch = true; //alternative to disable this script
 
