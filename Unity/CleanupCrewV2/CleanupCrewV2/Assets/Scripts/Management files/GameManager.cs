@@ -34,12 +34,7 @@ public class GameManager : MonoBehaviour {
     private int earthpoints = 0;
     private int spacepoints = 0;
 
-    public static bool IsQuitting = false;
 
-    void OnApplicationQuit()
-    {
-        IsQuitting = true;
-    }
 
     void Awake()
     {
