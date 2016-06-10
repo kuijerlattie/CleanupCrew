@@ -21,8 +21,9 @@ public class BlobScript : MonoBehaviour {
 
     void OnDestroy()
     {
-        if(!GameManager.IsQuitting)
+        //if(!GameManager.IsQuitting)
             EventManager.TriggerEvent("BlobDestroyed", gameObject);
+        Debug.Log("triggered");
     }
     public static Vector3 GetRandomSpawnPos
     {
@@ -86,21 +87,13 @@ public class BlobScript : MonoBehaviour {
     /// <param name="c"></param>
 	void OnCollisionEnter(Collision c)
     {
-        if(c.collider.gameObject.tag == "Ball")
+        if (c.collider.gameObject.tag == "Ball")
         {
             EventManager.TriggerEvent("BallHitBlob", gameObject);
         }
 
     }
 
-    void OnTriggerEnter(Collider c)
-    {
-        if (c.gameObject.tag == "Ball")
-        {
-            EventManager.TriggerEvent("BallHitBlob", gameObject);
-        }
-
-    }
 
 
 }

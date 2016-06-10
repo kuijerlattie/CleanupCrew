@@ -17,6 +17,8 @@ public class PaddleControls : MonoBehaviour {
             _currentState = value;
             EventManager.TriggerEvent(value == PaddleState.Launching ? "StartLaunch" : "StartPlay", gameObject);
             if (ball.transform.position.z < gameObject.transform.position.z) Debug.LogWarning("ball not spawned in correct position");
+            if (value == PaddleState.Launching) ball.GetComponent<Collider>().isTrigger = true;
+            else ball.GetComponent<Collider>().isTrigger = false;
         }
         get { return _currentState; }
 

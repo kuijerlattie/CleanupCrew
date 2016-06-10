@@ -16,6 +16,7 @@ public class PwrupManager : MonoBehaviour {
 
     void BlobDestroyed(GameObject g, float f)
     {
+        Debug.Log(true);
         blobsDestroyed += 1;
 
         if (blobsDestroyed == blobsNeeded)
@@ -25,7 +26,7 @@ public class PwrupManager : MonoBehaviour {
         }
     }
 
-    void OnEnable()
+    void Start()
     {
         EventManager.StartListening("BlobDestroyed", BlobDestroyed);
     }
@@ -38,7 +39,6 @@ public class PwrupManager : MonoBehaviour {
 
     void SpawnPwrup()
     {
-        Debug.Log("SAATANA");
         Vector3 spawnLocation = new Vector3(0, 0, 0); // current solution, later need to make it spawn where last blob dies(?)
         GameObject pwrUp = (GameObject)Instantiate(pwrUps[Random.Range(0, pwrUps.Length)], spawnLocation, Quaternion.identity);
         
