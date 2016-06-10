@@ -127,6 +127,7 @@ public class GameManager : MonoBehaviour {
     {
         //everything you make here wont be automaticly removed at the end of a gamestate
         gameObject.AddComponent<InitializeGame>().StartState();
+        gameObject.AddComponent<pointevents>();
         SetGameplayState(gameplaystate.paused);
         EventManager.TriggerEvent("StartGame");
     }
@@ -250,7 +251,7 @@ public class GameManager : MonoBehaviour {
     {
         energy -= e;
         EventManager.TriggerEvent("LoseEnergy", null, e);
-        if (energy >= 0)
+        if (energy <= 0)
         {
             SetState(gamestate.GameOver);
         }

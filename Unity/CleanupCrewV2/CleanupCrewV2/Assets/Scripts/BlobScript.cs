@@ -8,6 +8,7 @@ public class BlobScript : MonoBehaviour {
 
     private Vector3 startDirection;
     private float moveSpeed = 1;
+    private int health = 1;
 
     public static GameObject[] spawnLocations = null;
 
@@ -95,5 +96,19 @@ public class BlobScript : MonoBehaviour {
     }
 
 
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        EventManager.TriggerEvent("BlobKill", gameObject);
+        Destroy(gameObject);
+    }
 
 }

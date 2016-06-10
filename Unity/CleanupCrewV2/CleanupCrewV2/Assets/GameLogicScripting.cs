@@ -39,7 +39,7 @@ public class GameLogicScripting : MonoBehaviour
 
     void OnBallHitBlob(GameObject g, float f)
     {
-        GameObject.Destroy(g);
+        g.GetComponent<BlobScript>().TakeDamage(1);
     }
 
 
