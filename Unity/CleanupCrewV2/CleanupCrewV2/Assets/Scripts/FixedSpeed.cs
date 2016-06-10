@@ -13,13 +13,12 @@ public class FixedSpeed : MonoBehaviour {
     public float targetSpeed = 10;
     public Vector3 fixedDirection = Vector3.zero;   //currently doesnt work with blobs hitting rods
     bool slowFixDirection = false;
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         _rigid = GetComponent<Rigidbody>();
         ResetSpeed();
-	}
-	
-
+    }
 
     public void ResetSpeed()
     {
@@ -40,6 +39,7 @@ public class FixedSpeed : MonoBehaviour {
     {
         if (fixedDirection == Vector3.zero) return;
         _rigid.velocity = fixedDirection;
+        ResetSpeed();
     }
 
 
@@ -66,6 +66,7 @@ public class FixedSpeed : MonoBehaviour {
                 ResetSpeed();
             }
         }
+        ResetSpeed();
     }
 
 }
