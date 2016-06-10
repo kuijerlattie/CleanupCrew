@@ -30,6 +30,7 @@ public class PaddlePhysics : MonoBehaviour {
             hitBallRigid.velocity = outPutDirection.normalized;
 
             EventManager.TriggerEvent("BallHitPaddle", col.gameObject);
+            hitBall.GetComponent<FixedSpeed>().ResetSpeed();
         }
 
     }
