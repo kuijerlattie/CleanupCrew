@@ -9,27 +9,27 @@ public class BlobScript : MonoBehaviour {
     private Vector3 startDirection;
     private float moveSpeed = 1;
 
+    public static GameObject[] spawnLocations = null;
 
+
+
+    private static void InitSpawnLocations()
+    {
+       spawnLocations = GameObject.FindGameObjectsWithTag("BlobSpawnPos");
+        if (spawnLocations.GetLength(0) < 3) Debug.LogError("No spawn points in scene, add tags 'BlobSpawnPos' to objects (atleast 3)");
+    }
 
     void OnDestroy()
     {
-        //TODO if(is quitting game, do nothing)
-        EventManager.TriggerEvent("BlobDestroyed", gameObject);
+        if(!GameManager.IsQuitting)
+            EventManager.TriggerEvent("BlobDestroyed", gameObject);
     }
     public static Vector3 GetRandomSpawnPos
     {
         get
         {
-            GameObject spawnObject = GameObject.FindGameObjectWithTag("BlobSpawnPos");
-            if(spawnObject == null)
-            {
-                Debug.LogError("no object with tag: 'BlobSpawnPos', cannot spawn blobs on correct position");
-                return Vector3.zero;
-            }
-            Vector3 spawnAreaSize = spawnObject.GetComponent<BoxCollider>().bounds.size /2f;
-            float rndX = Random.Range(spawnObject.transform.position.x - spawnAreaSize.x, spawnObject.transform.position.x + spawnAreaSize.x);
-            float rndZ = Random.Range(spawnObject.transform.position.z - spawnAreaSize.z, spawnObject.transform.position.z + spawnAreaSize.z);
-            return new Vector3(rndX, 0.5f, rndZ);
+            if (spawnLocations == null) InitSpawnLocations();
+            return spawnLocations[Random.Range(0, spawnLocations.GetLength(0))].transform.position;
         }
     }
         
