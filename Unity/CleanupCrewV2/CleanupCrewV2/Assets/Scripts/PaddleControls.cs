@@ -8,7 +8,7 @@ public class PaddleControls : MonoBehaviour {
     private float PaddleWidthHalf;
     private float BallRadius;
 
-    public float moveSpeed = 25; 
+    public float moveSpeed = 40; 
 
     public PaddleState currentState
     {
