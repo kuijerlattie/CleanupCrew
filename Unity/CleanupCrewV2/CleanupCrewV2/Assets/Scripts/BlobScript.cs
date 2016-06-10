@@ -87,21 +87,13 @@ public class BlobScript : MonoBehaviour {
     /// <param name="c"></param>
 	void OnCollisionEnter(Collision c)
     {
-        if(c.collider.gameObject.tag == "Ball")
+        if (c.collider.gameObject.tag == "Ball")
         {
             EventManager.TriggerEvent("BallHitBlob", gameObject);
         }
 
     }
 
-    void OnTriggerEnter(Collider c)
-    {
-        if (c.gameObject.tag == "Ball")
-        {
-            EventManager.TriggerEvent("BallHitBlob", gameObject);
-        }
-
-    }
 
 
 }
