@@ -19,6 +19,10 @@ public class FixedSpeed : MonoBehaviour {
         ResetSpeed();
 	}
 	
+    void Update()
+    {
+        ResetSpeed();
+    }
 
 
     public void ResetSpeed()
@@ -40,6 +44,7 @@ public class FixedSpeed : MonoBehaviour {
     {
         if (fixedDirection == Vector3.zero) return;
         _rigid.velocity = fixedDirection;
+        ResetSpeed();
     }
 
 
