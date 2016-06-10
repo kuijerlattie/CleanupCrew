@@ -22,9 +22,8 @@ public class BlobScript : MonoBehaviour {
 
     void OnDestroy()
     {
-        //if(!GameManager.IsQuitting)
+        if(!GameManager.IsQuitting)
             EventManager.TriggerEvent("BlobDestroyed", gameObject);
-        Debug.Log("triggered");
     }
     public static Vector3 GetRandomSpawnPos
     {
@@ -67,7 +66,6 @@ public class BlobScript : MonoBehaviour {
         string prefabName = "Blob";
         GameObject newBlob = GameObject.Instantiate(Resources.Load("prefabs/" + prefabName)) as GameObject;
         newBlob.transform.position = position;
-        if (position.y != 0.5f) Debug.LogWarning("Warning, spawning not on Y = 0.5");
 
         EventManager.TriggerEvent("BlobSpawn", newBlob);
         return newBlob;
