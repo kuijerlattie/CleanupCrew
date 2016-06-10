@@ -21,8 +21,9 @@ public class BlobScript : MonoBehaviour {
 
     void OnDestroy()
     {
-        if(!GameManager.IsQuitting)
+        //if(!GameManager.IsQuitting)
             EventManager.TriggerEvent("BlobDestroyed", gameObject);
+        Debug.Log("triggered");
     }
     public static Vector3 GetRandomSpawnPos
     {

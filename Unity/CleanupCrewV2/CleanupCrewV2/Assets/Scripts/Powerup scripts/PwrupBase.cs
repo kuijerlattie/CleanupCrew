@@ -9,10 +9,10 @@ public abstract class PwrupBase : MonoBehaviour {
 
     void OnCollisionEnter(Collision col)
     {
-        if (col.collider.tag == "paddle")
+        if (col.collider.tag == "Paddle")
         {
             startPwrup();
-
+            GameObject.Destroy(gameObject);
         }
 
     }
