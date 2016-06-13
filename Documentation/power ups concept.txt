@@ -1,30 +1,30 @@
 power up concepts : 	@Would work 	?Might work if multitouch or double tap
 
-Keep ball in peddal "bounds" for X seconds	@	Former Bug
+Keep ball in peddal "bounds" for X seconds	@		Hex		FormerBug
 
-slowing blobs movement				@
+slowing blobs movement				@		Dia
+								
+Ball stick to the paddle and can be shot off	?		hex
 
-Ball stick to the paddle and can be shot off	?
+magnetic pedal					@		hex				
+	-Move toward paddle when moving toward paddle	
 
-magnetic pedal					@				
-	-Move toward paddle when moving toward paddle
+bigger pedal					@		hex
 
-bigger pedal					@
+smaller pedal					@		hex
 
-smaller pedal					@
+extra life					@		Dia
 
-extra life					@
-
-Multiball					@
+Multiball					@		Dia
 	-Lose life when all balls are gone
 
-Shoot						?
+Shoot						?		Hex
 
-Kill all enemies				@
+Kill all enemies				@		Dia
 
-Shield at bottom				@
+Shield at bottom				@		Dia
 
-Double paddles					@
+Double paddles					@		Hex
 
 
 
