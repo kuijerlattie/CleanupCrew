@@ -80,12 +80,23 @@ public class RodScript : MonoBehaviour {
     {
         if (col.gameObject.tag == "Ball")
         {
+            //make ball bounce off 2x the speed
+            col.gameObject.GetComponent<Rigidbody>().velocity *= 4;
             EventManager.TriggerEvent("BallHitRod", this.gameObject, (float)rodType);
         }
 
         if (col.gameObject.tag == "Blob")
         {
             EventManager.TriggerEvent("BlobHitRod", col.gameObject, (float)rodType);
+        }
+    }
+
+    void OnCollisionStay(Collision col)
+    {
+        if (col.gameObject.tag == "Blob")
+        {
+            EventManager.TriggerEvent("BlobCrushed", col.gameObject);
+            Destroy(col.gameObject);
         }
     }
 

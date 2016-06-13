@@ -22,10 +22,24 @@ public class FixedSpeed : MonoBehaviour {
 
     public void ResetSpeed()
     {
-        if (_rigid.velocity.magnitude != targetSpeed)
+        if (gameObject.tag == "Ball")
         {
-            //if (fixedDirection != Vector3.zero) _rigid.velocity = fixedDirection;
-            _rigid.velocity = _rigid.velocity.normalized * targetSpeed;
+            if (_rigid.velocity.magnitude < targetSpeed)
+            {
+                _rigid.velocity = _rigid.velocity.normalized * targetSpeed;
+            }
+            if (_rigid.velocity.magnitude > targetSpeed)
+            {
+                _rigid.velocity = _rigid.velocity.normalized * (_rigid.velocity.magnitude * 0.95f);
+            }
+        }
+        else
+        {
+            if (_rigid.velocity.magnitude != targetSpeed)
+            {
+                //if (fixedDirection != Vector3.zero) _rigid.velocity = fixedDirection;
+                _rigid.velocity = _rigid.velocity.normalized * targetSpeed;
+            }
         }
     }
 
