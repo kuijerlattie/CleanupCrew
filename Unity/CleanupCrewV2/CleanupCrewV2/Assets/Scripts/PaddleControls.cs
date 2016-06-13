@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using System.Collections.Generic;
 
 public class PaddleControls : MonoBehaviour {
 
@@ -16,17 +17,15 @@ public class PaddleControls : MonoBehaviour {
         {
             _currentState = value;
             EventManager.TriggerEvent(value == PaddleState.Launching ? "StartLaunch" : "StartPlay", gameObject);
-            if (ball.transform.position.z < gameObject.transform.position.z) Debug.LogWarning("ball not spawned in correct position");
-            if (value == PaddleState.Launching) ball.GetComponent<Collider>().isTrigger = true;
-            else ball.GetComponent<Collider>().isTrigger = false;
+            //TODO enable/disable collider trigger to stop blob collecting during launch
         }
         get { return _currentState; }
 
     }
     private PaddleState _currentState;
 
-    [HideInInspector]
-    public GameObject ball;
+
+    List<GameObject> playingBalls = new List<GameObject>();
 
     public enum PaddleState
     {
@@ -39,7 +38,7 @@ public class PaddleControls : MonoBehaviour {
     /// </summary>
     private void SetBoundaries()
     {
-        if (!ball) SpawnBall(); //just for safety
+        if (playingBalls.Count < 1) SpawnBall(); //just for safety
         WallScript[] _walls = FindObjectsOfType<WallScript>();
         GameObject leftWall = Array.Find(_walls, a => a.thisWall == WallScript.walls.left).gameObject;
         GameObject rightWall = Array.Find(_walls, a => a.thisWall == WallScript.walls.right).gameObject;
@@ -47,28 +46,28 @@ public class PaddleControls : MonoBehaviour {
         minX = leftWall.transform.position.x + leftWall.GetComponent<BoxCollider>().bounds.size.x / 2.0f;
         maxX = rightWall.transform.position.x - rightWall.GetComponent<BoxCollider>().bounds.size.x / 2.0f;
         PaddleWidthHalf = gameObject.GetComponent<BoxCollider>().bounds.size.x / 2.0f;
-        BallRadius = ball.GetComponent<SphereCollider>().radius;
+        BallRadius = playingBalls[0].GetComponent<SphereCollider>().radius;
 
         minX += PaddleWidthHalf;
         maxX -= PaddleWidthHalf;
         
     }
-    void DestroyBall()
+    void DestroyBall(GameObject ball)
     {
         EventManager.TriggerEvent("BallDestroyed", ball);
+        playingBalls.Remove(ball);
         GameObject.Destroy(ball);
         ball = null;
     }
 
-    public void SpawnBall()
+    public GameObject SpawnBall()
     {
-        if (ball == null)
-        {
-            ball = GameObject.Instantiate(Resources.Load("prefabs/ball")) as GameObject;
-            ball.transform.position = this.transform.position + new Vector3(0, 0, ball.GetComponent<SphereCollider>().radius + 0.5f);
-            EventManager.TriggerEvent("BallSpawn", ball);
-        }
-        else Debug.LogError("currently doesnt support 'multi-balls' yet");
+        GameObject ball;
+        ball = GameObject.Instantiate(Resources.Load("prefabs/ball")) as GameObject;
+        ball.transform.position = this.transform.position + new Vector3(0, 0, ball.GetComponent<SphereCollider>().radius + 0.5f);
+        EventManager.TriggerEvent("BallSpawn", ball);
+        playingBalls.Add(ball);
+        return ball;
     }
 	// Use this for initialization
 	void OnEnable() {
@@ -85,6 +84,12 @@ public class PaddleControls : MonoBehaviour {
         EventManager.StopListening("HoldClick", OnInput);
         EventManager.StopListening("DoubleClick", ShootBall);
         EventManager.StopListening("BallBottomDeath", BallDied);
+
+        for (int i = playingBalls.Count-1; i > 0; i--)
+        {
+            GameObject.Destroy(playingBalls[i]);
+        }
+        playingBalls.Clear();
     }
 
 
@@ -114,6 +119,8 @@ public class PaddleControls : MonoBehaviour {
 
     void ShootBall(GameObject g, float f)
     {
+        if (playingBalls.Count > 1) return; //cannot shoot with multiple balls
+        GameObject ball = playingBalls[0];
         if(currentState != PaddleState.Launching) { Debug.LogWarning("Cannot shoot ball during play"); return; }
         ball.GetComponent<Rigidbody>().velocity = (ball.transform.position - gameObject.transform.position).normalized;
         currentState = PaddleState.Playing;
@@ -123,9 +130,9 @@ public class PaddleControls : MonoBehaviour {
 
     void LaunchUpdate()
     {
-        if (!ball) SpawnBall();
+        if (playingBalls.Count < 1) SpawnBall();
         if (currentState != PaddleState.Launching) return;
-
+        GameObject ball = playingBalls[0];
         if (ball.transform.position.x - BallRadius < transform.position.x - PaddleWidthHalf)
         {
             ball.transform.position = new Vector3(transform.position.x - PaddleWidthHalf + BallRadius, ball.transform.position.y, ball.transform.position.z);
@@ -142,15 +149,21 @@ public class PaddleControls : MonoBehaviour {
 	void Update () {
         transform.position = Vector3.MoveTowards(transform.position, new Vector3(targetX, transform.position.y, transform.position.z), Time.deltaTime * moveSpeed);
         LaunchUpdate();
-       
+        if (Input.GetKeyDown(KeyCode.Space)) SpawnBall();
 	}
 
     void BallDied(GameObject ball, float f)
     {
-        GameManager.instance.LoseEnergy(10);
-        DestroyBall();
-        SpawnBall();
-        currentState = PaddleState.Launching;
+        if (playingBalls.Count > 1) {/* when an extra ball dies*/ }
+        else GameManager.instance.LoseEnergy(10);
+
+        
+        DestroyBall(ball);
+        if (playingBalls.Count == 0)
+        {
+            SpawnBall();
+            currentState = PaddleState.Launching;
+        }
         
     }
 
