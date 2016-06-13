@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour {
         running
     }
 
+    public int CurrentLevel = 0; //should be 0 when building the game for playtests.
+
     public static GameManager instance = null;
     private gamestate gameState = gamestate.Start;
     private gameplaystate gameplayState = gameplaystate.paused;
@@ -162,6 +164,7 @@ public class GameManager : MonoBehaviour {
 
     void StartBreakout()
     {
+        CurrentLevel += 1;
         stateBasedScripts.Add(gameObject.AddComponent<BreakoutScript>());
         stateBasedScripts[stateBasedScripts.Count-1].StartState();
         SetGameplayState(gameplaystate.running);
