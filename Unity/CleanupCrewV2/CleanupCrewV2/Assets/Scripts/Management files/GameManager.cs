@@ -30,9 +30,11 @@ public class GameManager : MonoBehaviour {
 
 
     private int energy = 0;
+    private int maxenergy = 100;
     private int points = 0;
 
     private int Barrelcontent = 0;
+    private int GooNeededForBoss = 10;
 
     public static bool IsQuitting = false;
 
@@ -206,11 +208,17 @@ public class GameManager : MonoBehaviour {
     public int CurrentEnergy
     { get { return energy; } }
 
+    public float CurrentEnergyUI
+    { get { return 1f/(float)maxenergy*(float)energy; } }
+
     public int CurrentPoints
     { get { return points; } }
 
     public int CurrentBarrelGoo
     { get { return Barrelcontent; } }
+
+    public float CurrentBarrelGooUI
+    { get { return 1f/(float)GooNeededForBoss*(float)Barrelcontent; } }
 
     public void AddPoints(int p)
     {

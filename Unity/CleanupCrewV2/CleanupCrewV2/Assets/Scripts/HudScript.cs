@@ -11,6 +11,9 @@ public class HudScript : MonoBehaviour {
     Text tState;
     Text tGameplayState;
 
+    Image EnergyGauge;
+    Image BarrelGauge;
+
     // Use this for initialization
     void Start () {
         tPoints = GameObject.Find("Points").GetComponent<Text>();
@@ -18,6 +21,8 @@ public class HudScript : MonoBehaviour {
         tWaterpoints = GameObject.Find("Waterpoints").GetComponent<Text>();
         tState = GameObject.Find("GameState").GetComponent<Text>();
         tGameplayState = GameObject.Find("GameplayState").GetComponent<Text>();
+        EnergyGauge = GameObject.Find("EnergyGauge").GetComponent<Image>();
+        BarrelGauge = GameObject.Find("BarrelGauge").GetComponent<Image>();
 
     }
 	
@@ -28,5 +33,8 @@ public class HudScript : MonoBehaviour {
         tWaterpoints.text = "Goo in barrel: " + GameManager.instance.CurrentBarrelGoo;
         tState.text = "Current state: " + GameManager.instance.CurrentGamestate;
         tGameplayState.text = "current gameplay state: " + GameManager.instance.CurrentGameplaystate;
+        Debug.Log(GameManager.instance.CurrentBarrelGooUI);
+        EnergyGauge.fillAmount = GameManager.instance.CurrentEnergyUI;
+        BarrelGauge.fillAmount = GameManager.instance.CurrentBarrelGooUI;
 	}
 }
