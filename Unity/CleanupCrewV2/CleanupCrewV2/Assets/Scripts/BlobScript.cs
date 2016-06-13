@@ -87,10 +87,15 @@ public class BlobScript : MonoBehaviour {
 
     Vector3 GetBehaviourVector()
     {
-        //TODO what behaviours?
-        return Vector3.zero; 
+
         Vector3 vec = Vector3.zero;
-        vec.x = Mathf.Sin(transform.position.z);
+        float z = transform.position.z;
+
+        //vec.x = Mathf.Sin(z);
+        //vec.y = Mathf.Sin(z);
+
+
+
         vec *= Time.deltaTime * 20f;
         return vec;
     }
