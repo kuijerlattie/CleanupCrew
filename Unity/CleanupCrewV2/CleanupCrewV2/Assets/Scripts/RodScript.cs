@@ -6,7 +6,7 @@ using System;
 public class RodScript : MonoBehaviour {
 
 
-    private float currentState = RodState.Down;
+    private float currentState = RodState.Up;
 
     private Vector3 targetPos = Vector3.up;
     public float RodSpeed = 2;  //how fast it moves up and down
@@ -34,7 +34,7 @@ public class RodScript : MonoBehaviour {
     {
         switchTimer = SwitchAfterSeconds;
         targetPos = transform.position;
-        RodState.Up = (GetComponent<Collider>().bounds.size.y / 2.0f + float.Epsilon + maxHeight);   
+        RodState.Down = -(GetComponent<Collider>().bounds.size.y / 2.0f + float.Epsilon + maxHeight);   
 
     }
 	
@@ -105,8 +105,8 @@ public class RodScript : MonoBehaviour {
     //EDIT: this might not work with static if the different rods have different heights(which they should NOT)
     private static class RodState
     {
-        static public float Up = 5; //is overwritten later
-        static public float Down = 0;
+        static public float Up = 0; //is overwritten later
+        static public float Down = -5;
     }
 
 

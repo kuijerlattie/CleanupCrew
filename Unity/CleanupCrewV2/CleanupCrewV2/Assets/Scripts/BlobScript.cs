@@ -78,13 +78,29 @@ public class BlobScript : MonoBehaviour {
 
         GetComponent<Rigidbody>().velocity = startDirection * moveSpeed;
 	}
-	
+
+    void Update()
+    {
+        transform.position += GetBehaviourVector();
+
+    }
+
+    Vector3 GetBehaviourVector()
+    {
+        //TODO what behaviours?
+        return Vector3.zero;    //nothing designed for it yet
+        Vector3 vec = Vector3.zero;
+        vec.x = Mathf.Sin(transform.position.z);
+        vec *= Time.deltaTime * 20f;
+        return vec;
+    }
+
 
     /// <summary>
     /// currently using trigger instead otherwise ball bounces off after collecting a blob
     /// </summary>
     /// <param name="c"></param>
-	void OnCollisionEnter(Collision c)
+    void OnCollisionEnter(Collision c)
     {
         if (c.collider.gameObject.tag == "Ball")
         {
