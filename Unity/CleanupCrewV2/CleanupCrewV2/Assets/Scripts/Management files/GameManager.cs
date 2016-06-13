@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour {
         running
     }
 
+    public int CurrentLevel = 0; //should be 0 when building the game for playtests.
+
     public static GameManager instance = null;
     private gamestate gameState = gamestate.Start;
     private gameplaystate gameplayState = gameplaystate.paused;
@@ -30,9 +32,7 @@ public class GameManager : MonoBehaviour {
     private int energy = 0;
     private int points = 0;
 
-    private int waterpoints = 0;
-    private int earthpoints = 0;
-    private int spacepoints = 0;
+    private int Barrelcontent = 0;
 
     public static bool IsQuitting = false;
 
@@ -162,6 +162,7 @@ public class GameManager : MonoBehaviour {
 
     void StartBreakout()
     {
+        CurrentLevel += 1;
         stateBasedScripts.Add(gameObject.AddComponent<BreakoutScript>());
         stateBasedScripts[stateBasedScripts.Count-1].StartState();
         SetGameplayState(gameplaystate.running);
@@ -208,14 +209,8 @@ public class GameManager : MonoBehaviour {
     public int CurrentPoints
     { get { return points; } }
 
-    public int CurrentWaterPoints
-    { get { return waterpoints; } }
-
-    public int CurrentEarthPoints
-    { get { return earthpoints; } }
-
-    public int CurrentSpacePoints
-    { get { return spacepoints; } }
+    public int CurrentBarrelGoo
+    { get { return Barrelcontent; } }
 
     public void AddPoints(int p)
     {
@@ -267,5 +262,10 @@ public class GameManager : MonoBehaviour {
                 EventManager.TriggerEvent("GainedEnergy", null, e - energy);
         }
         energy = e;
+    }
+
+    public void AddGooToBarrel(int goo)
+    {
+        Barrelcontent += goo;
     }
 }

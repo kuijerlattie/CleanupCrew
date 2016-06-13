@@ -3,9 +3,12 @@ using System.Collections;
 
 public class BreakoutScript : BaseGamestate {
 
+    public float BlobSpawnTime = 10; //time between blob spawns in seconds
+    float SpawnTimer = 5;
+
     public override void StartState()
     {
-
+            
     }
 
     public override void EndState()
@@ -15,17 +18,18 @@ public class BreakoutScript : BaseGamestate {
 
     void Update()
     {
-        if (GameManager.instance.CurrentEarthPoints > 10)
+        if (GameManager.instance.CurrentBarrelGoo > 10)
         {
             GameManager.instance.SetState(GameManager.gamestate.BossIntermission);
         }
-        if (GameManager.instance.CurrentWaterPoints > 10)
+
+        SpawnTimer -= Time.deltaTime;
+        if (SpawnTimer <= 0)
         {
-            GameManager.instance.SetState(GameManager.gamestate.BossIntermission);
+            //spawn blob from top
+            BlobScript.Spawn(BlobScript.GetRandomSpawnPos);
+            SpawnTimer = BlobSpawnTime;
         }
-        if (GameManager.instance.CurrentEarthPoints > 10)
-        {
-            GameManager.instance.SetState(GameManager.gamestate.BossIntermission);
-        }
+
     }
 }

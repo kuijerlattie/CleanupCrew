@@ -6,7 +6,7 @@ using System;
 public class RodScript : MonoBehaviour {
 
 
-    private float currentState = RodState.Down;
+    private float currentState = RodState.Up;
 
     private Vector3 targetPos = Vector3.up;
     public float RodSpeed = 2;  //how fast it moves up and down
@@ -34,7 +34,7 @@ public class RodScript : MonoBehaviour {
     {
         switchTimer = SwitchAfterSeconds;
         targetPos = transform.position;
-        RodState.Up = (GetComponent<Collider>().bounds.size.y / 2.0f + float.Epsilon + maxHeight);   
+        RodState.Down = -(GetComponent<Collider>().bounds.size.y / 2.0f + float.Epsilon + maxHeight);   
 
     }
 	
@@ -80,6 +80,8 @@ public class RodScript : MonoBehaviour {
     {
         if (col.gameObject.tag == "Ball")
         {
+            //make ball bounce off 2x the speed
+            col.gameObject.GetComponent<Rigidbody>().velocity *= 4;
             EventManager.TriggerEvent("BallHitRod", this.gameObject, (float)rodType);
         }
 
@@ -89,13 +91,22 @@ public class RodScript : MonoBehaviour {
         }
     }
 
+    void OnCollisionStay(Collision col)
+    {
+        if (col.gameObject.tag == "Blob")
+        {
+            EventManager.TriggerEvent("BlobCrushed", col.gameObject);
+            Destroy(col.gameObject);
+        }
+    }
+
     //custom 'enum' of which its values can be changed during runtime
     //the values of the states are used for the Y-value of the rod
     //EDIT: this might not work with static if the different rods have different heights(which they should NOT)
     private static class RodState
     {
-        static public float Up = 5; //is overwritten later
-        static public float Down = 0;
+        static public float Up = 0; //is overwritten later
+        static public float Down = -5;
     }
 
 

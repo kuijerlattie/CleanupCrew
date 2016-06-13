@@ -16,8 +16,6 @@ public class HudScript : MonoBehaviour {
         tPoints = GameObject.Find("Points").GetComponent<Text>();
         tEnergy = GameObject.Find("Energy").GetComponent<Text>();
         tWaterpoints = GameObject.Find("Waterpoints").GetComponent<Text>();
-        tEarthpoints = GameObject.Find("Sandpoints").GetComponent<Text>();
-        tSpacepoints = GameObject.Find("Spacepoints").GetComponent<Text>();
         tState = GameObject.Find("GameState").GetComponent<Text>();
         tGameplayState = GameObject.Find("GameplayState").GetComponent<Text>();
 
@@ -27,9 +25,7 @@ public class HudScript : MonoBehaviour {
 	void Update () {
         tPoints.text = "points: " + GameManager.instance.CurrentPoints;
         tEnergy.text = "energy: " + GameManager.instance.CurrentEnergy;
-        tWaterpoints.text = "Waste in water: " + GameManager.instance.CurrentWaterPoints;
-        tEarthpoints.text = "Waste underground: " + GameManager.instance.CurrentEarthPoints;
-        tSpacepoints.text = "waste in space: " + GameManager.instance.CurrentSpacePoints;
+        tWaterpoints.text = "Goo in barrel: " + GameManager.instance.CurrentBarrelGoo;
         tState.text = "Current state: " + GameManager.instance.CurrentGamestate;
         tGameplayState.text = "current gameplay state: " + GameManager.instance.CurrentGameplaystate;
 	}
