@@ -34,7 +34,7 @@ public class GameLogicScripting : MonoBehaviour
 
     void OnBallHitRod(GameObject g, float f)
     {
-        BlobScript.Spawn(BlobScript.GetRandomSpawnPos, g.GetComponent<RodScript>().rodType);
+        BlobScript.Spawn(g.transform.position+ new Vector3(0,0,-2), g.GetComponent<RodScript>().rodType);
     }
 
     void OnBallHitBlob(GameObject g, float f)

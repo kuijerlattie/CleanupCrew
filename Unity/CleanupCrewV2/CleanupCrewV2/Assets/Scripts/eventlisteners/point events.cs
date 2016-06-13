@@ -19,6 +19,7 @@ public class pointevents : MonoBehaviour
         EventManager.StopListening("BallBottomDeath", OnBallBottomDeath);
         EventManager.StopListening("BlobBottomDeath", OnBlobBottomDeath);
         EventManager.StopListening("BlobKill", OnBlobKill);
+        EventManager.StopListening("BallHitRod", OnRodHit);
         //add all events to stop listening to here
     }
 
