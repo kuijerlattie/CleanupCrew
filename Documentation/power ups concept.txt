@@ -1,20 +1,30 @@
-power up concepts :
+power up concepts : 	@Would work 	?Might work if multitouch or double tap
 
-multiple peddals				#
+Keep ball in peddal "bounds" for X seconds	@	Former Bug
 
-?slowing blobs movement
+slowing blobs movement				@
 
-Blobs stick to the paddle and can be shot off	!#
+Ball stick to the paddle and can be shot off	?
 
-magnetic pedal					!#
+magnetic pedal					@				
+	-Move toward paddle when moving toward paddle
 
-smaller blobs					
+bigger pedal					@
 
-bigger pedal					!#
+smaller pedal					@
 
-smaller pedal					!#
+extra life					@
 
-extra energy					#
+Multiball					@
+	-Lose life when all balls are gone
 
-lose all powerups				#
+Shoot						?
+
+Kill all enemies				@
+
+Shield at bottom				@
+
+Double paddles					@
+
+
 
