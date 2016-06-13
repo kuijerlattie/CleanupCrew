@@ -18,15 +18,7 @@ public class BreakoutScript : BaseGamestate {
 
     void Update()
     {
-        if (GameManager.instance.CurrentEarthPoints > 10)
-        {
-            GameManager.instance.SetState(GameManager.gamestate.BossIntermission);
-        }
-        if (GameManager.instance.CurrentWaterPoints > 10)
-        {
-            GameManager.instance.SetState(GameManager.gamestate.BossIntermission);
-        }
-        if (GameManager.instance.CurrentEarthPoints > 10)
+        if (GameManager.instance.CurrentBarrelGoo > 10)
         {
             GameManager.instance.SetState(GameManager.gamestate.BossIntermission);
         }

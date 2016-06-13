@@ -24,12 +24,14 @@ public class GameLogicScripting : MonoBehaviour
     {
         EventManager.StartListening("BallHitRod", OnBallHitRod);
         EventManager.StartListening("BallHitBlob", OnBallHitBlob);
+        EventManager.StartListening("BlobKill", OnBlobKill);
     }
 
     void OnDisable()
     {
         EventManager.StopListening("BallHitRod", OnBallHitRod);
         EventManager.StopListening("BallHitBlob", OnBallHitBlob);
+        EventManager.StopListening("BlobKill", OnBlobKill);
     }
 
     void OnBallHitRod(GameObject g, float f)
@@ -42,5 +44,9 @@ public class GameLogicScripting : MonoBehaviour
         g.GetComponent<BlobScript>().TakeDamage(1);
     }
 
+    void OnBlobKill(GameObject g, float f)
+    {
+        GameManager.instance.AddGooToBarrel(1);
+    }
 
 }
