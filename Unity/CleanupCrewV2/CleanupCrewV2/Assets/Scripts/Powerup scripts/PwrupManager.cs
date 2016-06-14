@@ -11,7 +11,11 @@ public class PwrupManager : MonoBehaviour {
     public enum PowerupType
     {
         smallPaddle,
-        bigPaddle
+        bigPaddle,
+        slowBlobs,
+        destroyBlobs,
+        bottomShield,
+        magneticPaddle
     }
 
     void BlobDestroyed(GameObject g, float f)
@@ -39,7 +43,7 @@ public class PwrupManager : MonoBehaviour {
 
     void SpawnPwrup()
     {
-        Vector3 spawnLocation = new Vector3(0, 0, 0); // current solution, later need to make it spawn where last blob dies(?)
+        Vector3 spawnLocation = new Vector3(0, 0, -1); // current solution, later need to make it spawn where last blob dies(?)
         GameObject pwrUp = (GameObject)Instantiate(pwrUps[Random.Range(0, pwrUps.Length)], spawnLocation, Quaternion.identity);
         
     }
@@ -58,6 +62,24 @@ public class PwrupManager : MonoBehaviour {
                 StartCoroutine(PwrupTimer(type, durationTimer));
                 break;
 
+            case PowerupType.slowBlobs:
+                SlowPwrup.Slow();
+                StartCoroutine(PwrupTimer(type, durationTimer));
+                break;
+
+            case PowerupType.destroyBlobs:
+                destroyBlobs.destroyAllBlobs();
+                break;
+
+            case PowerupType.magneticPaddle:
+                magneticPaddle.magnetic();
+                break;
+
+            case PowerupType.bottomShield:
+                shieldPwrup.activateShield();
+                StartCoroutine(PwrupTimer(type, durationTimer));
+                break;
+
             default:
                 break;
         }
@@ -73,6 +95,14 @@ public class PwrupManager : MonoBehaviour {
 
             case PowerupType.bigPaddle:
                 upScalePwrup.ResetScale();
+                break;
+
+            case PowerupType.slowBlobs:
+                SlowPwrup.ResetSpeed();
+                break;
+
+            case PowerupType.bottomShield:
+                shieldPwrup.deactivateShield();
                 break;
 
             default:

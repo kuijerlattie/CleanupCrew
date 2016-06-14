@@ -15,5 +15,10 @@ public abstract class PwrupBase : MonoBehaviour {
             GameObject.Destroy(gameObject);
         }
 
+        if(col.collider.gameObject == GameObject.Find("bottom wall"))
+        {
+            GameObject.Destroy(gameObject);
+        }
+
     }
 }

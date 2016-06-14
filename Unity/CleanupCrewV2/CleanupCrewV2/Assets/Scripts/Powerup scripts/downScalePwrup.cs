@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System;
+
 
 public class downScalePwrup : PwrupBase {
-
+    public PwrupManager.PowerupType powerupType;
     public override void startPwrup()
     {
-        Narrow();
+        PwrupManager manager = FindObjectOfType<PwrupManager>();
+
+        manager.ActivatePwrup(powerupType);
     }
 
     public override void stopPwrup()
@@ -19,7 +20,7 @@ public class downScalePwrup : PwrupBase {
         GameObject paddle;
 
         paddle = FindObjectOfType<PaddleControls>().gameObject;
-        paddle.transform.localScale = new Vector3(0.5f, 1, 1);
+        paddle.transform.localScale = new Vector3(2, 1, 0.5f);
     }
 
     static public void ResetScale()
@@ -27,6 +28,6 @@ public class downScalePwrup : PwrupBase {
         GameObject paddle;
 
         paddle = FindObjectOfType<PaddleControls>().gameObject;
-        paddle.transform.localScale = new Vector3(1, 1, 1);
+        paddle.transform.localScale = new Vector3(4, 1, 0.5f);
     }
 }
