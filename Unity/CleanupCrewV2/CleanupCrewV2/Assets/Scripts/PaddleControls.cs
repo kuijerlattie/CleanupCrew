@@ -158,7 +158,6 @@ public class PaddleControls : MonoBehaviour {
 	void Update () {
         transform.position = Vector3.MoveTowards(transform.position, new Vector3(targetX, transform.position.y, transform.position.z), Time.deltaTime * moveSpeed);
         LaunchUpdate();
-        if (Input.GetKeyDown(KeyCode.Space)) SpawnBall();
 	}
 
     void BallDied(GameObject ball, float f)

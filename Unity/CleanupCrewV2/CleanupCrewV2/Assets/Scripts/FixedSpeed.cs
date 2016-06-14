@@ -11,13 +11,33 @@ public class FixedSpeed : MonoBehaviour {
 
     Rigidbody _rigid;
     public float targetSpeed = 10;
+    public float maxSpeed = 50;
     public Vector3 fixedDirection = Vector3.zero;   //currently doesnt work with blobs hitting rods
     bool slowFixDirection = false;
+    bool slowResetSpeed = false;
     // Use this for initialization
     void Start()
     {
         _rigid = GetComponent<Rigidbody>();
         ResetSpeed();
+    }
+
+    public void SlowResetSpeed()
+    {
+        slowResetSpeed = true;
+    }
+
+    /// <summary>
+    /// to make sure the ball won't get stuck bouncing left to right, and not going up or down
+    /// </summary>
+    private void AdjustDirection()
+    {
+        if (gameObject.tag != "Ball") return;
+        if(Mathf.Abs(_rigid.velocity.x) > Mathf.Abs(_rigid.velocity.z))
+        {
+            _rigid.velocity = new Vector3(_rigid.velocity.x / 1.5f, 0, _rigid.velocity.z * 1.5f);
+
+        }
     }
 
     public void ResetSpeed()
@@ -59,16 +79,35 @@ public class FixedSpeed : MonoBehaviour {
 
     void OnCollisionEnter(Collision c)
     {
+        AdjustDirection();
         ResetSpeed();
         if (c.collider.gameObject.GetComponent<RodScript>())
         {
             SlowResetDirection();
+            if (gameObject.tag == "Blob")
+            {
+                StopCoroutine("StartBehaviour");
+                gameObject.GetComponent<BlobScript>().StopBehaviour(1);
+            }
         }
         else InstantResetDirection();
+
+        
     }
 
     void Update()
     {
+        if(slowResetSpeed)
+        {
+            if (_rigid.velocity.magnitude == targetSpeed)
+                slowResetSpeed = false;
+            else
+            {
+                _rigid.velocity = Vector3.MoveTowards(_rigid.velocity, _rigid.velocity.normalized * targetSpeed, Time.deltaTime * 300);
+            }
+        }
+
+
         if(slowFixDirection)
         {
             if(_rigid.velocity == fixedDirection)
@@ -80,7 +119,8 @@ public class FixedSpeed : MonoBehaviour {
                 ResetSpeed();
             }
         }
-        ResetSpeed();
+        if(!slowResetSpeed) ResetSpeed();
+        if (_rigid.velocity.magnitude > maxSpeed) _rigid.velocity = _rigid.velocity.normalized * maxSpeed;
     }
 
 }

@@ -9,10 +9,28 @@ public class BlobScript : MonoBehaviour {
     private Vector3 startDirection;
     private float moveSpeed = 1;
     private int health = 1;
+    private bool useBehaviour = true;
+
+    public float behaviourOffset = 0;  // is set later
 
     public static GameObject[] spawnLocations = null;
 
+    /// <summary>
+    /// stop the blob behaviour for x amount of seconds, used to stop them getting stuck against walls trying to continue their behaviour
+    /// </summary>
+    /// <param name="seconds"></param>
+    public void StopBehaviour(float seconds)
+    {
+        useBehaviour = false;
+        StartCoroutine(StartBehaviour(seconds));
+        
+    }
 
+    private IEnumerator StartBehaviour(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        useBehaviour = true;
+    }
 
     private static void InitSpawnLocations()
     {
@@ -74,14 +92,15 @@ public class BlobScript : MonoBehaviour {
     void Start () {
 
         startDirection = -Vector3.forward;
-
+        behaviourOffset = Time.realtimeSinceStartup;
 
         GetComponent<Rigidbody>().velocity = startDirection * moveSpeed;
 	}
 
     void Update()
     {
-        transform.position += GetBehaviourVector();
+        if(useBehaviour)
+            transform.position += GetBehaviourVector();
 
     }
 
@@ -91,8 +110,8 @@ public class BlobScript : MonoBehaviour {
         Vector3 vec = Vector3.zero;
         float z = transform.position.z;
 
-        //vec.x = Mathf.Sin(z);
-        //vec.y = Mathf.Sin(z);
+        vec.x = Mathf.Sin(z + behaviourOffset);
+
 
 
 
@@ -111,6 +130,7 @@ public class BlobScript : MonoBehaviour {
         {
             EventManager.TriggerEvent("BallHitBlob", gameObject);
         }
+
 
     }
 
