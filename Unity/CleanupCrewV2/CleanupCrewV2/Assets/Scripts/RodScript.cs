@@ -15,7 +15,59 @@ public class RodScript : MonoBehaviour {
     private float switchTimer;
     private float maxHeight = 10;
 
-    public static bool AllowedToSwitch = true; //alternative to disable this script
+    public bool StartUp = true;
+    public bool AllowedToSwitch = true; //alternative to disable this script
+
+    public void EnableRod()
+    {
+        AllowedToSwitch = true;
+        if (currentState == RodState.Down) SwitchState();
+    }
+    /// <summary>
+    /// keeps the rod in the 'Down-position' until 'EnableRod' is called
+    /// </summary>
+    public void DisableRod()
+    {
+        if (currentState == RodState.Up) SwitchState();
+        AllowedToSwitch = false;
+    }
+
+    public static void DisableAllRods()
+    {
+        RodScript[] rods = FindObjectsOfType<RodScript>();
+        foreach (RodScript rod in rods)
+        {
+            rod.DisableRod();
+        }
+    }
+
+    public static void EnableAllRods()
+    {
+        RodScript[] rods = FindObjectsOfType<RodScript>();
+        foreach(RodScript rod in rods)
+        {
+            rod.EnableRod();
+        }
+    }
+
+
+    public static Vector3 GetRodSpawnPoint(GameObject rod)
+    {
+        RodScript RS = rod.GetComponent<RodScript>();
+        if (!RS) Debug.LogError("ERROR: '" + rod.name + "' does not have a 'RodScript' attached");
+        return RS.SpawnPoint;
+    }
+    public Vector3 SpawnPoint { get {
+            if (_SpawnPoint == Vector3.zero) SetSpawnPoint();
+            return _SpawnPoint;
+        } }
+    private Vector3 _SpawnPoint = Vector3.zero;
+    private void SetSpawnPoint()
+    {
+        _SpawnPoint = new Vector3(transform.position.x, BlobScript.GetRandomSpawnPos.y, transform.position.z - GetComponent<Collider>().bounds.size.z / 2.0f - 2);
+    }
+
+
 
     public void SwitchState()
     {
@@ -28,7 +80,10 @@ public class RodScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         Init();
-	}
+        currentState = StartUp ? RodState.Up : RodState.Down;
+        transform.position = new Vector3(transform.position.x, currentState, transform.position.z);
+        targetPos = transform.position;
+    }
 
     void Init()
     {
@@ -76,12 +131,15 @@ public class RodScript : MonoBehaviour {
 
     public rodtype rodType;
 
+
+
     void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.tag == "Ball")
         {
-            //make ball bounce off 2x the speed
+            //make ball bounce off 4x the speed
             col.gameObject.GetComponent<Rigidbody>().velocity *= 4;
+            col.gameObject.GetComponent<FixedSpeed>().SlowResetSpeed(); //to make sure the speed drops off quickly after the speedup
             EventManager.TriggerEvent("BallHitRod", this.gameObject, (float)rodType);
         }
 
@@ -96,7 +154,7 @@ public class RodScript : MonoBehaviour {
         if (col.gameObject.tag == "Blob")
         {
             EventManager.TriggerEvent("BlobCrushed", col.gameObject);
-            Destroy(col.gameObject);
+            //Destroy(col.gameObject);
         }
     }
 
