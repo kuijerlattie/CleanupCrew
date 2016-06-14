@@ -18,6 +18,11 @@ public class PaddleControls : MonoBehaviour {
             _currentState = value;
             EventManager.TriggerEvent(value == PaddleState.Launching ? "StartLaunch" : "StartPlay", gameObject);
             //TODO enable/disable collider trigger to stop blob collecting during launch
+
+            foreach (GameObject g in playingBalls)
+            {
+                g.GetComponent<Collider>().isTrigger = value == PaddleState.Launching ? true : false;
+            }
         }
         get { return _currentState; }
 
@@ -32,6 +37,8 @@ public class PaddleControls : MonoBehaviour {
         Playing,
         Launching
     }
+
+
 
     /// <summary>
     /// gets width/height information from objects in the scene needed for this script to work properly
@@ -67,7 +74,9 @@ public class PaddleControls : MonoBehaviour {
         ball.transform.position = this.transform.position + new Vector3(0, 0, ball.GetComponent<SphereCollider>().radius + 0.5f);
         EventManager.TriggerEvent("BallSpawn", ball);
         playingBalls.Add(ball);
+
         return ball;
+        
     }
 	// Use this for initialization
 	void OnEnable() {
