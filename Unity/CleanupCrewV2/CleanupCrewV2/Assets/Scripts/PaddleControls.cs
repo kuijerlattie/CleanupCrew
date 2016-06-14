@@ -9,7 +9,7 @@ public class PaddleControls : MonoBehaviour {
     private float PaddleWidthHalf;
     private float BallRadius;
 
-    public float moveSpeed = 40; 
+    private float moveSpeed = 75; 
 
     public PaddleState currentState
     {
@@ -17,7 +17,6 @@ public class PaddleControls : MonoBehaviour {
         {
             _currentState = value;
             EventManager.TriggerEvent(value == PaddleState.Launching ? "StartLaunch" : "StartPlay", gameObject);
-            //TODO enable/disable collider trigger to stop blob collecting during launch
 
             foreach (GameObject g in playingBalls)
             {
