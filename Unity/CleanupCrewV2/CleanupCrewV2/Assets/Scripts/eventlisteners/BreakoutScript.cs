@@ -8,7 +8,8 @@ public class BreakoutScript : BaseGamestate {
 
     public override void StartState()
     {
-            
+        //GameManager.instance.SetState(GameManager.gamestate.BossIntermission);
+        GameManager.instance.gooNeededForBoss = 5 + GameManager.instance.CurrentLevel;
     }
 
     public override void EndState()
@@ -18,7 +19,7 @@ public class BreakoutScript : BaseGamestate {
 
     void Update()
     {
-        if (GameManager.instance.CurrentBarrelGoo > 10)
+        if (GameManager.instance.CurrentBarrelGoo > GameManager.instance.gooNeededForBoss)
         {
             GameManager.instance.SetState(GameManager.gamestate.BossIntermission);
         }
