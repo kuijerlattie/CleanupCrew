@@ -87,7 +87,7 @@ public class FixedSpeed : MonoBehaviour {
             if (gameObject.tag == "Blob")
             {
                 StopCoroutine("StartBehaviour");
-                gameObject.GetComponent<BlobScript>().StopBehaviour(1);
+                gameObject.GetComponent<BlobScript>().StopBehaviour(0.1f);
             }
         }
         else InstantResetDirection();
