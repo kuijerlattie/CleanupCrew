@@ -15,6 +15,9 @@ public class BlobScript : MonoBehaviour {
 
     public static GameObject[] spawnLocations = null;
 
+    private float TimeAlive = 0;
+    private float StartBehaviourAfter = 0.5f;  //after spawning wait x seconds before using behaviour
+    private bool currentDirection = true;   //used as an int
     /// <summary>
     /// stop the blob behaviour for x amount of seconds, used to stop them getting stuck against walls trying to continue their behaviour
     /// </summary>
@@ -61,21 +64,31 @@ public class BlobScript : MonoBehaviour {
     {
         GameObject newBlob = baseSpawn(position);
         newBlob.GetComponent<BlobScript>().blobType = RodScript.RandomType;
+        newBlob.GetComponent<BlobScript>().currentBehaviour = RandomBehaviour;  //TODO random
         return newBlob;
     }
 
-  
+    private static BehaviourType RandomBehaviour
+    {
+        get
+        {
+            BehaviourType[] rodtypeValues = (BehaviourType[])System.Enum.GetValues(typeof(BehaviourType));
+            return rodtypeValues[UnityEngine.Random.Range(0, rodtypeValues.GetLength(0))];
+        }
+    }
 
-    /// <summary>
-    /// spawn blob with a chosen type
-    /// </summary>
-    /// <param name="position"></param>
-    /// <param name="Type"></param>
-    /// <returns></returns>
-    public static GameObject Spawn(Vector3 position, RodScript.rodtype Type)
+
+/// <summary>
+/// spawn blob with a chosen type
+/// </summary>
+/// <param name="position"></param>
+/// <param name="Type"></param>
+/// <returns></returns>
+public static GameObject Spawn(Vector3 position, BehaviourType behaviour)
     {
         GameObject newBlob = baseSpawn(position);
-        newBlob.GetComponent<BlobScript>().blobType = Type;
+        newBlob.GetComponent<BlobScript>().blobType = RodScript.RandomType;
+        newBlob.GetComponent<BlobScript>().currentBehaviour = behaviour;
         return newBlob;
     }
 
@@ -99,8 +112,19 @@ public class BlobScript : MonoBehaviour {
 
     void Update()
     {
-        if(useBehaviour)
-            transform.position += GetBehaviourVector();
+        if (StartBehaviourAfter >= 0) StartBehaviourAfter -= Time.deltaTime;
+        TimeAlive += Time.deltaTime;
+        if (useBehaviour && StartBehaviourAfter < 0)
+            transform.position += GetBehaviourVector() * 0.2f;
+
+    }
+
+    public BehaviourType currentBehaviour = BehaviourType.none;
+    public enum BehaviourType
+    {
+        none,
+        sin,
+        leftRightBounce
 
     }
 
@@ -110,12 +134,20 @@ public class BlobScript : MonoBehaviour {
         Vector3 vec = Vector3.zero;
         float z = transform.position.z;
 
-        vec.x = Mathf.Sin(z + behaviourOffset);
+        switch(currentBehaviour)
+        {
+            case BehaviourType.none:
+                break;
+            case BehaviourType.sin:
+                vec.x = Mathf.Sin(TimeAlive * 5f + behaviourOffset);    //Sin maybe performance issues later
+                break;
+            case BehaviourType.leftRightBounce:
+                vec.x = currentDirection ? 1 : -1;
+                break;
+        }
+        
+  
 
-
-
-
-        vec *= Time.deltaTime * 20f;
         return vec;
     }
 
@@ -126,10 +158,15 @@ public class BlobScript : MonoBehaviour {
     /// <param name="c"></param>
     void OnCollisionEnter(Collision c)
     {
+        if(c.collider.gameObject.name == "WallAndCollider" || c.collider.gameObject.GetComponent<RodScript>())
+            currentDirection = !currentDirection;
+
         if (c.collider.gameObject.tag == "Ball")
         {
             EventManager.TriggerEvent("BallHitBlob", gameObject);
         }
+
+        
 
 
     }

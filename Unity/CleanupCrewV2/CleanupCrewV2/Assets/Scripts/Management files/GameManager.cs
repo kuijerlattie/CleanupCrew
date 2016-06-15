@@ -227,6 +227,13 @@ public class GameManager : MonoBehaviour {
         EventManager.TriggerEvent("GainedPoints", null, p);
     }
 
+    public int gooNeededForBoss
+    {
+        get { return GooNeededForBoss; }
+        set { GooNeededForBoss = value; }
+    }
+
+
     public void LosePoints(int p)
     {
         points -= p;
