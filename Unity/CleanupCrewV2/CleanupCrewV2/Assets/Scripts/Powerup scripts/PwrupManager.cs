@@ -8,6 +8,17 @@ public class PwrupManager : MonoBehaviour {
     public int blobsDestroyed = 0;
     public float durationTimer; // Time how long pwrups stay on
 
+    public static PwrupManager instance = null;
+    void OnAwake()
+    {
+        if (instance == null)
+            instance = this;
+        if (instance != this)
+            Destroy(gameObject);
+
+        DontDestroyOnLoad(gameObject);
+    }
+
     public enum PowerupType
     {
         smallPaddle,

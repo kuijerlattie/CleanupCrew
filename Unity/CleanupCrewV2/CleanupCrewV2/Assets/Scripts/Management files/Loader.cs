@@ -6,6 +6,7 @@ public class Loader : MonoBehaviour {
     public GameObject gameManager;
     public GameObject eventManager;
     public GameObject gameLogicScript;
+    public PwrupManager pwrupManager;
 
 	void Awake()
     {
@@ -16,5 +17,7 @@ public class Loader : MonoBehaviour {
             Instantiate(gameManager);
         if (GameLogicScripting.instance == null)
             Instantiate(gameLogicScript);
+        if(PwrupManager.instance == null)
+            Instantiate(pwrupManager);
     }
 }
