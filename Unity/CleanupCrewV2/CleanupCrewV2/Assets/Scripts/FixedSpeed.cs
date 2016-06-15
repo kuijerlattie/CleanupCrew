@@ -35,7 +35,7 @@ public class FixedSpeed : MonoBehaviour {
         if (gameObject.tag != "Ball") return;
         if(Mathf.Abs(_rigid.velocity.x) > Mathf.Abs(_rigid.velocity.z))
         {
-            _rigid.velocity = new Vector3(_rigid.velocity.x / 1.5f, 0, _rigid.velocity.z * 1.5f);
+            _rigid.velocity = new Vector3(_rigid.velocity.x / 1.5f, 0, (_rigid.velocity.z - 0.3f) * 1.5f);
 
         }
     }
@@ -97,6 +97,7 @@ public class FixedSpeed : MonoBehaviour {
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space)) _rigid.velocity = Vector3.right;
         if(slowResetSpeed)
         {
             if (_rigid.velocity.magnitude == targetSpeed)
