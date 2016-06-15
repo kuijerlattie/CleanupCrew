@@ -40,7 +40,7 @@ public class FixedSpeed : MonoBehaviour {
         }
         if(_rigid.velocity.normalized == -Vector3.forward)  // to make sure it doesnt get behind a rod and keeps going against the top wall
         {
-            _rigid.velocity += new Vector3(0.2f, 0, 0);
+            _rigid.velocity += new Vector3(1f, 0, 0);
         }
     }
 

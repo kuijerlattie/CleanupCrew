@@ -181,6 +181,9 @@ public static GameObject Spawn(Vector3 position, BehaviourType behaviour)
         }
     }
 
+    /// <summary>
+    /// not used? 
+    /// </summary>
     void Die()
     {
         EventManager.TriggerEvent("BlobKill", gameObject);
