@@ -23,7 +23,7 @@ public class ParticleEvents : MonoBehaviour {
 
     void OnBallHitRod(GameObject g, float f)
     {
-
+		StaticFuntions.SpawnParticle("Thunder", g.transform.position + Vector3.up * 5	); //g is in this case the Blob that is destroyed
     }
     void OnBlobHitRod(GameObject g, float f)
     {
