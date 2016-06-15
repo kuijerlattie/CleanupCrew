@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BossBase : MonoBehaviour {
+public abstract class BossBase : MonoBehaviour {
 
     public bool alive = true;
     public int hitpoints = 1;
@@ -9,14 +9,16 @@ public class BossBase : MonoBehaviour {
     public int phase = 0;
     public bool invincible = true;
 
+    ParticleSystem spawnparticle;
+
     public void Hit(int damage)
     {
-        if (invincible == false)
+        if (!invincible)
         {
             hitpoints -= damage;
             if (hitpoints <= 0)
             {
-                
+                Die();           
             }
         }
         
@@ -29,6 +31,8 @@ public class BossBase : MonoBehaviour {
             EventManager.TriggerEvent("BossDied", this.gameObject);
         }
     }
+
+    public abstract void Die();
 
     public float hitpointsForHud
     { get { return 1 / maxhitpoints * hitpoints; } }

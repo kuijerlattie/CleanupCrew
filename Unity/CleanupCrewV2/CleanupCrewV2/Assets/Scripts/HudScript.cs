@@ -19,6 +19,8 @@ public class HudScript : MonoBehaviour {
         tPoints = GameObject.Find("Points").GetComponent<Text>();
         tEnergy = GameObject.Find("Energy").GetComponent<Text>();
         tWaterpoints = GameObject.Find("Waterpoints").GetComponent<Text>();
+        tEarthpoints = GameObject.Find("Sandpoints").GetComponent<Text>();
+        tSpacepoints = GameObject.Find("Spacepoints").GetComponent<Text>();
         tState = GameObject.Find("GameState").GetComponent<Text>();
         tGameplayState = GameObject.Find("GameplayState").GetComponent<Text>();
         EnergyGauge = GameObject.Find("EnergyGauge").GetComponent<Image>();
@@ -33,8 +35,17 @@ public class HudScript : MonoBehaviour {
         tWaterpoints.text = "Goo in barrel: " + GameManager.instance.CurrentBarrelGoo;
         tState.text = "Current state: " + GameManager.instance.CurrentGamestate;
         tGameplayState.text = "current gameplay state: " + GameManager.instance.CurrentGameplaystate;
-        Debug.Log(GameManager.instance.CurrentBarrelGooUI);
         EnergyGauge.fillAmount = GameManager.instance.CurrentEnergyUI;
         BarrelGauge.fillAmount = GameManager.instance.CurrentBarrelGooUI;
+
+        if (GameManager.instance.CurrentGamestate == GameManager.gamestate.Boss)
+        {
+            tEarthpoints.text = "Boss health: " + GameObject.FindObjectOfType<MoleScript>().hitpoints;
+            tSpacepoints.text = "Boss state: " + GameObject.FindObjectOfType<MoleScript>().state;
+        }
+        else
+        {
+            tEarthpoints.text = "No Boss";
+        }
 	}
 }

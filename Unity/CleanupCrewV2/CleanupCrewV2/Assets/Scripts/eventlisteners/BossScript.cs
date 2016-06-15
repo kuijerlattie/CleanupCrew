@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+//script for whatever you want to do during the bossfight, does not include boss mechanics itself
 public class BossScript : BaseGamestate {
 
     float i = 0;
