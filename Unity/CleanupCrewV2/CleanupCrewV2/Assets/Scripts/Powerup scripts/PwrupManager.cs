@@ -7,6 +7,9 @@ public class PwrupManager : MonoBehaviour {
     public int blobsNeeded = 1; // how many blobs need to be destroyed before spawning pwrup
     public int blobsDestroyed = 0;
     public float durationTimer; // Time how long pwrups stay on
+    public float spawnTimer = 10;
+    public float minSpawnTime = 10, maxSpawnTime = 15;
+    public bool bossSpawned = false;
 
     public static PwrupManager instance = null;
     void OnAwake()
@@ -45,19 +48,52 @@ public class PwrupManager : MonoBehaviour {
     void Start()
     {
         EventManager.StartListening("BlobDestroyed", BlobDestroyed);
+        EventManager.StartListening("StartBoss", BossFightStarted);
     }
 
     void OnDisable()
     {
         EventManager.StopListening("BlobDestroyed", BlobDestroyed);
+        EventManager.StopListening("StartBoss", BossFightStarted);
     }
     
+    void BossFightStarted(GameObject g, float f)
+    {
+        bossSpawned = true;
+    }
+
+    void Update()
+    {
+        if(bossSpawned)
+        {
+            spawnTimer -= Time.deltaTime;
+            if(spawnTimer < 0)
+            {
+                SpawnPwrup();
+                spawnTimer = Random.Range(minSpawnTime, maxSpawnTime);
+            }
+        }
+    }
 
     void SpawnPwrup()
     {
-        Vector3 spawnLocation = BlobScript.GetRandomSpawnPos; // current solution, later need to make it spawn where last blob dies(?)
-        GameObject pwrUp = (GameObject)Instantiate(pwrUps[Random.Range(0, pwrUps.Length)], spawnLocation, Quaternion.identity);
+        if(GameManager.instance.CurrentGamestate == GameManager.gamestate.Breakout)
+        {
+            Vector3 spawnLocation = BlobScript.GetRandomSpawnPos; // current solution, later need to make it spawn where last blob dies(?)
+            GameObject pwrUp = (GameObject)Instantiate(pwrUps[Random.Range(0, pwrUps.Length)], spawnLocation, Quaternion.identity);
+        }
         
+        if(GameManager.instance.CurrentGamestate == GameManager.gamestate.Boss)
+        {
+            Vector3 spawnLocation = BlobScript.GetRandomSpawnPos; // current solution, later need to make it spawn where last blob dies(?)
+            GameObject powerUp = null;
+            while (powerUp == null || (powerUp != null && (powerUp.GetComponent<destroyBlobs>() != null || powerUp.GetComponent<shootingPwrup>() != null || powerUp.GetComponent<SlowPwrup>() != null)))
+            {
+                powerUp = pwrUps[Random.Range(0, pwrUps.Length)];
+            }
+
+            GameObject pwrUp = (GameObject)Instantiate(powerUp, spawnLocation, Quaternion.identity);
+        }
     }
 
     public void ActivatePwrup(PowerupType type)
@@ -89,7 +125,7 @@ public class PwrupManager : MonoBehaviour {
 
             case PowerupType.bottomShield:
                 shieldPwrup.activateShield();
-                StartCoroutine(PwrupTimer(type, durationTimer));
+                //StartCoroutine(PwrupTimer(type, durationTimer)); atm not needed
                 break;
 
             case PowerupType.shooting:
@@ -118,10 +154,10 @@ public class PwrupManager : MonoBehaviour {
                 SlowPwrup.ResetSpeed();
                 break;
 
-            case PowerupType.bottomShield:
-                shieldPwrup.deactivateShield();
+         /*   case PowerupType.bottomShield:
+                shieldPwrup.deactivateShield();         Atm not in use
                 break;
-
+                */
             case PowerupType.shooting:
                 shootingPwrup.disallowShooting();
                 break;

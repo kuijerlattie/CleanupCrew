@@ -23,7 +23,7 @@ public class shieldPwrup : PwrupBase {
         GameObject shield = (GameObject)Instantiate(Resources.Load("prefabs/shield"), new Vector3(0,0,-33), Quaternion.identity);
     }
 
-    static public void deactivateShield()
+    static public void deactivateShield() // atm not needed
     {
         GameObject shield = GameObject.FindGameObjectWithTag("Shield");
         Destroy(shield);
