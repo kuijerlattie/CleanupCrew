@@ -15,7 +15,8 @@ public class PwrupManager : MonoBehaviour {
         slowBlobs,
         destroyBlobs,
         bottomShield,
-        magneticPaddle
+        magneticPaddle,
+        shooting
     }
 
     void BlobDestroyed(GameObject g, float f)
@@ -43,7 +44,7 @@ public class PwrupManager : MonoBehaviour {
 
     void SpawnPwrup()
     {
-        Vector3 spawnLocation = new Vector3(0, 0, -1); // current solution, later need to make it spawn where last blob dies(?)
+        Vector3 spawnLocation = BlobScript.GetRandomSpawnPos; // current solution, later need to make it spawn where last blob dies(?)
         GameObject pwrUp = (GameObject)Instantiate(pwrUps[Random.Range(0, pwrUps.Length)], spawnLocation, Quaternion.identity);
         
     }
@@ -80,6 +81,11 @@ public class PwrupManager : MonoBehaviour {
                 StartCoroutine(PwrupTimer(type, durationTimer));
                 break;
 
+            case PowerupType.shooting:
+                shootingPwrup.allowShooting();
+                StartCoroutine(PwrupTimer(type, durationTimer));
+                break;
+
             default:
                 break;
         }
@@ -103,6 +109,10 @@ public class PwrupManager : MonoBehaviour {
 
             case PowerupType.bottomShield:
                 shieldPwrup.deactivateShield();
+                break;
+
+            case PowerupType.shooting:
+                shootingPwrup.disallowShooting();
                 break;
 
             default:
