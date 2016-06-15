@@ -38,6 +38,10 @@ public class FixedSpeed : MonoBehaviour {
             _rigid.velocity = new Vector3(_rigid.velocity.x / 1.5f, 0, (_rigid.velocity.z - 0.3f) * 1.5f);
 
         }
+        if(_rigid.velocity.normalized == -Vector3.forward)  // to make sure it doesnt get behind a rod and keeps going against the top wall
+        {
+            _rigid.velocity += new Vector3(0.2f, 0, 0);
+        }
     }
 
     public void ResetSpeed()
@@ -97,7 +101,6 @@ public class FixedSpeed : MonoBehaviour {
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) _rigid.velocity = Vector3.right;
         if(slowResetSpeed)
         {
             if (_rigid.velocity.magnitude == targetSpeed)
