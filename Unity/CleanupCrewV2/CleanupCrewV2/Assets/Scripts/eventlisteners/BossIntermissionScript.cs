@@ -9,6 +9,14 @@ public class BossIntermissionScript : BaseGamestate {
 
     public override void StartState()
     {
+        //destroy all blobs
+        BlobScript[] blobs = FindObjectsOfType<BlobScript>();
+
+        for (int i = 0; i < blobs.Length; i++)
+        {
+            Destroy(blobs[i].gameObject);
+        }
+
         RodScript.DisableAllRods();
         //chose boss to spawn
         bosslocation = GameObject.Find("BossLocation");
