@@ -13,7 +13,8 @@ public class BossIntermissionScript : BaseGamestate {
         //chose boss to spawn
         bosslocation = GameObject.Find("BossLocation");
         boss = (GameObject)Instantiate(Resources.Load("prefabs/MoleBoss"), bosslocation.transform.position + new Vector3(0, -5, 0), Quaternion.identity);
-        
+        boss.GetComponent<BossBase>().maxhitpoints = 5;
+        boss.GetComponent<BossBase>().hitpoints = 5;
 
     }
 
