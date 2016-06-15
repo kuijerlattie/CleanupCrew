@@ -7,6 +7,7 @@ public class BreakoutIntermissionScript : BaseGamestate {
     {
         RodScript.EnableAllRods();
         GameManager.instance.SetState(GameManager.gamestate.Breakout);
+        GameManager.instance.EmptyBarrelGoo();
     }
 
     public override void EndState()

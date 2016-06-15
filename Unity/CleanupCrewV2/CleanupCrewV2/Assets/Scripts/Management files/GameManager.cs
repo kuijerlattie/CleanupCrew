@@ -221,6 +221,11 @@ public class GameManager : MonoBehaviour {
     public float CurrentBarrelGooUI
     { get { return 1f/(float)GooNeededForBoss*(float)Barrelcontent; } }
 
+    public void EmptyBarrelGoo()
+    {
+        Barrelcontent = 0;
+    }
+
     public void AddPoints(int p)
     {
         points += p;

@@ -28,7 +28,7 @@ public class MoleScript : BossBase {
 
 	// Use this for initialization
 	void Start () {
-        hitpoints = 10;
+        hitpoints = 6;
         targetlocation = gameObject.transform.position;
         bossarea = GameObject.Find("BossArea");
 	}
