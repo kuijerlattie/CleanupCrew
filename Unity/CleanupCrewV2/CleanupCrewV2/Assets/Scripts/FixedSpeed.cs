@@ -46,6 +46,7 @@ public class FixedSpeed : MonoBehaviour {
 
     public void ResetSpeed()
     {
+        if (_rigid == null) _rigid = GetComponent<Rigidbody>();
         if (gameObject.tag == "Ball")
         {
             if (_rigid.velocity.magnitude < targetSpeed)
