@@ -21,7 +21,7 @@ public class BallScript : MonoBehaviour {
 
     void OnCollisionEnter(Collision c)
     {
-        transform.LookAt(_rigid.velocity);
+        transform.LookAt(transform.position + _rigid.velocity);
     }
 
     void Update()
