@@ -1,0 +1,175 @@
+fileFormatVersion: 2
+guid: 2b9051d8af9e9c048ba95d1fcefdff78
+timeCreated: 1466072255
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Slime_animation:ikHandle1
+    100002: Slime_animation:joint1
+    100004: Slime_animation:joint10
+    100006: Slime_animation:joint11
+    100008: Slime_animation:joint12
+    100010: Slime_animation:joint2
+    100012: Slime_animation:joint3
+    100014: Slime_animation:joint4
+    100016: Slime_animation:joint5
+    100018: Slime_animation:joint6
+    100020: Slime_animation:joint7
+    100022: Slime_animation:joint8
+    100024: Slime_animation:joint9
+    100026: Slime_animation:nurbsCircle1
+    100028: Slime_animation:nurbsCircle4
+    100030: Slime_animation:nurbsCircle5
+    100032: Slime_animation:Slime_final:polySurface1
+    100034: //RootNode
+    400000: Slime_animation:ikHandle1
+    400002: Slime_animation:joint1
+    400004: Slime_animation:joint10
+    400006: Slime_animation:joint11
+    400008: Slime_animation:joint12
+    400010: Slime_animation:joint2
+    400012: Slime_animation:joint3
+    400014: Slime_animation:joint4
+    400016: Slime_animation:joint5
+    400018: Slime_animation:joint6
+    400020: Slime_animation:joint7
+    400022: Slime_animation:joint8
+    400024: Slime_animation:joint9
+    400026: Slime_animation:nurbsCircle1
+    400028: Slime_animation:nurbsCircle4
+    400030: Slime_animation:nurbsCircle5
+    400032: Slime_animation:Slime_final:polySurface1
+    400034: //RootNode
+    4300000: Slime_animation:Slime_final:polySurface1
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Slime_animation:Slime_final:polySurface1
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 10
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Slime_animation:ikHandle1
+        weight: 1
+      - path: Slime_animation:joint1
+        weight: 1
+      - path: Slime_animation:joint1/Slime_animation:joint2
+        weight: 1
+      - path: Slime_animation:joint1/Slime_animation:joint2/Slime_animation:joint3
+        weight: 1
+      - path: Slime_animation:joint1/Slime_animation:joint2/Slime_animation:joint4
+        weight: 1
+      - path: Slime_animation:joint1/Slime_animation:joint2/Slime_animation:joint4/Slime_animation:joint5
+        weight: 1
+      - path: Slime_animation:joint1/Slime_animation:joint2/Slime_animation:joint4/Slime_animation:joint5/Slime_animation:joint6
+        weight: 1
+      - path: Slime_animation:joint1/Slime_animation:joint2/Slime_animation:joint7
+        weight: 1
+      - path: Slime_animation:joint1/Slime_animation:joint2/Slime_animation:joint8
+        weight: 1
+      - path: Slime_animation:joint1/Slime_animation:joint2/Slime_animation:joint11
+        weight: 1
+      - path: Slime_animation:joint1/Slime_animation:joint2/Slime_animation:joint12
+        weight: 1
+      - path: Slime_animation:joint1/Slime_animation:joint9
+        weight: 1
+      - path: Slime_animation:joint1/Slime_animation:joint10
+        weight: 1
+      - path: Slime_animation:nurbsCircle1
+        weight: 1
+      - path: Slime_animation:nurbsCircle4
+        weight: 1
+      - path: Slime_animation:nurbsCircle5
+        weight: 1
+      - path: Slime_animation:Slime_final:polySurface1
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 10
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
