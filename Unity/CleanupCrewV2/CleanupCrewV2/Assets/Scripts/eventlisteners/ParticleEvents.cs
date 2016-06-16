@@ -10,7 +10,7 @@ public class ParticleEvents : MonoBehaviour {
     }
     void OnBallDestroy(GameObject g, float f)
     {
-
+		StaticFuntions.SpawnParticle("splash 3", g.transform.position); //g is in this case the Blob that is destroyed
     }
     void OnBlobSpawn(GameObject g, float f)
     {
@@ -23,29 +23,31 @@ public class ParticleEvents : MonoBehaviour {
 
     void OnBallHitRod(GameObject g, float f)
     {
-		StaticFuntions.SpawnParticle("Thunder", g.transform.position + Vector3.up * 5	); //g is in this case the Blob that is destroyed
+		StaticFuntions.SpawnParticle("Thunder", g.transform.position + Vector3.up * 3	); //g is in this case the Blob that is destroyed
     }
     void OnBlobHitRod(GameObject g, float f)
     {
-
+		StaticFuntions.SpawnParticle("blob sparkle", g.transform.position); //g is in this case the Blob that is destroyed
     }
 
     
 
     void OnBallHitPaddle(GameObject g, float f)
     {
-
+		StaticFuntions.SpawnParticle("sparkle", g.transform.position); //g is in this case the Blob that is destroyed
     }
 
     void OnRodMoved(GameObject g, float f)
     {
         if(f >= 0)
         {
-            //going up
+			
+			//going up
 
         }
         if (f < 0)
         {
+			StaticFuntions.SpawnParticle("STEAM", g.transform.position); //g is in this case the Blob that is destroyed
             //going down
 
         }
@@ -58,7 +60,8 @@ public class ParticleEvents : MonoBehaviour {
 
     void OnStartBoss(GameObject g, float f)
     {
-        //g = null, use 'new Vector3(x,y,z)' instead of g.transform.position
+		//StaticFuntions.SpawnParticle("mole green goo",new Vector3(0,0,0)); //g is in this case the Blob that is destroyed
+		//g = null, use 'new Vector3(x,y,z)' instead of g.transform.position
 
     }
 
