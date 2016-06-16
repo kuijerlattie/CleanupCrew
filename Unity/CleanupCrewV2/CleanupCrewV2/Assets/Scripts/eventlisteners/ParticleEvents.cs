@@ -11,6 +11,7 @@ public class ParticleEvents : MonoBehaviour {
     void OnBallDestroy(GameObject g, float f)
     {
 		StaticFuntions.SpawnParticle("splash 3", g.transform.position); //g is in this case the Blob that is destroyed
+		CameraShake.ScreenShake(1,0.15f);
     }
     void OnBlobSpawn(GameObject g, float f)
     {
@@ -35,6 +36,7 @@ public class ParticleEvents : MonoBehaviour {
     void OnBallHitPaddle(GameObject g, float f)
     {
 		StaticFuntions.SpawnParticle("sparkle", g.transform.position); //g is in this case the Blob that is destroyed
+
     }
 
     void OnRodMoved(GameObject g, float f)
