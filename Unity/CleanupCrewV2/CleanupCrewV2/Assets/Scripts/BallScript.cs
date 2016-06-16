@@ -12,11 +12,13 @@ public class BallScript : MonoBehaviour {
     public float RotationSpeed = 10;    //is in inspector
     Rigidbody _rigid;
     private Vector3 RotationVec = Vector3.zero;
+    private PaddleControls PC;
 
     void Start()
     {
         _rigid = GetComponent<Rigidbody>();
         RotationVec = new Vector3(RotationSpeed, 0, 0);
+        PC = FindObjectOfType<PaddleControls>();
     }
 
     void OnCollisionEnter(Collision c)
@@ -26,6 +28,7 @@ public class BallScript : MonoBehaviour {
 
     void Update()
     {
-        transform.Rotate(RotationVec);
+        if(PC.currentState == PaddleControls.PaddleState.Playing)
+            transform.Rotate(RotationVec);
     }
 }
