@@ -4,14 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-#region "special event types"
-[System.Serializable]
-public class GameEvent : UnityEvent<GameObject, float>
-{ }
-
-#endregion
-
-
 public class EventManager : MonoBehaviour {
 
     private Dictionary<string, UnityEvent<GameObject, float>> eventDictionary;
