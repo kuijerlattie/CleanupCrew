@@ -32,7 +32,6 @@ public class HudScript : MonoBehaviour {
 	void Update () {
         tPoints.text = "points: " + GameManager.instance.CurrentPoints;
         tEnergy.text = "energy: " + GameManager.instance.CurrentEnergy;
-        tWaterpoints.text = "Goo in barrel: " + GameManager.instance.CurrentBarrelGoo;
         tState.text = "Current state: " + GameManager.instance.CurrentGamestate;
         tGameplayState.text = "current gameplay state: " + GameManager.instance.CurrentGameplaystate;
         EnergyGauge.fillAmount = GameManager.instance.CurrentEnergyUI;
@@ -42,10 +41,12 @@ public class HudScript : MonoBehaviour {
         {
             tEarthpoints.text = "Boss health: " + GameObject.FindObjectOfType<MoleScript>().hitpoints;
             tSpacepoints.text = "Boss state: " + GameObject.FindObjectOfType<MoleScript>().state;
+            tWaterpoints.text = "Boss invincible: " + FindObjectOfType<MoleScript>().invincible;
         }
         else
         {
             tEarthpoints.text = "No Boss";
+            tWaterpoints.text = "Goo in barrel: " + GameManager.instance.CurrentBarrelGoo;
         }
 	}
 }

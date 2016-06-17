@@ -13,16 +13,20 @@ public abstract class BossBase : MonoBehaviour {
 
     public void Hit(int damage)
     {
-        if (!invincible)
+        if (!invincible && GameManager.instance.CurrentGamestate == GameManager.gamestate.Boss)
         {
             hitpoints -= damage;
             if (hitpoints <= 0)
             {
-                Die();           
+                Die();
             }
+            else
+                OnHit();
         }
         
     }
+
+    public abstract void OnHit();
 
     public void OnDestroy()
     {

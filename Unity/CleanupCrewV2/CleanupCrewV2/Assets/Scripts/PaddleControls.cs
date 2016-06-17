@@ -54,8 +54,8 @@ public class PaddleControls : MonoBehaviour {
         PaddleWidthHalf = gameObject.GetComponent<BoxCollider>().bounds.size.x / 2.0f;
         BallRadius = playingBalls[0].GetComponent<SphereCollider>().radius;
 
-        minX += PaddleWidthHalf;
-        maxX -= PaddleWidthHalf;
+        minX += PaddleWidthHalf; //enable to make paddle stop at wall, disable to make it go into the wall half
+        maxX -= PaddleWidthHalf; //enable to make paddle stop at wall, disable to make it go into the wall half
         
     }
     void DestroyBall(GameObject ball)
@@ -76,6 +76,20 @@ public class PaddleControls : MonoBehaviour {
 
         return ball;
         
+    }
+
+    public void ResetBall()
+    {
+        GameObject ball;
+        while (playingBalls.Count > 0)
+        {
+            ball = playingBalls[playingBalls.Count - 1];
+            playingBalls.Remove(ball);
+            Destroy(ball);
+        }
+
+        SpawnBall();
+        currentState = PaddleState.Launching;
     }
 	// Use this for initialization
 	void OnEnable() {
@@ -129,7 +143,7 @@ public class PaddleControls : MonoBehaviour {
     {
         if (playingBalls.Count > 1) return; //cannot shoot with multiple balls
         GameObject ball = playingBalls[0];
-        if(currentState != PaddleState.Launching) { Debug.LogWarning("Cannot shoot ball during play"); return; }
+        if(currentState != PaddleState.Launching || GameManager.instance.CurrentGameplaystate != GameManager.gameplaystate.running) { Debug.LogWarning("Cannot shoot ball during play or when gameplay is paused"); return; }
         ball.GetComponent<Rigidbody>().velocity = (ball.transform.position - gameObject.transform.position).normalized;
         currentState = PaddleState.Playing;
         ball.GetComponent<FixedSpeed>().ResetSpeed();

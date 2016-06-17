@@ -3,6 +3,7 @@ using System.Collections;
 
 public class GameOverScript : BaseGamestate {
 
+    float i = 0;
     public override void StartState()
     {
         //explode all things in the scene?
@@ -12,5 +13,14 @@ public class GameOverScript : BaseGamestate {
     public override void EndState()
     {
 
+    }
+
+    void Update()
+    {
+        i += Time.deltaTime;
+        if (i >= 5f)
+        {
+            Application.LoadLevel(0);
+        }
     }
 }

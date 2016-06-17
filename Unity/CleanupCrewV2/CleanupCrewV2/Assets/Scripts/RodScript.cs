@@ -137,10 +137,13 @@ public class RodScript : MonoBehaviour {
     {
         if (col.gameObject.tag == "Ball")
         {
-            //make ball bounce off 4x the speed
-            col.gameObject.GetComponent<Rigidbody>().velocity *= 4;
-            col.gameObject.GetComponent<FixedSpeed>().SlowResetSpeed(); //to make sure the speed drops off quickly after the speedup
-            EventManager.TriggerEvent("BallHitRod", this.gameObject, (float)rodType);
+            if (GameManager.instance.CurrentGamestate != GameManager.gamestate.BossIntermission)
+            {
+                //make ball bounce off 4x the speed
+                col.gameObject.GetComponent<Rigidbody>().velocity *= 4;
+                col.gameObject.GetComponent<FixedSpeed>().SlowResetSpeed(); //to make sure the speed drops off quickly after the speedup
+                EventManager.TriggerEvent("BallHitRod", this.gameObject, (float)rodType);
+            }
         }
 
         if (col.gameObject.tag == "Blob")
