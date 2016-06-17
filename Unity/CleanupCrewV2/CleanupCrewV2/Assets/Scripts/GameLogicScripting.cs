@@ -14,7 +14,7 @@ public class GameLogicScripting : MonoBehaviour
         if (instance != this)
             Destroy(gameObject);
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
     public static GameLogicScripting instance = null;

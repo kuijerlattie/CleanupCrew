@@ -6,9 +6,11 @@ public class BossIntermissionScript : BaseGamestate {
     GameObject boss;
     GameObject bosslocation;
     float movespeed = 1f;
+    float t = 0f;
 
     public override void StartState()
     {
+        CameraShake.ScreenShake(4, 0.3f);
         //destroy all blobs
         BlobScript[] blobs = FindObjectsOfType<BlobScript>();
 
@@ -20,10 +22,11 @@ public class BossIntermissionScript : BaseGamestate {
         RodScript.DisableAllRods();
         //chose boss to spawn
         bosslocation = GameObject.Find("BossLocation");
-        boss = (GameObject)Instantiate(Resources.Load("prefabs/MoleBoss"), bosslocation.transform.position + new Vector3(0, -5, 0), Quaternion.identity);
+        boss = (GameObject)Instantiate(Resources.Load("prefabs/MoleBoss"), bosslocation.transform.position + new Vector3(0, 0, 0), Quaternion.identity);
         boss.GetComponent<BossBase>().maxhitpoints = 6;
         boss.GetComponent<BossBase>().hitpoints = 6;
 
+        FindObjectOfType<PaddleControls>().ResetBall();
     }
 
     public override void EndState()
@@ -33,13 +36,10 @@ public class BossIntermissionScript : BaseGamestate {
 
     void Update()
     {
-        if (boss.transform.position == bosslocation.transform.position)
+        t += Time.deltaTime;
+        if (t >= 5f)
         {
             GameManager.instance.SetState(GameManager.gamestate.Boss);
-        }
-        else
-        {
-            boss.transform.position = Vector3.MoveTowards(boss.transform.position, bosslocation.transform.position, movespeed * Time.deltaTime);
         }
     }
 }

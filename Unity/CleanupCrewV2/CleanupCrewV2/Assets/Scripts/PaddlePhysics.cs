@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PaddlePhysics : MonoBehaviour {
 
-    float maxangle = 90;
+    float maxangle = 170;
 
     void OnCollisionEnter(Collision col)
     {

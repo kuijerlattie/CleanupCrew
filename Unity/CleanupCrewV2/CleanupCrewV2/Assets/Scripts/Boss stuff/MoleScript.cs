@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class MoleScript : BossBase {
 
     float abovegroundtime = 10f; //excluding dig time
     float undergroundtime = 5f; //excluding dig time
     float timer = 0f;
+    bool fightstarted = false;
+
+    Animator anim;
 
     bool digparticlesStarted = false;
 
@@ -16,27 +18,65 @@ public class MoleScript : BossBase {
     Vector3 targetlocation = new Vector3(0, 0, 0);
 
     public molestate state = molestate.aboveground; //make not public again
+    molestate oldstate;
 
     public enum molestate
     {
         underground,
         diggingUp,
         diggingDown,
-        aboveground
+        aboveground,
+        gothit,
     }
     
+    void SetState(molestate s)
+    {
+        oldstate = state;
+        state = s;
+        switch (s)
+        {
+            case molestate.underground:
+                invincible = true;
+                break;
+            case molestate.diggingUp:
+                anim.Play("Mole_DigUp");
+                CameraShake.ScreenShake(1.5f, 0.05f);
+                invincible = true;
+                //anim.SetTrigger("PlayDigUp");
+                break;
+            case molestate.diggingDown:
+                anim.Play("Mole_DigDown");
+                CameraShake.ScreenShake(1.5f, 0.05f);
+                invincible = true;
+                //anim.SetTrigger("PlayDigDown");
+                break;
+            case molestate.aboveground:
+                if (oldstate == molestate.gothit && timer < 1.5f)
+                    invincible = true;
+                else
+                    invincible = false;
+                break;
+            case molestate.gothit:
+                invincible = true;
+                break;
+            default:
+                break;
+        }
+    }
 
 	// Use this for initialization
 	void Start () {
         hitpoints = 6;
         targetlocation = gameObject.transform.position;
         bossarea = GameObject.Find("BossArea");
+        anim = GetComponentInChildren<Animator>();
+        anim.speed = 0.5f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
         if (GameManager.instance.CurrentGamestate != GameManager.gamestate.Boss) return;
-        invincible = false;
+        if (!fightstarted) { fightstarted = true; invincible = false; }
         timer -= Time.deltaTime;
         switch (state)
         {
@@ -51,6 +91,9 @@ public class MoleScript : BossBase {
                 break;
             case molestate.aboveground:
                 AboveGround();
+                break;
+            case molestate.gothit:
+                GotHit();
                 break;
             default:
                 break;
@@ -68,21 +111,22 @@ public class MoleScript : BossBase {
 
     void DigUp()
     {
-        if (gameObject.transform.position == targetlocation)
+        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Mole_DigUp"))
         {
-            state = molestate.aboveground;
+            SetState(molestate.aboveground);
             timer = abovegroundtime;
             StopParticles();
             return;
         }
-        gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, targetlocation, 0.5f);
+        
     }
 
     void DigDown()
     {
-        if (gameObject.transform.position == targetlocation)
+
+        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Mole_DigDown"))
         {
-            state = molestate.underground;
+            SetState(molestate.underground);
             timer = undergroundtime;
 
             StopParticles();
@@ -90,10 +134,10 @@ public class MoleScript : BossBase {
             //set new location to start digging up
             GetNewBossPosition();
             gameObject.transform.position = targetlocation;
-
+        
             return;
         }
-        gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, targetlocation, 0.5f);
+        
     }
 
     void AboveGround()
@@ -106,9 +150,9 @@ public class MoleScript : BossBase {
             }
             if (timer <= 0)
             {
-                targetlocation = gameObject.transform.position + new Vector3(0, -5, 0);
+                //targetlocation = gameObject.transform.position + new Vector3(0, -5, 0);
                 Debug.Log("boss new target location = " + targetlocation);
-                state = molestate.diggingDown;
+                SetState(molestate.diggingDown);
             }
         }
     }
@@ -122,27 +166,29 @@ public class MoleScript : BossBase {
 
         if (timer <= 0)
         {
-            targetlocation = gameObject.transform.position + new Vector3(0, 5, 0);
-            state = molestate.diggingUp;
+            //targetlocation = gameObject.transform.position + new Vector3(0, 5, 0);
+            SetState(molestate.diggingUp);
         }
     }
 
     void GetNewBossPosition()
     {
         targetlocation.x = Random.Range(bossarea.transform.position.x - bossarea.transform.localScale.x/2, bossarea.transform.position.x + bossarea.transform.localScale.x/2);
+        targetlocation.y = 0;
         targetlocation.z = Random.Range(bossarea.transform.position.z - bossarea.transform.localScale.z/2, bossarea.transform.position.z + bossarea.transform.localScale.z/2);
     }
 
     void StartParticles()
     {
-        diggingparticle.transform.position = new Vector3(targetlocation.x, -0.5f, targetlocation.z);
-        diggingparticle.Play();
+        diggingparticle.time = 0;
+        diggingparticle.transform.position = new Vector3(targetlocation.x, 0, targetlocation.z);
+        diggingparticle.Play(true);
         digparticlesStarted = true;
     }
 
     void StopParticles()
     {
-        diggingparticle.Stop();
+        diggingparticle.Stop(true);
         digparticlesStarted = false;
     }
     
@@ -151,6 +197,27 @@ public class MoleScript : BossBase {
         alive = false;
         EventManager.TriggerEvent("BossDied", gameObject);
         Destroy(gameObject);
+    }
+
+    public override void OnHit()
+    {
+        if (timer <= 0)
+        {
+            timer = 2;
+            invincible = true;
+        }
+        anim.Play("Mole_Hit");
+        SetState(molestate.gothit);
+        CameraShake.ScreenShake(0.5f, 0.15f);
+    }
+
+    void GotHit()
+    {
+        Debug.Log("gothitfirst");
+        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Mole_Hit"))
+        {
+            SetState(oldstate);
+        }
     }
 
 }

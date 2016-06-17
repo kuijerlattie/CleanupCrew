@@ -43,6 +43,7 @@ public class BlobScript : MonoBehaviour {
 
     void OnDestroy()
     {
+        
         if(!GameManager.IsQuitting)
             EventManager.TriggerEvent("BlobDestroyed", gameObject);
     }
@@ -50,7 +51,7 @@ public class BlobScript : MonoBehaviour {
     {
         get
         {
-            if (spawnLocations == null) InitSpawnLocations();
+            if (spawnLocations == null || spawnLocations.Length == 0) InitSpawnLocations();
             return spawnLocations[Random.Range(0, spawnLocations.GetLength(0))].transform.position;
         }
     }
@@ -62,6 +63,7 @@ public class BlobScript : MonoBehaviour {
     /// <returns></returns>
     public static GameObject Spawn(Vector3 position)
     {
+        if (GameManager.instance.CurrentGameplaystate == GameManager.gameplaystate.paused) return null;
         GameObject newBlob = baseSpawn(position);
         newBlob.GetComponent<BlobScript>().blobType = RodScript.RandomType;
         newBlob.GetComponent<BlobScript>().currentBehaviour = RandomBehaviour;  //TODO random
@@ -103,7 +105,7 @@ public static GameObject Spawn(Vector3 position, BehaviourType behaviour)
     }
     // Use this for initialization
     void Start () {
-
+        spawnLocations = null;
         startDirection = -Vector3.forward;
         behaviourOffset = Time.realtimeSinceStartup;
 
