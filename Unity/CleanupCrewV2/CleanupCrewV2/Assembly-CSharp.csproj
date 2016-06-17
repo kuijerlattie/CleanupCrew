@@ -45,25 +45,42 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\BallScript.cs" />
-     <Compile Include="Assets\GameLogicScripting.cs" />
-     <Compile Include="Assets\PaddlePhysics.cs" />
+     <Compile Include="Assets\DestroyParticle.cs" />
+     <Compile Include="Assets\Scripts\BallScript.cs" />
      <Compile Include="Assets\Scripts\BlobScript.cs" />
+     <Compile Include="Assets\Scripts\Boss stuff\BossBase.cs" />
+     <Compile Include="Assets\Scripts\Boss stuff\MoleFace.cs" />
+     <Compile Include="Assets\Scripts\Boss stuff\MoleScript.cs" />
+     <Compile Include="Assets\Scripts\Boss stuff\MoleTail.cs" />
+     <Compile Include="Assets\Scripts\BulletScript.cs" />
+     <Compile Include="Assets\Scripts\CameraShake.cs" />
+     <Compile Include="Assets\Scripts\DestroyOnGameover.cs" />
      <Compile Include="Assets\Scripts\FixedSpeed.cs" />
+     <Compile Include="Assets\Scripts\GameLogicScripting.cs" />
      <Compile Include="Assets\Scripts\Gamestates\BaseGamestate.cs" />
      <Compile Include="Assets\Scripts\Gamestates\InitializeGame.cs" />
+     <Compile Include="Assets\Scripts\Heimscripts\Arguments.cs" />
+     <Compile Include="Assets\Scripts\Heimscripts\DBconnection.cs" />
+     <Compile Include="Assets\Scripts\Heimscripts\argumentDebug.cs" />
      <Compile Include="Assets\Scripts\HudScript.cs" />
+     <Compile Include="Assets\Scripts\LookAtMovementDirection.cs" />
      <Compile Include="Assets\Scripts\Management files\EventManager.cs" />
      <Compile Include="Assets\Scripts\Management files\GameManager.cs" />
      <Compile Include="Assets\Scripts\Management files\Loader.cs" />
      <Compile Include="Assets\Scripts\PaddleControls.cs" />
+     <Compile Include="Assets\Scripts\PaddlePhysics.cs" />
      <Compile Include="Assets\Scripts\Powerup scripts\PwrupBase.cs" />
      <Compile Include="Assets\Scripts\Powerup scripts\PwrupManager.cs" />
      <Compile Include="Assets\Scripts\Powerup scripts\PwrupStarter.cs" />
      <Compile Include="Assets\Scripts\Powerup scripts\SlowPwrup.cs" />
+     <Compile Include="Assets\Scripts\Powerup scripts\destroyBlobs.cs" />
      <Compile Include="Assets\Scripts\Powerup scripts\downScalePwrup.cs" />
+     <Compile Include="Assets\Scripts\Powerup scripts\magneticPaddle.cs" />
+     <Compile Include="Assets\Scripts\Powerup scripts\shieldPwrup.cs" />
+     <Compile Include="Assets\Scripts\Powerup scripts\shootingPwrup.cs" />
      <Compile Include="Assets\Scripts\Powerup scripts\upScalePwrup.cs" />
      <Compile Include="Assets\Scripts\RodScript.cs" />
+     <Compile Include="Assets\Scripts\StaticFuntions.cs" />
      <Compile Include="Assets\Scripts\WallScript.cs" />
      <Compile Include="Assets\Scripts\deathscript.cs" />
      <Compile Include="Assets\Scripts\eventTriggers\InputScript.cs" />
@@ -73,9 +90,12 @@
      <Compile Include="Assets\Scripts\eventlisteners\BreakoutScript.cs" />
      <Compile Include="Assets\Scripts\eventlisteners\GameOverScript.cs" />
      <Compile Include="Assets\Scripts\eventlisteners\IntroScript.cs" />
+     <Compile Include="Assets\Scripts\eventlisteners\ParticleEvents.cs" />
      <Compile Include="Assets\Scripts\eventlisteners\StartGameEvents.cs" />
      <Compile Include="Assets\Scripts\eventlisteners\TutorialScript.cs" />
      <Compile Include="Assets\Scripts\eventlisteners\point events.cs" />
+     <Compile Include="Assets\Scripts\paddleShooting.cs" />
+     <Compile Include="Assets\Scripts\shieldScript.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
