@@ -180,7 +180,6 @@ public class MoleScript : BossBase {
 
     void StartParticles()
     {
-        diggingparticle.time = 0;
         diggingparticle.transform.position = new Vector3(targetlocation.x, 0, targetlocation.z);
         diggingparticle.Play(true);
         digparticlesStarted = true;
@@ -213,7 +212,7 @@ public class MoleScript : BossBase {
 
     void GotHit()
     {
-        Debug.Log("gothitfirst");
+        invincible = true;
         if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Mole_Hit"))
         {
             SetState(oldstate);

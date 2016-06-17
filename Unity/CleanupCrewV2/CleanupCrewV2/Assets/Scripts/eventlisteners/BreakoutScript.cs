@@ -10,6 +10,11 @@ public class BreakoutScript : BaseGamestate {
     {
         //GameManager.instance.SetState(GameManager.gamestate.BossIntermission);
         GameManager.instance.gooNeededForBoss = 5 + GameManager.instance.CurrentLevel;
+        if (GameManager.instance.CurrentGameplaystate == GameManager.gameplaystate.paused)
+        {
+            Debug.Log("Game was paused for no reason");
+            GameManager.instance.SetGameplayState(GameManager.gameplaystate.running);
+        }
     }
 
     public override void EndState()
