@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour {
         if (instance != this)
             Destroy(gameObject);
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
         InitGame();
     }
 
@@ -195,9 +195,18 @@ public class GameManager : MonoBehaviour {
     {
         stateBasedScripts.Add(gameObject.AddComponent<GameOverScript>());
         stateBasedScripts[stateBasedScripts.Count-1].StartState();
-        SetGameplayState(gameplaystate.running);
+        SetGameplayState(gameplaystate.paused);
         EventManager.TriggerEvent("GameOver", null, points);
+        IsQuitting = true;
         //game is over. destroy (explode?) everything
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SetState(gamestate.GameOver);
+        }
     }
 
     public gamestate CurrentGamestate

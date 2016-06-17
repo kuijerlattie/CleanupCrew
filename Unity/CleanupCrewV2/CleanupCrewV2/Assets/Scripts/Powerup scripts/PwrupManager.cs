@@ -19,7 +19,7 @@ public class PwrupManager : MonoBehaviour {
         if (instance != this)
             Destroy(gameObject);
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
     public enum PowerupType
@@ -77,13 +77,13 @@ public class PwrupManager : MonoBehaviour {
 
     void SpawnPwrup()
     {
-        if(GameManager.instance.CurrentGamestate == GameManager.gamestate.Breakout)
+        if(GameManager.instance.CurrentGamestate == GameManager.gamestate.Breakout && GameManager.instance.CurrentGameplaystate != GameManager.gameplaystate.paused)
         {
             Vector3 spawnLocation = BlobScript.GetRandomSpawnPos; // current solution, later need to make it spawn where last blob dies(?)
             GameObject pwrUp = (GameObject)Instantiate(pwrUps[Random.Range(0, pwrUps.Length)], spawnLocation, Quaternion.identity);
         }
         
-        if(GameManager.instance.CurrentGamestate == GameManager.gamestate.Boss)
+        if(GameManager.instance.CurrentGamestate == GameManager.gamestate.Boss && GameManager.instance.CurrentGameplaystate != GameManager.gameplaystate.paused)
         {
             Vector3 spawnLocation = BlobScript.GetRandomSpawnPos; // current solution, later need to make it spawn where last blob dies(?)
             GameObject powerUp = null;
