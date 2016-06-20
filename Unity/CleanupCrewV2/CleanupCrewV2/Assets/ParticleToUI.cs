@@ -28,10 +28,14 @@ public class ParticleToUI : MonoBehaviour {
         {
             x.renderMode = RenderMode.ScreenSpaceCamera;
             x.gameObject.GetComponent<UnityEngine.UI.CanvasScaler>().uiScaleMode = UnityEngine.UI.CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            x.worldCamera = Camera.main; 
         });
-        if (Camera.main.gameObject.transform.childCount == 0)
+        if (Camera.main.gameObject.transform.childCount == 0)   
         {
+            //settings its position identical to the regular camera
             GameObject secondCam = GameObject.Instantiate(Resources.Load("prefabs/OnTopOfUICamera")) as GameObject;
+            secondCam.transform.position = Camera.main.transform.position;
+            secondCam.transform.rotation = Camera.main.transform.rotation;
             secondCam.transform.parent = Camera.main.transform;
         }
         Camera.main.cullingMask = ~(1 << LayerMask.NameToLayer("OnTopOfUI"));
