@@ -131,6 +131,7 @@ public class GameManager : MonoBehaviour {
         gameObject.AddComponent<InitializeGame>().StartState();
         gameObject.AddComponent<pointevents>();
         gameObject.AddComponent<ParticleEvents>();
+        ParticleToUI.SetUIForParticles();
         SetGameplayState(gameplaystate.paused);
         EventManager.TriggerEvent("StartGame");
     }
