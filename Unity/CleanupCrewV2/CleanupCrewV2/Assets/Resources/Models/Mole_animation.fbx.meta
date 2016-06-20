@@ -81,6 +81,7 @@ ModelImporter:
     7400012: Mole_BlockRight
     7400014: Mole_TailHitLeft
     7400016: Mole_TailHitRight
+    7400018: Mole_Idle
     9500000: //RootNode
     13700000: MOLEZ:Group1
   materials:
@@ -108,7 +109,7 @@ ModelImporter:
       name: Mole_Rig
       takeName: Mole_Rig
       firstFrame: 5
-      lastFrame: 240
+      lastFrame: 300
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -869,6 +870,100 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: MOLEZ:Group1
+        weight: 1
+      - path: Root_Joint_Controll
+        weight: 1
+      - path: Root_Joint_Controll/Root
+        weight: 1
+      - path: Root_Joint_Controll/Root/L_leg
+        weight: 1
+      - path: Root_Joint_Controll/Root/L_leg/L_heel
+        weight: 1
+      - path: Root_Joint_Controll/Root/L_leg/L_heel/L_foot
+        weight: 1
+      - path: Root_Joint_Controll/Root/R_leg
+        weight: 1
+      - path: Root_Joint_Controll/Root/R_leg/R_heel
+        weight: 1
+      - path: Root_Joint_Controll/Root/R_leg/R_heel/R_foot
+        weight: 1
+      - path: Root_Joint_Controll/Root/Spine1
+        weight: 1
+      - path: Root_Joint_Controll/Root/Spine1/Chest
+        weight: 1
+      - path: Root_Joint_Controll/Root/Spine1/Chest/Head
+        weight: 1
+      - path: Root_Joint_Controll/Root/Spine1/Chest/Head/Snout1
+        weight: 1
+      - path: Root_Joint_Controll/Root/Spine1/Chest/Head/Snout1/Snout2
+        weight: 1
+      - path: Root_Joint_Controll/Root/Spine1/Chest/Head/Snout1/Snout2/Snout3
+        weight: 1
+      - path: Root_Joint_Controll/Root/Spine1/Chest/Head/Snout1/Snout2/Snout3/joint1
+        weight: 1
+      - path: Root_Joint_Controll/Root/Spine1/Chest/Head/Snout1/Snout2/Snout3/joint2
+        weight: 1
+      - path: Root_Joint_Controll/Root/Spine1/Chest/Head/Snout1/Snout2/Snout3/joint3
+        weight: 1
+      - path: Root_Joint_Controll/Root/Spine1/Chest/Head/Snout1/Snout2/Snout3/joint4
+        weight: 1
+      - path: Root_Joint_Controll/Root/Spine1/Chest/Head/Snout1/Snout2/Snout3/joint5
+        weight: 1
+      - path: Root_Joint_Controll/Root/Spine1/Chest/Head/Snout1/Snout2/Snout3/joint6
+        weight: 1
+      - path: Root_Joint_Controll/Root/Spine1/Chest/Head/Snout1/Snout2/Snout3/joint7
+        weight: 1
+      - path: Root_Joint_Controll/Root/Spine1/Chest/Head/Snout1/Snout2/Snout3/joint8
+        weight: 1
+      - path: Root_Joint_Controll/Root/Spine1/Chest/L_Shold
+        weight: 1
+      - path: Root_Joint_Controll/Root/Spine1/Chest/L_Shold/L_Paw
+        weight: 1
+      - path: Root_Joint_Controll/Root/Spine1/Chest/L_Shold/L_Paw/L_claw
+        weight: 1
+      - path: Root_Joint_Controll/Root/Spine1/Chest/R_Shold
+        weight: 1
+      - path: Root_Joint_Controll/Root/Spine1/Chest/R_Shold/R_Paw
+        weight: 1
+      - path: Root_Joint_Controll/Root/Spine1/Chest/R_Shold/R_Paw/R_claw
+        weight: 1
+      - path: Root_Joint_Controll/Root/Tail1
+        weight: 1
+      - path: Root_Joint_Controll/Root/Tail1/Tail2
+        weight: 1
+      - path: Root_Joint_Controll/Root/Tail1/Tail2/Tail3
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    - serializedVersion: 16
+      name: Mole_Idle
+      takeName: Mole_Rig
+      firstFrame: 240
+      lastFrame: 300
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0

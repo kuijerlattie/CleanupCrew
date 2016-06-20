@@ -210,10 +210,10 @@ public class MoleScript : BossBase {
                 PlayAnimation("Mole_Hit", 0.5f);
                 break;
             case 2:
-                PlayAnimation("Mole_TailHitLeft", 0.5f);
+                PlayAnimation("Mole_Hit", 0.5f);
                 break;
             case 3:
-                PlayAnimation("Mole_TailHitRight", 0.5f);
+                PlayAnimation("Mole_Hit", 0.5f);
                 break;
             default:
                 PlayAnimation("Mole_hit", 0.5f); //play nose hit anyways
@@ -255,7 +255,7 @@ public class MoleScript : BossBase {
     
     bool AnimationsFinished()
     {
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Mole_PrevDone") || anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Mole_PrevDone") || anim.GetCurrentAnimatorStateInfo(0).IsName("Mole_Idle"))
             return true;
         return false;     
     }
