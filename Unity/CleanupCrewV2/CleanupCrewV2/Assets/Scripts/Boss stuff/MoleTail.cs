@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class MoleTail : MonoBehaviour {
-
+    public int hitregion;
 	// Use this for initialization
 	void Start () {
 	
@@ -17,7 +17,7 @@ public class MoleTail : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Ball")
         {
-            GetComponentInParent<MoleScript>().Hit(1);
+            GetComponentInParent<MoleScript>().Hit(1, hitregion);
         }
     }
 }

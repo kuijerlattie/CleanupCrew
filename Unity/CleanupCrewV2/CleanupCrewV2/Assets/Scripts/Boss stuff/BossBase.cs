@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public abstract class BossBase : MonoBehaviour {
 
@@ -11,7 +10,7 @@ public abstract class BossBase : MonoBehaviour {
 
     ParticleSystem spawnparticle;
 
-    public void Hit(int damage)
+    public void Hit(int damage, int hitid)
     {
         if (!invincible && GameManager.instance.CurrentGamestate == GameManager.gamestate.Boss)
         {
@@ -21,12 +20,12 @@ public abstract class BossBase : MonoBehaviour {
                 Die();
             }
             else
-                OnHit();
+                OnHit(hitid);
         }
         
     }
 
-    public abstract void OnHit();
+    public abstract void OnHit(int hitid);
 
     public void OnDestroy()
     {

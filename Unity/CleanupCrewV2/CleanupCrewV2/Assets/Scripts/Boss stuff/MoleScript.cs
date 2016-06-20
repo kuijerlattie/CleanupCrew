@@ -39,13 +39,13 @@ public class MoleScript : BossBase {
                 invincible = true;
                 break;
             case molestate.diggingUp:
-                anim.Play("Mole_DigUp");
+                PlayAnimation("Mole_DigUp",0.5f);
                 CameraShake.ScreenShake(1.5f, 0.05f);
                 invincible = true;
                 //anim.SetTrigger("PlayDigUp");
                 break;
             case molestate.diggingDown:
-                anim.Play("Mole_DigDown");
+                PlayAnimation("Mole_DigDown",0.5f);
                 CameraShake.ScreenShake(1.5f, 0.05f);
                 invincible = true;
                 //anim.SetTrigger("PlayDigDown");
@@ -70,7 +70,6 @@ public class MoleScript : BossBase {
         targetlocation = gameObject.transform.position;
         bossarea = GameObject.Find("BossArea");
         anim = GetComponentInChildren<Animator>();
-        anim.speed = 0.5f;
 	}
 	
 	// Update is called once per frame
@@ -111,7 +110,7 @@ public class MoleScript : BossBase {
 
     void DigUp()
     {
-        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Mole_DigUp"))
+        if (!AnimationIsPlaying("Mole_DigUp"))
         {
             SetState(molestate.aboveground);
             timer = abovegroundtime;
@@ -124,7 +123,7 @@ public class MoleScript : BossBase {
     void DigDown()
     {
 
-        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Mole_DigDown"))
+        if (!AnimationIsPlaying("Mole_DigDown"))
         {
             SetState(molestate.underground);
             timer = undergroundtime;
@@ -148,7 +147,7 @@ public class MoleScript : BossBase {
             {
                 StartParticles();
             }
-            if (timer <= 0)
+            if (timer <= 0 && AnimationsFinished())
             {
                 //targetlocation = gameObject.transform.position + new Vector3(0, -5, 0);
                 Debug.Log("boss new target location = " + targetlocation);
@@ -198,14 +197,28 @@ public class MoleScript : BossBase {
         Destroy(gameObject);
     }
 
-    public override void OnHit()
+    public override void OnHit(int hitid)
     {
         if (timer <= 0)
         {
             timer = 2;
             invincible = true;
         }
-        anim.Play("Mole_Hit");
+        switch(hitid)
+        {
+            case 1:
+                PlayAnimation("Mole_Hit", 0.5f);
+                break;
+            case 2:
+                PlayAnimation("Mole_TailHitLeft", 0.5f);
+                break;
+            case 3:
+                PlayAnimation("Mole_TailHitRight", 0.5f);
+                break;
+            default:
+                PlayAnimation("Mole_hit", 0.5f); //play nose hit anyways
+                break;
+        }
         SetState(molestate.gothit);
         CameraShake.ScreenShake(0.5f, 0.15f);
     }
@@ -213,10 +226,37 @@ public class MoleScript : BossBase {
     void GotHit()
     {
         invincible = true;
-        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Mole_Hit"))
+        if (!AnimationIsPlaying("Mole_Hit") && !AnimationIsPlaying("Mole_TailHitLeft") && !AnimationIsPlaying("Mole_TailHitRight"))
         {
             SetState(oldstate);
         }
     }
 
+    public void Block(int side)
+    {
+        if (!AnimationsFinished()) return;
+        if (side == 0)
+            PlayAnimation("Mole_BlockLeft", 2f);
+        if (side == 1)
+            PlayAnimation("Mole_BlockRight", 2f);
+    }
+
+    void PlayAnimation(string name, float speed = 0.5f)
+    {
+        anim.speed = speed;
+        anim.Play(name);
+    }
+
+    bool AnimationIsPlaying(string name)
+    {
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName(name)) return true;
+        return false;
+    }
+    
+    bool AnimationsFinished()
+    {
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Mole_PrevDone") || anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+            return true;
+        return false;     
+    }
 }

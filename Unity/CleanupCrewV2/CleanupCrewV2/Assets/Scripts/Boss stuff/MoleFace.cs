@@ -17,7 +17,7 @@ public class MoleFace : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Ball")
         {
-            GetComponentInParent<MoleScript>().Hit(1);
+            GetComponentInParent<MoleScript>().Hit(1, 1);
 
         }
     }

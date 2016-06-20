@@ -77,8 +77,8 @@ ModelImporter:
     7400004: Mole_Hit
     7400006: Mole_DigDown
     7400008: Mole_Down
-    7400010: Mole_HitLeft
-    7400012: Mole_HitRight
+    7400010: Mole_BlockLeft
+    7400012: Mole_BlockRight
     7400014: Mole_TailHitLeft
     7400016: Mole_TailHitRight
     9500000: //RootNode
@@ -575,9 +575,9 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 1
     - serializedVersion: 16
-      name: Mole_HitLeft
+      name: Mole_BlockLeft
       takeName: Mole_Rig
-      firstFrame: 135
+      firstFrame: 145
       lastFrame: 165
       wrapMode: 0
       orientationOffsetY: 0
@@ -669,9 +669,9 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 1
     - serializedVersion: 16
-      name: Mole_HitRight
+      name: Mole_BlockRight
       takeName: Mole_Rig
-      firstFrame: 165
+      firstFrame: 177
       lastFrame: 200
       wrapMode: 0
       orientationOffsetY: 0
