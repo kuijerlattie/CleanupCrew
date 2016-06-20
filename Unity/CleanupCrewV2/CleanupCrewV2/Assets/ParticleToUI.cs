@@ -28,10 +28,14 @@ public class ParticleToUI : MonoBehaviour {
         {
             x.renderMode = RenderMode.ScreenSpaceCamera;
             x.gameObject.GetComponent<UnityEngine.UI.CanvasScaler>().uiScaleMode = UnityEngine.UI.CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            x.worldCamera = Camera.main; 
         });
-        if (Camera.main.gameObject.transform.childCount == 0)
+        if (Camera.main.gameObject.transform.childCount == 0)   
         {
+            //settings its position identical to the regular camera
             GameObject secondCam = GameObject.Instantiate(Resources.Load("prefabs/OnTopOfUICamera")) as GameObject;
+            secondCam.transform.position = Camera.main.transform.position;
+            secondCam.transform.rotation = Camera.main.transform.rotation;
             secondCam.transform.parent = Camera.main.transform;
         }
         Camera.main.cullingMask = ~(1 << LayerMask.NameToLayer("OnTopOfUI"));
@@ -53,19 +57,25 @@ public class ParticleToUI : MonoBehaviour {
                 Debug.LogWarning("Trying to move particle to Points(score) in UI... where is that in the UI???? ");
                 break;
         }
+        transform.LookAt(UIWorldPosition);
+        rotateAxis = transform.right;
     }
 
     Vector3 UIWorldPosition = new Vector3(-33, 18, 0);
-    float speed = 15;
+    float speed = 40;
+    private Vector3 rotateAxis;
 	// Use this for initialization
 	void Start () {
         gameObject.layer = LayerMask.NameToLayer("OnTopOfUI");
         Init();
+        
     }
 	
 	// Update is called once per frame
 	void Update () {
         transform.position = Vector3.MoveTowards(transform.position, UIWorldPosition, Time.deltaTime * speed);
+        transform.RotateAround(UIWorldPosition, rotateAxis, -0.3f);
+        if (transform.position.y <= 0.5f) transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
         if (Vector3.Distance(transform.position, UIWorldPosition) < Mathf.Epsilon)
             GameObject.Destroy(gameObject);
 	}
