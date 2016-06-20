@@ -7,6 +7,7 @@ public class ParticleEvents : MonoBehaviour {
     void OnBlobDestroy(GameObject g, float f)
     {
         StaticFuntions.SpawnParticle("blob pop", g.transform.position); //g is in this case the Blob that is destroyed
+		StaticFuntions.SpawnParticleToUI("trail 2", g.transform.position);
     }
     void OnBallDestroy(GameObject g, float f)
     {
@@ -96,7 +97,8 @@ public class ParticleEvents : MonoBehaviour {
 
     void OnGainedPoints(GameObject g, float f)
     {
-        //g = null, use 'new Vector3(x,y,z)' instead of g.transform.position
+		
+		//g = null, use 'new Vector3(x,y,z)' instead of g.transform.position
 
     }
     void OnLosePoints(GameObject g, float f)
