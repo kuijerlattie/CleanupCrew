@@ -23,14 +23,7 @@ public class ParticleToUI : MonoBehaviour {
     /// -MainCamera can exclude "OnTopOfUI"-layer in it's culling mask
     public static void SetUIForParticles()
     {
-        Canvas[] _canvases = FindObjectsOfType<Canvas>();
-        System.Array.ForEach(_canvases, x => 
-        {
-            x.renderMode = RenderMode.ScreenSpaceCamera;
-            x.gameObject.GetComponent<UnityEngine.UI.CanvasScaler>().uiScaleMode = UnityEngine.UI.CanvasScaler.ScaleMode.ScaleWithScreenSize;
-            x.worldCamera = Camera.main; 
-        });
-        if (Camera.main.gameObject.transform.childCount == 0)   
+        if (Camera.main.gameObject.transform.childCount == 0)
         {
             //settings its position identical to the regular camera
             GameObject secondCam = GameObject.Instantiate(Resources.Load("prefabs/OnTopOfUICamera")) as GameObject;
@@ -39,6 +32,15 @@ public class ParticleToUI : MonoBehaviour {
             secondCam.transform.parent = Camera.main.transform;
         }
         Camera.main.cullingMask = ~(1 << LayerMask.NameToLayer("OnTopOfUI"));
+
+        Canvas[] _canvases = FindObjectsOfType<Canvas>();
+        System.Array.ForEach(_canvases, x => 
+        {
+            x.renderMode = RenderMode.ScreenSpaceCamera;
+            x.gameObject.GetComponent<UnityEngine.UI.CanvasScaler>().uiScaleMode = UnityEngine.UI.CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            x.worldCamera = Camera.main.transform.GetChild(0).GetChild(0).gameObject.GetComponent<Camera>();
+        });
+      
 
     }
 
