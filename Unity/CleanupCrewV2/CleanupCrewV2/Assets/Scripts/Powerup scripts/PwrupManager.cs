@@ -4,9 +4,9 @@ using System.Collections;
 public class PwrupManager : MonoBehaviour {
 
     public GameObject[] pwrUps;
-    public int blobsNeeded = 1; // how many blobs need to be destroyed before spawning pwrup
+    public int blobsNeeded = 1;
     public int blobsDestroyed = 0;
-    public float durationTimer; // Time how long pwrups stay on
+    public float durationTimer;
     public float spawnTimer = 10;
     public float minSpawnTime = 10, maxSpawnTime = 15;
     public bool bossSpawned = false;

@@ -18,17 +18,20 @@ public class upScalePwrup : PwrupBase {
 
     static public void Wider()
     {
-        GameObject paddle;
+         GameObject paddle;
 
-        paddle = FindObjectOfType<PaddleControls>().gameObject;
-        paddle.transform.localScale = new Vector3(11, 1, 0.5f);
+         paddle = FindObjectOfType<PaddleControls>().gameObject;
+         paddle.transform.localScale = new Vector3(11, 1, 1); 
+        
     }
 
     static public void ResetScale()
     {
-        GameObject paddle;
+         GameObject paddle;
 
-        paddle = FindObjectOfType<PaddleControls>().gameObject;
-        paddle.transform.localScale = new Vector3(8, 1, 0.5f);
+         paddle = FindObjectOfType<PaddleControls>().gameObject;
+         paddle.transform.localScale = new Vector3(8, 1, 1);
+        
     }
+
 }
