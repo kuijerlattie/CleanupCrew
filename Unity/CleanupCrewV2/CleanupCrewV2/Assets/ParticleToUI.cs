@@ -21,6 +21,7 @@ public class ParticleToUI : MonoBehaviour {
     /// -Canvas with UI must be on : Scale with Screen Size     (otherwise the points that represent the UI in world don't line up with different resolutions)
     /// -Main camera must have prefab: "OnTopOfUICamera" as child of the MainCamera
     /// -MainCamera can exclude "OnTopOfUI"-layer in it's culling mask
+    /// EDIT: main camera rendering objects, then camera3 rendering the UI, then camera2 renders particles after
     public static void SetUIForParticles()
     {
         if (Camera.main.gameObject.transform.childCount == 0)
