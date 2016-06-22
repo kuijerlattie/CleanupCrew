@@ -140,28 +140,28 @@ public class GameManager : MonoBehaviour {
 
     void StartIntro()
     {
+        SetGameplayState(gameplaystate.paused);
         stateBasedScripts.Add(gameObject.AddComponent<IntroScript>());
         Debug.Log("thisshitshouldbeadded");
         stateBasedScripts[stateBasedScripts.Count-1].StartState();
-        SetGameplayState(gameplaystate.paused);
         EventManager.TriggerEvent("StartIntro");
         //game start animation and shit
     }
 
     void StartTutorial()
     {
+        SetGameplayState(gameplaystate.running);
         stateBasedScripts.Add(gameObject.AddComponent<TutorialScript>());
         stateBasedScripts[stateBasedScripts.Count-1].StartState();
-        SetGameplayState(gameplaystate.running);
         EventManager.TriggerEvent("StartTutorial");
         //play tutorial
     }
 
     void StartBreakoutIntermission()
     {
+        SetGameplayState(gameplaystate.paused);
         stateBasedScripts.Add(gameObject.AddComponent<BreakoutIntermissionScript>());
         stateBasedScripts[stateBasedScripts.Count-1].StartState();
-        SetGameplayState(gameplaystate.paused);
         EventManager.TriggerEvent("BreakoutIntermission");
         //breakout start animation and shit
     }
@@ -178,27 +178,27 @@ public class GameManager : MonoBehaviour {
 
     void StartBossIntermission()
     {
+        SetGameplayState(gameplaystate.paused);
         stateBasedScripts.Add(gameObject.AddComponent<BossIntermissionScript>());
         stateBasedScripts[stateBasedScripts.Count-1].StartState();
-        SetGameplayState(gameplaystate.paused);
         EventManager.TriggerEvent("BossIntermission");
         //boss start animation and shit
     }
 
     void StartBoss()
     {
+        SetGameplayState(gameplaystate.running);
         stateBasedScripts.Add(gameObject.AddComponent<BossScript>());
         stateBasedScripts[stateBasedScripts.Count-1].StartState();
-        SetGameplayState(gameplaystate.running);
         EventManager.TriggerEvent("StartBoss");
         //actually start the bossfight logics
     }
 
     void GameOver()
     {
+        SetGameplayState(gameplaystate.paused);
         stateBasedScripts.Add(gameObject.AddComponent<GameOverScript>());
         stateBasedScripts[stateBasedScripts.Count-1].StartState();
-        SetGameplayState(gameplaystate.paused);
         EventManager.TriggerEvent("GameOver", null, points);
         IsQuitting = true;
         //game is over. destroy (explode?) everything

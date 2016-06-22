@@ -21,7 +21,15 @@ public class GameOverScript : BaseGamestate {
         i += Time.deltaTime;
         if (i >= 5f)
         {
-            FindObjectOfType<DBconnection>().UploadScore(FindObjectOfType<Arguments>().getUserID(), FindObjectOfType<Arguments>().getGameID(), GameManager.instance.CurrentPoints);
+            try
+            {
+                FindObjectOfType<DBconnection>().UploadScore(FindObjectOfType<Arguments>().getUserID(), FindObjectOfType<Arguments>().getGameID(), GameManager.instance.CurrentPoints);
+            }
+            catch
+            {
+                Debug.Log("tried uploading score");
+            }
+
             Application.Quit();
         }
     }

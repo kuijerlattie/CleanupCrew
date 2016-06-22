@@ -7,7 +7,7 @@ public class ParticleEvents : MonoBehaviour {
     void OnBlobDestroy(GameObject g, float f)
     {
         StaticFuntions.SpawnParticle("blob pop", g.transform.position); //g is in this case the Blob that is destroyed
-		StaticFuntions.SpawnParticleToUI("trail 2", g.transform.position);
+        //dont do blob trail 2 in here.
     }
     void OnBallDestroy(GameObject g, float f)
     {
@@ -32,6 +32,10 @@ public class ParticleEvents : MonoBehaviour {
 		StaticFuntions.SpawnParticle("blob sparkle", g.transform.position); //g is in this case the Blob that is destroyed
     }
 
+    void OnBlobKill(GameObject g, float f)
+    {
+        StaticFuntions.SpawnParticleToUI("trail 2", g.transform.position);
+    }
     
 
     void OnBallHitPaddle(GameObject g, float f)
@@ -121,6 +125,7 @@ public class ParticleEvents : MonoBehaviour {
         EventManager.StartListening("BallSpawn", OnBallSpawn);
         EventManager.StartListening("BallHitRod", OnBallHitRod);
         EventManager.StartListening("BlobHitRod", OnBlobHitRod);
+        EventManager.StartListening("BlobKill", OnBlobKill);
 
         EventManager.StartListening("GainedPoints", OnGainedPoints);
         EventManager.StartListening("LosePoints", OnLosePoints);
@@ -146,6 +151,7 @@ public class ParticleEvents : MonoBehaviour {
         EventManager.StopListening("BallSpawn", OnBallSpawn);
         EventManager.StopListening("BallHitRod", OnBallHitRod);
         EventManager.StopListening("BlobHitRod", OnBlobHitRod);
+        EventManager.StopListening("BlobKill", OnBlobKill);
 
         EventManager.StopListening("GainedPoints", OnGainedPoints);
         EventManager.StopListening("LosePoints", OnLosePoints);
