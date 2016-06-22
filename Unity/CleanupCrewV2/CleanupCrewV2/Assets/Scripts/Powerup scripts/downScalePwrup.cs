@@ -20,7 +20,7 @@ public class downScalePwrup : PwrupBase {
         GameObject paddle;
 
         paddle = FindObjectOfType<PaddleControls>().gameObject;
-        paddle.transform.localScale = new Vector3(5, 1, 0.5f);
+        paddle.transform.localScale = new Vector3(5, 1, 1);
     }
 
     static public void ResetScale()
@@ -28,6 +28,6 @@ public class downScalePwrup : PwrupBase {
         GameObject paddle;
 
         paddle = FindObjectOfType<PaddleControls>().gameObject;
-        paddle.transform.localScale = new Vector3(8, 1, 0.5f);
+        paddle.transform.localScale = new Vector3(8, 1, 1);
     }
 }

@@ -21,16 +21,10 @@ public class ParticleToUI : MonoBehaviour {
     /// -Canvas with UI must be on : Scale with Screen Size     (otherwise the points that represent the UI in world don't line up with different resolutions)
     /// -Main camera must have prefab: "OnTopOfUICamera" as child of the MainCamera
     /// -MainCamera can exclude "OnTopOfUI"-layer in it's culling mask
+    /// EDIT: main camera rendering objects, then camera3 rendering the UI, then camera2 renders particles after
     public static void SetUIForParticles()
     {
-        Canvas[] _canvases = FindObjectsOfType<Canvas>();
-        System.Array.ForEach(_canvases, x => 
-        {
-            x.renderMode = RenderMode.ScreenSpaceCamera;
-            x.gameObject.GetComponent<UnityEngine.UI.CanvasScaler>().uiScaleMode = UnityEngine.UI.CanvasScaler.ScaleMode.ScaleWithScreenSize;
-            x.worldCamera = Camera.main; 
-        });
-        if (Camera.main.gameObject.transform.childCount == 0)   
+        if (Camera.main.gameObject.transform.childCount == 0)
         {
             //settings its position identical to the regular camera
             GameObject secondCam = GameObject.Instantiate(Resources.Load("prefabs/OnTopOfUICamera")) as GameObject;
@@ -39,6 +33,15 @@ public class ParticleToUI : MonoBehaviour {
             secondCam.transform.parent = Camera.main.transform;
         }
         Camera.main.cullingMask = ~(1 << LayerMask.NameToLayer("OnTopOfUI"));
+
+        Canvas[] _canvases = FindObjectsOfType<Canvas>();
+        System.Array.ForEach(_canvases, x => 
+        {
+            x.renderMode = RenderMode.ScreenSpaceCamera;
+            x.gameObject.GetComponent<UnityEngine.UI.CanvasScaler>().uiScaleMode = UnityEngine.UI.CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            x.worldCamera = Camera.main.transform.GetChild(0).GetChild(0).gameObject.GetComponent<Camera>();
+        });
+      
 
     }
 
