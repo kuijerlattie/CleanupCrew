@@ -36,7 +36,7 @@ public class GameLogicScripting : MonoBehaviour
 
     void OnBallHitRod(GameObject g, float f)
     {
-        BlobScript.Spawn(RodScript.GetRodSpawnPoint(g));
+        if(GameManager.instance.CurrentGamestate != GameManager.gamestate.Tutorial) BlobScript.Spawn(RodScript.GetRodSpawnPoint(g));
     }
 
     void OnBallHitBlob(GameObject g, float f)
