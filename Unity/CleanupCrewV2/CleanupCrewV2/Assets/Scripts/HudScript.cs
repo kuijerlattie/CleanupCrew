@@ -13,18 +13,20 @@ public class HudScript : MonoBehaviour {
 
     Image EnergyGauge;
     Image BarrelGauge;
+    Image BossGauge;
 
     // Use this for initialization
     void Start () {
-        tPoints = GameObject.Find("Points").GetComponent<Text>();
-        tEnergy = GameObject.Find("Energy").GetComponent<Text>();
-        tWaterpoints = GameObject.Find("Waterpoints").GetComponent<Text>();
-        tEarthpoints = GameObject.Find("Sandpoints").GetComponent<Text>();
-        tSpacepoints = GameObject.Find("Spacepoints").GetComponent<Text>();
-        tState = GameObject.Find("GameState").GetComponent<Text>();
-        tGameplayState = GameObject.Find("GameplayState").GetComponent<Text>();
-        EnergyGauge = GameObject.Find("EnergyGauge").GetComponent<Image>();
-        BarrelGauge = GameObject.Find("BarrelGauge").GetComponent<Image>();
+        tPoints = GameObject.Find("Points").GetComponent<Text>(); //final
+        tEnergy = GameObject.Find("Energy").GetComponent<Text>(); //debug
+        tWaterpoints = GameObject.Find("Waterpoints").GetComponent<Text>(); //debug
+        tEarthpoints = GameObject.Find("Sandpoints").GetComponent<Text>(); //debug  
+        tSpacepoints = GameObject.Find("Spacepoints").GetComponent<Text>(); //debug
+        tState = GameObject.Find("GameState").GetComponent<Text>(); //debug 
+        tGameplayState = GameObject.Find("GameplayState").GetComponent<Text>(); //debug
+        EnergyGauge = GameObject.Find("EnergyGauge").GetComponent<Image>(); //final
+        BarrelGauge = GameObject.Find("BarrelGauge").GetComponent<Image>(); //final
+        BossGauge = GameObject.Find("BossGauge").GetComponent<Image>(); //final
 
     }
 	
@@ -39,6 +41,7 @@ public class HudScript : MonoBehaviour {
 
         if (GameManager.instance.CurrentGamestate == GameManager.gamestate.Boss)
         {
+            BossGauge.fillAmount = GameObject.FindObjectOfType<BossBase>().hitpointsForHud;
             tEarthpoints.text = "Boss health: " + GameObject.FindObjectOfType<MoleScript>().hitpoints;
             tSpacepoints.text = "Boss state: " + GameObject.FindObjectOfType<MoleScript>().state;
             tWaterpoints.text = "Boss invincible: " + FindObjectOfType<MoleScript>().invincible;
