@@ -9,6 +9,7 @@ public class TutorialScript : BaseGamestate {
         EventManager.StartListening("BallShoot", CheckShoot);
         EventManager.StartListening("BallHitRod", CheckHitRod);
         EventManager.StartListening("BallHitBlob", CheckHitBlob);
+        EventManager.StartListening("BlobDestroyed", CheckHitBlob); //in case the player fails to kill the tutorial blob.... it continues anyway
     }
 
     RodScript[] rods = null;
@@ -48,6 +49,7 @@ public class TutorialScript : BaseGamestate {
         if (!hasHitRod)
         {
             if (doubletapObject != null) GameObject.Destroy(doubletapObject);
+            if (swipeObject != null) GameObject.Destroy(swipeObject);
             if (rods == null)
             {
                 rods = FindObjectsOfType<RodScript>();
@@ -66,7 +68,7 @@ public class TutorialScript : BaseGamestate {
                 {
                     rod.gameObject.GetComponent<Renderer>().materials = new Material[] { rod.gameObject.GetComponent<Renderer>().materials[0] };
                 }
-                BlobScript.Spawn(BlobScript.GetRandomSpawnPos);
+                BlobScript.Spawn(BlobScript.GetRandomSpawnPos, BlobScript.BehaviourType.none);
             }
             rods = null;
 
@@ -93,6 +95,7 @@ public class TutorialScript : BaseGamestate {
 
     void CheckShoot(GameObject g, float f)
     {
+        hasMoved = true;
         hasShot = true;
     }
 

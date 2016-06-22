@@ -9,7 +9,7 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody))]
 public class BallScript : MonoBehaviour {
 
-    public float RotationSpeed = 10;    //is in inspector
+    float RotationSpeed = 200;    //is in inspector
     Rigidbody _rigid;
     private Vector3 RotationVec = Vector3.zero;
     private PaddleControls PC;
@@ -29,6 +29,6 @@ public class BallScript : MonoBehaviour {
     void Update()
     {
         if(PC.currentState == PaddleControls.PaddleState.Playing)
-            transform.Rotate(RotationVec);
+            transform.Rotate(RotationVec * Time.deltaTime);
     }
 }

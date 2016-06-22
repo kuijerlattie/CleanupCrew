@@ -117,7 +117,7 @@ public static GameObject Spawn(Vector3 position, BehaviourType behaviour)
         if (StartBehaviourAfter >= 0) StartBehaviourAfter -= Time.deltaTime;
         TimeAlive += Time.deltaTime;
         if (useBehaviour && StartBehaviourAfter < 0)
-            transform.position += GetBehaviourVector() * 0.2f;
+            transform.position += GetBehaviourVector() * 8.5f * Time.deltaTime;
 
     }
 
@@ -141,7 +141,7 @@ public static GameObject Spawn(Vector3 position, BehaviourType behaviour)
             case BehaviourType.none:
                 break;
             case BehaviourType.sin:
-                vec.x = Mathf.Sin(TimeAlive * 5f + behaviourOffset);    //Sin maybe performance issues later
+                vec.x = Mathf.Sin(TimeAlive * 3f + behaviourOffset);    //Sin maybe performance issues later
                 break;
             case BehaviourType.leftRightBounce:
                 vec.x = currentDirection ? 1 : -1;

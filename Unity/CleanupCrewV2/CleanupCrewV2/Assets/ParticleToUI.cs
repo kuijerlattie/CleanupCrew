@@ -50,13 +50,13 @@ public class ParticleToUI : MonoBehaviour {
         switch(currentTarget)
         {
             case UITarget.Barrel:
-                UIWorldPosition = new Vector3(-34, 15, 7);
+                UIWorldPosition = new Vector3(-38, 15, 4);
                 break;
             case UITarget.Energy:
-                UIWorldPosition = new Vector3(-34, 15, 7);
+                UIWorldPosition = new Vector3(-38, 15, 4);
                 break;
             case UITarget.Points:
-                UIWorldPosition = new Vector3(-34, 15, 7);
+                UIWorldPosition = new Vector3(-38, 15,4);
                 Debug.LogWarning("Trying to move particle to Points(score) in UI... where is that in the UI???? ");
                 break;
         }
