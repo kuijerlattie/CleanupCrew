@@ -13,11 +13,13 @@ public class AFKScript : MonoBehaviour {
 	void OnEnable ()
     {
         EventManager.StartListening("Click", OnScreenTouch);
+        EventManager.StartListening("HoldClick", OnScreenTouch);
 	}
 	
     void OnDisable()
     {
         EventManager.StopListening("Click", OnScreenTouch);
+        EventManager.StopListening("HoldClick", OnScreenTouch);
     }
 
 	// Update is called once per frame
@@ -36,6 +38,7 @@ public class AFKScript : MonoBehaviour {
             EventManager.TriggerEvent("PlayerAFKGameOver", null, AFKTimer);
             EndedGame = true;
             EventManager.StopListening("Click", OnScreenTouch);
+            EventManager.StopListening("HoldClick", OnScreenTouch);
             GameManager.instance.SetState(GameManager.gamestate.GameOver);
         }
 	}
