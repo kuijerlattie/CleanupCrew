@@ -42,7 +42,7 @@ public class PaddleControls : MonoBehaviour {
     /// <summary>
     /// gets width/height information from objects in the scene needed for this script to work properly
     /// </summary>
-    private void SetBoundaries()
+    public void SetBoundaries()
     {
         if (playingBalls.Count < 1) SpawnBall(); //just for safety
         WallScript[] _walls = FindObjectsOfType<WallScript>();

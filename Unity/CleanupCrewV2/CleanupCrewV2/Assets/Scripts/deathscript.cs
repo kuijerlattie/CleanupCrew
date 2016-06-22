@@ -24,5 +24,11 @@ public class deathscript : MonoBehaviour {
         {
             EventManager.TriggerEvent("BlobBottomDeath", col.gameObject, 0f);
         }
+
+        if (col.gameObject.tag == "Powerup")
+        {
+            //EventManager.TriggerEvent("PowerupBottomDeath", col.gameObject, 0f);
+            GameObject.Destroy(col.gameObject);
+        }
     }
 }

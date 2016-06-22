@@ -8,11 +8,13 @@ public class downScalePwrup : PwrupBase {
         PwrupManager manager = FindObjectOfType<PwrupManager>();
 
         manager.ActivatePwrup(powerupType);
+        FindObjectOfType<PaddleControls>().SetBoundaries();
     }
 
     public override void stopPwrup()
     {
         ResetScale();
+        
     }
 
     static public void Narrow()
@@ -29,5 +31,6 @@ public class downScalePwrup : PwrupBase {
 
         paddle = FindObjectOfType<PaddleControls>().gameObject;
         paddle.transform.localScale = new Vector3(8, 1, 1);
+        FindObjectOfType<PaddleControls>().SetBoundaries();
     }
 }
