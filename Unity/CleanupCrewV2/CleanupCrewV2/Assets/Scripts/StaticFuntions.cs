@@ -22,4 +22,16 @@ public class StaticFuntions : MonoBehaviour
         if (DesP != null) DesP.StayInScene = true;
         return g;
     }
+
+    public static AudioSource PlaySound(GameObject go, string soundname, bool looping = false)
+    {
+        AudioSource audio = go.GetComponent<AudioSource>();
+        if (audio == null)
+            audio = go.AddComponent<AudioSource>();
+        AudioClip sound = Resources.Load("Audio/" + soundname) as AudioClip;
+        audio.clip = sound;
+        audio.loop = looping;
+        audio.Play();
+        return audio;
+    }
 }

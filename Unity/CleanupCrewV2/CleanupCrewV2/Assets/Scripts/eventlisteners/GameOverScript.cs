@@ -7,6 +7,7 @@ public class GameOverScript : BaseGamestate {
     public override void StartState()
     {
         //explode all things in the scene?
+        GameManager.instance.SetGameplayState(GameManager.gameplaystate.paused);
         //make camera flyover the level with blobs going all over the place while your score is shown onscreen?
     }
 
@@ -20,7 +21,8 @@ public class GameOverScript : BaseGamestate {
         i += Time.deltaTime;
         if (i >= 5f)
         {
-            Application.LoadLevel(0);
+            FindObjectOfType<DBconnection>().UploadScore(FindObjectOfType<Arguments>().getUserID(), FindObjectOfType<Arguments>().getGameID(), GameManager.instance.CurrentPoints);
+            Application.Quit();
         }
     }
 }
