@@ -132,6 +132,7 @@ public class GameManager : MonoBehaviour {
         gameObject.AddComponent<pointevents>();
         gameObject.AddComponent<ParticleEvents>();
         gameObject.AddComponent<AFKScript>();
+		gameObject.AddComponent<AudiEvents> ();
         ParticleToUI.SetUIForParticles();
         SetGameplayState(gameplaystate.paused);
         EventManager.TriggerEvent("StartGame");
