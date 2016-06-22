@@ -23,11 +23,12 @@ public class StaticFuntions : MonoBehaviour
         return g;
     }
 
-    public static AudioSource PlaySound(GameObject go, AudioClip sound, bool looping = false)
+    public static AudioSource PlaySound(GameObject go, string soundname, bool looping = false)
     {
         AudioSource audio = go.GetComponent<AudioSource>();
         if (audio == null)
             audio = go.AddComponent<AudioSource>();
+        AudioClip sound = Resources.Load("Audio/" + soundname) as AudioClip;
         audio.clip = sound;
         audio.loop = looping;
         audio.Play();
