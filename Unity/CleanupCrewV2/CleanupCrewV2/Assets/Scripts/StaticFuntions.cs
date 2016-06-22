@@ -25,7 +25,7 @@ public class StaticFuntions : MonoBehaviour
 
     public static AudioSource PlaySound(GameObject go, string soundname, bool looping = false)
     {
-        GameObject g = new GameObject();
+        GameObject g = new GameObject("SoundEffect");
         g.transform.position = go.transform.position;
         g.AddComponent<RemoveAudioSource>();
         AudioSource audio = g.AddComponent<AudioSource>();
