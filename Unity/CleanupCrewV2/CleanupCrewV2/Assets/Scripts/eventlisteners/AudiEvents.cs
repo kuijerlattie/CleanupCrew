@@ -3,35 +3,40 @@ using System.Collections;
 
 public class AudiEvents : MonoBehaviour {
 
+	void Start ()
+	{
+		StaticFuntions.PlayMusic ("game music").volume = 0.1f;
+	}
 
 	void OnBallDestroy (GameObject g, float f)
 	{ 
 		Debug.Log ("musci played");
-		StaticFuntions.PlaySound (g, "balldead").volume = 0.5f;
+		StaticFuntions.PlaySound (g, "balldead").volume = 0.1f;
 	}
 	void OnBallHitPaddle (GameObject g, float f)
 	{
-		StaticFuntions.PlaySound (g, "ballhitpaddle").volume = 0.5f;
+		StaticFuntions.PlaySound (g, "ballhitpaddle").volume = 0.1f;
 	}
 	void OnBlobBottomDeath (GameObject g, float f)
 	{
-		StaticFuntions.PlaySound (g, "blolbescaped").volume = 0.5f;
+		StaticFuntions.PlaySound (g, "blolbescaped").volume = 0.11f;
 	}
 	void OnStartBoss (GameObject g, float f)
 	{
-		StaticFuntions.PlaySound (g, "molecomesout").volume = 0.5f;
+		StaticFuntions.PlaySound (g, "molecomesout").volume = 0.1f;
 	}
 	void OnGameOver (GameObject g, float f)
 	{
-		StaticFuntions.PlaySound (g, "looose").volume = 0.5f;
+		StaticFuntions.PlaySound (g, "looose").volume = 0.1f;
+		StaticFuntions.PlayMusic ("game music").volume = 0f;
 	}
 	void OnBallHitRod (GameObject g, float f)
 	{
-		StaticFuntions.PlaySound (g, "powerup").volume = 0.5f;
+		StaticFuntions.PlaySound (g, "powerup").volume = 0.1f;
 	}
 	void OnBallHitWall(GameObject g, float f)
 	{
-		StaticFuntions.PlaySound (g, "ballhitwall").volume = 1f;
+		StaticFuntions.PlaySound (g, "ballhitwall").volume = 0.1f;
 		Debug.Log ("wall is hit");
 	}
 		
