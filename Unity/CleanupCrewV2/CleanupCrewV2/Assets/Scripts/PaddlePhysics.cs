@@ -23,7 +23,7 @@ public class PaddlePhysics : MonoBehaviour {
             Vector3 localhitpoint = transform.InverseTransformPoint(hitPoint);
             float desiredangle = localhitpoint.x * maxangle;
 
-            float paddleLength = gameObject.transform.localScale.x;
+            float paddleLength = gameObject.GetComponent<BoxCollider>().size.x;
             outPutDirection = Quaternion.AngleAxis(desiredangle, Vector3.up) * outPutDirection;
             outPutDirection.y = 0;
 

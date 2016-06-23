@@ -10,20 +10,25 @@ public class upScalePwrup : PwrupBase {
         
         manager.ActivatePwrup(powerupType);
         FindObjectOfType<PaddleControls>().SetBoundaries();
+        manager.getWider = true;
+        manager.resetSize = false;
     }
 
     public override void stopPwrup()
     {
         ResetScale();
-        
+        PwrupManager manager = FindObjectOfType<PwrupManager>();
+        manager.getWider = false;
+        manager.resetSize = true;
     }
 
     static public void Wider()
     {
-         GameObject paddle;
+        GameObject paddle;
 
-         paddle = FindObjectOfType<PaddleControls>().gameObject;
-         paddle.transform.localScale = new Vector3(11, 1, 1); 
+
+        paddle = FindObjectOfType<PaddleControls>().gameObject;
+        //paddle.transform.localScale = new Vector3(11, 1, 1); 
         
     }
 
@@ -32,8 +37,8 @@ public class upScalePwrup : PwrupBase {
          GameObject paddle;
 
          paddle = FindObjectOfType<PaddleControls>().gameObject;
-         paddle.transform.localScale = new Vector3(8, 1, 1);
-        FindObjectOfType<PaddleControls>().SetBoundaries();
+        // paddle.transform.localScale = new Vector3(8, 1, 1);
+         FindObjectOfType<PaddleControls>().SetBoundaries();
 
     }
 
