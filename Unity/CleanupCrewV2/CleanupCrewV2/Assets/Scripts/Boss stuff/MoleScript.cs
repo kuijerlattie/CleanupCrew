@@ -73,7 +73,6 @@ public class MoleScript : BossBase {
 
 	// Use this for initialization
 	void Start () {
-        hitpoints = 6;
         targetlocation = gameObject.transform.position;
         bossarea = GameObject.Find("BossArea");
         anim = GetComponentInChildren<Animator>();
@@ -84,6 +83,9 @@ public class MoleScript : BossBase {
         if (GameManager.instance.CurrentGamestate != GameManager.gamestate.Boss) return;
         if (!fightstarted) { fightstarted = true; invincible = false; }
         timer -= Time.deltaTime;
+        if (!AnimationsFinished()) invincible = true;
+        else
+            invincible = false;
         switch (state)
         {
             case molestate.underground:
