@@ -240,6 +240,7 @@ public class GameManager : MonoBehaviour {
 
     public void AddPoints(int p)
     {
+        if (CurrentGamestate == gamestate.Tutorial) return;
         points += p;
         EventManager.TriggerEvent("GainedPoints", null, p);
     }
