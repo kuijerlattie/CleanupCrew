@@ -1,0 +1,8 @@
+Hit rod = 	5
+Hit blob = 	10
+Hit boss = 	5
+Kill boss = 	50
+
+Blobs need to boss	=	5		25+50
+Boss health		=	4		20+50
+Player Health		=	6
