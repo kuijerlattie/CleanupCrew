@@ -61,7 +61,8 @@ public class MoleScript : BossBase {
                 invincible = true;
                 break;
             case molestate.dead:
-                CameraShake.ScreenShake(10f, 0.5f);
+                CameraShake.ScreenShake(4f, 0.5f);
+                PlayAnimation("Mole_Death", 0.5f);
                 invincible = true;
                 break;
             default:
@@ -98,6 +99,9 @@ public class MoleScript : BossBase {
                 break;
             case molestate.gothit:
                 GotHit();
+                break;
+            case molestate.dead:
+                DoBossDeath();
                 break;
             default:
                 break;
@@ -140,7 +144,7 @@ public class MoleScript : BossBase {
             gameObject.transform.position = targetlocation;
         
             return;
-        }
+        
         
     }
 
@@ -195,11 +199,30 @@ public class MoleScript : BossBase {
         digparticlesStarted = false;
     }
     
+    void DoBossDeath()
+    {
+        if (AnimationsFinished())
+        {
+            MoveBossDown();
+            if (transform.position.y <= -5f)
+            {
+                EventManager.TriggerEvent("BossDied", gameObject);
+                Destroy(gameObject);
+            }
+        }
+    }
+
+
+    void MoveBossDown()
+    {
+        targetlocation.y = -5;
+        transform.position = Vector3.MoveTowards(transform.position, targetlocation, 1.0f);
+    }
+
     public override void Die()
     {
         alive = false;
-        EventManager.TriggerEvent("BossDied", gameObject);
-        Destroy(gameObject);
+        SetState(molestate.dead);
     }
 
     public override void OnHit(int hitid)
@@ -260,7 +283,7 @@ public class MoleScript : BossBase {
     
     bool AnimationsFinished()
     {
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Mole_PrevDone") || anim.GetCurrentAnimatorStateInfo(0).IsName("Mole_Idle"))
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Mole_PrevDone") || anim.GetCurrentAnimatorStateInfo(0).IsName("Mole_Idle") || anim.GetCurrentAnimatorStateInfo(0).IsName("Mole_StayDead"))
             return true;
         return false;     
     }

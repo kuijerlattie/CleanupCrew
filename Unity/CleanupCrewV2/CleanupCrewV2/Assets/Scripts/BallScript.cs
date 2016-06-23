@@ -9,7 +9,7 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody))]
 public class BallScript : MonoBehaviour {
 
-    float RotationSpeed = 200;    //is in inspector
+    float RotationSpeed = 2000;    //is in inspector
     Rigidbody _rigid;
     private Vector3 RotationVec = Vector3.zero;
     private PaddleControls PC;
@@ -24,7 +24,7 @@ public class BallScript : MonoBehaviour {
     void OnCollisionEnter(Collision c)
     {
         if (c.gameObject.tag == "Wall")
-        {
+        { 
             EventManager.TriggerEvent("BallHitWall", gameObject);
         }
         transform.LookAt(transform.position + _rigid.velocity);

@@ -14,6 +14,7 @@ public class HudScript : MonoBehaviour {
     Image EnergyGauge;
     Image BarrelGauge;
     Image BossGauge;
+    Image BossBackground;
 
     // Use this for initialization
     void Start () {
@@ -27,6 +28,7 @@ public class HudScript : MonoBehaviour {
         EnergyGauge = GameObject.Find("EnergyGauge").GetComponent<Image>(); //final
         BarrelGauge = GameObject.Find("BarrelGauge").GetComponent<Image>(); //final
         BossGauge = GameObject.Find("BossGauge").GetComponent<Image>(); //final
+        BossBackground = GameObject.Find("BossBackground").GetComponent<Image>();//final
 
     }
 	
@@ -41,6 +43,8 @@ public class HudScript : MonoBehaviour {
 
         if (GameManager.instance.CurrentGamestate == GameManager.gamestate.Boss)
         {
+            BossGauge.enabled = true;
+            BossBackground.enabled = true;
             BossGauge.fillAmount = GameObject.FindObjectOfType<BossBase>().hitpointsForHud;
             tEarthpoints.text = "Boss health: " + GameObject.FindObjectOfType<MoleScript>().hitpoints;
             tSpacepoints.text = "Boss state: " + GameObject.FindObjectOfType<MoleScript>().state;
@@ -48,6 +52,8 @@ public class HudScript : MonoBehaviour {
         }
         else
         {
+            BossGauge.enabled = false;
+            BossBackground.enabled = false;
             tEarthpoints.text = "No Boss";
             tWaterpoints.text = "Goo in barrel: " + GameManager.instance.CurrentBarrelGoo;
         }
