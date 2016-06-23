@@ -38,5 +38,5 @@ public abstract class BossBase : MonoBehaviour {
     public abstract void Die();
 
     public float hitpointsForHud
-    { get { return 1 / maxhitpoints * hitpoints; } }
+    { get { return (float) 1 / (float)maxhitpoints * (float)hitpoints; } }
 }
