@@ -10,6 +10,9 @@ public class PwrupManager : MonoBehaviour {
     public float spawnTimer = 10;
     public float minSpawnTime = 10, maxSpawnTime = 15;
     public bool bossSpawned = false;
+    public bool getWider = false;
+    public bool getNarrower = false;
+    public bool resetSize = false;
 
     public static PwrupManager instance = null;
     void OnAwake()
@@ -102,11 +105,13 @@ public class PwrupManager : MonoBehaviour {
         {
             case PowerupType.smallPaddle:
                 downScalePwrup.Narrow();
+                getNarrower = true;
                 StartCoroutine(PwrupTimer(type, durationTimer));
                 break;
 
             case PowerupType.bigPaddle:
                 upScalePwrup.Wider();
+                getWider = true;
                 StartCoroutine(PwrupTimer(type, durationTimer));
                 break;
 
@@ -143,10 +148,14 @@ public class PwrupManager : MonoBehaviour {
         switch (type)
         {
             case PowerupType.smallPaddle:
+                getNarrower = false;
+                resetSize = true;
                 downScalePwrup.ResetScale();
                 break;
 
             case PowerupType.bigPaddle:
+                getWider = false;
+                resetSize = true;
                 upScalePwrup.ResetScale();
                 break;
 
