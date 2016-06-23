@@ -13,7 +13,7 @@ public class pointevents : MonoBehaviour
         EventManager.StartListening("BallHitRod", OnRodHit);
         EventManager.StartListening("BallHitPaddle", OnBallHitPaddle);
         EventManager.StartListening("BossHit", OnBossHit);
-        EventManager.StartListening("BossKill", OnBossKill);
+        EventManager.StartListening("BossDeath", OnBossKill);
         //add all events that you want to listen to when the game starts here.
     }
 
