@@ -142,10 +142,9 @@ public class MoleScript : BossBase {
             //set new location to start digging up
             GetNewBossPosition();
             gameObject.transform.position = targetlocation;
-        
+
             return;
-        
-        
+        }
     }
 
     void AboveGround()

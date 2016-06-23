@@ -115,6 +115,8 @@ public class TutorialScript : BaseGamestate {
 
     public override void EndState()
     {
-        FindObjectOfType<PaddleControls>().gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
+        PaddleControls PC = FindObjectOfType<PaddleControls>();
+        PC.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
+        PC.ResetBall();
     }
 }

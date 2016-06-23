@@ -70,7 +70,7 @@ public class PaddleControls : MonoBehaviour {
     {
         GameObject ball;
         ball = GameObject.Instantiate(Resources.Load("prefabs/ball")) as GameObject;
-        ball.transform.position = this.transform.position + new Vector3(0, 0, ball.GetComponent<SphereCollider>().radius + 0.5f);
+        ball.transform.position = this.transform.position + new Vector3(0, 0.5f, ball.GetComponent<SphereCollider>().radius + 0.5f);
         EventManager.TriggerEvent("BallSpawn", ball);
         playingBalls.Add(ball);
 
