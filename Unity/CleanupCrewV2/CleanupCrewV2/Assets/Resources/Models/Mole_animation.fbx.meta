@@ -1144,8 +1144,8 @@ ModelImporter:
     - serializedVersion: 16
       name: Mole_StayDead
       takeName: Mole_Rig
-      firstFrame: 334
-      lastFrame: 335
+      firstFrame: 335
+      lastFrame: 340
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
