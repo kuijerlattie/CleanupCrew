@@ -278,6 +278,7 @@ public class GameManager : MonoBehaviour {
 
     public void LoseEnergy(int e)
     {
+        if (CurrentGamestate == gamestate.Tutorial) return;
         energy -= e;
         EventManager.TriggerEvent("LoseEnergy", null, e);
         if (energy <= 0)
