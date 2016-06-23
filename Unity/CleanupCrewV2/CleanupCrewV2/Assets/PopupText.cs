@@ -21,7 +21,7 @@ public class PopupText : MonoBehaviour {
 	void Update () {
         timer -= Time.deltaTime;
         if (timer <= 0) GameObject.Destroy(gameObject.transform.parent.gameObject);
-        transform.Translate(Vector3.down * Time.deltaTime * 8f);
-        if (_Text != null) _Text.color = new Color(_Text.color.r, _Text.color.g, _Text.color.b, _Text.color.a - Time.deltaTime);
+        transform.Translate(Vector3.down * Time.deltaTime * 25f);
+        if (_Text != null) _Text.color = new Color(_Text.color.r, _Text.color.g, _Text.color.b, _Text.color.a - Time.deltaTime * 0.5f);
 	}
 }
