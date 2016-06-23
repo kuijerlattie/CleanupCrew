@@ -11,35 +11,40 @@ public class AudiEvents : MonoBehaviour {
 	}
 	void OnBallHitPaddle (GameObject g, float f)
 	{
-		StaticFuntions.PlaySound (g, "ballhitpaddle");
+		StaticFuntions.PlaySound (g, "ballhitpaddle").volume = 0.5f;
 	}
 	void OnBlobBottomDeath (GameObject g, float f)
 	{
-		StaticFuntions.PlaySound (g, "blolbescaped");
+		StaticFuntions.PlaySound (g, "blolbescaped").volume = 0.5f;
 	}
 	void OnStartBoss (GameObject g, float f)
 	{
-		StaticFuntions.PlaySound (g, "molecomesout");
+		StaticFuntions.PlaySound (g, "molecomesout").volume = 0.5f;
 	}
 	void OnGameOver (GameObject g, float f)
 	{
-		StaticFuntions.PlaySound (g, "looose");
+		StaticFuntions.PlaySound (g, "looose").volume = 0.5f;
 	}
 	void OnBallHitRod (GameObject g, float f)
 	{
-		StaticFuntions.PlaySound (g, "powerup");
+		StaticFuntions.PlaySound (g, "powerup").volume = 0.5f;
+	}
+	void OnBallHitWall(GameObject g, float f)
+	{
+		StaticFuntions.PlaySound (g, "balhitwall").volume = 1f;
+		Debug.Log ("wall is hit");
 	}
 		
 
 	void OnEnable()
 	{
-		//EventManager.StartListening("BlobDestroyed", OnBlobDestroy);
+		//EventManager.StartListening("BloanbDestroyed", OnBlobDestroy);
 		EventManager.StartListening("BallDestroyed", OnBallDestroy);
 		//EventManager.StartListening("BlobSpawn", OnBlobSpawn);
 		//EventManager.StartListening("BallSpawn", OnBallSpawn);
 		EventManager.StartListening("BallHitRod", OnBallHitRod);
 		//EventManager.StartListening("BlobHitRod", OnBlobHitRod);
-		//
+		EventManager.StartListening("BallHitWall", OnBallHitWall);
 		//EventManager.StartListening("GainedPoints", OnGainedPoints);
 		//EventManager.StartListening("LosePoints", OnLosePoints);
 		//
@@ -64,7 +69,7 @@ public class AudiEvents : MonoBehaviour {
 		//EventManager.StopListening("BallSpawn", OnBallSpawn);
 		EventManager.StopListening("BallHitRod", OnBallHitRod);
 		//EventManager.StopListening("BlobHitRod", OnBlobHitRod);
-		//
+		EventManager.StopListening("BallHitWall", OnBallHitWall);
 		//EventManager.StopListening("GainedPoints", OnGainedPoints);
 		//EventManager.StopListening("LosePoints", OnLosePoints);
 		//
