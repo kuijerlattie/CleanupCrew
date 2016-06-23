@@ -20,7 +20,7 @@ public class shieldPwrup : PwrupBase {
 
     static public void activateShield()
     {
-        GameObject shield = (GameObject)Instantiate(Resources.Load("prefabs/Shield_Fixed"), new Vector3(-23,0,-33), Quaternion.identity);
+        GameObject shield = (GameObject)Instantiate(Resources.Load("prefabs/Shield_Fixed"), new Vector3(-23,0,-31), Quaternion.identity);
     }
 
     static public void deactivateShield() // atm not needed

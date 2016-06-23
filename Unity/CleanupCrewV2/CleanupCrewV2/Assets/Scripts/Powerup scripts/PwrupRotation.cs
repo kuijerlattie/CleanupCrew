@@ -11,16 +11,17 @@ public class PwrupRotation : MonoBehaviour {
 	void Start () {
         pwrUp = FindObjectOfType<PwrupRotation>().gameObject;
         rotTimer = timer;
-	}
+        pwrUp.transform.Rotate(Vector3.right, 90);
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        rotTimer -= Time.deltaTime;
-        if(rotTimer <= 0)
+       // rotTimer -= Time.deltaTime;
+       /* if(rotTimer <= 0)
         {
             pwrUp.transform.Rotate(Vector3.right, -10);
             rotTimer = timer;
         }
-        
+        */
     }
 }
