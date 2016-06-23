@@ -31,7 +31,7 @@ public abstract class BossBase : MonoBehaviour {
     {
         if (!GameManager.IsQuitting)
         {
-            EventManager.TriggerEvent("BossDied", this.gameObject);
+            EventManager.TriggerEvent("BossDestroyed", this.gameObject);
         }
     }
 

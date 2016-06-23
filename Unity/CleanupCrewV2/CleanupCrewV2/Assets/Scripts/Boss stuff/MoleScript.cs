@@ -58,6 +58,7 @@ public class MoleScript : BossBase {
                     invincible = false;
                 break;
             case molestate.gothit:
+                EventManager.TriggerEvent("BossHit");
                 invincible = true;
                 break;
             case molestate.dead:

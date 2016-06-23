@@ -31,9 +31,11 @@ public class GameManager : MonoBehaviour {
 
     private int energy = 0;
     private int maxenergy = 100;
+    private float screenpoints = 0;
     private int points = 0;
 
     private int Barrelcontent = 0;
+    private float screenBarrelContent = 0;
     private int GooNeededForBoss = 10;
 
     public static bool IsQuitting = false;
@@ -132,7 +134,7 @@ public class GameManager : MonoBehaviour {
         gameObject.AddComponent<pointevents>();
         gameObject.AddComponent<ParticleEvents>();
         gameObject.AddComponent<AFKScript>();
-		gameObject.AddComponent<AudiEvents> ();
+		gameObject.AddComponent<AudiEvents>();
         ParticleToUI.SetUIForParticles();
         SetGameplayState(gameplaystate.paused);
         EventManager.TriggerEvent("StartGame");
@@ -206,10 +208,7 @@ public class GameManager : MonoBehaviour {
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            SetState(gamestate.GameOver);
-        }
+        updateUIValues();
     }
 
     public gamestate CurrentGamestate
@@ -227,11 +226,14 @@ public class GameManager : MonoBehaviour {
     public int CurrentPoints
     { get { return points; } }
 
+    public int CurrentUIPoints
+    { get { return (int)screenpoints; } }
+
     public int CurrentBarrelGoo
     { get { return Barrelcontent; } }
 
     public float CurrentBarrelGooUI
-    { get { return 1f/(float)GooNeededForBoss*(float)Barrelcontent; } }
+    { get { return 1f/(float)GooNeededForBoss*(float)screenBarrelContent; } }
 
     public void EmptyBarrelGoo()
     {
@@ -302,5 +304,58 @@ public class GameManager : MonoBehaviour {
     public void AddGooToBarrel(int goo)
     {
         Barrelcontent += goo;
+    }
+
+    void updateUIValues()
+    {
+        if (screenBarrelContent > Barrelcontent)
+        {
+            //decrease screenbarrelcontent
+            if (screenBarrelContent - 1 < Barrelcontent)
+                screenBarrelContent = Barrelcontent;
+            else
+            {
+
+                screenBarrelContent -= 1 / Time.deltaTime;
+            }
+
+        }
+        else if (screenBarrelContent < Barrelcontent)
+        {
+            //increase screenbarrelcontent
+            if (screenBarrelContent + 1 > Barrelcontent)
+                screenBarrelContent = Barrelcontent;
+            else
+            {
+
+                screenBarrelContent += 1 / Time.deltaTime;
+            }
+        }
+
+        if (screenpoints > points)
+        {
+            //decrease screenpoints
+            if (screenpoints - 1 < points)
+                screenpoints = points;
+            else
+            {
+
+                screenpoints -= 1 / Time.deltaTime;
+            }
+        }
+        if (screenpoints < points)
+        {
+            //increase screenpoints
+            if (screenpoints + 1 > points)
+                screenpoints = points;
+            else
+            {
+
+                screenpoints += 1 / Time.deltaTime;
+            }
+        }
+
+        //screenBarrelContent = (Barrelcontent - screenBarrelContent) / Mathf.Abs(Barrelcontent - screenBarrelContent);
+        //screenpoints = (points - screenpoints) / Mathf.Abs(points - screenpoints);
     }
 }

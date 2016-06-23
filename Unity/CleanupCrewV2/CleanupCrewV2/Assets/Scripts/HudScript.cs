@@ -34,7 +34,7 @@ public class HudScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        tPoints.text = GameManager.instance.CurrentPoints.ToString();
+        tPoints.text = GameManager.instance.CurrentUIPoints.ToString();
         tEnergy.text = "energy: " + GameManager.instance.CurrentEnergy;
         tState.text = "Current state: " + GameManager.instance.CurrentGamestate;
         tGameplayState.text = "current gameplay state: " + GameManager.instance.CurrentGameplaystate;
