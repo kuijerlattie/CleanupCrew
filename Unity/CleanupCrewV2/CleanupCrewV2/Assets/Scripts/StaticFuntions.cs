@@ -3,7 +3,7 @@ using System.Collections;
 
 public class StaticFuntions : MonoBehaviour
 {
-
+    static GameObject musicObject = null;
     public static GameObject SpawnParticle(string name, Vector3 position) //documented
     {
         GameObject g = GameObject.Instantiate(Resources.Load("Particles/" + name)) as GameObject;
@@ -35,6 +35,27 @@ public class StaticFuntions : MonoBehaviour
         AudioClip sound = Resources.Load("Audio/" + soundname) as AudioClip;
         audio.clip = sound;
         audio.loop = looping;
+        audio.Play();
+        return audio;
+    }
+
+    public static AudioSource PlayMusic(string soundname)
+    {
+        if (musicObject == null)
+        {
+            musicObject = new GameObject("Music");
+            musicObject.AddComponent<AudioSource>();
+        }
+        //GameObject g = new GameObject("Music");
+        //if (go == null)
+        //    g.transform.position = new Vector3(0, 0, 0);
+        //else
+       //     g.transform.position = go.transform.position;
+       // g.AddComponent<RemoveAudioSource>();
+        AudioSource audio = musicObject.GetComponent<AudioSource>();
+        AudioClip sound = Resources.Load("Audio/" + soundname) as AudioClip;
+        audio.clip = sound;
+        audio.loop = true;
         audio.Play();
         return audio;
     }
