@@ -8,12 +8,15 @@ public class AFKScript : MonoBehaviour {
     float AFKEndGame = 30.0f;
     bool GaveWarning = false;
     bool EndedGame = false;
+    float GameTimer = 0.0f;
+    float MaxTime = 999;
 
 	// Use this for initialization
 	void OnEnable ()
     {
         EventManager.StartListening("Click", OnScreenTouch);
         EventManager.StartListening("HoldClick", OnScreenTouch);
+        MaxTime = FindObjectOfType<Arguments>().getGameTime() * 60f;
 	}
 	
     void OnDisable()
@@ -26,6 +29,11 @@ public class AFKScript : MonoBehaviour {
 	void Update () {
         if (GameManager.instance.CurrentGamestate == GameManager.gamestate.GameOver) return;
 
+        GameTimer += Time.deltaTime;
+        if(GameTimer>= MaxTime && GameManager.instance.CurrentGamestate != GameManager.gamestate.Boss)
+        {
+            GameManager.instance.SetState(GameManager.gamestate.GameOver);
+        }
         AFKTimer += Time.deltaTime;
         if (AFKTimer >= AFKWarningTime && !GaveWarning)
         {
