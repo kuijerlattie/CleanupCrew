@@ -31,19 +31,19 @@ public class pointevents : MonoBehaviour
 
     void OnBlobBottomDeath(GameObject g, float f)
     {
-        GameManager.instance.LoseEnergy(10);
+        GameManager.instance.LoseEnergy(7);
         Destroy(g);
     }
 
     void OnBlobKill(GameObject g, float f)
     {
-        GameManager.instance.AddPoints(20);
+        GameManager.instance.AddPoints(15);
         blobcombo++;
     }
 
     void OnRodHit(GameObject g, float f)
     {
-        GameManager.instance.AddPoints(10);
+        GameManager.instance.AddPoints(5);
     }
 
     void OnBallHitPaddle(GameObject g, float f)
