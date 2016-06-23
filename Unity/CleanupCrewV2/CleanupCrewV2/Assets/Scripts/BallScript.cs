@@ -23,6 +23,10 @@ public class BallScript : MonoBehaviour {
 
     void OnCollisionEnter(Collision c)
     {
+        if (c.gameObject.tag == "Wall")
+        {
+            EventManager.TriggerEvent("BallHitWall", gameObject);
+        }
         transform.LookAt(transform.position + _rigid.velocity);
     }
 

@@ -27,6 +27,7 @@ public class MoleScript : BossBase {
         diggingDown,
         aboveground,
         gothit,
+        dead
     }
     
     void SetState(molestate s)
@@ -57,6 +58,10 @@ public class MoleScript : BossBase {
                     invincible = false;
                 break;
             case molestate.gothit:
+                invincible = true;
+                break;
+            case molestate.dead:
+                CameraShake.ScreenShake(10f, 0.5f);
                 invincible = true;
                 break;
             default:
