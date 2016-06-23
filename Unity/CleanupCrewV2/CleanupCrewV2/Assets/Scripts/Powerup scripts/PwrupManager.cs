@@ -50,13 +50,13 @@ public class PwrupManager : MonoBehaviour {
 
     void Start()
     {
-        EventManager.StartListening("BlobDestroyed", BlobDestroyed);
+        EventManager.StartListening("BlobKill", BlobDestroyed);
         EventManager.StartListening("StartBoss", BossFightStarted);
     }
 
     void OnDisable()
     {
-        EventManager.StopListening("BlobDestroyed", BlobDestroyed);
+        EventManager.StopListening("BlobKill", BlobDestroyed);
         EventManager.StopListening("StartBoss", BossFightStarted);
     }
     
