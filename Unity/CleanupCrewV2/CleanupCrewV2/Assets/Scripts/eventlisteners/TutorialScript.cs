@@ -68,7 +68,7 @@ public class TutorialScript : BaseGamestate {
                 {
                     rod.gameObject.GetComponent<Renderer>().materials = new Material[] { rod.gameObject.GetComponent<Renderer>().materials[0] };
                 }
-                BlobScript.Spawn(BlobScript.GetRandomSpawnPos, BlobScript.BehaviourType.none);
+                BlobScript.Spawn(BlobScript.GetRandomSpawnPos, BlobScript.BehaviourType.none).transform.localScale = new Vector3(3,3,3);
             }
             rods = null;
 
@@ -115,6 +115,8 @@ public class TutorialScript : BaseGamestate {
 
     public override void EndState()
     {
-        FindObjectOfType<PaddleControls>().gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
+        PaddleControls PC = FindObjectOfType<PaddleControls>();
+        PC.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
+        PC.ResetBall();
     }
 }
