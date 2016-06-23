@@ -190,9 +190,11 @@ public class MoleScript : BossBase {
 
     void StartParticles()
     {
-        diggingparticle.transform.position = new Vector3(targetlocation.x, 0, targetlocation.z);
-        diggingparticle.Play(true);
-        digparticlesStarted = true;
+        StaticFuntions.SpawnParticle("mole green goo", new Vector3(transform.position.x, 0, transform.position.z));
+
+        //diggingparticle.transform.position = new Vector3(targetlocation.x, 0, targetlocation.z);
+        //diggingparticle.Play(true);
+        //digparticlesStarted = true;
     }
 
     void StopParticles()
