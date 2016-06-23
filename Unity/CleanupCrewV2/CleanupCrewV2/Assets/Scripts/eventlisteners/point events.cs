@@ -12,6 +12,8 @@ public class pointevents : MonoBehaviour
         EventManager.StartListening("BlobKill", OnBlobKill);
         EventManager.StartListening("BallHitRod", OnRodHit);
         EventManager.StartListening("BallHitPaddle", OnBallHitPaddle);
+        EventManager.StartListening("BossHit", OnBossHit);
+        EventManager.StartListening("BossKill", OnBossKill);
         //add all events that you want to listen to when the game starts here.
     }
 
@@ -21,6 +23,8 @@ public class pointevents : MonoBehaviour
         EventManager.StopListening("BlobBottomDeath", OnBlobBottomDeath);
         EventManager.StopListening("BlobKill", OnBlobKill);
         EventManager.StopListening("BallHitRod", OnRodHit);
+        EventManager.StopListening("BossHit", OnBossHit);
+        EventManager.StopListening("BossDeath", OnBossKill);
         //add all events to stop listening to here
     }
 
@@ -44,6 +48,16 @@ public class pointevents : MonoBehaviour
     void OnRodHit(GameObject g, float f)
     {
         GameManager.instance.AddPoints(5);
+    }
+
+    void OnBossHit(GameObject g, float f)
+    {
+        GameManager.instance.AddPoints(5);
+    }
+
+    void OnBossKill(GameObject g, float f)
+    {
+        GameManager.instance.AddPoints(50);
     }
 
     void OnBallHitPaddle(GameObject g, float f)

@@ -6,7 +6,7 @@ public class AudiEvents : MonoBehaviour {
 
 	void OnBallDestroy (GameObject g, float f)
 	{ 
-		Debug.Log ("musci played");
+		Debug.Log ("music played, Fucking Hungarian");
 		StaticFuntions.PlaySound (g, "balldead").volume = 0.5f;
 	}
 	void OnBallHitPaddle (GameObject g, float f)
