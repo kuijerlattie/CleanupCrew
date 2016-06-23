@@ -234,7 +234,7 @@ public class GameManager : MonoBehaviour {
     { get { return Barrelcontent; } }
 
     public float CurrentBarrelGooUI
-    { get { return 1f/(float)GooNeededForBoss*(float)screenBarrelContent; } }
+    { get { return 1f/(float)GooNeededForBoss*(float)Barrelcontent; } }
 
     public void EmptyBarrelGoo()
     {
