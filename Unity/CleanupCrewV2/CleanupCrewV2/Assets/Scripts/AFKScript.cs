@@ -12,11 +12,12 @@ public class AFKScript : MonoBehaviour {
     float MaxTime = 999;
 
 	// Use this for initialization
-	void OnEnable ()
+	void Start ()
     {
         EventManager.StartListening("Click", OnScreenTouch);
         EventManager.StartListening("HoldClick", OnScreenTouch);
         MaxTime = FindObjectOfType<Arguments>().getGameTime() * 60f;
+  
 	}
 	
     void OnDisable()
