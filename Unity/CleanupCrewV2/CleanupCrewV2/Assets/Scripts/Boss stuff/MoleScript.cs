@@ -145,7 +145,6 @@ public class MoleScript : BossBase {
 
             return;
         }
-        
     }
 
     void AboveGround()

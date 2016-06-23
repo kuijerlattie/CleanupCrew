@@ -84,7 +84,8 @@ public class FixedSpeed : MonoBehaviour {
 
     void OnCollisionEnter(Collision c)
     {
-        AdjustDirection();
+        if (c.gameObject.tag == "Wall")
+            AdjustDirection();
         ResetSpeed();
         if (c.collider.gameObject.GetComponent<RodScript>())
         {
