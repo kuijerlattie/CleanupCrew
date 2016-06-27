@@ -13,7 +13,7 @@ public class RodScript : MonoBehaviour {
 
     public float SwitchAfterSeconds = 5;
     private float switchTimer;
-    private float maxHeight = 10;
+    private float maxHeight = 9;
 
     public bool StartUp = true;
     public bool AllowedToSwitch = true; //alternative to disable this script
@@ -167,7 +167,7 @@ public class RodScript : MonoBehaviour {
     private static class RodState
     {
         static public float Up = 0; //is overwritten later
-        static public float Down = -5;
+        static public float Down = -4;
     }
 
 
