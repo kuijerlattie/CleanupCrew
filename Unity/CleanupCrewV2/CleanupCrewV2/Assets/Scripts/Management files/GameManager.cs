@@ -172,6 +172,7 @@ public class GameManager : MonoBehaviour {
     void StartBreakout()
     {
         CurrentLevel += 1;
+        if (CurrentLevel == 2) BumperScript.AddBumpers();    //after defeating the boss once    TODO change when
         stateBasedScripts.Add(gameObject.AddComponent<BreakoutScript>());
         stateBasedScripts[stateBasedScripts.Count-1].StartState();
         SetGameplayState(gameplaystate.running);
@@ -246,6 +247,7 @@ public class GameManager : MonoBehaviour {
         if (CurrentGamestate == gamestate.Tutorial) return;
         points += p;
         EventManager.TriggerEvent("GainedPoints", null, p);
+        if (points >= 125 && points < 300) BumperScript.AddBumpers();   //TODO 'level'-system
     }
 
     public int gooNeededForBoss
