@@ -26,7 +26,7 @@ public class BreakoutScript : BaseGamestate {
     {
         if (GameManager.instance.CurrentBarrelGoo > GameManager.instance.gooNeededForBoss)
         {
-            GameManager.instance.SetState(GameManager.gamestate.BossIntermission);
+            //GameManager.instance.SetState(GameManager.gamestate.BossIntermission); valve, plz fix
         }
 
         SpawnTimer -= Time.deltaTime;
