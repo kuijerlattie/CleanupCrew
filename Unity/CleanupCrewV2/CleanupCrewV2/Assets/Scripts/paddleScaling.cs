@@ -30,7 +30,11 @@ public class paddleScaling : MonoBehaviour {
         {
             if(manager.getWider)
             {
-                if(wider <= 100)
+                if (manager.getNarrower)
+                {
+                    manager.DeactivatePwrup(PwrupManager.PowerupType.smallPaddle);
+                }
+                if (wider <= 100)
                 {
                     skinned.SetBlendShapeWeight(1, wider);
                     wider += skinnedSpeed;
@@ -42,6 +46,10 @@ public class paddleScaling : MonoBehaviour {
 
             if(manager.getNarrower)
             {
+                if(manager.getWider)
+                {
+                    manager.DeactivatePwrup(PwrupManager.PowerupType.bigPaddle);
+                }
                 if (narrower <= 100)
                 {
                     skinned.SetBlendShapeWeight(0, narrower);
