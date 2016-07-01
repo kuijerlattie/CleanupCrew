@@ -10,11 +10,12 @@ public class TutorialScript : BaseGamestate {
         EventManager.StartListening("BallHitRod", CheckHitRod);
         EventManager.StartListening("BallHitBlob", CheckHitBlob);
         EventManager.StartListening("BlobDestroyed", CheckHitBlob); //in case the player fails to kill the tutorial blob.... it continues anyway
-        //GameManager.instance.SetState(GameManager.gamestate.Breakout);    //testing only
+        
 
         HandContainer = new GameObject("HandContainer");
         HandContainer.transform.position += Vector3.up;
         //valvemanager.instance.AddValveOutline();    //only for testing
+        //GameManager.instance.SetState(GameManager.gamestate.Breakout);    //testing only
     }
 
     RodScript[] rods = null;

@@ -9,6 +9,7 @@ public class valvescript : MonoBehaviour {
 
     void OnCollisionEnter(Collision col)
     {
+        if (GameManager.instance.CurrentGamestate == GameManager.gamestate.Tutorial) return;
         if (col.gameObject.tag == "Ball")
         {
             activated = true;
