@@ -110,6 +110,14 @@ public class ParticleEvents : MonoBehaviour {
         //g = null, use 'new Vector3(x,y,z)' instead of g.transform.position
 
     }
+	void OnValveHit(GameObject g, float f)
+	{
+		StaticFuntions.SpawnParticle("STEAM", g.transform.position);
+	}
+	void OnBossIntermission(GameObject g, float f)
+	{
+		StaticFuntions.SpawnParticle ("pipe exploding", g.transform.position);
+	}
 
 
 
@@ -139,7 +147,8 @@ public class ParticleEvents : MonoBehaviour {
 
         EventManager.StartListening("GainedEnergy", OnGainedEnergy);
         EventManager.StartListening("LoseEnergy", OnLoseEnergy);
-
+		EventManager.StartListening("ValveHit", OnValveHit);
+		EventManager.StartListening ("BossIntermission", OnBossIntermission);
 
     }
 
@@ -165,5 +174,7 @@ public class ParticleEvents : MonoBehaviour {
 
         EventManager.StopListening("GainedEnergy", OnGainedEnergy);
         EventManager.StopListening("LoseEnergy", OnLoseEnergy);
+		EventManager.StopListening("ValveHit", OnValveHit);
+		EventManager.StopListening ("BossIntermission", OnBossIntermission);
     }
 }

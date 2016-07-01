@@ -36,13 +36,13 @@ public class AudiEvents : MonoBehaviour {
 	void OnBallHitWall(GameObject g, float f)
 	{
 		StaticFuntions.PlaySound (g, "ballhitwall").volume = 0.1f;
-		Debug.Log ("wall is hit");
+		//Debug.Log ("wall is hit");
 	}
 		
 
 	void OnEnable()
 	{
-		//EventManager.StartListening("BloanbDestroyed", OnBlobDestroy);
+		//EventManager.StartListening("BlobDestroyed", OnBlobDestroy);
 		EventManager.StartListening("BallDestroyed", OnBallDestroy);
 		//EventManager.StartListening("BlobSpawn", OnBlobSpawn);
 		//EventManager.StartListening("BallSpawn", OnBallSpawn);
