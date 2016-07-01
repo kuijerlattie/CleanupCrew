@@ -186,7 +186,7 @@ public class GameManager : MonoBehaviour {
         SetGameplayState(gameplaystate.paused);
         stateBasedScripts.Add(gameObject.AddComponent<BossIntermissionScript>());
         stateBasedScripts[stateBasedScripts.Count-1].StartState();
-        EventManager.TriggerEvent("BossIntermission");
+        EventManager.TriggerEvent("BossIntermission", GameObject.Find("BossLocation"));
         //boss start animation and shit
     }
 

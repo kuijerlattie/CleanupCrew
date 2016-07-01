@@ -1,13 +1,34 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//           volvomanager
 public class valvemanager : MonoBehaviour {
     valvescript[] valves;
 
     void Start()
     {
-        valves = GameObject.FindObjectsOfType<valvescript>(); //valve, plz fix
+        valves = GameObject.FindObjectsOfType<valvescript>(); //volvo, plz fix
         EventManager.StartListening("ValveHit", OnValveHit);
+        
+    }
+
+    public void AddValveOutline()
+    {
+        foreach (valvescript valve in valves)
+        {
+            valve.gameObject.GetComponent<Renderer>().materials = new Material[] { valve.gameObject.GetComponent<Renderer>().materials[0], new Material(Shader.Find("Outlined/Silhouette Only")) };
+        }
+    }
+
+    public static valvemanager instance { get { return GameObject.FindObjectOfType<valvemanager>(); } }
+
+    public void SetValveOutlineColor(Color c)
+    {
+        foreach (valvescript valve in valves)
+        {
+            valve.gameObject.GetComponent<Renderer>().materials[1].SetColor("_OutlineColor", c);
+        }
+       
     }
 
     void OnDisable()
@@ -42,6 +63,9 @@ public class valvemanager : MonoBehaviour {
     void resetAllValves()
     {
         foreach (valvescript v in valves)
+        {
             v.activated = false;
+            SetValveOutlineColor(Color.red);
+        }
     }
 }

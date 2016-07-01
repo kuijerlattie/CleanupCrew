@@ -11,10 +11,15 @@ public class TutorialScript : BaseGamestate {
         EventManager.StartListening("BallHitBlob", CheckHitBlob);
         EventManager.StartListening("BlobDestroyed", CheckHitBlob); //in case the player fails to kill the tutorial blob.... it continues anyway
         //GameManager.instance.SetState(GameManager.gamestate.Breakout);    //testing only
+
+        HandContainer = new GameObject("HandContainer");
+        HandContainer.transform.position += Vector3.up;
+        valvemanager.instance.AddValveOutline();
     }
 
     RodScript[] rods = null;
     BlobScript[] blobs = null;
+    GameObject HandContainer = null;
     GameObject swipeObject = null;
     GameObject doubletapObject = null;
 
@@ -25,6 +30,7 @@ public class TutorialScript : BaseGamestate {
             if(swipeObject == null)
             {
                 swipeObject = GameObject.Instantiate(Resources.Load("prefabs/UI/HandV2")) as GameObject;
+                swipeObject.transform.parent = HandContainer.transform;
                 Animation a = swipeObject.GetComponent<Animation>();
                 a.wrapMode = WrapMode.Loop;
                 a.Play("Slide");
@@ -40,6 +46,7 @@ public class TutorialScript : BaseGamestate {
             if (doubletapObject == null)
             {
                 doubletapObject = GameObject.Instantiate(Resources.Load("prefabs/UI/HandV2")) as GameObject;
+                doubletapObject.transform.parent = HandContainer.transform;
                 Animation a = doubletapObject.GetComponent<Animation>();
                 a.wrapMode = WrapMode.Loop;
                 a.Play("Tap");
@@ -81,6 +88,7 @@ public class TutorialScript : BaseGamestate {
 
             return;
         }
+        //valvemanager.instance.AddValveOutline();  //only for testing
         GameManager.instance.SetState(GameManager.gamestate.BreakoutIntermission);
     }
 

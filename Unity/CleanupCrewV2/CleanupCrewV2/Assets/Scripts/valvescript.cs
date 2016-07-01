@@ -12,8 +12,16 @@ public class valvescript : MonoBehaviour {
         if (col.gameObject.tag == "Ball")
         {
             activated = true;
-            Debug.Log("got hit m8");
+            SetOutlineColor(Color.green);
             EventManager.TriggerEvent("ValveHit", col.gameObject, valveId);
         }
+    }
+
+    public void SetOutlineColor(Color c)
+    {
+        //if(gameObject.GetComponent<Renderer>().materials.GetLength(0) < 2) return;
+
+        gameObject.GetComponent<Renderer>().materials[1].SetColor("_OutlineColor", c);
+
     }
 }
