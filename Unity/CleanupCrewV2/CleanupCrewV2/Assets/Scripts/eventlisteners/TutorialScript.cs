@@ -14,7 +14,7 @@ public class TutorialScript : BaseGamestate {
 
         HandContainer = new GameObject("HandContainer");
         HandContainer.transform.position += Vector3.up;
-        valvemanager.instance.AddValveOutline();
+        //valvemanager.instance.AddValveOutline();    //only for testing
     }
 
     RodScript[] rods = null;
@@ -88,7 +88,7 @@ public class TutorialScript : BaseGamestate {
 
             return;
         }
-        //valvemanager.instance.AddValveOutline();  //only for testing
+        valvemanager.instance.AddValveOutline();
         GameManager.instance.SetState(GameManager.gamestate.BreakoutIntermission);
     }
 
