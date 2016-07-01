@@ -16,6 +16,7 @@ public class TutorialScript : BaseGamestate {
         HandContainer.transform.position += Vector3.up;
         //valvemanager.instance.AddValveOutline();    //only for testing
         //GameManager.instance.SetState(GameManager.gamestate.Breakout);    //testing only
+        //GameManager.instance.SetState(GameManager.gamestate.BossIntermission);    //testing only
     }
 
     RodScript[] rods = null;

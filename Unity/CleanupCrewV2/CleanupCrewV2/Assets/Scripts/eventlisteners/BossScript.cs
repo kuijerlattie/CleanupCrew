@@ -9,7 +9,7 @@ public class BossScript : BaseGamestate {
     public override void StartState()
     {
         EventManager.StartListening("BossDied", BossDied);
-        BumperScript.RemoveBumpers();
+        
     }
 
     public override void EndState()

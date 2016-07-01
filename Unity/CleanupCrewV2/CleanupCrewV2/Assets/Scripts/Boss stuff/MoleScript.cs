@@ -194,7 +194,7 @@ public class MoleScript : BossBase {
 
         //diggingparticle.transform.position = new Vector3(targetlocation.x, 0, targetlocation.z);
         //diggingparticle.Play(true);
-        //digparticlesStarted = true;
+        digparticlesStarted = true; //KEEP THIS, otherwise -1fps 
     }
 
     void StopParticles()

@@ -10,6 +10,7 @@ public class BossIntermissionScript : BaseGamestate {
 
     public override void StartState()
     {
+        BumperScript.RemoveBumpers();
         CameraShake.ScreenShake(4, 0.3f);
         //destroy all blobs
         BlobScript[] blobs = FindObjectsOfType<BlobScript>();
