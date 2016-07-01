@@ -38,6 +38,11 @@ public class AudiEvents : MonoBehaviour {
 		StaticFuntions.PlaySound (g, "ballhitwall").volume = 0.1f;
 		//Debug.Log ("wall is hit");
 	}
+
+    void OnBossHit(GameObject g, float f)
+    {
+        StaticFuntions.PlaySound(g, "mole gets hit");
+    }
 		
 
 	void OnEnable()
@@ -58,9 +63,10 @@ public class AudiEvents : MonoBehaviour {
 		EventManager.StartListening("StartBoss", OnStartBoss);
 		EventManager.StartListening("GameOver", OnGameOver);
 		EventManager.StartListening("BlobBottomDeath", OnBlobBottomDeath);
-		//
-		//EventManager.StartListening("GainedEnergy", OnGainedEnergy);
-		//EventManager.StartListening("LoseEnergy", OnLoseEnergy);
+        //
+        //EventManager.StartListening("GainedEnergy", OnGainedEnergy);
+        //EventManager.StartListening("LoseEnergy", OnLoseEnergy);
+        EventManager.StartListening("BossHit", OnBossHit);
 
 
 	}
@@ -83,9 +89,11 @@ public class AudiEvents : MonoBehaviour {
 		EventManager.StopListening("StartBoss", OnStartBoss);
 		EventManager.StopListening("GameOver", OnGameOver);
 		EventManager.StopListening("BlobBottomDeath", OnBlobBottomDeath);
-		//
-		//EventManager.StopListening("GainedEnergy", OnGainedEnergy);
-		//EventManager.StopListening("LoseEnergy", OnLoseEnergy);
-	}
+        //
+        //EventManager.StopListening("GainedEnergy", OnGainedEnergy);
+        //EventManager.StopListening("LoseEnergy", OnLoseEnergy);
+
+        EventManager.StopListening("BossHit", OnBossHit);
+    }
 
 }

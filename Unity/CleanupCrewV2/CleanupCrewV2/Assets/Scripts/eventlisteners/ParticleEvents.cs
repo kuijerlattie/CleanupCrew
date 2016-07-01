@@ -116,7 +116,7 @@ public class ParticleEvents : MonoBehaviour {
 	}
 	void OnBossIntermission(GameObject g, float f)
 	{
-		StaticFuntions.SpawnParticle ("pipe exploding", g.transform.position);
+		StaticFuntions.SpawnParticle("pipe exploding", g.transform.position);
 	}
 
 

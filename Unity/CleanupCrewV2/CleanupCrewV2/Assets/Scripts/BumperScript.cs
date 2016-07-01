@@ -4,11 +4,18 @@ using System.Collections;
 public class BumperScript : MonoBehaviour {
 
     private static bool _addedBumpers = false;
+    public static GameObject Bumpers = null;
     public static void AddBumpers()
     {
         if (_addedBumpers) return;
-        GameObject.Instantiate(Resources.Load("prefabs/Bumpers"));
+        Bumpers = GameObject.Instantiate(Resources.Load("prefabs/Bumpers")) as GameObject;
         _addedBumpers = true;
+    }
+    public static void RemoveBumpers()
+    {
+        if (!_addedBumpers) return;
+        GameObject.Destroy(Bumpers);
+        _addedBumpers = false;
     }
 
 
