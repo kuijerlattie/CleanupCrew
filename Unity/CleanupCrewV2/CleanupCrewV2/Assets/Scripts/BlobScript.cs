@@ -13,7 +13,7 @@ public class BlobScript : MonoBehaviour {
 
     public float behaviourOffset = 0;  // is set later
 
-    public static GameObject[] spawnLocations = null;
+    public static GameObject[] spawnLocations;
 
     private float TimeAlive = 0;
     private float StartBehaviourAfter = 0.5f;  //after spawning wait x seconds before using behaviour
@@ -35,7 +35,7 @@ public class BlobScript : MonoBehaviour {
         useBehaviour = true;
     }
 
-    private static void InitSpawnLocations()
+    public static void InitSpawnLocations()
     {
        spawnLocations = GameObject.FindGameObjectsWithTag("BlobSpawnPos");
         if (spawnLocations.GetLength(0) < 3) Debug.LogError("No spawn points in scene, add tags 'BlobSpawnPos' to objects (atleast 3)");

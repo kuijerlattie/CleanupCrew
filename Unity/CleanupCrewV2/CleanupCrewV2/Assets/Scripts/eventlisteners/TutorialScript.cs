@@ -78,7 +78,8 @@ public class TutorialScript : BaseGamestate {
                 {
                     rod.gameObject.GetComponent<Renderer>().materials = new Material[] { rod.gameObject.GetComponent<Renderer>().materials[0] };
                 }
-                BlobScript.Spawn(BlobScript.GetRandomSpawnPos, BlobScript.BehaviourType.none);
+                BlobScript.InitSpawnLocations();
+                BlobScript.Spawn(BlobScript.spawnLocations[2].transform.position, BlobScript.BehaviourType.none);
             }
             rods = null;
 
