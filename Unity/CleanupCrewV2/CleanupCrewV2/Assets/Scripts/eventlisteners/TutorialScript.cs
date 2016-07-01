@@ -90,7 +90,7 @@ public class TutorialScript : BaseGamestate {
 
             return;
         }
-        valvemanager.instance.AddValveOutline();
+
         GameManager.instance.SetState(GameManager.gamestate.BreakoutIntermission);
     }
 

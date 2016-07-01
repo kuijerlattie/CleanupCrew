@@ -9,6 +9,7 @@ public class valvescript : MonoBehaviour {
 
     void OnCollisionEnter(Collision col)
     {
+        EventManager.TriggerEvent("ValveAlwaysHit", col.gameObject, valveId);
         if (GameManager.instance.CurrentGamestate == GameManager.gamestate.Tutorial || GameManager.instance.CurrentGamestate == GameManager.gamestate.Boss) return;
         if (col.gameObject.tag == "Ball")
         {
@@ -21,8 +22,8 @@ public class valvescript : MonoBehaviour {
     public void SetOutlineColor(Color c)
     {
         //if(gameObject.GetComponent<Renderer>().materials.GetLength(0) < 2) return;
-
-        gameObject.GetComponent<Renderer>().materials[1].SetColor("_OutlineColor", c);
+        if (gameObject.GetComponent<Renderer>().materials.GetLength(0) > 1)
+            gameObject.GetComponent<Renderer>().materials[1].SetColor("_OutlineColor", c);
 
     }
 }
