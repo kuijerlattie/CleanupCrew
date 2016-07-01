@@ -19,6 +19,13 @@ public class valvemanager : MonoBehaviour {
             valve.gameObject.GetComponent<Renderer>().materials = new Material[] { valve.gameObject.GetComponent<Renderer>().materials[0], new Material(Shader.Find("Outlined/Silhouette Only")) };
         }
     }
+    public void RemoveValveOutline()
+    {
+        foreach (valvescript valve in valves)
+        {
+            valve.gameObject.GetComponent<Renderer>().materials = new Material[] { valve.gameObject.GetComponent<Renderer>().materials[0]};
+        }
+    }
 
     public static valvemanager instance { get { return GameObject.FindObjectOfType<valvemanager>(); } }
 
@@ -26,7 +33,8 @@ public class valvemanager : MonoBehaviour {
     {
         foreach (valvescript valve in valves)
         {
-            valve.gameObject.GetComponent<Renderer>().materials[1].SetColor("_OutlineColor", c);
+            if(valve.gameObject.GetComponent<Renderer>().materials.GetLength(0) > 1)
+                valve.gameObject.GetComponent<Renderer>().materials[1].SetColor("_OutlineColor", c);
         }
        
     }

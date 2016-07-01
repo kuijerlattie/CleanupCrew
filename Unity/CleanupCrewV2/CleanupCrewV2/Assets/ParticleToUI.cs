@@ -50,7 +50,7 @@ public class ParticleToUI : MonoBehaviour {
         switch(currentTarget)
         {
             case UITarget.Barrel:
-                UIWorldPosition = new Vector3(-38, 15, 4);
+                UIWorldPosition = new Vector3(-36, 15, 6);
                 break;
             case UITarget.Energy:
                 UIWorldPosition = new Vector3(-38, 15, 4);
