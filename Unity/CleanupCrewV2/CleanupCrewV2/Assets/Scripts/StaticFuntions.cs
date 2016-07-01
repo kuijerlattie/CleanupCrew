@@ -35,7 +35,7 @@ public class StaticFuntions : MonoBehaviour
         AudioClip sound = Resources.Load("Audio/" + soundname) as AudioClip;
         audio.clip = sound;
         audio.loop = looping;
-        audio.Play();
+        audio.PlayOneShot(sound, 1);
         return audio;
     }
 

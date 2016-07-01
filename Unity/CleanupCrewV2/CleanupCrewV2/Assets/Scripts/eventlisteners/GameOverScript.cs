@@ -12,6 +12,7 @@ public class GameOverScript : BaseGamestate {
         GameManager.instance.SetGameplayState(GameManager.gameplaystate.paused);
         //make camera flyover the level with blobs going all over the place while your score is shown onscreen?
         ToggleGameOverScreen(true);
+        Time.timeScale = 0f;    //otherwise you can still get score...
 
     }
 
