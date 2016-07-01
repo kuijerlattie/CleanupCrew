@@ -167,6 +167,12 @@ public static GameObject Spawn(Vector3 position, BehaviourType behaviour)
         {
             EventManager.TriggerEvent("BallHitBlob", gameObject);
         }
+        if(c.collider.gameObject.name.Contains("Valve"))
+        {
+            Vector3 direction = (transform.position - c.gameObject.transform.position).normalized;
+            direction.y = 0;
+            transform.position += direction;
+        }
 
         
 
