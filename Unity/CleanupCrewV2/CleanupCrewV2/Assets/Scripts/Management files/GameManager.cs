@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour {
     public void SetState(gamestate state)
     {
         EndState();
-        Debug.Log("state switched from " + gameState + " to " + state + ".");
+        //Debug.Log("state switched from " + gameState + " to " + state + ".");
         gameState = state;
         switch (state)
         {
@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour {
     public void SetGameplayState(gameplaystate state)
     {
 
-        Debug.Log("gameplay state switched from " + gameplayState + " to " + state + ".");
+        //Debug.Log("gameplay state switched from " + gameplayState + " to " + state + ".");
         gameplayState = state;
         switch (state)
         {
@@ -123,7 +123,7 @@ public class GameManager : MonoBehaviour {
             Destroy(m);
             i++;
         }
-        Debug.Log("removed " + i + " state based scripts from the " + gameState + " state");
+        //Debug.Log("removed " + i + " state based scripts from the " + gameState + " state");
         stateBasedScripts.Clear();
     }
 
@@ -146,7 +146,7 @@ public class GameManager : MonoBehaviour {
     {
         SetGameplayState(gameplaystate.paused);
         stateBasedScripts.Add(gameObject.AddComponent<IntroScript>());
-        Debug.Log("thisshitshouldbeadded");
+        //Debug.Log("thisshitshouldbeadded");
         stateBasedScripts[stateBasedScripts.Count-1].StartState();
         EventManager.TriggerEvent("StartIntro");
         //game start animation and shit

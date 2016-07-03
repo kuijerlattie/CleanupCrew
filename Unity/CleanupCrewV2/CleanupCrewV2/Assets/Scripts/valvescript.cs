@@ -11,13 +11,14 @@ public class valvescript : MonoBehaviour {
     {
         EventManager.TriggerEvent("ValveAlwaysHit", col.gameObject, valveId);
         if (GameManager.instance.CurrentGamestate == GameManager.gamestate.Tutorial || GameManager.instance.CurrentGamestate == GameManager.gamestate.Boss) return;
-        if (col.gameObject.tag == "Ball")
+        if (col.gameObject.tag == "Ball" && !activated)
         {
             activated = true;
             SetOutlineColor(Color.green);
             EventManager.TriggerEvent("ValveHit", col.gameObject, valveId);
         }
     }
+
 
     public void SetOutlineColor(Color c)
     {

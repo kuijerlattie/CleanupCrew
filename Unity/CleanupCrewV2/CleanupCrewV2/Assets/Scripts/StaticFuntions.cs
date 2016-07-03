@@ -4,6 +4,7 @@ using System.Collections;
 public class StaticFuntions : MonoBehaviour
 {
     static GameObject musicObject = null;
+    //static Dictionary particles;  //TODO particles loaded in memory
     public static GameObject SpawnParticle(string name, Vector3 position) //documented
     {
         GameObject g = GameObject.Instantiate(Resources.Load("Particles/" + name)) as GameObject;

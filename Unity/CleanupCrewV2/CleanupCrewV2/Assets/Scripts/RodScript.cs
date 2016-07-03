@@ -55,7 +55,7 @@ public class RodScript : MonoBehaviour {
     {
         RodScript RS = rod.GetComponent<RodScript>();
         if (!RS) Debug.LogError("ERROR: '" + rod.name + "' does not have a 'RodScript' attached");
-        return RS.SpawnPoint;
+        return (RS == null)? Vector3.zero : RS.SpawnPoint;
     }
     public Vector3 SpawnPoint { get {
             if (_SpawnPoint == Vector3.zero) SetSpawnPoint();

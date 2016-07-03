@@ -14,6 +14,9 @@ public class TutorialScript : BaseGamestate {
 
         HandContainer = new GameObject("HandContainer");
         HandContainer.transform.position += Vector3.up;
+
+        outlineShader = new Material(Shader.Find("Outlined/Silhouette Only"));
+        HandObject = Resources.Load("prefabs/UI/HandV2");
         //valvemanager.instance.AddValveOutline();    //only for testing
         //GameManager.instance.SetState(GameManager.gamestate.Breakout);    //testing only
         //GameManager.instance.SetState(GameManager.gamestate.BossIntermission);    //testing only
@@ -24,6 +27,22 @@ public class TutorialScript : BaseGamestate {
     GameObject HandContainer = null;
     GameObject swipeObject = null;
     GameObject doubletapObject = null;
+    Material outlineShader = null;
+    Material[] doubleMat = null;
+    Object HandObject = null;
+
+    bool blobShader = false;
+    bool rodShader = false;
+
+
+    IEnumerator AddOutLine(GameObject g)
+    {
+        Renderer R = g.GetComponent<Renderer>();
+        
+        R.materials = doubleMat == null ? new Material[] { R.materials[0], outlineShader } : doubleMat;
+        if (doubleMat == null) doubleMat = R.materials;
+        yield return null;
+    }
 
     void Update()
     {
@@ -31,7 +50,7 @@ public class TutorialScript : BaseGamestate {
         {
             if(swipeObject == null)
             {
-                swipeObject = GameObject.Instantiate(Resources.Load("prefabs/UI/HandV2")) as GameObject;
+                swipeObject = GameObject.Instantiate(HandObject) as GameObject;
                 swipeObject.transform.parent = HandContainer.transform;
                 Animation a = swipeObject.GetComponent<Animation>();
                 a.wrapMode = WrapMode.Loop;
@@ -47,7 +66,7 @@ public class TutorialScript : BaseGamestate {
 
             if (doubletapObject == null)
             {
-                doubletapObject = GameObject.Instantiate(Resources.Load("prefabs/UI/HandV2")) as GameObject;
+                doubletapObject = GameObject.Instantiate(HandObject) as GameObject;
                 doubletapObject.transform.parent = HandContainer.transform;
                 Animation a = doubletapObject.GetComponent<Animation>();
                 a.wrapMode = WrapMode.Loop;
@@ -62,11 +81,17 @@ public class TutorialScript : BaseGamestate {
             if (swipeObject != null) GameObject.Destroy(swipeObject);
             if (rods == null)
             {
-                rods = FindObjectsOfType<RodScript>();
-                foreach(RodScript rod in rods)
+                
+                if (!rodShader)
                 {
-                    rod.gameObject.GetComponent<Renderer>().materials = new Material[] { rod.gameObject.GetComponent<Renderer>().materials[0], new Material(Shader.Find("Outlined/Silhouette Only")) };
+                    rods = FindObjectsOfType<RodScript>();
+                    foreach (RodScript rod in rods)
+                    {
+                        AddOutLine(rod.gameObject);
+                        //rod.gameObject.GetComponent<Renderer>().materials = new Material[] { rod.gameObject.GetComponent<Renderer>().materials[0], outlineShader };
+                    }
                 }
+                rodShader = true;
             }
             return;
         }
@@ -78,15 +103,20 @@ public class TutorialScript : BaseGamestate {
                 {
                     rod.gameObject.GetComponent<Renderer>().materials = new Material[] { rod.gameObject.GetComponent<Renderer>().materials[0] };
                 }
+                rodShader = false;
                 BlobScript.InitSpawnLocations();
                 BlobScript.Spawn(BlobScript.spawnLocations[2].transform.position, BlobScript.BehaviourType.none);
             }
             rods = null;
 
-            blobs = FindObjectsOfType<BlobScript>();
-            foreach (BlobScript blob in blobs)
+            if (!blobShader)
             {
-                blob.gameObject.GetComponentInChildren<SkinnedMeshRenderer>().materials = new Material[] { blob.gameObject.GetComponent<Renderer>().materials[0], new Material(Shader.Find("Outlined/Silhouette Only")) };
+                blobs = FindObjectsOfType<BlobScript>();
+                foreach (BlobScript blob in blobs)
+                {
+                    blob.gameObject.GetComponentInChildren<SkinnedMeshRenderer>().materials = new Material[] { blob.gameObject.GetComponent<Renderer>().materials[0], outlineShader };
+                }
+                blobShader = true;
             }
 
             return;

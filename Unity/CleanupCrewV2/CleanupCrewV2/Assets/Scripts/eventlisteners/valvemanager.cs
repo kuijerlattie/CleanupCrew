@@ -5,20 +5,25 @@ using System.Collections;
 public class valvemanager : MonoBehaviour {
     valvescript[] valves;
 
+    Material outlineMat = null;
     void Start()
     {
         valves = GameObject.FindObjectsOfType<valvescript>(); //volvo, plz fix
         EventManager.StartListening("ValveHit", OnValveHit);
-        
+        outlineMat = new Material(Shader.Find("Outlined/Silhouette Only"));
+
+
     }
 
     public void AddValveOutline()
     {
         foreach (valvescript valve in valves)
         {
-            valve.gameObject.GetComponent<Renderer>().materials = new Material[] { valve.gameObject.GetComponent<Renderer>().materials[0], new Material(Shader.Find("Outlined/Silhouette Only")) };
+            valve.gameObject.GetComponent<Renderer>().materials = new Material[] { valve.gameObject.GetComponent<Renderer>().materials[0], outlineMat };
         }
     }
+
+
     public void RemoveValveOutline()
     {
         foreach (valvescript valve in valves)
