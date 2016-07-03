@@ -46,8 +46,14 @@ public class AudiEvents : MonoBehaviour {
 
     void OnValveHit(GameObject g, float f)
     {
-        StaticFuntions.PlaySound(g, "ballhitwall").volume = 0.1f;
+        StaticFuntions.PlaySound(g, "valvehit").volume = 0.1f;
     }
+	void OnMole_Death(GameObject g, float f)
+	{
+		StaticFuntions.PlaySound(g, "moledeath").volume = 0.1f;
+	}
+
+
 		
 
 	void OnEnable()
@@ -73,6 +79,8 @@ public class AudiEvents : MonoBehaviour {
         //EventManager.StartListening("LoseEnergy", OnLoseEnergy);
         EventManager.StartListening("BossHit", OnBossHit);
         EventManager.StartListening("ValveAlwaysHit", OnValveHit);
+		EventManager.StartListening ("Mole_death", OnMole_Death);
+
 
 
     }
@@ -101,6 +109,8 @@ public class AudiEvents : MonoBehaviour {
 
         EventManager.StopListening("BossHit", OnBossHit);
         EventManager.StopListening("ValveAlwaysHit", OnValveHit);
+		EventManager.StopListening ("Mole_death", OnMole_Death);
+
     }
 
 }
