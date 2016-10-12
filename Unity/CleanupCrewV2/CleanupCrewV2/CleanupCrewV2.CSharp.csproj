@@ -75,6 +75,7 @@
     <Compile Include="Assets\Scripts\Boss stuff\MoleScript.cs" />
     <Compile Include="Assets\Scripts\Boss stuff\MoleTail.cs" />
     <Compile Include="Assets\Scripts\BulletScript.cs" />
+    <Compile Include="Assets\Scripts\BumperScript.cs" />
     <Compile Include="Assets\Scripts\CameraShake.cs" />
     <Compile Include="Assets\Scripts\DestroyOnGameover.cs" />
     <Compile Include="Assets\Scripts\FixedSpeed.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Assets\Scripts\Management files\EventManager.cs" />
     <Compile Include="Assets\Scripts\Management files\GameManager.cs" />
     <Compile Include="Assets\Scripts\Management files\Loader.cs" />
+    <Compile Include="Assets\Scripts\MoveToStart.cs" />
     <Compile Include="Assets\Scripts\PaddleControls.cs" />
     <Compile Include="Assets\Scripts\PaddlePhysics.cs" />
     <Compile Include="Assets\Scripts\Powerup scripts\PwrupBase.cs" />
@@ -101,6 +103,7 @@
     <Compile Include="Assets\Scripts\Powerup scripts\magneticPaddle.cs" />
     <Compile Include="Assets\Scripts\Powerup scripts\shieldPwrup.cs" />
     <Compile Include="Assets\Scripts\Powerup scripts\shootingPwrup.cs" />
+    <Compile Include="Assets\Scripts\Powerup scripts\transparentPwrups.cs" />
     <Compile Include="Assets\Scripts\Powerup scripts\upScalePwrup.cs" />
     <Compile Include="Assets\Scripts\RemoveAudioSource.cs" />
     <Compile Include="Assets\Scripts\RodScript.cs" />
@@ -120,10 +123,12 @@
     <Compile Include="Assets\Scripts\eventlisteners\TutorialScript.cs" />
     <Compile Include="Assets\Scripts\eventlisteners\UIevents.cs" />
     <Compile Include="Assets\Scripts\eventlisteners\point events.cs" />
+    <Compile Include="Assets\Scripts\eventlisteners\valvemanager.cs" />
     <Compile Include="Assets\Scripts\menustartgame.cs" />
     <Compile Include="Assets\Scripts\paddleScaling.cs" />
     <Compile Include="Assets\Scripts\paddleShooting.cs" />
     <Compile Include="Assets\Scripts\shieldScript.cs" />
+    <Compile Include="Assets\Scripts\valvescript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Outlined-Silhouette Only.shader" />

@@ -1,7 +1,7 @@
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2008
-
-Project("{3B881B65-A209-25C4-8A6F-95FC9990C35C}") = "CleanupCrewV2", "Assembly-CSharp.csproj", "{BF63048D-1F89-1D6B-6676-ACF651B2F1F1}"
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanupCrewV2.CSharp", "CleanupCrewV2.CSharp.csproj", "{757BC0AD-12DF-348F-6189-F7E615F3AB95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,15 +9,12 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BF63048D-1F89-1D6B-6676-ACF651B2F1F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BF63048D-1F89-1D6B-6676-ACF651B2F1F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BF63048D-1F89-1D6B-6676-ACF651B2F1F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BF63048D-1F89-1D6B-6676-ACF651B2F1F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{757BC0AD-12DF-348F-6189-F7E615F3AB95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{757BC0AD-12DF-348F-6189-F7E615F3AB95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{757BC0AD-12DF-348F-6189-F7E615F3AB95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{757BC0AD-12DF-348F-6189-F7E615F3AB95}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Assembly-CSharp.csproj
 	EndGlobalSection
 EndGlobal
